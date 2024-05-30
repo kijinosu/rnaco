@@ -1,5 +1,5 @@
 Package: rnaco
-Title: What the Package Does (One Line, Title Case)
+Title: Implement NACO normalization in R
 Version: 0.0.0.9000
 Authors@R: 
     person("Alan", "Engel", , "alan@ttcrossroads.net", role = c("aut", "cre"),
