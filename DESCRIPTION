@@ -5,7 +5,7 @@ Authors@R:
     person("Alan", "Engel", , "alan@ttcrossroads.net", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0003-0070-2347"))
 Description: What the package does (one paragraph).
-License: MIT + file LICENSE
+License: OCLC + file LICENSE
 Suggests: 
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
