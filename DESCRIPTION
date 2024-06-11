@@ -1,25 +1,25 @@
 Package: rnaco
-Type: Package
-Title: R package for NACO normalization
+Title: rnaco: Dealing with Name Normalization in the VIAF API
 Version: 0.0.1
-Date: 2024-05-31
-Authors@R: person('Alan Engel', email = 'alan@ttcrossroads.net', role = c('cre','aut'),comment = c(ORCID = "0000-0003-0070-2347"))
-Maintainer: Alan Engel <alan@ttcrossroads.net>
-Description: This package implements the NACO normalization standard
-        as an Rcpp function.
-License: GPL-3 + file LICENSE
+Authors@R: 
+    person("Alan", "Engel", , "alan@ttcrossroads.net", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0003-0070-2347"))
+Description: {This package implements the NACO normalization routines used in VIAF, the Virtual International Authority Files.}
+License: use_ccby_license()
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.2.3
+Language: en
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.1
+DataVersion: 0.0.3
+Imports:
+    dplyr,
+    xml2,
+    xslt
+Depends: 
+    R (>= 3.5.0)
+Date: 2024-06-10
 Suggests: 
-    testthat (>= 3.0.0),
-    roxygen2,
     knitr,
     rmarkdown
-Imports: Rcpp (>= 1.0.12),
-    inline,
-    utf8
-LinkingTo: Rcpp
-Depends:
-    R (>= 2.10)
 VignetteBuilder: knitr

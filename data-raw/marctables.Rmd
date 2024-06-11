@@ -1,0 +1,216 @@
+---
+title: MARC tables for rnaco
+author: Alan Engel
+date: June 5, 2024
+lang: "en-us"
+output_format: rmarkdown::html_vignette
+bibliography: 
+  - R.bib
+link-citations: true
+---
+
+This script downloads the codetables.xml file from the
+[Library of Congress](https://www.loc.gov/marc/specifications/codetables.xml "MARC specification")
+and create data tibbles for the 9 code tables contained inside.
+
+Load the libraries. The R packages used for this script are listed in the references.
+
+```{r libraries, warning=FALSE}
+library(dplyr)
+library(xslt)
+library(tibble)
+```
+
+Design specifications for these tables:
+
+* Use camel case for dataset names, for example, "marcJapaneseHiraganaandKatakana".
+* Produce a separate tibble for each element that contains a $note$ element.
+  + Produce a dataset containing the notes.
+* Maintain column compatability across marc datasets.
+  + If $code$ elements contain $alt$ and $altutf-8$ elements, duplicate
+  the row with the $alt$ content in the $ucs$ and $utf-8$ columns.
+
+Download the MARC specification.
+
+```{r download}
+tmppath <- tempdir()
+tmpcodexml <- file.path(tmppath, "codetables.xml")
+xml2::download_xml("https://www.loc.gov/marc/specifications/codetables.xml", tmpcodexml)
+
+```
+
+Extract the notes.
+
+```{r marcnotes}
+xsldir <- file.path(project_path(),"inst","extdata","xslt")
+x <- xml2::read_xml(tmpcodexml)
+s <- xml2::read_xml(file.path(xsldir,"marcnotes.xsl"))
+marcnotes <- xslt::xml_xslt(x,s)
+
+```
+
+The resulting xml consists of a root element and row elements.
+The row elements each contain elements whose names will be used
+as column names. The name of the root element will be used as
+the name of the dataset. For this dataset, the name will be
+_marcNotes_ because that name has to be registered elsewhere
+in the package.
+
+```{r rootname}
+rootname <- xml2::xml_name(xml2::xml_root(marcnotes))
+rootname
+stopifnot(rootname == "marcNotes")
+```
+
+The function $xml2df()$ is in the R folder. We have to source it here
+because DataPackageR builds the datasets before building the rest of the
+package. It transforms the xslt output $marcnotes$ into a tibble
+that is assigned the $rootname$ to produce the dataset.
+
+```{r xml2df}
+source(file.path(project_path(),"data-raw","xml2df.R"))
+result <- xml2df(marcnotes)
+base::assign(rootname, result)
+```
+
+# How xml2df() works
+
+This next segment gets the names of the elements that
+are children of the first row element and makes a tibble
+with those names as the column names. A "ct" attribute
+in each child gives the R class of the column. This initial
+tibble contains no rows.
+
+```
+chlds <- xml2::xml_find_all(xml2::xml_root(marcnotes), "row")
+  labs <- trimws(xml2::xml_name(xml2::xml_children(chlds[1])))
+  colclasses <- xml2::xml_attr(xml2::xml_children(chlds[1]), "ct")
+  df <- read.table(text = "", colClasses = colclasses, col.names = labs)
+```
+
+This next nested loop reads the rows and appends them to the tibble.
+For each row, it makes a no-row tibble, dv, with the same columns as
+for df. Cell contents are added to its first row, which is created
+in this process. Each complete row is appended to df.
+
+```
+  len <- length(chlds)
+  for (i in 1:len) {
+    cells <- xml2::xml_children(chlds[i])
+    nocells <- length(cells)
+
+    dv <- read.table(text = "", colClasses = colclasses, col.names = labs)
+    for (j in 1:nocells) {
+      cellcontents <- xml2::xml_contents(cells[j])
+      tryCatch(
+        {
+          dv[1, j] <- switch(colclasses[j],
+              "character" = as.character(cellcontents), # nolint
+              "Date" = lubridate::ymd(xml2::xml_text(cells[j]),truncated = 2, quiet = TRUE), # nolint
+              "POSIXct" = lubridate::ymd_hms(xml2::xml_text(cells[j]), quiet = TRUE), # nolint
+              "factor" = as.factor(xml2::xml_text(cells[j])),
+              "logical" = as.logical(xml2::xml_text(cells[j])),
+              "integer" = as.integer(xml2::xml_text(cells[j])))
+        },
+        error = function(cond) {
+          message(paste("Error: viafxml2df Record ", i, " Cell ", j))
+          message(paste("Content: ", xml2::xml_text(cells[j])))
+          message(conditionMessage(cond))
+        },
+        warning = function(cond) {
+          message(paste("Warning: viafxml2df Record ", i, " Cell ", j))
+          message(paste("Content: ", xml2::xml_text(cells[j])))
+          message(paste("Content: ", as.character(xml2::xml_text(cells[j]))))
+          message(conditionMessage(cond))
+        }
+      )
+    }
+    df <- rbind(df, dv)
+  }
+  marcNotes <- dplyr::tibble(df)
+  marcNotes
+```
+
+marcNotes is a dataset saved from this script marctables.Rmd.
+It contains the XPath locations for the 16 character
+set tables in codetables.xml. Now extract these tables and
+save them in the package data.
+
+XPaths can't be used as parameters in xslt. An alternative is to use
+them to extract the target element and then use that element in an
+xslt transform.
+
+The values in the marcName column of marcNotes will be used both to
+name the elements being extracted from codetables.xml and the datesets
+to be saved with this packaage. There are two ways to accomplish this.
+One is to supply marcName as a parameter in $xml_xslt$. Another way
+is to recompute it in the xslt transform.
+
+The marcNames are computed from the 'name' attributes in codetables.xml.
+For example, the name shown in the following box yields 'marcBasicLatinASCII'
+using the xsl:template in the next box.
+
+```
+<characterSet name="Basic Latin (ASCII)" ISOcode="42">
+```
+
+```
+<xsl:template name="makemarcname">
+    <xsl:param name="premarc" />
+    <xsl:variable name="apos">'</xsl:variable>
+    <xsl:variable name="mname">
+        <xsl:value-of select="concat('marc',translate($premarc, ' ', ''))" />
+    </xsl:variable>
+    <xsl:variable name="mname2">
+        <xsl:value-of select="translate($mname, $apos, '')" />
+    </xsl:variable>
+    <xsl:value-of select="translate($mname2, '&#x28;&#x29;', '')" />
+</xsl:template>
+
+```
+
+Including this xsl:template in marccharsets.xsl, and using it to name the root nde of the
+output should produce the same name. This can be used as a consistency check, so
+the answer is to recompute it and perform a $stopifnot$ test on the output.
+
+Loop through the 16 character sets and groupings in $codetables.xml$ using the
+names and XPaths contained in marcNotes.
+
+This loop adds a column for a representation of the character. The notes in 
+[$codetables.xml$](https://www.loc.gov/marc/specifications/codetables.xml "MARC specification")
+specify this as a fifth column but the file does not contain them.
+
+```{r charsets}
+rows <- nrow(marcNotes)
+s <- xml2::read_xml(file.path(xsldir,"marccharsets.xsl"))
+csetpath <- file.path(tmppath,"charset.xml")
+tpath <- file.path(tmppath,"ctransformed.xml")
+names <-  marcNotes %>% select(marcName) %>% unlist(.)
+paths <- marcNotes %>% select(marcPath) %>% unlist(.)
+for(i in 1:rows) {
+  marcname <-  names[i] # for later check
+  sp <- as.character(paths[i])
+  subset <- xml2::xml_find_all(x, xpath = sp)
+  xml2::write_xml(subset , file = csetpath)
+  xcset <- xml2::read_xml(csetpath)
+  tset <- xslt::xml_xslt(xcset,s)
+  xml2::write_xml(tset , file = tpath)
+  rootname <- xml2::xml_name(xml2::xml_root(tset))
+  tb <- xml2df(tset)
+  tb <- tb %>% 
+    mutate(rep = intToUtf8(as.integer(ucs), multiple = TRUE)) %>% 
+	  relocate(rep , .after = utf8)
+
+  stopifnot(marcname == rootname)
+  assign(marcname,tb)
+  config <- DataPackageR::use_data_object(object_name = marcname)
+  }
+
+```
+
+
+---
+nocite: '@*'
+---
+
+# References

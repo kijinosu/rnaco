@@ -1,0 +1,24 @@
+configuration:
+  files:
+    marctables.Rmd:
+      enabled: yes
+  objects:
+  - marcNotes
+  - marcBasicLatinASCII
+  - marcExtendedLatinANSEL
+  - marcGreekSymbols
+  - marcSubscripts
+  - marcSuperscripts
+  - marcBasicHebrew
+  - marcBasicCyrillic
+  - marcExtendedCyrillic
+  - marcBasicArabic
+  - marcExtendedArabic
+  - marcBasicGreek
+  - marcEastAsianIdeographsHan
+  - marcJapaneseHiraganaandKatakana
+  - marcKoreanHangul
+  - marcEastAsianPunctuationMarks
+  - marcComponentInputMethodCharacters
+  render_root:
+    tmp: '669327'
