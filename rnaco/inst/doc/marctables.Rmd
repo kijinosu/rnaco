@@ -1,0 +1,16 @@
+---
+title: MARC tables for rnaco
+author: Alan Engel
+date: '`r format(Sys.time(), ''%d %B, %Y'')`'
+lang: en-us
+output_format: rmarkdown::html_vignette
+bibliography: R.bib
+link-citations: yes
+vignette: >
+  %\VignetteIndexEntry{MARC tables for rnaco}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+---
+
+# References
+

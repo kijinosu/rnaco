@@ -1,0 +1,27 @@
+configuration:
+  files:
+    marctables.Rmd:
+      enabled: yes
+    unihanVariants.Rmd:
+      enabled: yes
+  objects:
+  - marcNotes
+  - marcBasicLatinASCII
+  - marcExtendedLatinANSEL
+  - marcGreekSymbols
+  - marcSubscripts
+  - marcSuperscripts
+  - marcBasicHebrew
+  - marcBasicCyrillic
+  - marcExtendedCyrillic
+  - marcBasicArabic
+  - marcExtendedArabic
+  - marcBasicGreek
+  - marcEastAsianIdeographsHan
+  - marcJapaneseHiraganaandKatakana
+  - marcKoreanHangul
+  - marcEastAsianPunctuationMarks
+  - marcComponentInputMethodCharacters
+  - unihan_variants
+  render_root:
+    tmp: '669327'

@@ -1,0 +1,284 @@
+TRACE [2024-06-11 09:09:44] Logging to C:/Users/Alan/Documents/R Projects/rnaco/rnaco/inst/extdata/Logfiles/processing.log
+TRACE [2024-06-11 09:09:44] Processing data
+TRACE [2024-06-11 09:09:44] Reading yaml configuration
+TRACE [2024-06-11 09:09:44] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/marctables.Rmd
+TRACE [2024-06-11 09:09:44] Processing 1 of 1: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/marctables.Rmd
+
+TRACE [2024-06-11 09:11:21] Logging to C:/Users/Alan/Documents/R Projects/rnaco/rnaco/inst/extdata/Logfiles/processing.log
+TRACE [2024-06-11 09:11:21] Processing data
+TRACE [2024-06-11 09:11:21] Reading yaml configuration
+TRACE [2024-06-11 09:11:21] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/marctables.Rmd
+TRACE [2024-06-11 09:11:21] Processing 1 of 1: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/marctables.Rmd
+
+TRACE [2024-06-11 09:16:39] Logging to C:/Users/Alan/Documents/R Projects/rnaco/rnaco/inst/extdata/Logfiles/processing.log
+TRACE [2024-06-11 09:16:39] Processing data
+TRACE [2024-06-11 09:16:39] Reading yaml configuration
+TRACE [2024-06-11 09:16:39] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/marctables.Rmd
+TRACE [2024-06-11 09:16:39] Processing 1 of 1: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/marctables.Rmd
+
+TRACE [2024-06-11 09:17:17] 1 data set(s) created by marctables.Rmd
+TRACE [2024-06-11 09:17:17] NEWS.md file not found, creating!
+TRACE [2024-06-11 09:17:17] NEWS.md file found, updating!
+TRACE [2024-06-11 09:17:17] Saving to data
+TRACE [2024-06-11 09:17:17] Copied documentation to C:/Users/Alan/Documents/R Projects/rnaco/rnaco/R/rnaco.R
+TRACE [2024-06-11 09:17:17] Done
+TRACE [2024-06-11 09:17:17] DataPackageR succeeded
+TRACE [2024-06-11 09:17:17] Building documentation
+TRACE [2024-06-11 09:17:17] Building package
+TRACE [2024-06-11 09:17:59] Logging to C:/Users/Alan/Documents/R Projects/rnaco/rnaco/inst/extdata/Logfiles/processing.log
+TRACE [2024-06-11 09:17:59] Processing data
+TRACE [2024-06-11 09:17:59] Reading yaml configuration
+TRACE [2024-06-11 09:17:59] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/marctables.Rmd
+TRACE [2024-06-11 09:17:59] Processing 1 of 1: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/marctables.Rmd
+
+TRACE [2024-06-11 09:18:36] 17 data set(s) created by marctables.Rmd
+TRACE [2024-06-11 09:18:36] NEWS.md file found, updating!
+DEBUG [2024-06-11 09:18:36] marcBasicArabic was added.
+DEBUG [2024-06-11 09:18:36] marcBasicArabic was added.
+DEBUG [2024-06-11 09:18:36] marcBasicArabic was added.
+TRACE [2024-06-11 09:18:36] NEWS.md file found, updating!
+TRACE [2024-06-11 09:18:36] NEWS.md file found, updating!
+TRACE [2024-06-11 09:18:36] Data has been updated and DataVersion string incremented automatically to 0.1.1
+TRACE [2024-06-11 09:18:36] Saving to data
+TRACE [2024-06-11 09:18:36] Copied documentation to C:/Users/Alan/Documents/R Projects/rnaco/rnaco/R/rnaco.R
+TRACE [2024-06-11 09:18:37] Done
+TRACE [2024-06-11 09:18:37] DataPackageR succeeded
+TRACE [2024-06-11 09:18:37] Building documentation
+TRACE [2024-06-11 09:18:38] Building package
+TRACE [2024-06-11 09:23:37] Rebuilding data package documentation.
+TRACE [2024-06-11 10:07:05] Rebuilding data package documentation.
+TRACE [2024-06-11 10:37:08] Rebuilding data package documentation.
+TRACE [2024-06-11 11:11:03] Rebuilding data package documentation.
+TRACE [2024-06-18 12:59:01] Logging to C:/Users/Alan/Documents/R Projects/rnaco/rnaco/inst/extdata/Logfiles/processing.log
+TRACE [2024-06-18 12:59:01] Processing data
+TRACE [2024-06-18 12:59:01] Reading yaml configuration
+TRACE [2024-06-18 12:59:01] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/marctables.Rmd
+TRACE [2024-06-18 12:59:02] Processing 1 of 1: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/marctables.Rmd
+
+TRACE [2024-06-18 13:00:52] Logging to C:/Users/Alan/Documents/R Projects/rnaco/rnaco/inst/extdata/Logfiles/processing.log
+TRACE [2024-06-18 13:00:52] Processing data
+TRACE [2024-06-18 13:00:52] Reading yaml configuration
+TRACE [2024-06-18 13:00:52] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/marctables.Rmd
+TRACE [2024-06-18 13:00:52] Processing 1 of 1: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/marctables.Rmd
+
+TRACE [2024-06-18 13:01:34] 17 data set(s) created by marctables.Rmd
+TRACE [2024-06-18 13:01:34] NEWS.md file found, updating!
+TRACE [2024-06-18 13:01:34] New DataVersion is less than old but data are unchanged
+TRACE [2024-06-18 13:01:34] Saving to data
+TRACE [2024-06-18 13:01:34] Copied documentation to C:/Users/Alan/Documents/R Projects/rnaco/rnaco/R/rnaco.R
+TRACE [2024-06-18 13:01:35] Done
+TRACE [2024-06-18 13:01:35] DataPackageR succeeded
+TRACE [2024-06-18 13:01:35] Building documentation
+TRACE [2024-06-18 13:01:37] Building package
+TRACE [2024-06-18 13:12:01] Logging to C:/Users/Alan/Documents/R Projects/rnaco/rnaco/inst/extdata/Logfiles/processing.log
+TRACE [2024-06-18 13:12:01] Processing data
+TRACE [2024-06-18 13:12:01] Reading yaml configuration
+TRACE [2024-06-18 13:12:01] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/marctables.Rmd
+TRACE [2024-06-18 13:12:01] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/unihanVariants.Rmd
+TRACE [2024-06-18 13:12:01] Processing 1 of 2: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/marctables.Rmd
+
+TRACE [2024-06-18 13:12:42] 17 data set(s) created by marctables.Rmd
+TRACE [2024-06-18 13:12:42] Processing 2 of 2: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/unihanVariants.Rmd
+
+TRACE [2024-06-18 13:19:49] Logging to C:/Users/Alan/Documents/R Projects/rnaco/rnaco/inst/extdata/Logfiles/processing.log
+TRACE [2024-06-18 13:19:49] Processing data
+TRACE [2024-06-18 13:19:49] Reading yaml configuration
+TRACE [2024-06-18 13:19:49] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/marctables.Rmd
+TRACE [2024-06-18 13:19:49] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/unihanVariants.Rmd
+TRACE [2024-06-18 13:19:49] Processing 1 of 2: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/marctables.Rmd
+
+TRACE [2024-06-18 13:20:29] 17 data set(s) created by marctables.Rmd
+TRACE [2024-06-18 13:20:29] Processing 2 of 2: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/unihanVariants.Rmd
+
+TRACE [2024-06-18 13:25:20] Logging to C:/Users/Alan/Documents/R Projects/rnaco/rnaco/inst/extdata/Logfiles/processing.log
+TRACE [2024-06-18 13:25:20] Processing data
+TRACE [2024-06-18 13:25:20] Reading yaml configuration
+TRACE [2024-06-18 13:25:20] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/marctables.Rmd
+TRACE [2024-06-18 13:25:20] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/unihanVariants.Rmd
+TRACE [2024-06-18 13:25:20] Processing 1 of 2: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/marctables.Rmd
+
+TRACE [2024-06-18 13:25:59] 17 data set(s) created by marctables.Rmd
+TRACE [2024-06-18 13:25:59] Processing 2 of 2: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/unihanVariants.Rmd
+
+TRACE [2024-06-18 13:28:22] Logging to C:/Users/Alan/Documents/R Projects/rnaco/rnaco/inst/extdata/Logfiles/processing.log
+TRACE [2024-06-18 13:28:22] Processing data
+TRACE [2024-06-18 13:28:22] Reading yaml configuration
+TRACE [2024-06-18 13:28:22] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/marctables.Rmd
+TRACE [2024-06-18 13:28:22] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/unihanVariants.Rmd
+TRACE [2024-06-18 13:28:22] Processing 1 of 2: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/marctables.Rmd
+
+TRACE [2024-06-18 13:30:27] Logging to C:/Users/Alan/Documents/R Projects/rnaco/rnaco/inst/extdata/Logfiles/processing.log
+TRACE [2024-06-18 13:30:27] Processing data
+TRACE [2024-06-18 13:30:27] Reading yaml configuration
+TRACE [2024-06-18 13:30:27] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/marctables.Rmd
+TRACE [2024-06-18 13:30:27] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/unihanVariants.Rmd
+TRACE [2024-06-18 13:30:27] Processing 1 of 2: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/marctables.Rmd
+
+TRACE [2024-06-18 13:31:07] 17 data set(s) created by marctables.Rmd
+TRACE [2024-06-18 13:31:07] Processing 2 of 2: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/unihanVariants.Rmd
+
+TRACE [2024-06-18 13:31:29] 1 data set(s) created by unihanVariants.Rmd
+TRACE [2024-06-18 13:31:29] NEWS.md file found, updating!
+DEBUG [2024-06-18 13:31:29] unihan_variants was added.
+DEBUG [2024-06-18 13:31:29] unihan_variants was added.
+DEBUG [2024-06-18 13:31:29] unihan_variants was added.
+DEBUG [2024-06-18 13:31:29] unihan_variants was added.
+DEBUG [2024-06-18 13:31:29] unihan_variants was added.
+DEBUG [2024-06-18 13:31:29] unihan_variants was added.
+TRACE [2024-06-18 13:31:29] NEWS.md file found, updating!
+TRACE [2024-06-18 13:31:29] NEWS.md file found, updating!
+TRACE [2024-06-18 13:31:29] Saving to data
+TRACE [2024-06-18 13:31:29] Copied documentation to C:/Users/Alan/Documents/R Projects/rnaco/rnaco/R/rnaco.R
+TRACE [2024-06-18 13:31:30] Done
+TRACE [2024-06-18 13:31:30] DataPackageR succeeded
+TRACE [2024-06-18 13:31:30] Building documentation
+TRACE [2024-06-18 13:31:31] Building package
+TRACE [2024-06-18 13:41:54] Rebuilding data package documentation.
+TRACE [2024-06-18 14:03:21] Logging to C:/Users/Alan/Documents/R Projects/rnaco/rnaco/inst/extdata/Logfiles/processing.log
+TRACE [2024-06-18 14:03:21] Processing data
+TRACE [2024-06-18 14:03:21] Reading yaml configuration
+TRACE [2024-06-18 14:03:21] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/marctables.Rmd
+TRACE [2024-06-18 14:03:21] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/unihanVariants.Rmd
+TRACE [2024-06-18 14:03:21] Processing 1 of 2: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/marctables.Rmd
+
+TRACE [2024-06-18 14:04:01] 17 data set(s) created by marctables.Rmd
+TRACE [2024-06-18 14:04:01] Processing 2 of 2: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/unihanVariants.Rmd
+
+TRACE [2024-06-18 14:05:43] Logging to C:/Users/Alan/Documents/R Projects/rnaco/rnaco/inst/extdata/Logfiles/processing.log
+TRACE [2024-06-18 14:05:43] Processing data
+TRACE [2024-06-18 14:05:43] Reading yaml configuration
+TRACE [2024-06-18 14:05:43] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/marctables.Rmd
+TRACE [2024-06-18 14:05:43] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/unihanVariants.Rmd
+TRACE [2024-06-18 14:05:43] Processing 1 of 2: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/marctables.Rmd
+
+TRACE [2024-06-18 14:06:22] 17 data set(s) created by marctables.Rmd
+TRACE [2024-06-18 14:06:22] Processing 2 of 2: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/unihanVariants.Rmd
+
+TRACE [2024-06-18 14:09:54] Logging to C:/Users/Alan/Documents/R Projects/rnaco/rnaco/inst/extdata/Logfiles/processing.log
+TRACE [2024-06-18 14:09:54] Processing data
+TRACE [2024-06-18 14:09:54] Reading yaml configuration
+TRACE [2024-06-18 14:09:54] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/marctables.Rmd
+TRACE [2024-06-18 14:09:54] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/unihanVariants.Rmd
+TRACE [2024-06-18 14:09:54] Processing 1 of 2: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/marctables.Rmd
+
+TRACE [2024-06-18 14:10:32] 17 data set(s) created by marctables.Rmd
+TRACE [2024-06-18 14:10:32] Processing 2 of 2: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/unihanVariants.Rmd
+
+TRACE [2024-06-18 14:14:55] Logging to C:/Users/Alan/Documents/R Projects/rnaco/rnaco/inst/extdata/Logfiles/processing.log
+TRACE [2024-06-18 14:14:55] Processing data
+TRACE [2024-06-18 14:14:55] Reading yaml configuration
+TRACE [2024-06-18 14:14:55] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/marctables.Rmd
+TRACE [2024-06-18 14:14:55] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/unihanVariants.Rmd
+TRACE [2024-06-18 14:14:55] Processing 1 of 2: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/marctables.Rmd
+
+TRACE [2024-06-18 14:15:35] 17 data set(s) created by marctables.Rmd
+TRACE [2024-06-18 14:15:35] Processing 2 of 2: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/unihanVariants.Rmd
+
+TRACE [2024-06-18 14:15:57] 1 data set(s) created by unihanVariants.Rmd
+TRACE [2024-06-18 14:15:57] NEWS.md file found, updating!
+TRACE [2024-06-18 14:15:57] Processed data sets match existing data sets at version 0.0.5
+TRACE [2024-06-18 14:15:57] Saving to data
+TRACE [2024-06-18 14:15:58] Copied documentation to C:/Users/Alan/Documents/R Projects/rnaco/rnaco/R/rnaco.R
+TRACE [2024-06-18 14:15:58] Done
+TRACE [2024-06-18 14:15:58] DataPackageR succeeded
+TRACE [2024-06-18 14:15:58] Building documentation
+TRACE [2024-06-18 14:15:59] Building package
+TRACE [2024-06-18 14:19:07] Rebuilding data package documentation.
+TRACE [2024-06-18 14:34:08] Logging to C:/Users/Alan/Documents/R Projects/rnaco/rnaco/inst/extdata/Logfiles/processing.log
+TRACE [2024-06-18 14:34:08] Processing data
+TRACE [2024-06-18 14:34:08] Reading yaml configuration
+TRACE [2024-06-18 14:34:08] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/marctables.Rmd
+TRACE [2024-06-18 14:34:08] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/unihanVariants.Rmd
+TRACE [2024-06-18 14:34:08] Processing 1 of 2: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/marctables.Rmd
+
+TRACE [2024-06-18 14:34:51] 17 data set(s) created by marctables.Rmd
+TRACE [2024-06-18 14:34:51] Processing 2 of 2: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/unihanVariants.Rmd
+
+TRACE [2024-06-18 14:35:14] 1 data set(s) created by unihanVariants.Rmd
+TRACE [2024-06-18 14:35:14] NEWS.md file found, updating!
+WARN [2024-06-18 14:35:14] DataVersion has changed.
+WARN [2024-06-18 14:35:14] marcBasicArabic has changed.
+WARN [2024-06-18 14:35:14] marcBasicCyrillic has changed.
+WARN [2024-06-18 14:35:14] marcBasicGreek has changed.
+WARN [2024-06-18 14:35:14] marcBasicHebrew has changed.
+WARN [2024-06-18 14:35:14] marcBasicLatinASCII has changed.
+WARN [2024-06-18 14:35:14] marcComponentInputMethodCharacters has changed.
+WARN [2024-06-18 14:35:14] marcEastAsianIdeographsHan has changed.
+WARN [2024-06-18 14:35:14] marcEastAsianPunctuationMarks has changed.
+WARN [2024-06-18 14:35:14] marcExtendedArabic has changed.
+WARN [2024-06-18 14:35:14] marcExtendedCyrillic has changed.
+WARN [2024-06-18 14:35:14] marcExtendedLatinANSEL has changed.
+WARN [2024-06-18 14:35:14] marcGreekSymbols has changed.
+WARN [2024-06-18 14:35:14] marcJapaneseHiraganaandKatakana has changed.
+WARN [2024-06-18 14:35:14] marcNotes has changed.
+WARN [2024-06-18 14:35:14] marcSubscripts has changed.
+WARN [2024-06-18 14:35:14] unihan_variants has changed.
+WARN [2024-06-18 14:35:14] DataVersion has changed.
+WARN [2024-06-18 14:35:14] marcBasicArabic has changed.
+WARN [2024-06-18 14:35:14] marcBasicCyrillic has changed.
+WARN [2024-06-18 14:35:14] marcBasicGreek has changed.
+WARN [2024-06-18 14:35:14] marcBasicHebrew has changed.
+WARN [2024-06-18 14:35:14] marcBasicLatinASCII has changed.
+WARN [2024-06-18 14:35:14] marcComponentInputMethodCharacters has changed.
+WARN [2024-06-18 14:35:14] marcEastAsianIdeographsHan has changed.
+WARN [2024-06-18 14:35:14] marcEastAsianPunctuationMarks has changed.
+WARN [2024-06-18 14:35:14] marcExtendedArabic has changed.
+WARN [2024-06-18 14:35:14] marcExtendedCyrillic has changed.
+WARN [2024-06-18 14:35:14] marcExtendedLatinANSEL has changed.
+WARN [2024-06-18 14:35:14] marcGreekSymbols has changed.
+WARN [2024-06-18 14:35:14] marcJapaneseHiraganaandKatakana has changed.
+WARN [2024-06-18 14:35:14] marcNotes has changed.
+WARN [2024-06-18 14:35:14] marcSubscripts has changed.
+WARN [2024-06-18 14:35:14] unihan_variants has changed.
+WARN [2024-06-18 14:35:14] DataVersion has changed.
+WARN [2024-06-18 14:35:14] marcBasicArabic has changed.
+WARN [2024-06-18 14:35:14] marcBasicCyrillic has changed.
+WARN [2024-06-18 14:35:14] marcBasicGreek has changed.
+WARN [2024-06-18 14:35:14] marcBasicHebrew has changed.
+WARN [2024-06-18 14:35:14] marcBasicLatinASCII has changed.
+WARN [2024-06-18 14:35:14] marcComponentInputMethodCharacters has changed.
+WARN [2024-06-18 14:35:14] marcEastAsianIdeographsHan has changed.
+WARN [2024-06-18 14:35:14] marcEastAsianPunctuationMarks has changed.
+WARN [2024-06-18 14:35:14] marcExtendedArabic has changed.
+WARN [2024-06-18 14:35:14] marcExtendedCyrillic has changed.
+WARN [2024-06-18 14:35:14] marcExtendedLatinANSEL has changed.
+WARN [2024-06-18 14:35:14] marcGreekSymbols has changed.
+WARN [2024-06-18 14:35:14] marcJapaneseHiraganaandKatakana has changed.
+WARN [2024-06-18 14:35:14] marcNotes has changed.
+WARN [2024-06-18 14:35:14] marcSubscripts has changed.
+WARN [2024-06-18 14:35:14] unihan_variants has changed.
+TRACE [2024-06-18 14:35:14] NEWS.md file found, updating!
+TRACE [2024-06-18 14:37:12] NEWS.md file found, updating!
+TRACE [2024-06-18 14:37:12] Data has been updated and DataVersion string incremented automatically to 0.0.6
+TRACE [2024-06-18 14:37:12] Saving to data
+TRACE [2024-06-18 14:37:12] Copied documentation to C:/Users/Alan/Documents/R Projects/rnaco/rnaco/R/rnaco.R
+TRACE [2024-06-18 14:37:12] Done
+TRACE [2024-06-18 14:37:12] DataPackageR succeeded
+TRACE [2024-06-18 14:37:12] Building documentation
+TRACE [2024-06-18 14:37:13] Building package
+TRACE [2024-06-18 14:39:30] Rebuilding data package documentation.
+TRACE [2024-06-18 15:02:29] Logging to C:/Users/Alan/Documents/R Projects/rnaco/rnaco/inst/extdata/Logfiles/processing.log
+TRACE [2024-06-18 15:02:29] Processing data
+TRACE [2024-06-18 15:02:29] Reading yaml configuration
+TRACE [2024-06-18 15:02:29] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/marctables.Rmd
+TRACE [2024-06-18 15:02:29] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/unihanVariants.Rmd
+TRACE [2024-06-18 15:02:29] Processing 1 of 2: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/marctables.Rmd
+
+TRACE [2024-06-18 15:03:08] 17 data set(s) created by marctables.Rmd
+TRACE [2024-06-18 15:03:08] Processing 2 of 2: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/unihanVariants.Rmd
+
+TRACE [2024-06-18 15:03:30] 1 data set(s) created by unihanVariants.Rmd
+TRACE [2024-06-18 15:03:30] NEWS.md file found, updating!
+WARN [2024-06-18 15:03:30] marcSuperscripts has changed.
+WARN [2024-06-18 15:03:30] marcSuperscripts has changed.
+WARN [2024-06-18 15:03:30] marcSuperscripts has changed.
+TRACE [2024-06-18 15:03:30] NEWS.md file found, updating!
+TRACE [2024-06-18 15:04:11] NEWS.md file found, updating!
+TRACE [2024-06-18 15:04:11] Data has been updated and DataVersion string incremented automatically to 0.0.7
+TRACE [2024-06-18 15:04:11] Saving to data
+TRACE [2024-06-18 15:04:11] Copied documentation to C:/Users/Alan/Documents/R Projects/rnaco/rnaco/R/rnaco.R
+TRACE [2024-06-18 15:04:11] Done
+TRACE [2024-06-18 15:04:11] DataPackageR succeeded
+TRACE [2024-06-18 15:04:11] Building documentation
+TRACE [2024-06-18 15:04:12] Building package
+TRACE [2024-06-18 15:04:40] Rebuilding data package documentation.

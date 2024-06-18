@@ -1,0 +1,590 @@
+---
+title: Unihan Variants Table for rnaco
+author: Alan Engel
+date: '`r format(Sys.time(), ''%d %B, %Y'')`'
+lang: en-us
+output_format: rmarkdown::html_vignette
+bibliography:
+- R.bib
+- unihan.bib
+link-citations: yes
+vignette: >
+  %\VignetteIndexEntry{Unihan Variants Table for rnaco}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+---
+
+# Libraries
+
+```{r libraries}
+library(tidyr)
+library(dplyr)
+library(magrittr)
+library(tibble)
+library(stringi)
+
+```
+
+# Scope
+
+This package, ```rnaco```, applies to normalization for a local
+search and comparison task. It is not intended for use for global tasks
+such as permanent and authoritative databases. 
+
+That said, since this package is intended for use in extracting
+information from the Virtual International Authority File [(VIAF)]{https://viaf.org}, the
+ability to reproduce normalization as observed in VIAF will receive
+priority.
+
+# Normalization task
+
+As part of normalization for the purpose of comparing titles and names, 
+[VIAF](https://viaf.org "VIAF") (Virtual International Authority File)
+appears to use Unihan variants [jenkins2021uax].
+An example is shown by the following element found in
+this [VIAF xml record](https://viaf.org/viaf/253482919/viaf.xml):
+
+```
+<ns1:x400>
+<ns1:datafield dtype="MARC21" ind1="1" ind2=" " tag="400">
+<ns1:subfield code="a">千葉, 玄彌</ns1:subfield>
+<ns1:normalized>仟叶 伭弥</ns1:normalized>
+</ns1:datafield>
+<ns1:sources>
+<ns1:s>NII</ns1:s>
+<ns1:sid>NII|DA0067554X</ns1:sid>
+</ns1:sources>
+</ns1:x400>
+```
+
+The subfield contains a name, "Chiba Gen'ya," in Japanese characters.
+The normalized name consists of simplified Chinese characters.
+
+## Unicode ICU
+
+Note that transformation from traditional to simplified as implemented
+according to Unicode ICU rules, as implemented by the R package ```stringi```
+[@R-stringi] gives a different result.
+
+```{r stri_trans_general}
+stringi::stri_trans_general("千葉, 玄彌", id="Traditional-Simplified")
+```
+
+## Unicode Han Database {#id_unihandatabase}
+
+The [UNICODE HAN DATABASE](https://www.unicode.org/reports/tr38/)[@jenkins2021uax]
+provides a file ```Unihan.zip``` that contains a file ```Unihan\_Variants.txt```.
+Load it and take a look while referring to the
+[3.7 Variants](https://www.unicode.org/reports/tr38/#N10211) section.
+
+```{r takealook}
+
+variants <- readLines( con <- file(project_extdata_path("Unihan_Variants.txt"), encoding="UTF-8") )
+variants[1:25]
+```
+
+The header provides useful information but will get in the way of later
+processing. Remove it. There is also a blank line at the end.
+
+```{r removeheader}
+variants <- variants[which(stringi::stri_detect_regex(variants, "^#", negate = TRUE))]
+variants <- variants[which(stringi::stri_length(variants) > 0)]
+as.data.frame(variants[1:5])
+```
+
+The header states that there are six kinds of variants.
+
+* tkSemanticVariant
+* tkSimplifiedVariant
+* tkSpecializedSemanticVariant
+* tkSpoofingVariant
+* tkTraditionalVariant
+* tkZVariant
+
+Below I walk through the [3.7 Variants](https://www.unicode.org/reports/tr38/#N10211) section,
+and look up each example in ```variants```.
+
+### 3.7 Variants {#id_Variants}
+
+> Although Unicode encodes characters and not glyphs, the line between the two can sometimes be hard to draw, particularly in East Asia. There, thousands of years worth of writing have produced thousands of pairs which can be used more-or-less interchangeably.
+
+> To deal with this situation, the Unicode Standard has adopted a three-dimensional model for determining the relationship between ideographs, and has formal rules for when two forms may be unified, which includes the now-abolished Source Separation Rule. Both are described in some detail in the Unicode Standard. Briefly, however, the three-dimensional model uses the x-axis to represent meaning, the y-axis to represent abstract shape, and the z-axis for stylistic variations.
+
+> To illustrate, U+8AAA 說 and U+8C93 貓 have different positions along the x-axis, because they mean two entirely different things (to speak and cat, respectively). U+8C93 貓 and U+732B 猫 mean the same thing and are pronounced the same way, but have different abstract shapes, so they have the same position on the x-axis (semantics), but different positions on the y-axis (abstract shape). They are said to be y-variants of one another. On the other hand, U+8AAA 說 and U+8AAC 説 have the same meaning and pronunciation, and the same abstract shape, and so have the same positions on both the x- and y-axes, but different positions on the z-axis. They are z-variants of one another.
+
+> Ideally, there would be no pairs of z-variants in the Unicode Standard; however, the need to provide for round-trip compatibility with earlier standards, and some out-and-out mistakes along the way, mean that there are some. These are marked using the kZVariant property.
+
+> The remaining variant properties are used to mark different types of y-variation.
+
+```{r variants1}
+as.data.frame(variants[which(stringi::stri_detect_regex(variants, "U[+]8AAA"))])
+as.data.frame(variants[which(stringi::stri_detect_regex(variants, "U[+]8C93"))])
+```
+
+(Geeky note: The Chinese characters in the quoted passages are copied from
+the web page. Those in the discussion are rendered from inline R code, e.g.,
+```r intToUtf8(as.integer(0x8AAA))```.)
+
+These entries show that U+8AAA `r intToUtf8(as.integer(0x8AAA))`
+and U+8C93 `r intToUtf8(as.integer(0x8C93))` are completely separated, 
+because they mean two entirely different things (to speak and cat, respectively).
+Now compare U+8C93 `r intToUtf8(as.integer(0x8C93))` and U+732B `r intToUtf8(as.integer(0x732B))`, which mean the same thing and are
+pronounced the same way, but have different abstract shapes
+
+```{r variants2}
+as.data.frame(variants[which(stringi::stri_detect_regex(variants, "U[+]8C93"))])
+as.data.frame(variants[which(stringi::stri_detect_regex(variants, "U[+]732B"))])
+```
+
+Both sets show that U+8C93 `r intToUtf8(as.integer(0x8C93))` is a
+semantic variant of U+732B `r intToUtf8(as.integer(0x732B))`, and
+that U+732B `r intToUtf8(as.integer(0x732B))` is a semantic variant
+of U+8C93 `r intToUtf8(as.integer(0x8C93))`. Semantic variant is
+a commutative relationship with entries for both directions. The top
+set for U+8C93 `r intToUtf8(as.integer(0x8C93))` shows that it, and
+U+732B `r intToUtf8(as.integer(0x732B))` are traditional
+variants of U+732B `r intToUtf8(as.integer(0x732B))`, and that it has U+732B `r intToUtf8(as.integer(0x732B))` as a simplified
+variant. The second set for U+732B `r intToUtf8(as.integer(0x732B))` shows the same relationships
+as for U+8C93 `r intToUtf8(as.integer(0x8C93))` but with an additional entry showing it as a simplified
+variant of itself. It is also a traditional variant of itself.
+In other words, U+732B `r intToUtf8(as.integer(0x732B))` is member of both the simplified and
+traditional Chinese character sets.
+
+Now look at the other pairing of U+8AAA `r intToUtf8(as.integer(0x8AAA))`,
+that with U+8AAC `r intToUtf8(as.integer(0x8AAC))`.
+I include the simplified character U+8BF4 `r intToUtf8(as.integer(0x8BF4))` because it also
+shows up in the first two retrievals for U+8AAA `r intToUtf8(as.integer(0x8AAA))`
+and U+8AAC `r intToUtf8(as.integer(0x8AAC))`.
+As the [Variants](https://www.unicode.org/reports/tr38/#N10211) section
+explains these are merely stylistically different and are therefore
+called z-variants. 
+
+```{r variants3}
+as.data.frame(variants[which(stringi::stri_detect_regex(variants, "U[+]8AAA"))])
+as.data.frame(variants[which(stringi::stri_detect_regex(variants, "U[+]8AAC"))])
+as.data.frame(variants[which(stringi::stri_detect_regex(variants, "U[+]8BF4"))])
+```
+
+The first subsection is [3.7.1 Simplified and Traditional Chinese Variants](https://www.unicode.org/reports/tr38/#SCTC), 
+which starts with the case that a character is the same in both simplified and traditional
+Chinese.
+
+#### 3.7.1 Simplified and Traditional Chinese Variants {#id_stvariants}
+
+> The kTraditionalVariant and kSimplifiedVariant properties are used in character-by-character conversions between simplified and traditional Chinese (abbreviated as SC and TC, respectively). For any ideograph X, when converting between SC and TC, there are four possible cases:
+
+> 1. X is used in both SC and TC and is unchanged when mapping between them. An example would be U+4E95 井. This is the most common case, and is indicated by both the kSimplifiedVariant and kTraditionalVariant properties being empty.
+
+As stated, there are no kTraditionalVariant and kSimplifiedVariant entries in ```Unihan_Variants.txt". The
+kSpecializedSemanticVariant entries are explained later.
+
+```{r variants4}
+as.data.frame(variants[which(stringi::stri_detect_regex(variants, "U[+]4E95"))])
+```
+
+> 2. X is used in TC but not SC, that is, it is changed when converting from TC to SC, but not vice versa. In this case, the kSimplifiedVariant property lists the ideograph(s) to which it is mapped and the kTraditionalVariant property is empty. An example would be U+66F8 書 whose kSimplifiedVariant property is U+4E66 书.
+
+Retrieving these entries gives a pair. One can be verbalized,
+"U+4E66 `r intToUtf8(as.integer(0x4E66))` has the traditional
+variant U+66F8 `r intToUtf8(as.integer(0x66F8))`." The other,
+"U+66F8 `r intToUtf8(as.integer(0x66F8))` has the simplified
+variant U+4E66 `r intToUtf8(as.integer(0x4E66))`."
+
+```{r variants5}
+as.data.frame(variants[which(stringi::stri_detect_regex(variants, "U[+]66F8"))])
+as.data.frame(variants[which(stringi::stri_detect_regex(variants, "U[+]4E66"))])
+```
+
+> 3. X is used in SC but not TC, that is, it is changed when converting from SC to TC, but not vice versa. In this case, the kTraditionalVariant property lists the ideograph(s) to which it is mapped and the kSimplifiedVariant property is empty. An example would be U+5B66 学 whose kTraditionalVariant property is U+5B78 學.
+
+Searching U+5B66 `r intToUtf8(as.integer(0x5B66))`
+retrieves a traditional/simplified pairing with U+5B78 `r intToUtf8(as.integer(0x5B78))`, but
+searching U+5B78 `r intToUtf8(as.integer(0x5B78))`
+additionally retrieves U+6588 `r intToUtf8(as.integer(0x6588))` as
+a semantic variant (see below). Note that
+[3.7.1 Simplified and Traditional Chinese Variants](https://www.unicode.org/reports/tr38/#SCTC)
+states that the kSimplifiedVariant property is empty, which
+does not appear to be the case here.
+
+```{r variants6}
+as.data.frame(variants[which(stringi::stri_detect_regex(variants, "U[+]5B66"))])
+as.data.frame(variants[which(stringi::stri_detect_regex(variants, "U[+]5B78"))])
+as.data.frame(variants[which(stringi::stri_detect_regex(variants, "U[+]6588"))])
+```
+
+> 4. X is used in both SC and TC and may be changed when mapping between them. This is the most complex case, because there are two distinct sub-cases:
+
+>> 1. X may be mapped to itself or to another ideograph when converting between SC and TC. In this case, the ideograph is its own simplification as well as the simplification for other ideographs. An example would be U+540E 后, which is the simplification for itself and for U+5F8C 後. When mapping TC to SC, it is left alone, but when mapping SC to TC it may or may not be changed, depending on context. In this case, both kTraditionalVariant and kSimplifiedVariant properties are defined and X is included among the values for both.
+
+The retrievals below are straightforwardly consistent with
+the Unicode report. For the purpose of normalization, it's worth
+noting that mappings from traditional to simplified are N-to-1, at
+least in the examples so far.
+
+```{r variants7}
+as.data.frame(variants[which(stringi::stri_detect_regex(variants, "U[+]540E"))])
+as.data.frame(variants[which(stringi::stri_detect_regex(variants, "U[+]5F8C"))])
+```
+
+>> 2. X is used for different words in SC and TC. When converting between the two, it is always changed. An example would be U+82E7 苧. In traditional Chinese, it is pronounced zhù and refers to a kind of nettle. In simplified Chinese, it is pronounced níng and means limonene (a chemical found in the rinds of lemons and other citrus fruits). When converting TC to SC it is mapped to U+82CE 苎, and when converting SC to TC it is mapped to U+85B4 薴. In this case, both kTraditionalVariant and kSimplifiedVariant properties are defined but X is not included in the values for either.
+
+The related retrievals show chained relations.
+U+85B4 `r intToUtf8(as.integer(0x85B4))` has the
+simplified variant U+82E7 `r intToUtf8(as.integer(0x82E7))`, which in turn has the
+simplified variant U+82CE `r intToUtf8(as.integer(0x82CE))`, or conversely
+U+82CE `r intToUtf8(as.integer(0x82CE))` has the traditional variant
+U+82E7 `r intToUtf8(as.integer(0x82E7))`, which in turn has the
+traditional variant U+85B4 `r intToUtf8(as.integer(0x85B4))`.
+
+Observation: searches retrieve nearest neighbors in the chain. 
+
+```{r variants8}
+as.data.frame(variants[which(stringi::stri_detect_regex(variants, "U[+]82E7"))])
+as.data.frame(variants[which(stringi::stri_detect_regex(variants, "U[+]82CE"))])
+as.data.frame(variants[which(stringi::stri_detect_regex(variants, "U[+]85B4"))])
+```
+
+> In practice, conversion between simplified and traditional Chinese is complicated by several factors:
+
+>> 1. The conversion is almost always one-to-one, but in some cases may be one-to-many, and context may need to be evaluated to determine which specific mapping to use. When converting SC to TC, U+810F 脏 is mapped to U+81DF 臟 when it means “viscera” and to U+9AD2 髒 when it means “dirty.”
+
+For normalization purposes, U+810F `r intToUtf8(as.integer(0x810F))`
+is the only simplified variant in this example.
+
+```{r variants9}
+as.data.frame(variants[which(stringi::stri_detect_regex(variants, "U[+]810F"))])
+as.data.frame(variants[which(stringi::stri_detect_regex(variants, "U[+]81DF"))])
+as.data.frame(variants[which(stringi::stri_detect_regex(variants, "U[+]9AD2"))])
+```
+
+>> 2. Simplified/traditional pairs may be affected by the now-abolished Source Separation Rule, such as 1) when the traditional variant that is common in TW/HK is not identical to the official traditional variant as defined by CN standards, such as U+4E3A 为 versus U+70BA 為 (HK, TW) / U+7232 爲 (CN); and 2) when the traditional variant that is common in TW/HK diverges, whereby the preferred HK traditional variant is identical to the official traditional variant as defined by CN standards, such as U+8BF4 说 versus U+8AAC 説 (HK, CN) / U+8AAA 說 (TW).
+
+For normalization purposes, U+4E3A `r intToUtf8(as.integer(0x4E3A))`
+is the only simplified variant in the first example. 
+
+```{r variants10}
+as.data.frame(variants[which(stringi::stri_detect_regex(variants, "U[+]4E3A"))])
+as.data.frame(variants[which(stringi::stri_detect_regex(variants, "U[+]70BA"))])
+as.data.frame(variants[which(stringi::stri_detect_regex(variants, "U[+]7232"))])
+```
+
+The second example, see also [above](#id_Variants),
+likewise has a single simplified variant U+8BF4 `r intToUtf8(as.integer(0x8BF4))`.
+
+```{r variants11}
+as.data.frame(variants[which(stringi::stri_detect_regex(variants, "U[+]8BF4"))])
+as.data.frame(variants[which(stringi::stri_detect_regex(variants, "U[+]8AAC"))])
+as.data.frame(variants[which(stringi::stri_detect_regex(variants, "U[+]8AAA"))])
+```
+
+>> 3. An SC ideograph may be used in actual TC text and, more rarely, vice versa. This is particularly true in handwritten and ancient texts. Indeed, many SC forms originated as handwritten forms or ancient synonyms. It also occurs when one of a number of synonymous TC ideographs is identified as the preferred or correct ideograph to use in SC. For example, both U+732B 猫 and U+8C93 貓 are acceptable TC ideographs meaning “cat,” but only U+732B 猫 should be used in SC.
+
+U+732B `r intToUtf8(as.integer(0x732B))` is the only
+simplified variant here.
+
+```{r variants12}
+as.data.frame(variants[which(stringi::stri_detect_regex(variants, "U[+]732B"))])
+as.data.frame(variants[which(stringi::stri_detect_regex(variants, "U[+]8C93"))])
+```
+
+>> 4. The mappings defined within the Unihan database are informal and based on actual practice. Different authorities may not agree on the simplified or traditional form of a specific ideograph, and either might be at odds with official, formal definitions, such as those in the 通用规范汉字表 (Tōngyòng Guīfàn Hànzì Biǎo, Table of General Standard Chinese Characters).
+
+>> 5. Political divisions within the Chinese-speaking community have resulted in different coinages in different locales for various modern terms, and so actual conversion between SC and TC is ideally done on a word-by-word basis, not a character-by-character basis. A hard disk, for example, is called 硬盘 in the PRC, and 硬碟 in Taiwan.
+
+These items have no examples, so move on.
+
+#### 3.7.2 Semantic Variants {#id_semantic}
+
+> Two variation properties, kSemanticVariant and kSpecializedSemanticVariant, are used to mark cases where two ideographs have identical and overlapping meanings, respectively.
+
+> Thus U+514E 兎 and U+5154 兔 are y-variants of one another; both mean rabbit.
+
+Curiously, Unihan_Variants.txt does not contain entries for a simplified/traditional
+relationship between U+514E `r intToUtf8(as.integer(0x514E))` and U+5154
+`r intToUtf8(as.integer(0x5154))`, but 
+[MDBG](https://www.mdbg.net/chinese/dictionary?page=worddict&wdrst=0&wdqb=c%3A*%E5%85%8E*)
+shows U+5154 `r intToUtf8(as.integer(0x5154))` to be the simplified variant of
+U+514E `r intToUtf8(as.integer(0x514E))`. A
+[search of VIAF](https://viaf.org/viaf/search?query=local.personalNames%20all%20%22%E5%85%8E%22) finds 3
+Japanese persons
+who use the traditional character U+514E `r intToUtf8(as.integer(0x514E))` as part
+of their names. A search on the [simplified character](https://viaf.org/viaf/search?query=local.personalNames%20all%20%22%E5%85%94%22)
+returns the same 3 persons even though the returned records do not contain this simplified
+variant. Evidently, this variant is included in the VAIF search process, but the mechanism
+is unclear to me at this point. A possible alternate route may be via the Japanese readings,
+'Usagi' and 'ウサギ'.
+
+```{r variants13}
+as.data.frame(variants[which(stringi::stri_detect_regex(variants, "U[+]514E"))])
+as.data.frame(variants[which(stringi::stri_detect_regex(variants, "U[+]5154"))])
+```
+
+> U+4E3C 丼 and U+4E95 井 are not pure y-variants of one another. U+4E95 井 means a well, and
+although U+4E3C 丼 can also mean a well and be used for U+4E95 井, it can also mean a bowl of food.
+We use kSemanticVariant, then, for the former pair, and kSpecializedSemanticVariant for the latter.
+
+
+```{r variants14}
+as.data.frame(variants[which(stringi::stri_detect_regex(variants, "U[+]4E3C"))])
+as.data.frame(variants[which(stringi::stri_detect_regex(variants, "U[+]4E95"))])
+```
+
+> In many cases, data is provided listing the Unihan sources which indicate the variant relationship. The syntax is described in detail below, but as an example, U+792E 礮 has the kSemanticVariant value U+70AE<kMeyerWempe U+7832<kLau,kMatthews,kMeyerWempe U+791F<kLau,kMatthews. This means that the Mathews, Lau, and Meyer-Wempe dictionaries all say that it is a y-variant of U+7832 砲, whereas only Mathews and Lau identify it as a variant of U+791F 礟 and only Meyer-Wempe identifies it as a variant of U+70AE 炮.
+
+In this example, only U+792E `r intToUtf8(as.integer(0x732B))` retrieves
+a simplified/traditional relationship with U+2AFEB `r intToUtf8(as.integer(0x2AFEB))`
+being the simplified variant. And U+2AFEB `r intToUtf8(as.integer(0x2AFEB))` does not
+participate in any of the semantic variant relationships of its traditional
+counterpart.
+
+```{r variants15}
+as.data.frame(variants[which(stringi::stri_detect_regex(variants, "U[+]792E"))])
+as.data.frame(variants[which(stringi::stri_detect_regex(variants, "U[+]70AE"))])
+as.data.frame(variants[which(stringi::stri_detect_regex(variants, "U[+]7832"))])
+as.data.frame(variants[which(stringi::stri_detect_regex(variants, "U[+]791F"))])
+as.data.frame(variants[which(stringi::stri_detect_regex(variants, "U[+]2AFEB"))])
+```
+
+#### 3.7.3 Spoofing Variants {#id_spoofing}
+
+> The kSpoofingVariant property is used to denote a special class of variant, a spoofing variant. Spoofing variants are potentially used in bad faith to direct users to unexpected URLs, evade email filters, or otherwise deceive end-users. Determining whether or not two ideographs are spoofing variants is based entirely on the glyph shape, without regard for semantics. Etymologically unrelated pairs such as U+571F 土 and U+58EB 士 or U+672A 未 and U+672B 末 are considered spoofing variants.
+
+Unihan_Variants.txt does not contain these examples.
+
+```{r variants16}
+as.data.frame(variants[which(stringi::stri_detect_regex(variants, "U[+]571F"))])
+as.data.frame(variants[which(stringi::stri_detect_regex(variants, "U[+]58EB"))])
+```
+
+```{r variants17}
+as.data.frame(variants[which(stringi::stri_detect_regex(variants, "U[+]672A"))])
+as.data.frame(variants[which(stringi::stri_detect_regex(variants, "U[+]672B"))])
+```
+
+> A common source of spoofing variants is deliberate confusion between Radicals 74 (⽉) and 130 (⾁). These two radicals, when used in Han ideographs, look very similar or identical (for example, in U+3B35 㬵 and U+80F6 胶).
+
+U+81A0 `r intToUtf8(as.integer(0x81A0))` is a traditional variant of 
+U+80F6 `r intToUtf8(as.integer(0x80F6))` and is included as it may have implications
+for normalization.
+
+```{r variants18}
+as.data.frame(variants[which(stringi::stri_detect_regex(variants, "U[+]3B35"))])
+as.data.frame(variants[which(stringi::stri_detect_regex(variants, "U[+]80F6"))])
+as.data.frame(variants[which(stringi::stri_detect_regex(variants, "U[+]81A0"))])
+```
+
+> Similarly, even if the visual appearance of two radicals is distinct, they may be similar enough that a user might overlook the distinction (for example, ⼎ and ⺡), especially in a spoofing context such as 凊水.org versus 清水.org. Spoofing variants also include instances where two highly similar shapes are separately encoded because of source code separation, without regard to other considerations. Cases include the following pairs: U+672C 本 and U+5932 夲; U+520A 刊 and U+520B 刋.
+
+The first pair, U+672C `r intToUtf8(as.integer(0x672C))` and U+5932 `r intToUtf8(as.integer(0x5932))`,
+is not in Unihan_Variants.txt.
+
+```{r variants19}
+as.data.frame(variants[which(stringi::stri_detect_regex(variants, "U[+]672C"))])
+as.data.frame(variants[which(stringi::stri_detect_regex(variants, "U[+]5932"))])
+```
+
+The second pair, U+520A 刊 and U+520B 刋, is in Unihan_Variants.txt
+as semantic variants.
+
+```{r variants20}
+as.data.frame(variants[which(stringi::stri_detect_regex(variants, "U[+]520A"))])
+as.data.frame(variants[which(stringi::stri_detect_regex(variants, "U[+]520B"))])
+```
+
+
+> Some spoofing variants might be sufficiently dissimilar in shape that they can be distinguished at large point sizes. Others are dissimilar in meaning so that they can be distinguished in running text. They might also be visually distinct in one font but not another, due to the language or region that the font supports. These considerations are irrelevant to their status; even dissimilar pairs can be used to misdirect users (particularly when URLs are displayed at small point sizes).
+
+> Because z-variant pairs are, by definition, either identical or unifiable, they should all be considered spoofing variants as well. The same is true of compatibility variants. Because of these considerations, the kSpoofingVariant property only includes spoofing variants which are not also z-variants or compatibility variants.
+
+> The kSpoofingVariant property is symmetric (if A is a spoofing variant of B, then B is a spoofing variant of A) and transitive (if A is a spoofing variant of B and B is a spoofing variant of C, then A is a spoofing variant of C).
+
+> The kSpoofingVariant property only covers ideographs in the CJK Unified Ideographs blocks. Other CJK-related spoofing data is found in the EquivalentUnifiedIdeographs.txt file in the [UCD].
+
+## Implications for normalization
+
+This section will likely change as I work through the NACO rules.
+
+### Illustrative example
+
+Here review the illustrative example from the top of the page in light of 
+```stringi::stri_trans_general(str, id="Traditional-Simplified")``` and
+```Unihan_Variants.txt```.
+
+Also include a VIAF normalization example from the related
+[Authority Source Resource](https://viaf.org/processed/NDL%7C00158642?httpAccept=text/xml).
+
+```
+<mx:datafield ind1=" " ind2=" " tag="910">
+<mx:subfield code="a">份只を操る技术</mx:subfield>
+<mx:subfield code="A">分子を操る技術 /</mx:subfield>
+<mx:subfield code="l">jpn</mx:subfield>
+<mx:subfield code="9">1</mx:subfield>
+</mx:datafield>
+...
+<mx:datafield ind1=" " ind2=" " tag="998">
+<mx:subfield code="a">千葉, 玄弥</mx:subfield>
+<mx:subfield code="2">NII|DA0067554X</mx:subfield>
+<mx:subfield code="3">exact title: (1.00, '份只を操る技术', '份只を操る技术')</mx:subfield>
+</mx:datafield>
+```
+
+This processed source record from NDL contains under tag 910 the title
+分子を操る技術 of a work edited by Chiba Gen'ya
+and under tag 998 the exact title matching of a normalized form of this title
+(份只を操る技术) with its (normalized) title in the processed source record from NII.
+
+The code segment below shows stringi's transformation to simplified Chinese along
+with the Unicode of the original string for both strings.
+
+```{r example1a}
+stringi::stri_trans_general("千葉, 玄彌", id="Any-Hex/Unicode")
+stringi::stri_trans_general("千葉, 玄彌", id="Traditional-Simplified")
+stringi::stri_trans_general("千叶, 玄弥", id="Any-Hex/Unicode")
+stringi::stri_trans_general("分子を操る技術", id="Any-Hex/Unicode")
+stringi::stri_trans_general("分子を操る技術", id="Traditional-Simplified")
+stringi::stri_trans_general("分子を操る技术", id="Any-Hex/Unicode")
+```
+
+From the name string, "千葉, 玄彌", this replaces 葉 with 叶 and 彌 with 弥, but
+leaves 千 and 玄 unreplaced. From the title string, "分子を操る技術", it
+replaces 術 with 术, but leaves 分子 unreplaced.
+
+Now search for the characters 千 (U+5343) with its target 仟 (U+4EDF)
+and 玄 (U+7384) with its target 伭 (U+4F2D) in Unihan_Variants.txt.
+
+```{r example1b}
+as.data.frame(variants[which(stringi::stri_detect_regex(variants, "U[+]5343"))])
+as.data.frame(variants[which(stringi::stri_detect_regex(variants, "U[+]4EDF"))])
+as.data.frame(variants[which(stringi::stri_detect_regex(variants, "U[+]7384"))])
+as.data.frame(variants[which(stringi::stri_detect_regex(variants, "U[+]4F2D"))])
+```
+
+Also search for the paired sets 葉 (U+8449) with 叶 (U+53F6),
+and 彌 (U+5F4C) with 弥 (U+5F25).
+
+```{r example1c}
+as.data.frame(variants[which(stringi::stri_detect_regex(variants, "U[+]8449"))])
+as.data.frame(variants[which(stringi::stri_detect_regex(variants, "U[+]53F6"))])
+as.data.frame(variants[which(stringi::stri_detect_regex(variants, "U[+]5F4C"))])
+as.data.frame(variants[which(stringi::stri_detect_regex(variants, "U[+]5F25"))])
+```
+
+It can be seen that Unihan_Variants.txt provides a route from
+千 (U+5343) to its target 仟 (U+4EDF) through the semantic variants below.
+
+```
+U+5343\tkSemanticVariant\tU+4EDF<kMeyerWempe
+U+5343\tkSpecializedSemanticVariant\tU+4EDF
+```
+
+Similarly, there is a route from 玄 (U+7384) to its target 伭 (U+4F2D)
+via the semantic variant below.
+
+Note that for both of these pairs the semantic variant in the normalized
+form is the lesser when collated by Unicode code integer value.
+
+```
+U+7384\tkSemanticVariant\tU+4F2D<kMatthews
+```
+
+There are simplified variants for both of the paired sets 葉 (U+8449) with 叶 (U+53F6),
+and 彌 (U+5F4C) with 弥 (U+5F25).
+
+Note that for both of these pairs the semantic variant in the normalized
+form is the lesser when collated by Unicode code integer value.
+
+Now look at the CJK character pairs in the title and its normalized
+form, "分子を操る技術" and "份只を操る技术". The unchanged
+characters 操 (U+64CD) and 技 (U+6280) have no entries in
+Unihan_Variants.txt.
+
+* 分 (U+5206) vs 份 (U+4EFD)
+
+This retrieves a specialized semantie pairing with 份 (U+4EFD)
+being the lesser when collated by Unicode code integer value.
+
+```{r example1d}
+as.data.frame(variants[which(stringi::stri_detect_regex(variants, "U[+]5206"))])
+as.data.frame(variants[which(stringi::stri_detect_regex(variants, "U[+]4EFD"))])
+```
+
+* 子 (U+5B50) vs 只 (U+53EA)
+
+子 (U+5B50) retrieves a simple semantic pairing with 只 (U+53EA)
+coming first in collated sequence. 只 (U+53EA) retrieves a mix of
+simplified and semantic variants relationships. 只 (U+53EA) is first
+in collated sequence for all and is the simplified variant in all
+
+
+```{r example1e}
+as.data.frame(variants[which(stringi::stri_detect_regex(variants, "U[+]5B50"))])
+as.data.frame(variants[which(stringi::stri_detect_regex(variants, "U[+]53EA"))])
+```
+
+* 操 (U+64CD)
+
+```{r example1f}
+as.data.frame(variants[which(stringi::stri_detect_regex(variants, "U[+]64CD"))])
+```
+
+* 技 (U+6280)
+
+```{r example1g}
+as.data.frame(variants[which(stringi::stri_detect_regex(variants, "U[+]6280"))])
+```
+
+* 術 (U+8853) vs 术 (U+672F)
+
+This is a straightforward traditional/simplified pairing.
+
+```{r example1h}
+as.data.frame(variants[which(stringi::stri_detect_regex(variants, "U[+]8853"))])
+as.data.frame(variants[which(stringi::stri_detect_regex(variants, "U[+]672F"))])
+```
+
+### Suggested strategy
+
+The above examples suggest that VIAF's normalization can be
+replicated by the following two steps:
+
+1. Use ```stringi::stri_trans_general(str, id="Traditional-Simplified")```
+to substitute simplified characters.
+
+2. Retrieve Unihan semantic variants and replace with the first
+character when collated by integer value. 
+
+# Dataset
+
+This script produces a tibble [@R-tibble] with three columns:
+
+* ucsindex (hexmode)
+* varianttype (factor)
+* ucsvariant (hexmode)
+
+Column ucsindex will be for looking up the original variable.
+Column varianttype consists of the six types of variants.
+The third column will be the target code point. As can already
+be seen in the above examples, Unihan_Variants.txt may have
+lists of code points in this position. These will be unnested
+into rows so that each row will consist of a ucsindex-varianttype-ucsvariant
+triad.
+
+```{r dataset}
+utv <- data.frame(stringi::stri_split_fixed(variants, "\t"))
+utvlist <- lapply(utv, function(df) {
+	index = stringi::stri_match_first(df[1],regex = "(?:U[+])([A-F0-9]++)")[,2]
+	target = stringi::stri_match_all(df[3],regex = "(?:U[+])([A-F0-9]++)")[[1]][,2]
+	tibble(ucsindex = as.hexmode(paste("0x",index, sep="")),
+		varianttype = as.factor(df[2]),
+		tgtlist = list(string = target))
+})
+ubf <- do.call(rbind,utvlist)
+unihan_variants <- ubf %>% tidyr::unnest(cols = c(tgtlist)) %>% 
+	dplyr::mutate(
+		ucsvariant = as.hexmode(paste("0x",tgtlist, sep=""))
+	) %>% 
+	dplyr::select(-tgtlist)
+unihan_variants
+```
+
+# References
