@@ -11,7 +11,6 @@
 
 <meta name="author" content="Alan Engel" />
 
-<meta name="date" content="2024-06-05" />
 
 <title>MARC tables for rnaco</title>
 
@@ -374,7 +373,7 @@ display: none;
 
 <h1 class="title toc-ignore">MARC tables for rnaco</h1>
 <h4 class="author">Alan Engel</h4>
-<h4 class="date">June 5, 2024</h4>
+<h4 class="date">18 6月, 2024</h4>
 
 </div>
 
@@ -383,9 +382,18 @@ display: none;
 tibbles for the 9 code tables contained inside.</p>
 <p>Load the libraries. The R packages used for this script are listed in
 the references.</p>
-<pre class="r"><code>library(dplyr)
-library(xslt)
-library(tibble)</code></pre>
+<pre class="r"><code>library(dplyr)</code></pre>
+<pre><code>## 
+## 次のパッケージを付け加えます: &#39;dplyr&#39;</code></pre>
+<pre><code>## 以下のオブジェクトは &#39;package:stats&#39; からマスクされています:
+## 
+##     filter, lag</code></pre>
+<pre><code>## 以下のオブジェクトは &#39;package:base&#39; からマスクされています:
+## 
+##     intersect, setdiff, setequal, union</code></pre>
+<pre class="r"><code>library(xslt)</code></pre>
+<pre><code>## 要求されたパッケージ xml2 をロード中です</code></pre>
+<pre class="r"><code>library(tibble)</code></pre>
 <p>Design specifications for these tables:</p>
 <ul>
 <li>Use camel case for dataset names, for example,
@@ -457,7 +465,8 @@ process. Each complete row is appended to df.</p>
               &quot;POSIXct&quot; = lubridate::ymd_hms(xml2::xml_text(cells[j]), quiet = TRUE), # nolint
               &quot;factor&quot; = as.factor(xml2::xml_text(cells[j])),
               &quot;logical&quot; = as.logical(xml2::xml_text(cells[j])),
-              &quot;integer&quot; = as.integer(xml2::xml_text(cells[j])))
+              &quot;integer&quot; = as.integer(xml2::xml_text(cells[j])),
+              &quot;hexmode&quot; = as.hexmode(xml2::xml_text(cells[j])))
         },
         error = function(cond) {
           message(paste(&quot;Error: viafxml2df Record &quot;, i, &quot; Cell &quot;, j))
@@ -532,409 +541,43 @@ for(i in 1:rows) {
   tb &lt;- xml2df(tset)
   tb &lt;- tb %&gt;% 
     mutate(rep = intToUtf8(as.integer(ucs), multiple = TRUE)) %&gt;% 
-      relocate(rep , .after = utf8)
+      relocate(rep , .after = utf8) %&gt;% 
+      rename(ucschr = ucs) %&gt;% 
+    mutate(ucs = as.hexmode(ucschr)) %&gt;% 
+      relocate(ucs , .after = marc) %&gt;% 
+    select(-ucschr)
 
   stopifnot(marcname == rootname)
   assign(marcname,tb)
   config &lt;- DataPackageR::use_data_object(object_name = marcname)
   }</code></pre>
-<pre><code>## configuration:
-##   files:
-##     marctables.Rmd:
-##       enabled: yes
-##   objects:
-##   - marcNotes
-##   - marcBasicLatinASCII
-##   - marcExtendedLatinANSEL
-##   - marcGreekSymbols
-##   - marcSubscripts
-##   - marcSuperscripts
-##   - marcBasicHebrew
-##   - marcBasicCyrillic
-##   - marcExtendedCyrillic
-##   - marcBasicArabic
-##   - marcExtendedArabic
-##   - marcBasicGreek
-##   - marcEastAsianIdeographsHan
-##   - marcJapaneseHiraganaandKatakana
-##   - marcKoreanHangul
-##   - marcEastAsianPunctuationMarks
-##   - marcComponentInputMethodCharacters
-##   render_root:
-##     tmp: &#39;669327&#39;
-## configuration:
-##   files:
-##     marctables.Rmd:
-##       enabled: yes
-##   objects:
-##   - marcNotes
-##   - marcBasicLatinASCII
-##   - marcExtendedLatinANSEL
-##   - marcGreekSymbols
-##   - marcSubscripts
-##   - marcSuperscripts
-##   - marcBasicHebrew
-##   - marcBasicCyrillic
-##   - marcExtendedCyrillic
-##   - marcBasicArabic
-##   - marcExtendedArabic
-##   - marcBasicGreek
-##   - marcEastAsianIdeographsHan
-##   - marcJapaneseHiraganaandKatakana
-##   - marcKoreanHangul
-##   - marcEastAsianPunctuationMarks
-##   - marcComponentInputMethodCharacters
-##   render_root:
-##     tmp: &#39;669327&#39;
-## configuration:
-##   files:
-##     marctables.Rmd:
-##       enabled: yes
-##   objects:
-##   - marcNotes
-##   - marcBasicLatinASCII
-##   - marcExtendedLatinANSEL
-##   - marcGreekSymbols
-##   - marcSubscripts
-##   - marcSuperscripts
-##   - marcBasicHebrew
-##   - marcBasicCyrillic
-##   - marcExtendedCyrillic
-##   - marcBasicArabic
-##   - marcExtendedArabic
-##   - marcBasicGreek
-##   - marcEastAsianIdeographsHan
-##   - marcJapaneseHiraganaandKatakana
-##   - marcKoreanHangul
-##   - marcEastAsianPunctuationMarks
-##   - marcComponentInputMethodCharacters
-##   render_root:
-##     tmp: &#39;669327&#39;
-## configuration:
-##   files:
-##     marctables.Rmd:
-##       enabled: yes
-##   objects:
-##   - marcNotes
-##   - marcBasicLatinASCII
-##   - marcExtendedLatinANSEL
-##   - marcGreekSymbols
-##   - marcSubscripts
-##   - marcSuperscripts
-##   - marcBasicHebrew
-##   - marcBasicCyrillic
-##   - marcExtendedCyrillic
-##   - marcBasicArabic
-##   - marcExtendedArabic
-##   - marcBasicGreek
-##   - marcEastAsianIdeographsHan
-##   - marcJapaneseHiraganaandKatakana
-##   - marcKoreanHangul
-##   - marcEastAsianPunctuationMarks
-##   - marcComponentInputMethodCharacters
-##   render_root:
-##     tmp: &#39;669327&#39;
-## configuration:
-##   files:
-##     marctables.Rmd:
-##       enabled: yes
-##   objects:
-##   - marcNotes
-##   - marcBasicLatinASCII
-##   - marcExtendedLatinANSEL
-##   - marcGreekSymbols
-##   - marcSubscripts
-##   - marcSuperscripts
-##   - marcBasicHebrew
-##   - marcBasicCyrillic
-##   - marcExtendedCyrillic
-##   - marcBasicArabic
-##   - marcExtendedArabic
-##   - marcBasicGreek
-##   - marcEastAsianIdeographsHan
-##   - marcJapaneseHiraganaandKatakana
-##   - marcKoreanHangul
-##   - marcEastAsianPunctuationMarks
-##   - marcComponentInputMethodCharacters
-##   render_root:
-##     tmp: &#39;669327&#39;
-## configuration:
-##   files:
-##     marctables.Rmd:
-##       enabled: yes
-##   objects:
-##   - marcNotes
-##   - marcBasicLatinASCII
-##   - marcExtendedLatinANSEL
-##   - marcGreekSymbols
-##   - marcSubscripts
-##   - marcSuperscripts
-##   - marcBasicHebrew
-##   - marcBasicCyrillic
-##   - marcExtendedCyrillic
-##   - marcBasicArabic
-##   - marcExtendedArabic
-##   - marcBasicGreek
-##   - marcEastAsianIdeographsHan
-##   - marcJapaneseHiraganaandKatakana
-##   - marcKoreanHangul
-##   - marcEastAsianPunctuationMarks
-##   - marcComponentInputMethodCharacters
-##   render_root:
-##     tmp: &#39;669327&#39;
-## configuration:
-##   files:
-##     marctables.Rmd:
-##       enabled: yes
-##   objects:
-##   - marcNotes
-##   - marcBasicLatinASCII
-##   - marcExtendedLatinANSEL
-##   - marcGreekSymbols
-##   - marcSubscripts
-##   - marcSuperscripts
-##   - marcBasicHebrew
-##   - marcBasicCyrillic
-##   - marcExtendedCyrillic
-##   - marcBasicArabic
-##   - marcExtendedArabic
-##   - marcBasicGreek
-##   - marcEastAsianIdeographsHan
-##   - marcJapaneseHiraganaandKatakana
-##   - marcKoreanHangul
-##   - marcEastAsianPunctuationMarks
-##   - marcComponentInputMethodCharacters
-##   render_root:
-##     tmp: &#39;669327&#39;
-## configuration:
-##   files:
-##     marctables.Rmd:
-##       enabled: yes
-##   objects:
-##   - marcNotes
-##   - marcBasicLatinASCII
-##   - marcExtendedLatinANSEL
-##   - marcGreekSymbols
-##   - marcSubscripts
-##   - marcSuperscripts
-##   - marcBasicHebrew
-##   - marcBasicCyrillic
-##   - marcExtendedCyrillic
-##   - marcBasicArabic
-##   - marcExtendedArabic
-##   - marcBasicGreek
-##   - marcEastAsianIdeographsHan
-##   - marcJapaneseHiraganaandKatakana
-##   - marcKoreanHangul
-##   - marcEastAsianPunctuationMarks
-##   - marcComponentInputMethodCharacters
-##   render_root:
-##     tmp: &#39;669327&#39;
-## configuration:
-##   files:
-##     marctables.Rmd:
-##       enabled: yes
-##   objects:
-##   - marcNotes
-##   - marcBasicLatinASCII
-##   - marcExtendedLatinANSEL
-##   - marcGreekSymbols
-##   - marcSubscripts
-##   - marcSuperscripts
-##   - marcBasicHebrew
-##   - marcBasicCyrillic
-##   - marcExtendedCyrillic
-##   - marcBasicArabic
-##   - marcExtendedArabic
-##   - marcBasicGreek
-##   - marcEastAsianIdeographsHan
-##   - marcJapaneseHiraganaandKatakana
-##   - marcKoreanHangul
-##   - marcEastAsianPunctuationMarks
-##   - marcComponentInputMethodCharacters
-##   render_root:
-##     tmp: &#39;669327&#39;
-## configuration:
-##   files:
-##     marctables.Rmd:
-##       enabled: yes
-##   objects:
-##   - marcNotes
-##   - marcBasicLatinASCII
-##   - marcExtendedLatinANSEL
-##   - marcGreekSymbols
-##   - marcSubscripts
-##   - marcSuperscripts
-##   - marcBasicHebrew
-##   - marcBasicCyrillic
-##   - marcExtendedCyrillic
-##   - marcBasicArabic
-##   - marcExtendedArabic
-##   - marcBasicGreek
-##   - marcEastAsianIdeographsHan
-##   - marcJapaneseHiraganaandKatakana
-##   - marcKoreanHangul
-##   - marcEastAsianPunctuationMarks
-##   - marcComponentInputMethodCharacters
-##   render_root:
-##     tmp: &#39;669327&#39;
-## configuration:
-##   files:
-##     marctables.Rmd:
-##       enabled: yes
-##   objects:
-##   - marcNotes
-##   - marcBasicLatinASCII
-##   - marcExtendedLatinANSEL
-##   - marcGreekSymbols
-##   - marcSubscripts
-##   - marcSuperscripts
-##   - marcBasicHebrew
-##   - marcBasicCyrillic
-##   - marcExtendedCyrillic
-##   - marcBasicArabic
-##   - marcExtendedArabic
-##   - marcBasicGreek
-##   - marcEastAsianIdeographsHan
-##   - marcJapaneseHiraganaandKatakana
-##   - marcKoreanHangul
-##   - marcEastAsianPunctuationMarks
-##   - marcComponentInputMethodCharacters
-##   render_root:
-##     tmp: &#39;669327&#39;
-## configuration:
-##   files:
-##     marctables.Rmd:
-##       enabled: yes
-##   objects:
-##   - marcNotes
-##   - marcBasicLatinASCII
-##   - marcExtendedLatinANSEL
-##   - marcGreekSymbols
-##   - marcSubscripts
-##   - marcSuperscripts
-##   - marcBasicHebrew
-##   - marcBasicCyrillic
-##   - marcExtendedCyrillic
-##   - marcBasicArabic
-##   - marcExtendedArabic
-##   - marcBasicGreek
-##   - marcEastAsianIdeographsHan
-##   - marcJapaneseHiraganaandKatakana
-##   - marcKoreanHangul
-##   - marcEastAsianPunctuationMarks
-##   - marcComponentInputMethodCharacters
-##   render_root:
-##     tmp: &#39;669327&#39;
-## configuration:
-##   files:
-##     marctables.Rmd:
-##       enabled: yes
-##   objects:
-##   - marcNotes
-##   - marcBasicLatinASCII
-##   - marcExtendedLatinANSEL
-##   - marcGreekSymbols
-##   - marcSubscripts
-##   - marcSuperscripts
-##   - marcBasicHebrew
-##   - marcBasicCyrillic
-##   - marcExtendedCyrillic
-##   - marcBasicArabic
-##   - marcExtendedArabic
-##   - marcBasicGreek
-##   - marcEastAsianIdeographsHan
-##   - marcJapaneseHiraganaandKatakana
-##   - marcKoreanHangul
-##   - marcEastAsianPunctuationMarks
-##   - marcComponentInputMethodCharacters
-##   render_root:
-##     tmp: &#39;669327&#39;
-## configuration:
-##   files:
-##     marctables.Rmd:
-##       enabled: yes
-##   objects:
-##   - marcNotes
-##   - marcBasicLatinASCII
-##   - marcExtendedLatinANSEL
-##   - marcGreekSymbols
-##   - marcSubscripts
-##   - marcSuperscripts
-##   - marcBasicHebrew
-##   - marcBasicCyrillic
-##   - marcExtendedCyrillic
-##   - marcBasicArabic
-##   - marcExtendedArabic
-##   - marcBasicGreek
-##   - marcEastAsianIdeographsHan
-##   - marcJapaneseHiraganaandKatakana
-##   - marcKoreanHangul
-##   - marcEastAsianPunctuationMarks
-##   - marcComponentInputMethodCharacters
-##   render_root:
-##     tmp: &#39;669327&#39;
-## configuration:
-##   files:
-##     marctables.Rmd:
-##       enabled: yes
-##   objects:
-##   - marcNotes
-##   - marcBasicLatinASCII
-##   - marcExtendedLatinANSEL
-##   - marcGreekSymbols
-##   - marcSubscripts
-##   - marcSuperscripts
-##   - marcBasicHebrew
-##   - marcBasicCyrillic
-##   - marcExtendedCyrillic
-##   - marcBasicArabic
-##   - marcExtendedArabic
-##   - marcBasicGreek
-##   - marcEastAsianIdeographsHan
-##   - marcJapaneseHiraganaandKatakana
-##   - marcKoreanHangul
-##   - marcEastAsianPunctuationMarks
-##   - marcComponentInputMethodCharacters
-##   render_root:
-##     tmp: &#39;669327&#39;
-## configuration:
-##   files:
-##     marctables.Rmd:
-##       enabled: yes
-##   objects:
-##   - marcNotes
-##   - marcBasicLatinASCII
-##   - marcExtendedLatinANSEL
-##   - marcGreekSymbols
-##   - marcSubscripts
-##   - marcSuperscripts
-##   - marcBasicHebrew
-##   - marcBasicCyrillic
-##   - marcExtendedCyrillic
-##   - marcBasicArabic
-##   - marcExtendedArabic
-##   - marcBasicGreek
-##   - marcEastAsianIdeographsHan
-##   - marcJapaneseHiraganaandKatakana
-##   - marcKoreanHangul
-##   - marcEastAsianPunctuationMarks
-##   - marcComponentInputMethodCharacters
-##   render_root:
-##     tmp: &#39;669327&#39;</code></pre>
 </div>
 <div id="references" class="section level1 unnumbered">
 <h1 class="unnumbered">References</h1>
 <div id="refs" class="references csl-bib-body hanging-indent">
-<div id="ref-finak2024datapackager" class="csl-entry">
+<div id="ref-R-datapackager" class="csl-entry">
 Finak, Greg. 2024. <em>DataPackageR: Construct Reproducible Analytic
 Data Sets as r Packages</em>. <a href="https://CRAN.R-project.org/package=DataPackageR">https://CRAN.R-project.org/package=DataPackageR</a>.
 </div>
-<div id="ref-ooms2024xslt" class="csl-entry">
+<div id="ref-R-stringi" class="csl-entry">
+Gagolewski, Marek. 2022. <span>“<span class="nocase">stringi</span>:
+<span>F</span>ast and Portable Character String Processing in
+<span>R</span>.”</span> <em>Journal of Statistical Software</em> 103
+(2): 1–59. <a href="https://doi.org/10.18637/jss.v103.i02">https://doi.org/10.18637/jss.v103.i02</a>.
+</div>
+<div id="ref-R-tibble" class="csl-entry">
+Müller, Kirill, and Hadley Wickham. 2023. <em>Tibble: Simple Data
+Frames</em>. <a href="https://CRAN.R-project.org/package=tibble">https://CRAN.R-project.org/package=tibble</a>.
+</div>
+<div id="ref-R-xslt" class="csl-entry">
 Ooms, Jeroen. 2024. <em>Xslt: Extensible Style-Sheet Language
 Transformations</em>. <a href="https://CRAN.R-project.org/package=xslt">https://CRAN.R-project.org/package=xslt</a>.
 </div>
-<div id="ref-wickham2023dplyr" class="csl-entry">
+<div id="ref-R-stringr" class="csl-entry">
+Wickham, Hadley. 2023. <em>Stringr: Simple, Consistent Wrappers for
+Common String Operations</em>. <a href="https://CRAN.R-project.org/package=stringr">https://CRAN.R-project.org/package=stringr</a>.
+</div>
+<div id="ref-R-dplyr" class="csl-entry">
 Wickham, Hadley, Romain François, Lionel Henry, Kirill Müller, and Davis
 Vaughan. 2023. <em>Dplyr: A Grammar of Data Manipulation</em>. <a href="https://CRAN.R-project.org/package=dplyr">https://CRAN.R-project.org/package=dplyr</a>.
 </div>

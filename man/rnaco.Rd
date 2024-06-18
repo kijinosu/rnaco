@@ -4,7 +4,7 @@
 \name{rnaco}
 \alias{rnaco}
 \alias{rnaco-package}
-\title{Package Title}
+\title{R implemention of NACO normalization.}
 \description{
 A description of the data package
 }
@@ -17,11 +17,11 @@ and/or DataPackageR::load_all
 _datasets() to load them.
 }
 \seealso{
+\link{marcNotes}
 \link{marcBasicArabic}
 \link{marcBasicCyrillic}
 \link{marcBasicGreek}
 \link{marcBasicHebrew}
-\link{marcBasicLatinASCII}
 \link{marcComponentInputMethodCharacters}
 \link{marcEastAsianIdeographsHan}
 \link{marcEastAsianPunctuationMarks}
@@ -33,6 +33,7 @@ _datasets() to load them.
 \link{marcKoreanHangul}
 \link{marcSubscripts}
 \link{marcSuperscripts}
+\link{unihan_variants}
 }
 \author{
 \strong{Maintainer}: Alan Engel \email{alan@ttcrossroads.net} (\href{https://orcid.org/0000-0003-0070-2347}{ORCID})

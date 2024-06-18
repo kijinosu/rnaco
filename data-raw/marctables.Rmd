@@ -1,7 +1,7 @@
 ---
 title: MARC tables for rnaco
 author: Alan Engel
-date: June 5, 2024
+date: "`r format(Sys.time(), '%d %B, %Y')`"
 lang: "en-us"
 output_format: rmarkdown::html_vignette
 bibliography: 
@@ -110,7 +110,8 @@ in this process. Each complete row is appended to df.
               "POSIXct" = lubridate::ymd_hms(xml2::xml_text(cells[j]), quiet = TRUE), # nolint
               "factor" = as.factor(xml2::xml_text(cells[j])),
               "logical" = as.logical(xml2::xml_text(cells[j])),
-              "integer" = as.integer(xml2::xml_text(cells[j])))
+              "integer" = as.integer(xml2::xml_text(cells[j])),
+              "hexmode" = as.hexmode(xml2::xml_text(cells[j])))
         },
         error = function(cond) {
           message(paste("Error: viafxml2df Record ", i, " Cell ", j))
@@ -180,7 +181,7 @@ This loop adds a column for a representation of the character. The notes in
 [$codetables.xml$](https://www.loc.gov/marc/specifications/codetables.xml "MARC specification")
 specify this as a fifth column but the file does not contain them.
 
-```{r charsets}
+```{r charsets, results='hide'}
 rows <- nrow(marcNotes)
 s <- xml2::read_xml(file.path(xsldir,"marccharsets.xsl"))
 csetpath <- file.path(tmppath,"charset.xml")
@@ -199,7 +200,11 @@ for(i in 1:rows) {
   tb <- xml2df(tset)
   tb <- tb %>% 
     mutate(rep = intToUtf8(as.integer(ucs), multiple = TRUE)) %>% 
-	  relocate(rep , .after = utf8)
+	  relocate(rep , .after = utf8) %>% 
+	  rename(ucschr = ucs) %>% 
+    mutate(ucs = as.hexmode(ucschr)) %>% 
+	  relocate(ucs , .after = marc) %>% 
+    select(-ucschr)
 
   stopifnot(marcname == rootname)
   assign(marcname,tb)

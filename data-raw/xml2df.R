@@ -58,7 +58,8 @@ xml2df <- function(x) {
               "POSIXct" = lubridate::ymd_hms(xml2::xml_text(cells[j]), quiet = TRUE), # nolint
               "factor" = as.factor(xml2::xml_text(cells[j])),
               "logical" = as.logical(xml2::xml_text(cells[j])),
-              "integer" = as.integer(xml2::xml_text(cells[j])))
+              "integer" = as.integer(xml2::xml_text(cells[j])),
+              "hexmode" = as.hexmode(xml2::xml_text(cells[j])))
         },
         error = function(cond) {
           message(paste("Error: xml2df Record ", i, " Cell ", j))

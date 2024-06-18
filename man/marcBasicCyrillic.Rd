@@ -3,23 +3,27 @@
 \docType{data}
 \name{marcBasicCyrillic}
 \alias{marcBasicCyrillic}
-\title{Descriptive data title}
+\title{Basic Cyrillic code table, ISOcode=4E (January 2000)}
 \format{
 a \code{tbl_df} containing the following fields:
 \describe{
-\item{marc}{}
-\item{ucs}{}
-\item{utf8}{}
-\item{rep}{}
-\item{isAlt}{}
+\item{marc}{MARC-8 code (in hex) for the character as coming from the G0 graphic set}
+\item{ucs}{UCS/Unicode code point \if{html}{\out{<hexmode>}}}
+\item{utf8}{UTF-8 code (in hex) for the UCS character}
+\item{rep}{representation of the character (where possible)}
+\item{isAlt}{For some tables alternate encodings in Unicode and UTF-8 are given.
+When that occurs the alternate Unicode and alternate UTF-8 columns follow the character name.}
 \item{isCombining}{}
-\item{name}{}
+\item{name}{MARC character name, followed by the UCS name}
 }
 }
 \source{
-The data comes from________________________.
+The data comes from the \href{https://www.loc.gov/marc/specifications/codetables.xml}{Library of Congress}.
 }
 \description{
+From the Basic and Extended Cyrillic character sets
+}
+\details{
 Detailed description of the data
 }
 \seealso{
@@ -27,7 +31,6 @@ Detailed description of the data
 \link{marcBasicArabic}
 \link{marcBasicGreek}
 \link{marcBasicHebrew}
-\link{marcBasicLatinASCII}
 \link{marcComponentInputMethodCharacters}
 \link{marcEastAsianIdeographsHan}
 \link{marcEastAsianPunctuationMarks}
@@ -39,4 +42,5 @@ Detailed description of the data
 \link{marcKoreanHangul}
 \link{marcSubscripts}
 \link{marcSuperscripts}
+\link{unihan_variants}
 }

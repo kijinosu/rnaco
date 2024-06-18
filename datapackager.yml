@@ -2,6 +2,8 @@ configuration:
   files:
     marctables.Rmd:
       enabled: yes
+    unihanVariants.Rmd:
+      enabled: yes
   objects:
   - marcNotes
   - marcBasicLatinASCII
@@ -20,5 +22,6 @@ configuration:
   - marcKoreanHangul
   - marcEastAsianPunctuationMarks
   - marcComponentInputMethodCharacters
+  - unihan_variants
   render_root:
     tmp: '669327'

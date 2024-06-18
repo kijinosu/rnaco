@@ -1,7 +1,7 @@
 ---
 title: MARC tables for rnaco
 author: Alan Engel
-date: June 5, 2024
+date: '`r format(Sys.time(), ''%d %B, %Y'')`'
 lang: en-us
 output_format: rmarkdown::html_vignette
 bibliography: R.bib

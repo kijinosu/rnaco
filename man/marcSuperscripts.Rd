@@ -3,23 +3,27 @@
 \docType{data}
 \name{marcSuperscripts}
 \alias{marcSuperscripts}
-\title{Descriptive data title}
+\title{Superscripts}
 \format{
 a \code{tbl_df} containing the following fields:
 \describe{
-\item{marc}{}
-\item{ucs}{}
-\item{utf8}{}
-\item{rep}{}
-\item{isAlt}{}
+\item{marc}{MARC-8 code (in hex) for the character as coming from the G0 graphic set}
+\item{ucs}{UCS/Unicode code point \if{html}{\out{<hexmode>}}}
+\item{utf8}{UTF-8 code (in hex) for the UCS character}
+\item{rep}{representation of the character (where possible)}
+\item{isAlt}{For some tables alternate encodings in Unicode and UTF-8 are given.
+When that occurs the alternate Unicode and alternate UTF-8 columns follow the character name.}
 \item{isCombining}{}
-\item{name}{}
+\item{name}{MARC character name, followed by the UCS name}
 }
 }
 \source{
-The data comes from________________________.
+The data comes from the \href{https://www.loc.gov/marc/specifications/codetables.xml}{Library of Congress}.
 }
 \description{
+Superscripts code table, ISO code 70 (January 2000)
+}
+\details{
 Detailed description of the data
 }
 \seealso{
@@ -28,7 +32,6 @@ Detailed description of the data
 \link{marcBasicCyrillic}
 \link{marcBasicGreek}
 \link{marcBasicHebrew}
-\link{marcBasicLatinASCII}
 \link{marcComponentInputMethodCharacters}
 \link{marcEastAsianIdeographsHan}
 \link{marcEastAsianPunctuationMarks}
@@ -39,4 +42,5 @@ Detailed description of the data
 \link{marcJapaneseHiraganaandKatakana}
 \link{marcKoreanHangul}
 \link{marcSubscripts}
+\link{unihan_variants}
 }
