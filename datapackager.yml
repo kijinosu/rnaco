@@ -4,24 +4,34 @@ configuration:
       enabled: yes
     unihanVariants.Rmd:
       enabled: yes
+    nacoDatasets.Rmd:
+      enabled: yes
+    naco.Rmd:
+      enabled: yes
   objects:
   - marcNotes
+  - marcBasicArabic
+  - marcBasicCyrillic
+  - marcBasicGreek
+  - marcBasicHebrew
   - marcBasicLatinASCII
+  - marcComponentInputMethodCharacters
+  - marcEastAsianIdeographsHan
+  - marcEastAsianPunctuationMarks
+  - marcExtendedArabic
+  - marcExtendedCyrillic
   - marcExtendedLatinANSEL
   - marcGreekSymbols
-  - marcSubscripts
-  - marcSuperscripts
-  - marcBasicHebrew
-  - marcBasicCyrillic
-  - marcExtendedCyrillic
-  - marcBasicArabic
-  - marcExtendedArabic
-  - marcBasicGreek
-  - marcEastAsianIdeographsHan
   - marcJapaneseHiraganaandKatakana
   - marcKoreanHangul
-  - marcEastAsianPunctuationMarks
-  - marcComponentInputMethodCharacters
+  - marcSubscripts
+  - marcSuperscripts
   - unihan_variants
+  - unconditionalMappings
+  - step7lltranslitrule
+  - step6rulestring
+  - numericrules
+  - cjkextractzh
+  - cjkextractja
   render_root:
-    tmp: '669327'
+    tmp: '23451'

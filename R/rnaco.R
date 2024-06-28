@@ -1,31 +1,18 @@
 #' rnaco
 #' A data package for rnaco.
 #' @aliases rnaco-package
-#' @title R implemention of NACO normalization.
+#' @title Package Title
 #' @name rnaco
 #' @description A description of the data package
 #' @details Use \code{data(package='rnaco')$results[, 3]} to see a list of available data sets in this data package
 #'     and/or DataPackageR::load_all
 #' _datasets() to load them.
 #' @seealso
-#' \link{marcNotes}
-#' \link{marcBasicArabic}
-#' \link{marcBasicCyrillic}
-#' \link{marcBasicGreek}
-#' \link{marcBasicHebrew}
-#' \link{marcComponentInputMethodCharacters}
-#' \link{marcEastAsianIdeographsHan}
-#' \link{marcEastAsianPunctuationMarks}
-#' \link{marcExtendedArabic}
-#' \link{marcExtendedCyrillic}
-#' \link{marcExtendedLatinANSEL}
-#' \link{marcGreekSymbols}
-#' \link{marcJapaneseHiraganaandKatakana}
-#' \link{marcKoreanHangul}
-#' \link{marcSubscripts}
-#' \link{marcSuperscripts}
-#' \link{unihan_variants}
+#' \link{cjkextractja}
+#' \link{cjkextractzh}
 '_PACKAGE'
+
+
 
 
 
@@ -71,6 +58,8 @@ NULL
 
 
 
+
+
 #' Detailed description of the data
 #' @name marcBasicLatinASCII
 #' @docType data
@@ -79,7 +68,7 @@ NULL
 #' @format a \code{tbl_df} containing the following fields:
 #' \describe{
 #' \item{marc}{MARC-8 code (in hex) for the character as coming from the G0 graphic set}
-#' \item{ucs}{UCS/Unicode code point <hexmode>}
+#' \item{ucs}{UCS/Unicode code point (hexmode)}
 #' \item{utf8}{UTF-8 code (in hex) for the UCS character}
 #' \item{rep}{representation of the character (where possible)}
 #' \item{isAlt}{For some tables alternate encodings in Unicode and UTF-8 are given.
@@ -87,6 +76,7 @@ NULL
 #' \item{isCombining}{}
 #' \item{name}{MARC character name, followed by the UCS name}
 #' }
+#' @details See the vignette `vignette("marctables")`.
 #' @source The data comes from the [Library of Congress](https://www.loc.gov/marc/specifications/codetables.xml "MARC specification").
 #' @seealso
 #' \link{rnaco}
@@ -112,6 +102,8 @@ NULL
 
 
 
+
+
 #' Detailed description of the data
 #' @name marcBasicArabic
 #' @docType data
@@ -120,7 +112,7 @@ NULL
 #' @format a \code{tbl_df} containing the following fields:
 #' \describe{
 #' \item{marc}{MARC-8 code (in hex) for the character as coming from the G0 graphic set}
-#' \item{ucs}{UCS/Unicode code point <hexmode>}
+#' \item{ucs}{UCS/Unicode code point (hexmode)}
 #' \item{utf8}{UTF-8 code (in hex) for the UCS character}
 #' \item{rep}{representation of the character (where possible)}
 #' \item{isAlt}{For some tables alternate encodings in Unicode and UTF-8 are given.
@@ -147,6 +139,8 @@ NULL
 #' \link{marcSuperscripts}
 #' \link{unihan_variants}
 NULL
+
+
 
 
 
@@ -159,7 +153,7 @@ NULL
 #' @format a \code{tbl_df} containing the following fields:
 #' \describe{
 #' \item{marc}{MARC-8 code (in hex) for the character as coming from the G0 graphic set}
-#' \item{ucs}{UCS/Unicode code point <hexmode>}
+#' \item{ucs}{UCS/Unicode code point (hexmode)}
 #' \item{utf8}{UTF-8 code (in hex) for the UCS character}
 #' \item{rep}{representation of the character (where possible)}
 #' \item{isAlt}{For some tables alternate encodings in Unicode and UTF-8 are given.
@@ -186,6 +180,8 @@ NULL
 #' \link{marcSuperscripts}
 #' \link{unihan_variants}
 NULL
+
+
 
 
 
@@ -198,7 +194,7 @@ NULL
 #' @format a \code{tbl_df} containing the following fields:
 #' \describe{
 #' \item{marc}{MARC-8 code (in hex) for the character as coming from the G0 graphic set}
-#' \item{ucs}{UCS/Unicode code point <hexmode>}
+#' \item{ucs}{UCS/Unicode code point (hexmode)}
 #' \item{utf8}{UTF-8 code (in hex) for the UCS character}
 #' \item{rep}{representation of the character (where possible)}
 #' \item{isAlt}{For some tables alternate encodings in Unicode and UTF-8 are given.
@@ -225,6 +221,8 @@ NULL
 #' \link{marcSuperscripts}
 #' \link{unihan_variants}
 NULL
+
+
 
 
 
@@ -237,7 +235,7 @@ NULL
 #' @format a \code{tbl_df} containing the following fields:
 #' \describe{
 #' \item{marc}{MARC-8 code (in hex) for the character as coming from the G0 graphic set}
-#' \item{ucs}{UCS/Unicode code point <hexmode>}
+#' \item{ucs}{UCS/Unicode code point (hexmode)}
 #' \item{utf8}{UTF-8 code (in hex) for the UCS character}
 #' \item{rep}{representation of the character (where possible)}
 #' \item{isAlt}{For some tables alternate encodings in Unicode and UTF-8 are given.
@@ -264,6 +262,8 @@ NULL
 #' \link{marcSuperscripts}
 #' \link{unihan_variants}
 NULL
+
+
 
 
 
@@ -276,7 +276,7 @@ NULL
 #' @format a \code{tbl_df} containing the following fields:
 #' \describe{
 #' \item{marc}{MARC-8 code (in hex) for the character as coming from the G0 graphic set}
-#' \item{ucs}{UCS/Unicode code point <hexmode>}
+#' \item{ucs}{UCS/Unicode code point (hexmode)}
 #' \item{utf8}{UTF-8 code (in hex) for the UCS character}
 #' \item{rep}{representation of the character (where possible)}
 #' \item{isAlt}{For some tables alternate encodings in Unicode and UTF-8 are given.
@@ -303,6 +303,8 @@ NULL
 #' \link{marcSuperscripts}
 #' \link{unihan_variants}
 NULL
+
+
 
 
 
@@ -315,7 +317,7 @@ NULL
 #' @format a \code{tbl_df} containing the following fields:
 #' \describe{
 #' \item{marc}{MARC-8 code (in hex) for the character as coming from the G0 graphic set}
-#' \item{ucs}{UCS/Unicode code point <hexmode>}
+#' \item{ucs}{UCS/Unicode code point (hexmode)}
 #' \item{utf8}{UTF-8 code (in hex) for the UCS character}
 #' \item{rep}{representation of the character (where possible)}
 #' \item{isAlt}{For some tables alternate encodings in Unicode and UTF-8 are given.
@@ -342,6 +344,8 @@ NULL
 #' \link{marcSuperscripts}
 #' \link{unihan_variants}
 NULL
+
+
 
 
 
@@ -354,7 +358,7 @@ NULL
 #' @format a \code{tbl_df} containing the following fields:
 #' \describe{
 #' \item{marc}{MARC-8 code (in hex) for the character as coming from the G0 graphic set}
-#' \item{ucs}{UCS/Unicode code point <hexmode>}
+#' \item{ucs}{UCS/Unicode code point (hexmode)}
 #' \item{utf8}{UTF-8 code (in hex) for the UCS character}
 #' \item{rep}{representation of the character (where possible)}
 #' \item{isAlt}{For some tables alternate encodings in Unicode and UTF-8 are given.
@@ -381,6 +385,8 @@ NULL
 #' \link{marcSuperscripts}
 #' \link{unihan_variants}
 NULL
+
+
 
 
 
@@ -393,7 +399,7 @@ NULL
 #' @format a \code{tbl_df} containing the following fields:
 #' \describe{
 #' \item{marc}{MARC-8 code (in hex) for the character as coming from the G0 graphic set}
-#' \item{ucs}{UCS/Unicode code point <hexmode>}
+#' \item{ucs}{UCS/Unicode code point (hexmode)}
 #' \item{utf8}{UTF-8 code (in hex) for the UCS character}
 #' \item{rep}{representation of the character (where possible)}
 #' \item{isAlt}{For some tables alternate encodings in Unicode and UTF-8 are given.
@@ -420,6 +426,8 @@ NULL
 #' \link{marcSuperscripts}
 #' \link{unihan_variants}
 NULL
+
+
 
 
 
@@ -432,7 +440,7 @@ NULL
 #' @format a \code{tbl_df} containing the following fields:
 #' \describe{
 #' \item{marc}{MARC-8 code (in hex) for the character as coming from the G0 graphic set}
-#' \item{ucs}{UCS/Unicode code point <hexmode>}
+#' \item{ucs}{UCS/Unicode code point (hexmode)}
 #' \item{utf8}{UTF-8 code (in hex) for the UCS character}
 #' \item{rep}{representation of the character (where possible)}
 #' \item{isAlt}{For some tables alternate encodings in Unicode and UTF-8 are given.
@@ -459,6 +467,8 @@ NULL
 #' \link{marcSuperscripts}
 #' \link{unihan_variants}
 NULL
+
+
 
 
 
@@ -471,7 +481,7 @@ NULL
 #' @format a \code{tbl_df} containing the following fields:
 #' \describe{
 #' \item{marc}{MARC-8 code (in hex) for the character as coming from the G0 graphic set}
-#' \item{ucs}{UCS/Unicode code point <hexmode>}
+#' \item{ucs}{UCS/Unicode code point (hexmode)}
 #' \item{utf8}{UTF-8 code (in hex) for the UCS character}
 #' \item{rep}{representation of the character (where possible)}
 #' \item{isAlt}{For some tables alternate encodings in Unicode and UTF-8 are given.
@@ -498,6 +508,8 @@ NULL
 #' \link{marcSuperscripts}
 #' \link{unihan_variants}
 NULL
+
+
 
 
 
@@ -510,7 +522,7 @@ NULL
 #' @format a \code{tbl_df} containing the following fields:
 #' \describe{
 #' \item{marc}{MARC-8 code (in hex) for the character as coming from the G0 graphic set}
-#' \item{ucs}{UCS/Unicode code point <hexmode>}
+#' \item{ucs}{UCS/Unicode code point (hexmode)}
 #' \item{utf8}{UTF-8 code (in hex) for the UCS character}
 #' \item{rep}{representation of the character (where possible)}
 #' \item{isAlt}{For some tables alternate encodings in Unicode and UTF-8 are given.
@@ -537,6 +549,8 @@ NULL
 #' \link{marcSuperscripts}
 #' \link{unihan_variants}
 NULL
+
+
 
 
 
@@ -549,7 +563,7 @@ NULL
 #' @format a \code{tbl_df} containing the following fields:
 #' \describe{
 #' \item{marc}{MARC-8 code (in hex) for the character as coming from the G0 graphic set}
-#' \item{ucs}{UCS/Unicode code point <hexmode>}
+#' \item{ucs}{UCS/Unicode code point (hexmode)}
 #' \item{utf8}{UTF-8 code (in hex) for the UCS character}
 #' \item{rep}{representation of the character (where possible)}
 #' \item{isAlt}{For some tables alternate encodings in Unicode and UTF-8 are given.
@@ -576,6 +590,8 @@ NULL
 #' \link{marcSuperscripts}
 #' \link{unihan_variants}
 NULL
+
+
 
 
 
@@ -588,7 +604,7 @@ NULL
 #' @format a \code{tbl_df} containing the following fields:
 #' \describe{
 #' \item{marc}{MARC-8 code (in hex) for the character as coming from the G0 graphic set}
-#' \item{ucs}{UCS/Unicode code point <hexmode>}
+#' \item{ucs}{UCS/Unicode code point (hexmode)}
 #' \item{utf8}{UTF-8 code (in hex) for the UCS character}
 #' \item{rep}{representation of the character (where possible)}
 #' \item{isAlt}{For some tables alternate encodings in Unicode and UTF-8 are given.
@@ -615,6 +631,8 @@ NULL
 #' \link{marcSuperscripts}
 #' \link{unihan_variants}
 NULL
+
+
 
 
 
@@ -627,7 +645,7 @@ NULL
 #' @format a \code{tbl_df} containing the following fields:
 #' \describe{
 #' \item{marc}{MARC-8 code (in hex) for the character as coming from the G0 graphic set}
-#' \item{ucs}{UCS/Unicode code point <hexmode>}
+#' \item{ucs}{UCS/Unicode code point (hexmode)}
 #' \item{utf8}{UTF-8 code (in hex) for the UCS character}
 #' \item{rep}{representation of the character (where possible)}
 #' \item{isAlt}{For some tables alternate encodings in Unicode and UTF-8 are given.
@@ -635,6 +653,7 @@ NULL
 #' \item{isCombining}{}
 #' \item{name}{MARC character name, followed by the UCS name}
 #' }
+#' @details See the vignette `vignette("marctables")`.
 #' @source The data comes from the [Library of Congress](https://www.loc.gov/marc/specifications/codetables.xml "MARC specification").
 #' @seealso
 #' \link{rnaco}
@@ -658,6 +677,8 @@ NULL
 
 
 
+
+
 #' Detailed description of the data
 #' @name marcSuperscripts
 #' @docType data
@@ -666,7 +687,7 @@ NULL
 #' @format a \code{tbl_df} containing the following fields:
 #' \describe{
 #' \item{marc}{MARC-8 code (in hex) for the character as coming from the G0 graphic set}
-#' \item{ucs}{UCS/Unicode code point <hexmode>}
+#' \item{ucs}{UCS/Unicode code point (hexmode)}
 #' \item{utf8}{UTF-8 code (in hex) for the UCS character}
 #' \item{rep}{representation of the character (where possible)}
 #' \item{isAlt}{For some tables alternate encodings in Unicode and UTF-8 are given.
@@ -697,15 +718,17 @@ NULL
 
 
 
+
+
 #' Detailed description of the data
 #' @name unihan_variants
 #' @docType data
 #' @title Unihan CJK variants
 #' @format a \code{tbl_df} containing the following fields:
 #' \describe{
-#' \item{ucsindex}{UCS/Unicode code point <hexmode>}
+#' \item{ucsindex}{UCS/Unicode code point (hexmode)}
 #' \item{varianttype}{Type of variant, e.g., kSemanticVariant}
-#' \item{ucsvariant}{UCS/Unicode code point <hexmode>}
+#' \item{ucsvariant}{UCS/Unicode code point (hexmode)}
 #' }
 #' @description Variants loaded from the Unicode Han Database. Lists of
 #' variants have been unnested so that there is only one character and one variant per line.
@@ -728,4 +751,140 @@ NULL
 #' \link{marcJapaneseHiraganaandKatakana}
 #' \link{marcKoreanHangul}
 #' \link{marcSubscripts}
+#' \link{unconditionalMappings}
+NULL
+
+
+
+
+
+
+#' Detailed description of the data
+#' @name unconditionalMappings
+#' @rdname nacotransform
+#' @docType data
+#' @title Unconditional mappings for naco_transform()
+#' @format a \code{tbl_df} containing the following fields:
+#' \describe{
+#' \item{ucs}{UCS/Unicode code point (hexmode)}
+#' \item{lower}{Lower case mapping}
+#' \item{title}{Title case mapping}
+#' \item{upper}{Upper case mapping}
+#' \item{name}{UCS name}
+#' }
+#' @description The 2009 version of the authority file comparison rules call
+#' for using the unconditional mappings from the
+#' Unicode® Standard.
+#' These mappings provide lower, title and upper case mapping for characters such as
+#' the German ß (U+00DF, Latin small letter sharp S).
+#' The mappings used
+#' for this package are found in the file SpecialCasings.txt, which is contained in the
+#' file UCD.zip
+#' @source The data comes from the [Unicode® Standard](https://www.unicode.org/versions/Unicode15.1.0/)
+#' provides a file UCD.zip that contains the file SpecialCasings.txt.
+#' @seealso
+#' \link{rnaco}
+NULL
+
+
+
+
+
+#' Detailed description of the data
+#' @name numericrules
+#' @rdname nacotransform
+#' @docType data
+#' @title Transliteration rules for numeric decimals
+#' @format numericrules is a \code{tbl_df} containing the following fields:
+#' \describe{
+#' \item{V1}{chr: code point}
+#' \item{V2}{chr: name of code point}
+#' \item{V3}{chr: Unicode category}
+#' \item{V8}{int: Integer replacement for code point}
+#' \item{from}{chr: Character for transliteration rule}
+#' \item{to}{chr: Character for transliteration rule}
+#' \item{rule}{chr: Transliteration rule}
+#' }
+#' @source The data comes from version 15.1.0 of the Unicode Standard.
+#' @seealso
+#' \link{rnaco}
+NULL
+
+
+
+
+
+#' Detailed description of the data
+#' @name step6rulestring
+#' @rdname nacotransform
+#' @docType data
+#' @title Transliteration rule Step 6 of naco_transform()
+#' @format step6rulestring is in the form of a \code{string} 
+NULL
+
+
+
+
+
+#' Detailed description of the data
+#' @name step7lltranslitrule
+#' @rdname nacotransform
+#' @docType data
+#' @title Transliteration rule Step 7 of naco_transform()
+#' @format step7lltranslitrule is in the form of a \code{string} 
+NULL
+
+
+
+
+#' Personal name authority records
+#' @name cjkextractja
+#' @rdname cjkextracts
+#' @docType data
+#' @title Personal name authority records
+#' @description The [NACO CJK Funnel References Project Guidelines](https://www.loc.gov/aba/pcc/naco/CJK/NACO-CJK-Funnel-References-Project-Guidelines.docx)[@naco2019naco]
+#' refer to three Excel files containing personal name authorities for use
+#' in the funnel project. These files contain 268,128 records extracted by
+#' Gary Strawn. While they emphasize Chinese, Japanese and Korean, when coupled
+#' with VIAF, they access a rich resource of name authority records from
+#' the various VIAF contributors.
+#' @format cjkextractja is a \code{tbl_df} containing the following fields:
+#' \describe{
+#' \item{010 $a}{}
+#' \item{008/32}{Descriptive cataloging rule. Differentiated personal name when coded “a”}
+#' \item{100 field}{Name in the 100 field}
+#' \item{400 CJK}{Number of Chinese, Japanese or Korean references in 400 fields}
+#' \item{400 other}{Number of other non-Latin references in 400 fields}
+#' \item{400 roman}{Number of Latin references in 400 fields}
+#' \item{rda}{Whether or not RDA record}
+#' \item{670}{Number of 670 fields}
+#' \item{667}{Has non-Latin script reference been evaluated?}
+#' \item{Language}{Language of name record}
+#' }
+#' @source The data comes from the NACO CJK Funnel References Project.
+#' @seealso
+#' \link{rnaco}
+#' \link{cjkextractzh}
+NULL
+
+
+
+
+#' Personal name authority records
+#' @name cjkextractzh
+#' @rdname cjkextracts
+#' @docType data
+#' @format cjkextractzh is a \code{tbl_df} containing the following fields:
+#' \describe{
+#' \item{010 $a}{}
+#' \item{008/32}{Descriptive cataloging rule. Differentiated personal name when coded “a”}
+#' \item{100 field}{Name in the 100 field}
+#' \item{400 CJK}{Number of Chinese, Japanese or Korean references in 400 fields}
+#' \item{400 other}{Number of other non-Latin references in 400 fields}
+#' \item{400 roman}{Number of Latin references in 400 fields}
+#' \item{rda}{Whether or not RDA record}
+#' \item{670}{Number of 670 fields}
+#' \item{667}{Has non-Latin script reference been evaluated?}
+#' \item{notes}{If not CJK or minority name}
+#' }
 NULL

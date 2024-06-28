@@ -1,0 +1,17 @@
+---
+title: Datasets for Authority File Comparison Rules (NACO Normalization)
+author: Alan Engel
+date: '`r format(Sys.time(), ''%d %B, %Y'')`'
+lang: en-us
+output_format: rmarkdown::html_vignette
+bibliography:
+- R.bib
+- naco.bib
+link-citations: yes
+vignette: >
+  %\VignetteIndexEntry{Datasets for Authority File Comparison Rules (NACO Normalization)}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+---
+
+# References

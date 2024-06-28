@@ -75,7 +75,7 @@ Load it and take a look while referring to the
 
 ```{r takealook}
 
-variants <- readLines( con <- file(project_extdata_path("Unihan_Variants.txt"), encoding="UTF-8") )
+variants <- readLines( con <- file(file.path(project_extdata_path(),"ucd","Unihan_Variants.txt"), encoding="UTF-8") )
 variants[1:25]
 ```
 
@@ -90,12 +90,12 @@ as.data.frame(variants[1:5])
 
 The header states that there are six kinds of variants.
 
-* tkSemanticVariant
-* tkSimplifiedVariant
-* tkSpecializedSemanticVariant
-* tkSpoofingVariant
-* tkTraditionalVariant
-* tkZVariant
+* kSemanticVariant
+* kSimplifiedVariant
+* kSpecializedSemanticVariant
+* kSpoofingVariant
+* kTraditionalVariant
+* kZVariant
 
 Below I walk through the [3.7 Variants](https://www.unicode.org/reports/tr38/#N10211) section,
 and look up each example in ```variants```.

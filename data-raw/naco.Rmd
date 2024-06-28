@@ -1,0 +1,680 @@
+---
+title: "Authority comparison (NACO) rules walk-through"
+author: Alan Engel
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+lang: "en-us"
+output_format: rmarkdown::html_vignette
+bibliography: 
+  - R.bib
+  - naco.bib
+link-citations: true
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+This vignette walks through the Library of Congress's authority
+file comparison rules, aka, NACO normalization, [@pcc2020authority] 
+and [@pcc2009authority]. As much as possible, the vignette uses 
+the R package ```stringi``` [@R-stringi], a mature R package for
+fast and portable handling of string data based on ICU
+(International Components for Unicode). 
+
+A detailed description of NACO normalization can be found in [@hickey2011naco].
+
+This vignette walks through the 2009 revision of LOC's authority file
+comparison rules and derives datasets and functionality for implementing them
+in R. My project's main purpose is to develop normalization functionality that
+can be applied to extracting information from the Virtual International Authority
+File (VIAF). Some notes pertaining to that use are included in this walk-through.
+
+Load the needed R libraries.
+
+```{r libraries}
+library(rnaco)
+library(stringi)
+library(dplyr)
+```
+
+# Rules for Comparison
+
+## 1. Compare only records that may be compared
+
+```
+These rules are designed to be applied to any given set of authority
+records, whether those records reside in one or more physical files.
+Although these records allow for the comparison of all records from
+all sources, there are two exceptions:
+•
+access fields in authority records with differing subject heading
+system codes (MARC 21 008/11) are not compared
+•
+access fields in LC/NACO name authority records are not compared
+to access fields in LCSH authority records even though they have
+the same subject heading system code
+```
+
+Note for application to VIAF records.
+
+## 2. Selection of subfields
+
+```
+Select all subfields from candidate variable fields except the following:
+•
+subfields with numeric codes ($0-$9)
+•
+subfield $e; but retain subfield $e in conference headings (X11 fields)
+•
+subfield $i (used in 4XX and 5XX fields)
+•
+control subfield $w
+```
+
+The following examples are taken from these comparison rules.
+
+```
+Original: ‡aBrades, Susan Ferleger.
+Comparison form: ‡aBRADES, SUSAN FERLEGER
+
+Original: ‡aCamacam, Altamirando,‡d1930-
+Comparison form: ‡aCAMACAM, ALTAMIRANDO‡d1930
+
+Original: ‡aLabor, Obstetric‡xdrug effects
+Comparison form: ‡aLABOR, OBSTETRIC‡xDRUG EFFECTS
+
+Original: ‡aLabor (Obstetrics)‡xComplications
+Comparison form: ‡aLABOR OBSTETRICS‡xCOMPLICATIONS
+```
+
+This package is intended for broader application such as these name records
+found in [a VIAF processed source record](https://viaf.org/processed/WKP%7CQ108886274),
+which is derived from this [Wikidata page](https://www.wikidata.org/wiki/Q108886274).
+These lines are in MARC21 form and use the subfields mentioned under this rule.
+
+```
+400	0		‎‡a  Susan Ferleger Brades‏ ‎‡c  American museum director‏ ‎‡9  en‏
+400	0		‎‡a  Susan Ferleger Brades‏ ‎‡c  Museumsdirektorin in London‏ ‎‡9  de
+```
+
+This data is also available in [xml](https://viaf.org/processed/WKP%7CQ7174738&recordSchema=MARCXML?httpAccept=text/xml)
+as shown in the fragment below.
+
+```
+<mx:datafield ind1="0" ind2=" " tag="400">
+<mx:subfield code="a">Susan Ferleger Brades</mx:subfield>
+<mx:subfield code="c">American museum director</mx:subfield>
+<mx:subfield code="9">en</mx:subfield>
+</mx:datafield>
+<mx:datafield ind1="0" ind2=" " tag="400">
+<mx:subfield code="a">Susan Ferleger Brades</mx:subfield>
+<mx:subfield code="c">Museumsdirektorin in London</mx:subfield>
+<mx:subfield code="9">de</mx:subfield>
+</mx:datafield>
+```
+
+This Rule 2 specifies that the respective subfields are to be processed separately. Rule 10 below
+specifies that the double-dagger (‡) delimiter is to be prepended to each subfield string. As this
+would limit applications, the separation of the subfields and their post-process recombination, including
+prepending the double-dagger, will be left to the calling routine.
+
+## 3. Preparation of subfield text for comparison
+
+### Step 1
+
+```
+For each subfield in the field of interest to be retained for the purposes of comparison:
+
+1) If the subfield contains text marked with U+0098/U+009C pairs, remove those characters and everything between them. If the subfield does not contain U+0098/U+009C pairs and if the subfield code of the subfield is $a and if the field contains a nonfiling characters indicator whose value is higher than zero, remove from the beginning of the subfield the number of code points indicated by the nonfiling characters indicator.
+```
+
+The code points U+0098 and U+009C are control points meaning "START OF STRING"
+and "STRING TERMINATOR", respectively.
+
+```{r string-delimiters}
+str <- "ABC\u0098DEFGHIJ\u009CKLMNOPQRSTUVWXYZ"
+stringi::stri_replace_all_regex(str, "\u0098\\X+\u009C","")
+```
+
+### Step 2
+
+```
+2) Remove leading and trailing spaces.
+```
+
+To make this Unicode compatible, use the Unicode white space character class.
+
+```{r trim}
+str <- "　守屋俊彦,　" # "wide" space U+3000
+stringi::stri_trim_both(str, pattern = "\\P{Wspace}", negate = FALSE)
+```
+
+### Step 3
+
+```
+3) If the subfield text is now a null string, omit the subfield from the comparison heading.
+```
+OK.
+
+### Step 4
+
+```
+4) If any code point in the subfield is listed in the Unconditional mappings section of the Unicode special casing file, replace the code point with its uppercase equivalent.
+```
+
+A copy of these mappings is included in this package as the dataset ```unconditionalMappings```.
+The dataset's construction is described in the vignette
+[rnaco::nacoDatasets]("nacoDatasets.html"). 
+
+This is a limited mapping to upper case. The main mapping to upper case is
+carried out under Step 7 below. The result from Step 4 is saved temporarily
+because if Step 7 wipes out the string, this result is the fallback. 
+
+```{R unconditionalmapping}
+str <- "Litfaßsäule"
+rhex <- stri_trans_general(str, id="Any-Hex/Unicode")
+rhex
+rhex <- stri_match_all_regex(rhex, "(?:U[+])([A-F0-9]++)")
+set <- as.hexmode(rhex[[1]][,2])
+rz <- rnaco::unconditionalMappings %>%
+	    dplyr::filter(ucs %in% set) %>%
+      dplyr::mutate(from = intToUtf8(ucs, multiple = TRUE), to = upper) %>%
+      dplyr::select(from,to) %>% unique() %>%
+      dplyr::mutate(rule = paste0(from," > ",to," ;",sep="" )) %>%
+      dplyr::select(rule)
+rzf <- stri_join(as.vector(rz$rule), collapse=" ")
+step4result <- stri_trans_general(str, id=rzf, rules=TRUE)
+step4result
+```
+
+### Step 5
+
+```
+5) Apply Unicode compatibility decomposition[9] to the subfield text. Perform this action recursively, until no further changes are possible.10
+
+[9] Unicode normalization form KD: replace each code point with the code point or code points indicated in position 6 of each code point’s entry in the Unicode character database, minus any qualifier given within angle brackets. If position 6 of a code point’s entry in the Unicode character database is null, make no change in this step.
+
+[10] To save processing steps, an implementation may choose to apply the rules given in the remaining steps to the substitution performed in this step. For example, because U+031B Combining horn will later be removed, an implementation may choose not to insert that character here as part of the compatibility decomposition; similarly, because lowercase characters will eventually be replaced by uppercase characters, an implementation may choose to use uppercase characters where lowercase characters are indicated.
+
+Example:
+U+01A0 Uppercase O-hook is substituted by U+004F Latin capital letter O plus U+031B Combining horn
+```
+
+Unicode normalization form KD is now NFKD, and stringi has a
+transform for this, stringi::stri_trans_nfkd(). 
+
+```{r nfkd}
+str <- "\u01a1"
+stringi::stri_trans_general(str, id="Any-Hex/Unicode")
+skd <- stringi::stri_trans_nfkd(str)
+skd
+stringi::stri_trans_general(skd, id="Any-Hex/Unicode")
+
+str <- "Tôi đang \u01a1 trong nhà"
+stringi::stri_trans_nfkd(str)
+
+```
+
+### Step 6
+
+```
+6) Perform additional substitutions for those code points listed in the following table.
+```
+
+```{r rule6table, echo = FALSE, results = TRUE}
+UTF16  <- c("U+00C6 Uppercase digraph AE",
+"U+00D8 Uppercase Scandinavian O",
+"U+00DE Uppercase Icelandic thorn",
+"U+00E6 Lowercase digraph ae",
+"U+00F0 Lowercase eth",
+"U+00F8 Lowercase Scandinavian O",
+"U+00FE Lowercase Icelandic thorn",
+"U+0110 Uppercase D with crossbar",
+"U+0111 Lowercase d with crossbar",
+"U+0131 Lowercase Turkish i",
+"U+0141 Uppercase Polish L",
+"U+0142 Lowercase Polish l",
+"U+0152 Uppercase digraph OE",
+"U+0153 Lowercase digraph oe",
+"U+02BB Ayn",
+"U+02BC Alif",
+"U+2113 Script small l")
+Substitution <- c("U+0041 Latin capital letter A plus U+0045 Latin capital letter E",
+"U+004F Latin capital letter O",
+ "U+0054 Latin capital letter T plus U+0048 Latin capital letter H",
+ "U+0061 Latin small letter a plus U+0065 Latin small letter e",
+ "U+0064 Latin small letter d",
+ "U+006F Latin small letter o",
+ "U+0074 Latin small letter t plus U+0068 Latin small letter h",
+ "U+0044 Latin capital letter D",
+ "U+0064 Latin small letter d",
+ "U+0069 Latin small letter i",
+ "U+004C Latin capital letter L",
+ "U+006C Latin small letter l",
+ "U+004F Latin capital letter O plus U+0045 Latin capital letter E",
+ "U+006F Latin small letter o plus U+0065 Latin small letter e",
+ "Remove",
+ "Remove",
+ "U+006C Latin small letter l")
+d <- data.frame(UTF16, Substitution)
+knitr::kable(d)
+```
+
+This table is used to create a transliteration rule. Please see the
+[dataset vignette]("nacoDatasets.html") for details.
+
+```{r testrule6string}
+#step6string <- DataPackageR::datapackager_object_read("step6string").
+teststr <- c("add /æd/","børn","bʻrn")
+stringi::stri_trans_general(teststr,id=rnaco::step6rulestring,rules=TRUE)
+```
+
+### Step 7
+
+```
+7) Apply additional transformations based on the Unicode character category code:
+```
+
+#### Characters to remove
+
+```
+• Class Cc (control characters): remove (note treatment of the subfield delimiter (U+001F) in 10) below)
+• Class Cf (formatting characters): remove
+• Class Co (private-use characters): remove
+• Class Cs (surrogate characters): remove
+• Class Lm (modifier letters): remove
+• Class Mc (spacing combining marks): remove
+• Class Me (enclosing marks): remove
+• Class Mn (non-spacing combining marks): remove
+```
+
+These 8 categories can be removed with 1 regular expression.
+
+```{r step7remove}
+str <- "AB\u0061\u0002\u0009\u001ACD\u00ADE"
+stri_replace_all_regex(str,
+  pattern = "(\\p{Cc}|\\p{Cf}|\\p{Co}|\\p{Cs}|\\p{Lm}|\\p{Mc}|\\p{Me}|\\p{Mn})",
+  replacement=""
+)
+```
+
+#### Uppercase transliteration
+
+```
+• Class Ll (lowercase alphabetic character): Replace the code point with the code point identified in position 13 of the code point 's entry in the Unicode character database if position 13 is not null; if position 13 in the Unicode database is null, retain the original code point.
+```
+
+Class Ll (lowercase letters) contains 1403 members, making this the main uppercase
+transliteration rule. As is shown with the R code below, stri_trans_toupper() is almost
+identical with a handful of exceptions that can be handled by transliteration rules.
+
+```{R lowercase}
+ucdpath <- file.path(project_extdata_path(), "ucd", "UnicodeData.txt")
+ucddata <- tibble(read.delim2(ucdpath, header = FALSE, sep = ";", quote = ""))
+subset <- ucddata %>% 
+          filter(V3 == "Ll") %>% 
+          filter(stri_length(V13) > 0) %>% 
+          select(V1,V2,V3,V13)
+subset
+```
+
+Apply stri_trans_toupper() and see which transliterations do not match column 13 (V13).
+
+```{R applystritransupper}
+mismatch <- subset %>%
+            mutate(from = stri_trans_general(stri_paste("U+",V1,sep=""),"Hex-Any"),
+                    to = stri_trans_general(stri_paste("U+",V13,sep=""),"Hex-Any")) %>%
+            mutate(striupper = stri_trans_toupper(from, locale = NULL)) %>% 
+            filter(to != striupper)
+mismatch %>% print(n=Inf)
+```
+
+Derive a transliteration rule string that can be used in stri_trans_general().
+
+```{R transrule}
+translitset <- mismatch %>% 
+                mutate(rule = stri_join(from,">",to,";",sep=" ")) %>% 
+                select(rule)
+step7lltranslitrule <- stri_join(translitset$rule,collapse=" ")
+step7lltranslitrule
+```
+
+Transliteration rule step7lltranslitrule is in the package as a dataset.
+
+This substep can then be carried out with the following two function calls in this
+sequence.
+
+```
+stri_trans_general(str, id = step7lltranslitrule, rules = TRUE)
+stri_trans_toupper(str, locale = NULL)
+```
+
+Here are three classes with nothing to do:
+
+```
+• Class Lo (other letters): retain
+• Class Lt (title-case letters): code points in this category are replaced in step 6
+• Class Lu (uppercase alphabetic characters): retain as given
+```
+
+#### Decimal numeral transliteration
+
+```
+• Class Nd (decimal numeral): Replace with the value indicated by position 8 of the code point 's entry in the Unicode database if that position is not null and if the value in that position is less than 10; if that position in the Unicode database is null or has some other value, retain the code point
+```
+
+This operation is implemented by dynamically forming transliteration rules and
+using these rules in stri_trans_general().
+
+First create a tibble dataset that contains a code point index and corresponding
+transliteration rules.
+
+```{R numerictranslitrules}
+subsetNd <- ucddata %>% filter(V3 == "Nd")
+numericrules <- subsetNd %>% 
+                mutate(from = stri_trans_general(stri_paste("U+",V1,sep=""),"Hex-Any"),
+			                 to = stri_string_format("%d",V8)) %>%
+		            mutate(rule = stri_join(from,">",to,";",sep=" ")) %>%
+		            select(V1,V2,V3,V8,from,to,rule)
+numericrules
+```
+
+This numericrules string is included as a dataset in the package data.
+
+Then extract all of the numerical digits in the string and use
+that set to dynamically create a transliteration rule. The test string
+below contains Japanese wide numerals.
+
+```{R numeric}
+teststr <- "回答した３７社のうち、ＤＢＳ制度に「参加する」と答えたのは９社。「参加する方向で検討中」の２３社と合わせ、３２社が参加に前向きだった。"
+numericchrs <- unlist(stri_extract_all_regex(teststr, "(\\p{Nd})")) %>% unique()
+ruleset <- numericrules %>% filter(from %in% numericchrs) %>% select(rule)
+translitrule <- stri_join(ruleset$rule,collapse=" ")
+stri_trans_general(teststr, id=translitrule , rules=TRUE)
+```
+
+Two classes with nothing to do:
+
+```
+• Class Nl (number letters): retain
+• Class No (other numbers): retain
+```
+
+#### Punctuation
+
+##### Class Pc
+
+```
+• Class Pc (connector punctuation): replace with space[13]
+[13] The space character is code point U+0020. Note that here and elsewhere, spaces created at the beginning and ending of a subfield by replacing a code point with a space should be omitted.
+```
+
+Take a look at Class Pc and then run a test string through stri_replace_all_charclass().
+
+```{R classPc}
+ucddata %>% filter(V3 == "Pc") %>% select(V1,V2,V3)
+teststr <- "AaaBbb\u005fCcc\u203fDdd\ufe4dEee\ufe4fFee\uff3fGgg"
+teststr
+stri_replace_all_charclass(teststr, "\\p{Pc}", " ")
+```
+
+##### Class Pd
+
+```
+• Class Pd (dash punctuation): replace with space
+```
+
+Take a look at Class Pd and then run a test string through stri_replace_all_charclass().
+
+```{R classPd}
+ucddata %>% filter(V3 == "Pd") %>% select(V1,V2,V3)
+teststr <- "AaaBbb\u002DCcc\u1400Ddd\u2010Eee\u2011Fee\u2014Ggg"
+teststr
+stri_replace_all_charclass(teststr, "\\p{Pd}", " ")
+```
+
+##### Class Pe
+
+```
+• Class Pe (close punctuation): Take action as indicated in the following table.
+```
+
+```{r rule7table1, echo = FALSE, results = TRUE}
+UTF16  <- c("U+005D Right square bracket",
+"All other characters in this category")
+Substitution <- c("Remove",
+ "Replace with space")
+d <- data.frame(UTF16, Substitution)
+knitr::kable(d)
+```
+
+```{R classPe}
+ucddata %>% filter(V3 == "Pe") %>% select(V1,V2,V3)
+teststr <- "AaaBbb\u0029Ccc\u005DDdd\u007DEee\u2309Fee\u207EGgg"
+teststr
+teststr <- stri_replace_all_fixed(teststr, "\u005D", "")
+teststr
+stri_replace_all_charclass(teststr, "\\p{Pe}", " ")
+```
+
+##### Classes Pf and Pi
+
+```
+• Class Pf (final quote punctuation): replace with space
+• Class Pi (initial quote punctuation): replace with space
+```
+```{R classPf}
+ucddata %>% filter(V3 == "Pf") %>% select(V1,V2,V3)
+teststr <- "AaaBbb\u2019Ccc\u201DDdd\u2E05Eee\u2E0DFee\u2E21Ggg"
+teststr
+stri_replace_all_charclass(teststr, "\\p{Pf}", " ")
+```
+
+```{R classPi}
+ucddata %>% filter(V3 == "Pi") %>% select(V1,V2,V3)
+teststr <- "AaaBbb\u2018Ccc\u201FDdd\u2E02Eee\u2E09Fee\u2E1CGgg"
+teststr
+stri_replace_all_charclass(teststr, "\\p{Pi}", " ")
+```
+
+##### Class Po
+
+```
+• Class Po (other punctuation): Take action as indicated in the following table.
+```
+```{r rule7table2, echo = FALSE, results = TRUE}
+UTF16  <- c("U+0023 Number sign",
+"U+0026 Ampersand",
+"U+002C Comma",
+"U+0040 Commercial at",
+"U+0027 Apostrophe",
+"All other characters in this category")
+Substitution <- c("Retain",
+ "Retain",
+"Retain the first comma internal to subfield $a; replace all other commas with spaces",
+"Retain",
+"Remove",
+"Replace with space")
+d <- data.frame(UTF16, Substitution)
+knitr::kable(d)
+```
+
+* Remove apostrophe.
+* Except for number sign, ampersand, comma and commercial at, replace with space.
+* Handle comma for subfield $a. 
+* For other subfields replace all commas with space.
+
+```{R classPo}
+ucddata %>% filter(V3 == "Po") %>% select(V1,V2,V3)
+teststr <- "Aaa,Bbb!Ccc,\u0023Ddd\u0026Eee\u0027,Fee\u0040Ggg"
+teststr
+teststr <- stri_replace_all_fixed(teststr, "\u0027", "")
+teststr
+pattern <- "[\\p{Po}-[\u0023\u0026\u002C\u0040]]"
+teststr <- stri_replace_all_regex(teststr, pattern, " ")
+teststr
+
+resstr2 <- stringi::stri_replace_all_regex(teststr, pattern, " ")
+ncommas <- stri_split_fixed(resstr2,",", n=2)
+resstr3 <- lapply(ncommas, function(v) stri_replace_all_fixed(v, ",", " ") )
+resstr4 <- unlist(lapply(resstr3, function(v) stri_join(v, collapse=",") ))
+resstr4
+```
+
+##### Class Ps
+
+```
+Class Ps (open punctuation): replace with space
+```
+```{r rule7table3, echo = FALSE, results = TRUE}
+UTF16  <- c("U+005B Left square bracket",
+"All other characters in this category")
+Substitution <- c("Remove",
+ "Replace with space")
+d <- data.frame(UTF16, Substitution)
+knitr::kable(d)
+```
+
+```{R classPs}
+ucddata %>% filter(V3 == "Ps") %>% select(V1,V2,V3)
+teststr <- "AaaBbb\u0028Ccc\u005BDdd\u207DEee\u007BFee\u169BGgg"
+teststr
+teststr <- stri_replace_all_fixed(teststr, "\u005B", "")
+teststr
+stri_replace_all_charclass(teststr, "\\p{Ps}", " ")
+```
+
+##### Class Sc
+
+```
+• Class Sc (currency symbol): retain
+```
+```{R classSc}
+ucddata %>% filter(V3 == "Sc") %>% select(V1,V2,V3)
+
+```
+
+##### Class Sk
+
+```
+• Class Sk (modifier symbol): replace with space
+```
+
+```{R classSk}
+ucddata %>% filter(V3 == "Sk") %>% select(V1,V2,V3)
+teststr <- "Aaa\u005EBbb\u0060Ccc\u00AFDdd\u02C2Eee\u00B4,Fee\u00B8Ggg"
+teststr
+stri_replace_all_charclass(teststr, "\\p{Sk}", " ")
+```
+
+##### Class Sm
+
+```
+• Class Sm (miscellaneous symbols): Take action as indicated in the following table.
+```
+```{r rule7table4, echo = FALSE, results = TRUE}
+UTF16  <- c("U+002B Plus",
+"U+266F Music sharp sign",
+"All other characters in this category")
+Substitution <- c("Retain",
+"Retain",
+ "Replace with space")
+d <- data.frame(UTF16, Substitution)
+knitr::kable(d)
+```
+
+```{R classSm}
+ucddata %>% filter(V3 == "Sm") %>% select(V1,V2,V3)
+teststr <- "Aaa\u002BBbb\u266FCcc\u003DDdd\u003CEee\u00AC,Fee\u00F7Ggg"
+teststr
+pattern <- "[\\p{Sm}-[\u002B\u266F]]"
+stri_replace_all_regex(teststr, pattern, " ")
+
+```
+
+##### Class So
+
+```
+• Class So (other symbol): Take action as indicated in the following table.
+```
+```{r rule7table5, echo = FALSE, results = TRUE}
+UTF16  <- c("U+266D Music flat sign",
+"All other characters in this category")
+Substitution <- c("Retain",
+"Replace with space")
+d <- data.frame(UTF16, Substitution)
+knitr::kable(d)
+```
+```{R classSo}
+ucddata %>% filter(V3 == "So") %>% select(V1,V2,V3)
+teststr <- "Aaa\u266DBbb\u00A9Ccc\u00AEDdd\u00B0Eee\u058DFee\u00A6Ggg"
+teststr
+pattern <- "[\\p{So}-[\u266D]]"
+stri_replace_all_regex(teststr, pattern, " ")
+```
+
+##### Classes Zl, Zp, Zs
+
+```
+• Class Zl (line separator): replace with space
+• Class Zp (paragraph separator): replace with space
+• Class Zs (space separator): replace with space
+```
+```{R classZl}
+ucddata %>% filter(V3 %in% c("Zl","Zp","Zs")) %>% select(V1,V2,V3)
+teststr <- "Aaa\u2028Bbb\u2029Ccc\u00A0Ddd\u2004Eee\u1680Fee\u3000Ggg"
+teststr
+stri_replace_all_regex(teststr, "[\\p{Zl}|\\p{Zp}|\\p{Zs}]", " ")
+```
+
+### Step 8
+
+```
+8) If through the application of rules 5-7 the subfield has been reduced to a null string, restore the text of the subfield as it existed at the end of step 4.
+```
+
+### Step 9
+
+```
+9) Reduce multiple adjacent internal spaces to a single space
+```
+
+This can be done with ```stri_replace_all_charclass()```
+
+```{R step9}
+stri_replace_all_charclass('a\nb\tc   d', '\\p{WHITE_SPACE}', ' ', merge=TRUE)
+```
+
+### Step 10
+
+```
+10) Precede the text of each subfield with the delimiter character (U+001F) and its subfield code
+```
+
+As explained under Step 2 above, this step will be left to the calling routine.
+
+# naco_transform()
+
+
+
+# Test data
+
+Test data is assembled from the 268,128 authority records contained in
+[Gary Strawn's files](https://files.library.northwestern.edu/public/Files/)
+generated in May 2018:
+
+* CJK_Extract.01.xlsx
+* CJK_Extract.02.xlsx
+* CJK_Extract.03.xlsx
+
+Please see the NACO CJK Funnel References Project Guidelines[@naco2019naco].
+
+
+---
+nocite: '@*'
+---
+
+# References

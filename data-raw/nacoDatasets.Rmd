@@ -1,0 +1,262 @@
+---
+title: Datasets for Authority File Comparison Rules (NACO Normalization)
+author: Alan Engel
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+lang: "en-us"
+output_format: rmarkdown::html_vignette
+bibliography: 
+  - R.bib
+  - naco.bib
+link-citations: true
+---
+
+# Purpose
+
+Implementing and testing the Authority File Comparison Rules (NACO Normalization)
+requires some prepared datasets. Their preparation is detailed here.
+
+```{r libraries}
+library(stringi)
+library(dplyr)
+```
+
+# Unconditional Mappings
+
+The 2009 version of the authority file comparison rules [@pcc2009authority] call
+for using the unconditional mappings from the
+Unicode®^[Unicode is a registered tradmark of The Unicode Corporation.] Standard.
+These mappings provide lower, title and upper case mapping for characters such as
+the German ß (U+00DF, Latin small letter sharp S).
+The mappings used
+for this package are found in the file SpecialCasings.txt, which is contained in the
+file UCD.zip, which was downloaded from
+[version 15.1.0 of the Unicode Standard](https://www.unicode.org/versions/Unicode15.1.0/).
+SpecialCasings.txt contains two sections: unconditional mappings and conditional mappings.
+The unconditional mapping were manually copied into the file Uncondtional_Mappings.txt that
+is included in the ```inst/extdata/ucd``` folder of this package.
+
+```{r mappings}
+ucddir <- file.path(project_extdata_path(), "ucd", "Unconditional_Mappings.txt")
+umap <- read.delim2(ucddir, header = TRUE, sep = ";", quote = "")
+
+codeRaw <- umap %>% select(code) %>% as.vector()
+code <- lapply(codeRaw, function(v) {
+	as.hexmode(paste0("0x",v,sep=""))
+})
+
+lowerRaw <- umap %>% select(lower) %>% as.vector()
+lower <- lapply(lowerRaw, function(v) {
+	v1 <- stringi::stri_replace_all_regex(v ,pattern = "([A-F0-9]++)",replacement= "\\\\u$1")
+	v2 <- stringi::stri_replace_all_fixed(v1 ,pattern = " ", replacement="")
+	stringi::stri_unescape_unicode(v2)
+})
+
+titleRaw  <- umap %>% select(title) %>% as.vector()
+title  <- lapply(titleRaw, function(v) {
+	v1 <- stringi::stri_replace_all_regex(v ,pattern = "([A-F0-9]++)",replacement= "\\\\u$1")
+	v2 <- stringi::stri_replace_all_fixed(v1 ,pattern = " ", replacement="")
+	stringi::stri_unescape_unicode(v2)
+})
+
+upperRaw  <- umap %>% select(upper) %>% as.vector()
+upper  <- lapply(upperRaw, function(v) {
+	v1 <- stringi::stri_replace_all_regex(v ,pattern = "([A-F0-9]++)",replacement= "\\\\u$1")
+	v2 <- stringi::stri_replace_all_fixed(v1 ,pattern = " ", replacement="")
+	stringi::stri_unescape_unicode(v2)
+})
+
+commentRaw <- umap %>% select(comment) %>% as.vector()
+comment <- lapply(commentRaw, function(v) {
+	v1 <- stringi::stri_replace_first_fixed(v, pattern = "# ", replacement="")
+	stri_trim_both(v1, pattern = "\\P{Wspace}", negate = FALSE)
+})
+
+unconditionalMappings <- tibble(ucs = as.hexmode(as.vector(unlist(code))), 
+	lower=as.vector(unlist(lower)), 
+	title=as.vector(unlist(title)),
+	upper=as.vector(unlist(upper)),
+	name=as.vector(unlist(comment)))
+
+unconditionalMappings
+```
+
+# Rule String for Authority File Comparison Rules, Rule 6
+
+This rule calls for the subsitutions in this table. These can
+be implemented by a call to ```stri_trans_general(str1,id=rulestring,rules=TRUE)```
+where ```rulestring``` is string with semicolon-separated transliteration rules
+that use the syntax specified by the ICU manual. This string is
+calculated from the table and saved in the package as the dataset ```rule6string```.
+
+
+```{r rule6table, results = TRUE}
+UTF16  <- c("U+00C6 Uppercase digraph AE",
+"U+00D8 Uppercase Scandinavian O",
+"U+00DE Uppercase Icelandic thorn",
+"U+00E6 Lowercase digraph ae",
+"U+00F0 Lowercase eth",
+"U+00F8 Lowercase Scandinavian O",
+"U+00FE Lowercase Icelandic thorn",
+"U+0110 Uppercase D with crossbar",
+"U+0111 Lowercase d with crossbar",
+"U+0131 Lowercase Turkish i",
+"U+0141 Uppercase Polish L",
+"U+0142 Lowercase Polish l",
+"U+0152 Uppercase digraph OE",
+"U+0153 Lowercase digraph oe",
+"U+02BB Ayn",
+"U+02BC Alif",
+"U+2113 Script small l")
+Substitution <- c("U+0041 Latin capital letter A plus U+0045 Latin capital letter E",
+"U+004F Latin capital letter O",
+ "U+0054 Latin capital letter T plus U+0048 Latin capital letter H",
+ "U+0061 Latin small letter a plus U+0065 Latin small letter e",
+ "U+0064 Latin small letter d",
+ "U+006F Latin small letter o",
+ "U+0074 Latin small letter t plus U+0068 Latin small letter h",
+ "U+0044 Latin capital letter D",
+ "U+0064 Latin small letter d",
+ "U+0069 Latin small letter i",
+ "U+004C Latin capital letter L",
+ "U+006C Latin small letter l",
+ "U+004F Latin capital letter O plus U+0045 Latin capital letter E",
+ "U+006F Latin small letter o plus U+0065 Latin small letter e",
+ "Remove",
+ "Remove",
+ "U+006C Latin small letter l")
+step6table <- data.frame(UTF16, Substitution)
+knitr::kable(step6table)
+```
+
+```{r step6string}
+rset <- step6table %>% mutate(utf16a=stringi::stri_extract_all_regex(UTF16,pattern="(U[+][A-F0-9]++)") ) %>%
+	mutate(utf16b=stringi::stri_trans_general(utf16a,"Hex-Any") ) %>%
+	mutate(utf16=stringi::stri_trans_general(utf16b,"Any-Hex") ) %>%
+	mutate(rep=stringi::stri_extract_all_regex(Substitution,pattern="((U[+][A-F0-9]++)|(Remove))") ) %>%
+	mutate(rep2=stringi::stri_join_list(rep,sep="")) %>%
+	mutate(repv=stringi::stri_trans_general(rep2,"Hex-Any")) %>%
+	mutate(rule= case_when( repv=="Remove" ~ stringi::stri_join(utf16,">",";",sep=" "),
+					.default=stringi::stri_join(utf16,">",repv,";",sep=" ") ) )  %>%
+	select(rule)
+step6rulestring <- stringi::stri_join(rset$rule,collapse=" ")
+step6rulestring
+```
+
+Note that two of the characters, U+02BB Ayn and U+02BC Alif, are to be removed. This is something that
+is not well documented in the ICU manuals and is coded by leaving the replacement position
+blank.
+
+Then test it.
+
+```{r testrule6string}
+teststr <- c("add /æd/","børn","bʻrn")
+stringi::stri_trans_general(teststr,id=step6rulestring,rules=TRUE)
+```
+
+# Unicode Data
+
+The authority file comparison rules refer twice to particular columns
+in the Unicode character database, once for Class Li (lowercase alphabetic
+characters) and once for Class Nd (decimal numerals). These are in the
+file UnicodeData.txt that is in UCD.zip that can be downloaded from 
+[version 15.1.0 of the Unicode Standard](https://www.unicode.org/versions/Unicode15.1.0/)
+
+The full file UnicodeData.txt is in the ```inst/extdata/ucd```
+folder of this package.
+
+## Step 7, Class Li substep: step7lltranslitrule dataset
+
+This Class Li substep can be carried out with the following two function calls in this
+sequence. See the vignette for details.
+
+```
+stri_trans_general(str, id = step7lltranslitrule, rules = TRUE)
+stri_trans_toupper(str, locale = NULL)
+```
+
+Dataset step7lltranslitrule is created with the following code segment.
+
+```{r step7lltranslitrule}
+ucdpath <- file.path(project_extdata_path(), "ucd", "UnicodeData.txt")
+ucddata <- tibble(read.delim2(ucdpath, header = FALSE, sep = ";", quote = ""))
+subset <- ucddata %>% 
+          filter(V3 == "Ll") %>% 
+          filter(stri_length(V13) > 0) %>% 
+          select(V1,V2,V3,V13)
+mismatch <- subset %>%
+            mutate(from = stri_trans_general(stri_paste("U+",V1,sep=""),"Hex-Any"),
+                    to = stri_trans_general(stri_paste("U+",V13,sep=""),"Hex-Any")) %>%
+            mutate(striupper = stri_trans_toupper(from, locale = NULL)) %>% 
+            filter(to != striupper)
+translitset <- mismatch %>% 
+                mutate(rule = stri_join(from,">",to,";",sep=" ")) %>% 
+                select(rule)
+step7lltranslitrule <- stri_join(translitset$rule,collapse=" ")
+step7lltranslitrule
+```
+
+## Step 7, Class Nd substep: numericrules dataset
+
+Unicode class Nd is a collection of 680 characters all of which represent the arabic
+numerals. This tibble contains transliteration rules that can be used in Marek Gagolewski's
+stringi package.[@R-stringi] In naco_transform(), instead of a transliteration rule covering
+all 680 code points, transliteration rules are extracted dynamically from _numericrules_
+based on the code points in the string being transliterated.
+
+```{R numerictranslitrules}
+subsetNd <- ucddata %>% filter(V3 == "Nd")
+numericrules <- subsetNd %>% 
+                mutate(from = stri_trans_general(stri_paste("U+",V1,sep=""),"Hex-Any"),
+			           to = stri_string_format("%d",V8)) %>%
+		        mutate(rule = stri_join(from,">",to,";",sep=" ")) %>%
+		        select(V1,V2,V3,V8,from,to,rule)
+numericrules
+```
+
+
+# Datasets for Testing 
+
+The [NACO CJK Funnel References Project Guidelines](https://www.loc.gov/aba/pcc/naco/CJK/NACO-CJK-Funnel-References-Project-Guidelines.docx)[@naco2019naco]
+refer to three Excel files containing personal name authorities for use
+in the funnel project. These files contain 268,128 records extracted by
+Gary Strawn. Copies of Strawn's files are included in the inst/extdata/naco folder
+of this package. While they emphasize Chinese, Japanese and Korean, when coupled
+with VIAF, they access a rich resource of name authority records from
+the various VIAF contributors. The funnel references project derived subsets
+having Chinese, Japanese and Korean name records. 
+The Chinese and Japanese subsets are included as datasets with this package. The Korean
+subset was not accessible when this document was compiled.
+
+```{R googleauth, echo=FALSE}
+library(googlesheets4)
+local_gs4_quiet()
+gm <- "ttcrossroads09@gmail.com"
+gs4_auth(scopes = "spreadsheets.readonly", email = gm)
+```
+```{R cjkextracts}
+sszh <- "https://docs.google.com/spreadsheets/d/1MyHXMifmYtb3QOkOkGxXioqDpia9ifWWX8skj9Oo-pc/edit?usp=sharing"
+cjkextractzh <- read_sheet(sszh ,
+                   sheet = "Sheet1",
+                   range = "A:J",
+				   col_names = c("010 $a","008/32","100 field","400 CJK","400 other","400 roman	","rda","670","667","notes"),
+                   col_types = "ccciiicicc",
+                   trim_ws = FALSE)
+cjkextractzh
+
+ssja <- "https://docs.google.com/spreadsheets/d/1dIKgpdGZFXx20Mcbh83Y-0pgQ6wAUPw3Lc8zFKXteD8/edit?usp=sharing"
+cjkextractja <- read_sheet(ssja ,
+                   sheet = "Sheet1",
+                   range = "A:J",
+                   col_types = "ccciiicicc",
+                   trim_ws = FALSE)
+cjkextractja
+
+
+
+```
+
+---
+nocite: '@*'
+---
+
+# References

@@ -71,6 +71,7 @@ that is assigned the $rootname$ to produce the dataset.
 source(file.path(project_path(),"data-raw","xml2df.R"))
 result <- xml2df(marcnotes)
 base::assign(rootname, result)
+rm(xml2df)
 ```
 
 # How xml2df() works
@@ -208,7 +209,6 @@ for(i in 1:rows) {
 
   stopifnot(marcname == rootname)
   assign(marcname,tb)
-  config <- DataPackageR::use_data_object(object_name = marcname)
   }
 
 ```

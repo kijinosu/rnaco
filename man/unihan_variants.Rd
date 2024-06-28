@@ -7,9 +7,9 @@
 \format{
 a \code{tbl_df} containing the following fields:
 \describe{
-\item{ucsindex}{UCS/Unicode code point \if{html}{\out{<hexmode>}}}
+\item{ucsindex}{UCS/Unicode code point (hexmode)}
 \item{varianttype}{Type of variant, e.g., kSemanticVariant}
-\item{ucsvariant}{UCS/Unicode code point \if{html}{\out{<hexmode>}}}
+\item{ucsvariant}{UCS/Unicode code point (hexmode)}
 }
 }
 \source{
@@ -40,4 +40,5 @@ Detailed description of the data
 \link{marcJapaneseHiraganaandKatakana}
 \link{marcKoreanHangul}
 \link{marcSubscripts}
+\link{unconditionalMappings}
 }

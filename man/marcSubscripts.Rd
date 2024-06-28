@@ -8,7 +8,7 @@
 a \code{tbl_df} containing the following fields:
 \describe{
 \item{marc}{MARC-8 code (in hex) for the character as coming from the G0 graphic set}
-\item{ucs}{UCS/Unicode code point \if{html}{\out{<hexmode>}}}
+\item{ucs}{UCS/Unicode code point (hexmode)}
 \item{utf8}{UTF-8 code (in hex) for the UCS character}
 \item{rep}{representation of the character (where possible)}
 \item{isAlt}{For some tables alternate encodings in Unicode and UTF-8 are given.
@@ -25,6 +25,8 @@ Subscripts code table, ISO code 62 (January 2000)
 }
 \details{
 Detailed description of the data
+
+See the vignette \code{vignette("marctables")}.
 }
 \seealso{
 \link{rnaco}

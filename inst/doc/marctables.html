@@ -373,7 +373,7 @@ display: none;
 
 <h1 class="title toc-ignore">MARC tables for rnaco</h1>
 <h4 class="author">Alan Engel</h4>
-<h4 class="date">18 6月, 2024</h4>
+<h4 class="date">28 June, 2024</h4>
 
 </div>
 
@@ -382,18 +382,9 @@ display: none;
 tibbles for the 9 code tables contained inside.</p>
 <p>Load the libraries. The R packages used for this script are listed in
 the references.</p>
-<pre class="r"><code>library(dplyr)</code></pre>
-<pre><code>## 
-## 次のパッケージを付け加えます: &#39;dplyr&#39;</code></pre>
-<pre><code>## 以下のオブジェクトは &#39;package:stats&#39; からマスクされています:
-## 
-##     filter, lag</code></pre>
-<pre><code>## 以下のオブジェクトは &#39;package:base&#39; からマスクされています:
-## 
-##     intersect, setdiff, setequal, union</code></pre>
-<pre class="r"><code>library(xslt)</code></pre>
-<pre><code>## 要求されたパッケージ xml2 をロード中です</code></pre>
-<pre class="r"><code>library(tibble)</code></pre>
+<pre class="r"><code>library(dplyr)
+library(xslt)
+library(tibble)</code></pre>
 <p>Design specifications for these tables:</p>
 <ul>
 <li>Use camel case for dataset names, for example,
@@ -549,7 +540,6 @@ for(i in 1:rows) {
 
   stopifnot(marcname == rootname)
   assign(marcname,tb)
-  config &lt;- DataPackageR::use_data_object(object_name = marcname)
   }</code></pre>
 </div>
 <div id="references" class="section level1 unnumbered">
@@ -572,10 +562,6 @@ Frames</em>. <a href="https://CRAN.R-project.org/package=tibble">https://CRAN.R-
 <div id="ref-R-xslt" class="csl-entry">
 Ooms, Jeroen. 2024. <em>Xslt: Extensible Style-Sheet Language
 Transformations</em>. <a href="https://CRAN.R-project.org/package=xslt">https://CRAN.R-project.org/package=xslt</a>.
-</div>
-<div id="ref-R-stringr" class="csl-entry">
-Wickham, Hadley. 2023. <em>Stringr: Simple, Consistent Wrappers for
-Common String Operations</em>. <a href="https://CRAN.R-project.org/package=stringr">https://CRAN.R-project.org/package=stringr</a>.
 </div>
 <div id="ref-R-dplyr" class="csl-entry">
 Wickham, Hadley, Romain François, Lionel Henry, Kirill Müller, and Davis

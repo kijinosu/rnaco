@@ -373,7 +373,7 @@ display: none;
 
 <h1 class="title toc-ignore">Unihan Variants Table for rnaco</h1>
 <h4 class="author">Alan Engel</h4>
-<h4 class="date">18 6月, 2024</h4>
+<h4 class="date">28 June, 2024</h4>
 
 </div>
 
@@ -382,13 +382,8 @@ display: none;
 <h1>Libraries</h1>
 <pre class="r"><code>library(tidyr)
 library(dplyr)
-library(magrittr)</code></pre>
-<pre><code>## 
-## 次のパッケージを付け加えます: &#39;magrittr&#39;</code></pre>
-<pre><code>## 以下のオブジェクトは &#39;package:tidyr&#39; からマスクされています:
-## 
-##     extract</code></pre>
-<pre class="r"><code>library(tibble)
+library(magrittr)
+library(tibble)
 library(stringi)</code></pre>
 </div>
 <div id="scope" class="section level1">
@@ -438,7 +433,7 @@ provides a file <code>Unihan.zip</code> that contains a file
 <code>Unihan\_Variants.txt</code>. Load it and take a look while
 referring to the <a href="https://www.unicode.org/reports/tr38/#N10211">3.7 Variants</a>
 section.</p>
-<pre class="r"><code>variants &lt;- readLines( con &lt;- file(project_extdata_path(&quot;Unihan_Variants.txt&quot;), encoding=&quot;UTF-8&quot;) )
+<pre class="r"><code>variants &lt;- readLines( con &lt;- file(file.path(project_extdata_path(),&quot;ucd&quot;,&quot;Unihan_Variants.txt&quot;), encoding=&quot;UTF-8&quot;) )
 variants[1:25]</code></pre>
 <pre><code>##  [1] &quot;#&quot;                                                                                                         
 ##  [2] &quot;# Unihan_Variants.txt&quot;                                                                                     
@@ -478,12 +473,12 @@ as.data.frame(variants[1:5])</code></pre>
 ## 5           U+342B\tkSemanticVariant\tU+51F6</code></pre>
 <p>The header states that there are six kinds of variants.</p>
 <ul>
-<li>tkSemanticVariant</li>
-<li>tkSimplifiedVariant</li>
-<li>tkSpecializedSemanticVariant</li>
-<li>tkSpoofingVariant</li>
-<li>tkTraditionalVariant</li>
-<li>tkZVariant</li>
+<li>kSemanticVariant</li>
+<li>kSimplifiedVariant</li>
+<li>kSpecializedSemanticVariant</li>
+<li>kSpoofingVariant</li>
+<li>kTraditionalVariant</li>
+<li>kZVariant</li>
 </ul>
 <p>Below I walk through the <a href="https://www.unicode.org/reports/tr38/#N10211">3.7 Variants</a>
 section, and look up each example in <code>variants</code>.</p>

@@ -1,0 +1,17 @@
+---
+title: Authority comparison (NACO) rules walk-through
+author: Alan Engel
+date: '`r format(Sys.time(), ''%d %B, %Y'')`'
+lang: en-us
+output_format: rmarkdown::html_vignette
+bibliography:
+- R.bib
+- naco.bib
+link-citations: yes
+vignette: >
+  %\VignetteIndexEntry{Authority comparison (NACO) rules walk-through}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+---
+
+# References
