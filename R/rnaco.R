@@ -8,9 +8,9 @@
 #'     and/or DataPackageR::load_all
 #' _datasets() to load them.
 #' @seealso
-#' \link{cjkextractja}
-#' \link{cjkextractzh}
+#' \link{cjkextractko}
 '_PACKAGE'
+
 
 
 
@@ -52,6 +52,7 @@
 #' \link{marcSuperscripts}
 #' \link{unihan_variants}
 NULL
+
 
 
 
@@ -104,6 +105,7 @@ NULL
 
 
 
+
 #' Detailed description of the data
 #' @name marcBasicArabic
 #' @docType data
@@ -139,6 +141,7 @@ NULL
 #' \link{marcSuperscripts}
 #' \link{unihan_variants}
 NULL
+
 
 
 
@@ -186,6 +189,7 @@ NULL
 
 
 
+
 #' Detailed description of the data
 #' @name marcBasicGreek
 #' @docType data
@@ -221,6 +225,7 @@ NULL
 #' \link{marcSuperscripts}
 #' \link{unihan_variants}
 NULL
+
 
 
 
@@ -268,6 +273,7 @@ NULL
 
 
 
+
 #' Detailed description of the data
 #' @name marcComponentInputMethodCharacters
 #' @docType data
@@ -303,6 +309,7 @@ NULL
 #' \link{marcSuperscripts}
 #' \link{unihan_variants}
 NULL
+
 
 
 
@@ -350,6 +357,7 @@ NULL
 
 
 
+
 #' Detailed description of the data
 #' @name marcEastAsianPunctuationMarks
 #' @docType data
@@ -385,6 +393,7 @@ NULL
 #' \link{marcSuperscripts}
 #' \link{unihan_variants}
 NULL
+
 
 
 
@@ -432,6 +441,7 @@ NULL
 
 
 
+
 #' Detailed description of the data
 #' @name marcExtendedCyrillic
 #' @docType data
@@ -467,6 +477,7 @@ NULL
 #' \link{marcSuperscripts}
 #' \link{unihan_variants}
 NULL
+
 
 
 
@@ -514,6 +525,7 @@ NULL
 
 
 
+
 #' Detailed description of the data
 #' @name marcGreekSymbols
 #' @docType data
@@ -549,6 +561,7 @@ NULL
 #' \link{marcSuperscripts}
 #' \link{unihan_variants}
 NULL
+
 
 
 
@@ -596,6 +609,7 @@ NULL
 
 
 
+
 #' Detailed description of the data
 #' @name marcKoreanHangul
 #' @docType data
@@ -631,6 +645,7 @@ NULL
 #' \link{marcSuperscripts}
 #' \link{unihan_variants}
 NULL
+
 
 
 
@@ -679,6 +694,7 @@ NULL
 
 
 
+
 #' Detailed description of the data
 #' @name marcSuperscripts
 #' @docType data
@@ -714,6 +730,7 @@ NULL
 #' \link{marcSubscripts}
 #' \link{unihan_variants}
 NULL
+
 
 
 
@@ -759,7 +776,7 @@ NULL
 
 
 
-#' Detailed description of the data
+
 #' @name unconditionalMappings
 #' @rdname nacotransform
 #' @docType data
@@ -790,7 +807,7 @@ NULL
 
 
 
-#' Detailed description of the data
+
 #' @name numericrules
 #' @rdname nacotransform
 #' @docType data
@@ -805,22 +822,20 @@ NULL
 #' \item{to}{chr: Character for transliteration rule}
 #' \item{rule}{chr: Transliteration rule}
 #' }
-#' @source The data comes from version 15.1.0 of the Unicode Standard.
-#' @seealso
-#' \link{rnaco}
 NULL
 
 
 
 
 
-#' Detailed description of the data
+
 #' @name step6rulestring
 #' @rdname nacotransform
 #' @docType data
 #' @title Transliteration rule Step 6 of naco_transform()
 #' @format step6rulestring is in the form of a \code{string} 
 NULL
+
 
 
 
@@ -833,6 +848,7 @@ NULL
 #' @title Transliteration rule Step 7 of naco_transform()
 #' @format step7lltranslitrule is in the form of a \code{string} 
 NULL
+
 
 
 
@@ -850,22 +866,22 @@ NULL
 #' the various VIAF contributors.
 #' @format cjkextractja is a \code{tbl_df} containing the following fields:
 #' \describe{
-#' \item{010 $a}{}
-#' \item{008/32}{Descriptive cataloging rule. Differentiated personal name when coded “a”}
-#' \item{100 field}{Name in the 100 field}
-#' \item{400 CJK}{Number of Chinese, Japanese or Korean references in 400 fields}
-#' \item{400 other}{Number of other non-Latin references in 400 fields}
-#' \item{400 roman}{Number of Latin references in 400 fields}
+#' \item{lccn}{LC control number, lower case 'n', no space}
+#' \item{tag008_32}{Descriptive cataloging rule. Differentiated personal name when coded “a”}
+#' \item{tag100_field}{Name in the 100 field}
+#' \item{tag400_CJK}{Number of Chinese, Japanese or Korean references in 400 fields}
+#' \item{tag400_other}{Number of other non-Latin references in 400 fields}
+#' \item{tag400_roman}{Number of Latin references in 400 fields}
 #' \item{rda}{Whether or not RDA record}
-#' \item{670}{Number of 670 fields}
-#' \item{667}{Has non-Latin script reference been evaluated?}
+#' \item{tag670}{Number of 670 fields}
+#' \item{tag667}{Has non-Latin script reference been evaluated?}
 #' \item{Language}{Language of name record}
 #' }
 #' @source The data comes from the NACO CJK Funnel References Project.
 #' @seealso
 #' \link{rnaco}
-#' \link{cjkextractzh}
 NULL
+
 
 
 
@@ -876,15 +892,39 @@ NULL
 #' @docType data
 #' @format cjkextractzh is a \code{tbl_df} containing the following fields:
 #' \describe{
-#' \item{010 $a}{}
-#' \item{008/32}{Descriptive cataloging rule. Differentiated personal name when coded “a”}
-#' \item{100 field}{Name in the 100 field}
-#' \item{400 CJK}{Number of Chinese, Japanese or Korean references in 400 fields}
-#' \item{400 other}{Number of other non-Latin references in 400 fields}
-#' \item{400 roman}{Number of Latin references in 400 fields}
+#' \item{lccn}{LC control number, lower case 'n', no space}
+#' \item{tag008_32}{Descriptive cataloging rule. Differentiated personal name when coded “a”}
+#' \item{tag100_field}{Name in the 100 field}
+#' \item{tag400_CJK}{Number of Chinese, Japanese or Korean references in 400 fields}
+#' \item{tag400_other}{Number of other non-Latin references in 400 fields}
+#' \item{tag400_roman}{Number of Latin references in 400 fields}
 #' \item{rda}{Whether or not RDA record}
-#' \item{670}{Number of 670 fields}
-#' \item{667}{Has non-Latin script reference been evaluated?}
+#' \item{tag670}{Number of 670 fields}
+#' \item{tag667}{Has non-Latin script reference been evaluated?}
 #' \item{notes}{If not CJK or minority name}
+#' }
+NULL
+
+
+
+
+#' Detailed description of the data
+#' @name cjkextractko
+#' @rdname cjkextracts
+#' @docType data
+#' @format cjkextractko is a \code{tbl_df} containing the following fields:
+#' \describe{
+#' \item{lccn}{LC control number, lower case 'n', no space}
+#' \item{tag008_32}{Descriptive cataloging rule. Differentiated personal name when coded “a”}
+#' \item{tag100_field}{Name in the 100 field}
+#' \item{tag400_CJK}{Number of Chinese, Japanese or Korean references in 400 fields}
+#' \item{tag400_other}{Number of other non-Latin references in 400 fields}
+#' \item{tag400_roman}{Number of Latin references in 400 fields}
+#' \item{rda}{Whether or not RDA record}
+#' \item{tag670}{Number of 670 fields}
+#' \item{tag667}{Has non-Latin script reference been evaluated?}
+#' \item{tag400Hangul}{Number of Hangul references in 400 fields}
+#' \item{Hangul_only}{}
+#' \item{note}{}
 #' }
 NULL

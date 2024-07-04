@@ -11,7 +11,7 @@ link-citations: yes
 vignette: >
   %\VignetteIndexEntry{Authority comparison (NACO) rules walk-through}
   %\VignetteEngine{knitr::rmarkdown}
-  \usepackage[utf8]{inputenc}
+  %\VignetteEncoding{UTF-8}
 ---
 
 # References

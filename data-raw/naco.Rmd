@@ -8,6 +8,10 @@ bibliography:
   - R.bib
   - naco.bib
 link-citations: true
+vignette: >
+  %\VignetteIndexEntry{Authority comparison (NACO) rules walk-through}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 ---
 
 ```{r, include = FALSE}
@@ -35,7 +39,7 @@ File (VIAF). Some notes pertaining to that use are included in this walk-through
 Load the needed R libraries.
 
 ```{r libraries}
-library(rnaco)
+#library(rnaco)
 library(stringi)
 library(dplyr)
 ```
@@ -505,12 +509,15 @@ knitr::kable(d)
 * Remove apostrophe.
 * Except for number sign, ampersand, comma and commercial at, replace with space.
 * Handle comma for subfield $a. 
+  + Retain the first comma unless it is at the end[@hickey2006naco]
+  + Replace the remaining commas
 * For other subfields replace all commas with space.
 
 ```{R classPo}
 ucddata %>% filter(V3 == "Po") %>% select(V1,V2,V3)
 teststr <- "Aaa,Bbb!Ccc,\u0023Ddd\u0026Eee\u0027,Fee\u0040Ggg"
 teststr
+teststr <- stri_replace_all_regex(teststr, "[,]\\z", "")
 teststr <- stri_replace_all_fixed(teststr, "\u0027", "")
 teststr
 pattern <- "[\\p{Po}-[\u0023\u0026\u002C\u0040]]"
@@ -662,13 +669,13 @@ As explained under Step 2 above, this step will be left to the calling routine.
 
 # Test data
 
-Test data is assembled from the 268,128 authority records contained in
+Test data is assembled from the authority records contained in
 [Gary Strawn's files](https://files.library.northwestern.edu/public/Files/)
-generated in May 2018:
+generated in May 2018, and divided into Chinese, Japanese and Korean subsets:
 
-* CJK_Extract.01.xlsx
-* CJK_Extract.02.xlsx
-* CJK_Extract.03.xlsx
+* cjkextractzh
+* cjkextractja
+* cjkextractko
 
 Please see the NACO CJK Funnel References Project Guidelines[@naco2019naco].
 

@@ -14,8 +14,14 @@
 #' @import dplyr
 #'
 #' @return Transformed (normalized) string
+#' @seealso
+#' * Please see \code{vignette("naco", package = "rnaco")} for a detailed walk-through of
+#' the NACO authority file comparison rules.
 #' @export
 naco_transform <- function(str, firstcomma=TRUE, encoding="UTF-8") {
+    library(dplyr)
+    library(magrittr)
+    library(stringi)
     step2str <- stringi::stri_trim_both(str, pattern = "\\P{Wspace}", negate = FALSE)
     step4str <- .step4(step2str)
     step5str <- stringi::stri_trans_nfkd(step4str)
@@ -54,7 +60,8 @@ naco_transform <- function(str, firstcomma=TRUE, encoding="UTF-8") {
 }
 
 .step7otherpunctuation <- function(str, firstcomma, encoding="UTF-8") {
-    resstr1 <- stringi::stri_replace_all_fixed(str, "\u0027", "")
+    resstr0 <- stringi::stri_replace_all_regex(str, "[,]\\z", "")
+    resstr1 <- stringi::stri_replace_all_fixed(resstr0, "\u0027", "")
     pattern <- "[\\p{Po}-[\u0023\u0026\u002C\u0040]]"
     resstr2 <- stringi::stri_replace_all_regex(resstr1, pattern, " ")
     ncommas <- stringi::stri_split_fixed(resstr2,",", n=2)

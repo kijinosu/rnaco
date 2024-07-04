@@ -374,7 +374,7 @@ display: none;
 <h1 class="title toc-ignore">Authority comparison (NACO) rules
 walk-through</h1>
 <h4 class="author">Alan Engel</h4>
-<h4 class="date">28 June, 2024</h4>
+<h4 class="date">04 July, 2024</h4>
 
 </div>
 
@@ -386,8 +386,8 @@ much as possible, the vignette uses the R package <code>stringi</code>
 <span class="citation">(<a href="#ref-R-stringi">Gagolewski
 2022</a>)</span>, a mature R package for fast and portable handling of
 string data based on ICU (International Components for Unicode).</p>
-<p>A detailed description of NACO normalization can be found in <span class="citation">(<a href="#ref-hickey2011naco">Hickey, Toves, and
-O’Neill 2011</a>)</span>.</p>
+<p>A detailed description of NACO normalization can be found in <span class="citation">(<a href="#ref-hickey2011naco">Thomas B. Hickey, Toves,
+and O’Neill 2011</a>)</span>.</p>
 <p>This vignette walks through the 2009 revision of LOC’s authority file
 comparison rules and derives datasets and functionality for implementing
 them in R. My project’s main purpose is to develop normalization
@@ -395,7 +395,7 @@ functionality that can be applied to extracting information from the
 Virtual International Authority File (VIAF). Some notes pertaining to
 that use are included in this walk-through.</p>
 <p>Load the needed R libraries.</p>
-<pre class="r"><code>library(rnaco)
+<pre class="r"><code>#library(rnaco)
 library(stringi)
 library(dplyr)</code></pre>
 <div id="rules-for-comparison" class="section level1">
@@ -980,7 +980,12 @@ all other commas with spaces</td>
 <li>Remove apostrophe.</li>
 <li>Except for number sign, ampersand, comma and commercial at, replace
 with space.</li>
-<li>Handle comma for subfield $a.</li>
+<li>Handle comma for subfield $a.
+<ul>
+<li>Retain the first comma unless it is at the end<span class="citation">(<a href="#ref-hickey2006naco">Thomas B. Hickey, Toves,
+and O’Neill 2006</a>)</span></li>
+<li>Replace the remaining commas</li>
+</ul></li>
 <li>For other subfields replace all commas with space.</li>
 </ul>
 <pre class="r"><code>ucddata %&gt;% filter(V3 == &quot;Po&quot;) %&gt;% select(V1,V2,V3)
@@ -1001,7 +1006,8 @@ with space.</li>
 <pre class="r"><code>teststr &lt;- &quot;Aaa,Bbb!Ccc,\u0023Ddd\u0026Eee\u0027,Fee\u0040Ggg&quot;
 teststr
 #&gt; [1] &quot;Aaa,Bbb!Ccc,#Ddd&amp;Eee&#39;,Fee@Ggg&quot;</code></pre>
-<pre class="r"><code>teststr &lt;- stri_replace_all_fixed(teststr, &quot;\u0027&quot;, &quot;&quot;)
+<pre class="r"><code>teststr &lt;- stri_replace_all_regex(teststr, &quot;[,]\\z&quot;, &quot;&quot;)
+teststr &lt;- stri_replace_all_fixed(teststr, &quot;\u0027&quot;, &quot;&quot;)
 teststr
 #&gt; [1] &quot;Aaa,Bbb!Ccc,#Ddd&amp;Eee,Fee@Ggg&quot;</code></pre>
 <pre class="r"><code>pattern &lt;- &quot;[\\p{Po}-[\u0023\u0026\u002C\u0040]]&quot;
@@ -1254,13 +1260,13 @@ calling routine.</p>
 </div>
 <div id="test-data" class="section level1">
 <h1>Test data</h1>
-<p>Test data is assembled from the 268,128 authority records contained
-in <a href="https://files.library.northwestern.edu/public/Files/">Gary
-Strawn’s files</a> generated in May 2018:</p>
+<p>Test data is assembled from the authority records contained in <a href="https://files.library.northwestern.edu/public/Files/">Gary
+Strawn’s files</a> generated in May 2018, and divided into Chinese,
+Japanese and Korean subsets:</p>
 <ul>
-<li>CJK_Extract.01.xlsx</li>
-<li>CJK_Extract.02.xlsx</li>
-<li>CJK_Extract.03.xlsx</li>
+<li>cjkextractzh</li>
+<li>cjkextractja</li>
+<li>cjkextractko</li>
 </ul>
 <p>Please see the NACO CJK Funnel References Project Guidelines<span class="citation">(<a href="#ref-naco2019naco">Program for Cooperative
 Cataloging 2019</a>)</span>.</p>
@@ -1277,6 +1283,12 @@ Gagolewski, Marek. 2022. <span>“<span class="nocase">stringi</span>:
 <span>F</span>ast and Portable Character String Processing in
 <span>R</span>.”</span> <em>Journal of Statistical Software</em> 103
 (2): 1–59. <a href="https://doi.org/10.18637/jss.v103.i02">https://doi.org/10.18637/jss.v103.i02</a>.
+</div>
+<div id="ref-hickey2006naco" class="csl-entry">
+Hickey, Thomas B., Jenny Toves, and T. O’Neill Edward. 2006. <span>“NACO
+Normalization: A Detailed Examination of the Authority File Comparison
+Rules.”</span> <em>Library Resources &amp; Technical Services</em> 50
+(3): 166–72. <a href="https://www.proquest.com/scholarly-journals/naco-normalization-detailed-examination-authority/docview/216890715/se-2">https://www.proquest.com/scholarly-journals/naco-normalization-detailed-examination-authority/docview/216890715/se-2</a>.
 </div>
 <div id="ref-hickey2011naco" class="csl-entry">
 Hickey, Thomas B, Jenny Toves, and Edward T O’Neill. 2011. <span>“NACO

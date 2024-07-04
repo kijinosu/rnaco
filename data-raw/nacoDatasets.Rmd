@@ -235,24 +235,38 @@ gs4_auth(scopes = "spreadsheets.readonly", email = gm)
 ```
 ```{R cjkextracts}
 sszh <- "https://docs.google.com/spreadsheets/d/1MyHXMifmYtb3QOkOkGxXioqDpia9ifWWX8skj9Oo-pc/edit?usp=sharing"
-cjkextractzh <- read_sheet(sszh ,
+extract <- read_sheet(sszh ,
                    sheet = "Sheet1",
                    range = "A:J",
-				   col_names = c("010 $a","008/32","100 field","400 CJK","400 other","400 roman	","rda","670","667","notes"),
                    col_types = "ccciiicicc",
-                   trim_ws = FALSE)
+                   trim_ws = TRUE)
+colnames(extract) = c("lccnraw","tag008_32","tag100_field","tag400_CJK","tag400_other","tag400_roman","rda","tag670","tag667","note")
+cjkextractzh <- extract %>% mutate(lccn = stringi::stri_replace_all_fixed(stringi::stri_trans_tolower(lccnraw)," ",""), .before = 1) %>%
+	select(-lccnraw)
 cjkextractzh
 
 ssja <- "https://docs.google.com/spreadsheets/d/1dIKgpdGZFXx20Mcbh83Y-0pgQ6wAUPw3Lc8zFKXteD8/edit?usp=sharing"
-cjkextractja <- read_sheet(ssja ,
+extract <- read_sheet(ssja ,
                    sheet = "Sheet1",
                    range = "A:J",
                    col_types = "ccciiicicc",
-                   trim_ws = FALSE)
+                   trim_ws = TRUE)
+colnames(extract) = c("lccnraw","tag008_32","tag100_field","tag400_CJK","tag400_other","tag400_roman","rda","tag670","tag667","lang")
+cjkextractja <- extract %>% mutate(lccn = stringi::stri_replace_all_fixed(stringi::stri_trans_tolower(lccnraw)," ",""), .before = 1) %>%
+	select(-lccnraw)
 cjkextractja
 
-
-
+ssko <- "https://docs.google.com/spreadsheets/d/1GcJslDB8v9WklEI6tv0iTcZS3v9LZapVFnkCs9HoUpw/edit?usp=sharing"
+extract <- read_sheet(ssko ,
+                   sheet = "Sheet1",
+                   range = "A:J",
+                   col_types = "ccciiicicc",
+                   trim_ws = TRUE)
+colnames(extract) = c("lccnraw","tag008_32","tag100_field","tag400_CJK","tag400_other","tag400_roman","rda","tag670","tag667","tag400Hangul",
+						"Hangul_only","note")
+cjkextractko <- extract %>% mutate(lccn = stringi::stri_replace_all_fixed(stringi::stri_trans_tolower(lccnraw)," ",""), .before = 1) %>%
+	select(-lccnraw)
+cjkextractko
 ```
 
 ---

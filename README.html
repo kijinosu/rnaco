@@ -603,11 +603,200 @@ padding-top: 0px;
 
 <h1 id="r-implemention-of-naco-normalization">R implemention of NACO
 normalization</h1>
-<p>Alan Engel June 11, 2024</p>
+<p>Alan Engel 04 July, 2024</p>
+<p>The Library of Congress’s <a href="https://www.loc.gov/aba/pcc/naco/normrule-2.html">Authority File
+Comparison Rules (NACO Normalization)</a> were finalized in 2009 for the
+specific purpose of determining whether or not names in the 4XX fields
+can be added to the 1XX fields. If the comparision rules find that a
+name in a 4XX field already exists, in normalized form, in the 1XX
+fields, it cannot be added.(<a href="#ref-hickey2006naco">Hickey, Toves,
+and O’Neill 2006</a>)</p>
+<p>Thanks to a splendid new R package, stringi, developed by Marek
+Gagolewski,(<a href="#ref-R-stringi">Gagolewski 2022</a>) the comparison
+rules can be implemented using calls to the ICU4C library from the <a href="https://icu.unicode.org/">International Components for
+Unicode</a>. A step-by-step walk through vignette shows how the
+comparison rules are executed using stringi functions.</p>
+<p>This package is a sibling of a <a href="https://github.com/kijinosu/viafr">R package viafr</a>, which was
+forked from Stefanie Schneider’s viafr package on Github.(<a href="#ref-R-viafr">Schneider 2022</a>) In a related project, viafr
+development is aimed at extracting information, for example, social
+networks based on coauthors, from the <a href="https://viaf.org/">Virtual International Authority Files
+(VIAF)</a>. In particular, normalization functionality for that package
+will be built and maintained in rnaco.</p>
+<p>Of course, development based on NACO did not end in 2009 and is
+included in the <a href="https://www.loc.gov/aba/pcc/naco/index.html">NACO - Name Authority
+Cooperative Program</a>. This package is intended to facilitate
+following developments and includes test datasets from the <a href="https://www.loc.gov/aba/pcc/naco/CJK.html">CJK NACO Project</a>.
+In particular, each build of the rnaco project downloads the following
+files, which are then included as <code>tibbles</code>(<a href="#ref-R-tibble">Müller and Wickham 2023</a>) in package data.</p>
+<h1 id="features">Features</h1>
+<h2 id="functions">Functions</h2>
+<ul>
+<li><p>naco_transform() This function follows the Authority File
+Comparison Rules using stringi(<a href="#ref-R-stringi">Gagolewski
+2022</a>) to implement the <a href="https://icu.unicode.org/">International Components for
+Unicode</a>. The derivation of naco_transform() is detailed in a
+walk-through vignette, <code>rnaco::naco</code>.</p></li>
+<li><p>xml2df() This function reads a specially structured xml, and
+produces a tibble.</p></li>
+</ul>
+<h2 id="data">Data</h2>
+<h3 id="marc-code-tables">MARC code tables</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Dataset</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>marcNotes</td>
+<td>Names, XPaths and notes for MARC-8 code tables</td>
+</tr>
+<tr class="even">
+<td>marcBasicArabic</td>
+<td>Basic Arabic code table, ISOcode=33 (July 2001)</td>
+</tr>
+<tr class="odd">
+<td>marcBasicCyrillic</td>
+<td>Basic Cyrillic code table, ISOcode=4E (January 2000)</td>
+</tr>
+<tr class="even">
+<td>marcBasicGreek</td>
+<td>Basic Greek code table, ISOcode=53 (January 2000)</td>
+</tr>
+<tr class="odd">
+<td>marcBasicHebrew</td>
+<td>Basic Hebrew code table, ISOcode=32 (January 2000)</td>
+</tr>
+<tr class="even">
+<td>marcBasicLatinASCII</td>
+<td>Basic Latin (ASCII) code table (January 2000) ISOcode=42</td>
+</tr>
+<tr class="odd">
+<td>marcComponentInputMethodCharacters</td>
+<td>Component Input Method Characters code table (February 6, 2003)</td>
+</tr>
+<tr class="even">
+<td>marcEastAsianIdeographsHan</td>
+<td>East Asian Ideographs (‘Han’) code table (February 6, 2003)</td>
+</tr>
+<tr class="odd">
+<td>marcEastAsianPunctuationMarks</td>
+<td>East Asian Punctuation Marks code table (February 6, 2003)</td>
+</tr>
+<tr class="even">
+<td>marcExtendedArabic</td>
+<td>Extended Arabic code table, ISO code 34 (July 2001)</td>
+</tr>
+<tr class="odd">
+<td>marcExtendedCyrillic</td>
+<td>Extended Cyrillic code table, ISO code 51 (January 2000)</td>
+</tr>
+<tr class="even">
+<td>marcExtendedLatinANSEL</td>
+<td>Extended Latin (ANSEL) code table, ISO code 45 (January 2000,
+Updated September 2004)</td>
+</tr>
+<tr class="odd">
+<td>marcGreekSymbols</td>
+<td>Greek Symbols</td>
+</tr>
+<tr class="even">
+<td>marcJapaneseHiraganaandKatakana</td>
+<td>Japanese Hiragana and Katakana code table (February 6, 2003)</td>
+</tr>
+<tr class="odd">
+<td>marcKoreanHangul</td>
+<td>Korean Hangul code table (February 6, 2003)</td>
+</tr>
+<tr class="even">
+<td>marcSubscripts</td>
+<td>Subscripts</td>
+</tr>
+<tr class="odd">
+<td>marcSuperscripts</td>
+<td>Superscripts</td>
+</tr>
+</tbody>
+</table>
+<h3 id="datasets-for-naco_transform">Datasets for naco_transform()</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Dataset</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>numericrules</td>
+<td>Transliteration rules for numeric decimals</td>
+</tr>
+<tr class="even">
+<td>step6rulestring</td>
+<td>Transliteration rule for Step 6 of naco_transform()</td>
+</tr>
+<tr class="odd">
+<td>step7lltranslitrule</td>
+<td>Transliteration rule for Step 7 of naco_transform()</td>
+</tr>
+<tr class="even">
+<td>unconditionalMappings</td>
+<td>Unconditional mappings for naco_transform()</td>
+</tr>
+</tbody>
+</table>
+<h3 id="datasets-for-cjk-normalization">Datasets for CJK
+normalization</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Dataset</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>unihan_variants</td>
+<td>Unihan CJK variants</td>
+</tr>
+<tr class="even">
+<td>cjkextractja</td>
+<td>Personal name authority records - Japanese names</td>
+</tr>
+<tr class="odd">
+<td>cjkextractko</td>
+<td>Personal name authority records - Korean names</td>
+</tr>
+<tr class="even">
+<td>cjkextractzh</td>
+<td>Personal name authority records - Chinese names</td>
+</tr>
+</tbody>
+</table>
+<h2 id="vignettes">Vignettes</h2>
+<ul>
+<li><p>MARC Tables for NACO: For each build, this script downloads the
+<a href="https://www.loc.gov/marc/">MARC code lists</a> in XML format
+and extracts the code table listed above.</p></li>
+<li><p>rnaco::naco: Authority comparison (NACO) rules
+walk-through</p></li>
+<li><p>rnaco::nacoDatasets: Datasets for Authority File Comparison Rules
+(NACO Normalization)</p></li>
+<li><p>rnaco::unihanVariants: Unihan Variants Table for rnaco including
+analysis of their use in VAIF normalization of CJK names</p></li>
+</ul>
 <h1 id="installation">Installation</h1>
 <p>You can install the latest version of <strong>rnaco</strong> from <a href="https://github.com/kijinosu/rnaco">github</a> with:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">library</span>(devtools)</span>
 <span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;kijinosu/rnaco&quot;</span>)</span></code></pre></div>
+<h1 id="other-simlar-work">Other simlar work</h1>
+<ul>
+<li><a href="https://github.com/unt-libraries/pynaco">pynaco</a> is a
+fork by University of North Texas Libraries of sample code found on the
+OCLC Research Website.</li>
+</ul>
 <h1 id="r-packages-used-for-this-data-package">R packages used for this
 data package</h1>
 <ul>
@@ -623,6 +812,33 @@ R Gottardo. 2018. “DataPackageR: Reproducible Data Preprocessing,
 Standardization and Sharing Using r/Bioconductor for Collaborative Data
 Analysis [Version 2; Referees: 2 Approved, 1 Approved with
 Reservations].” <em>Gates Open Research</em> 2 (31). <a href="https://doi.org/10.12688/gatesopenres.12832.2">https://doi.org/10.12688/gatesopenres.12832.2</a>.</p>
+</div>
+
+<div id="ref-R-stringi" class="csl-entry">
+
+<p>Gagolewski, Marek. 2022. “<span class="nocase">stringi</span>: Fast
+and Portable Character String Processing in R.” <em>Journal of
+Statistical Software</em> 103 (2): 1–59. <a href="https://doi.org/10.18637/jss.v103.i02">https://doi.org/10.18637/jss.v103.i02</a>.</p>
+</div>
+
+<div id="ref-hickey2006naco" class="csl-entry">
+
+<p>Hickey, Thomas B., Jenny Toves, and T. O’Neill Edward. 2006. “NACO
+Normalization: A Detailed Examination of the Authority File Comparison
+Rules.” <em>Library Resources &amp; Technical Services</em> 50 (3):
+166–72. <a href="https://www.proquest.com/scholarly-journals/naco-normalization-detailed-examination-authority/docview/216890715/se-2">https://www.proquest.com/scholarly-journals/naco-normalization-detailed-examination-authority/docview/216890715/se-2</a>.</p>
+</div>
+
+<div id="ref-R-tibble" class="csl-entry">
+
+<p>Müller, Kirill, and Hadley Wickham. 2023. <em>Tibble: Simple Data
+Frames</em>. <a href="https://CRAN.R-project.org/package=tibble">https://CRAN.R-project.org/package=tibble</a>.</p>
+</div>
+
+<div id="ref-R-viafr" class="csl-entry">
+
+<p>Schneider, Stefanie. 2022. <em>Viafr: Interface to the ’VIAF’
+(’Virtual International Authority File’) API</em>. <a href="https://CRAN.R-project.org/package=viafr">https://CRAN.R-project.org/package=viafr</a>.</p>
 </div>
 
 </div>

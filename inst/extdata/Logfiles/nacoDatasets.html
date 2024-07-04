@@ -374,7 +374,7 @@ display: none;
 <h1 class="title toc-ignore">Datasets for Authority File Comparison
 Rules (NACO Normalization)</h1>
 <h4 class="author">Alan Engel</h4>
-<h4 class="date">28 June, 2024</h4>
+<h4 class="date">04 July, 2024</h4>
 
 </div>
 
@@ -695,51 +695,81 @@ and Korean name records. The Chinese and Japanese subsets are included
 as datasets with this package. The Korean subset was not accessible when
 this document was compiled.</p>
 <pre class="r"><code>sszh &lt;- &quot;https://docs.google.com/spreadsheets/d/1MyHXMifmYtb3QOkOkGxXioqDpia9ifWWX8skj9Oo-pc/edit?usp=sharing&quot;
-cjkextractzh &lt;- read_sheet(sszh ,
+extract &lt;- read_sheet(sszh ,
                    sheet = &quot;Sheet1&quot;,
                    range = &quot;A:J&quot;,
-                   col_names = c(&quot;010 $a&quot;,&quot;008/32&quot;,&quot;100 field&quot;,&quot;400 CJK&quot;,&quot;400 other&quot;,&quot;400 roman &quot;,&quot;rda&quot;,&quot;670&quot;,&quot;667&quot;,&quot;notes&quot;),
                    col_types = &quot;ccciiicicc&quot;,
-                   trim_ws = FALSE)</code></pre>
-<pre><code>## Warning in .f(.x[[i]], ...): 強制変換により NA が生成されました
-## Warning in .f(.x[[i]], ...): 強制変換により NA が生成されました
-## Warning in .f(.x[[i]], ...): 強制変換により NA が生成されました</code></pre>
-<pre class="r"><code>cjkextractzh</code></pre>
-<pre><code>## # A tibble: 47,938 × 10
-##    `010 $a`     `008/32` `100 field`                                      `400 CJK` `400 other` `400 roman\t` rda   `670` `667` notes       
-##    &lt;chr&gt;        &lt;chr&gt;    &lt;chr&gt;                                                &lt;int&gt;       &lt;int&gt;         &lt;int&gt; &lt;chr&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt;       
-##  1 010 $a       008/32   100 field                                               NA          NA            NA rda     670 667   &lt;NA&gt;        
-##  2 NO 93022222  a        $a &#39;Jam-dpal-rgya-mtsho                                  2           0             5 Y         7 N     Non-CJK     
-##  3 N 82098580   a        $a &#39;Phags-pa Blo-gros-rgyal-mtshan, $d 1235-1280         2           0             5 Y         2 N     Chi Minority
-##  4 N 79141606   a        $a A, Kejian                                             2           0             3 N         3 N     &lt;NA&gt;        
-##  5 N 2005085813 a        $a Abao                                                  2           0             1 Y         2 N     &lt;NA&gt;        
-##  6 NO2007114850 a        $a Abdulla, Zaki                                         2           0             7 N         2 N     Chi Minority
-##  7 NO2007111407 a        $a Abduqadir, Ablimit                                    2           0             3 Y         1 N     Chi Minority
-##  8 N 83043146   a        $a Abing, $d 1893-1950                                   2           0             6 N         2 N     &lt;NA&gt;        
-##  9 N 88276359   a        $a Abudureheman                                          2           0             1 N         1 N     &lt;NA&gt;        
-## 10 N 88012033   a        $a Abulaiti, Abudurexiti                                 2           0             3 N         1 N     Chi Minority
-## # ℹ 47,928 more rows</code></pre>
+                   trim_ws = TRUE)</code></pre>
+<pre><code>## Auto-refreshing stale OAuth token.</code></pre>
+<pre><code>## New names:
+## • `` -&gt; `...10`</code></pre>
+<pre class="r"><code>colnames(extract) = c(&quot;lccnraw&quot;,&quot;tag008_32&quot;,&quot;tag100_field&quot;,&quot;tag400_CJK&quot;,&quot;tag400_other&quot;,&quot;tag400_roman&quot;,&quot;rda&quot;,&quot;tag670&quot;,&quot;tag667&quot;,&quot;note&quot;)
+cjkextractzh &lt;- extract %&gt;% mutate(lccn = stringi::stri_replace_all_fixed(stringi::stri_trans_tolower(lccnraw),&quot; &quot;,&quot;&quot;), .before = 1) %&gt;%
+    select(-lccnraw)
+cjkextractzh</code></pre>
+<pre><code>## # A tibble: 47,937 × 10
+##    lccn         tag008_32 tag100_field                                     tag400_CJK tag400_other tag400_roman rda   tag670 tag667 note        
+##    &lt;chr&gt;        &lt;chr&gt;     &lt;chr&gt;                                                 &lt;int&gt;        &lt;int&gt;        &lt;int&gt; &lt;chr&gt;  &lt;int&gt; &lt;chr&gt;  &lt;chr&gt;       
+##  1 no93022222   a         $a &#39;Jam-dpal-rgya-mtsho                                   2            0            5 Y          7 N      Non-CJK     
+##  2 n82098580    a         $a &#39;Phags-pa Blo-gros-rgyal-mtshan, $d 1235-1280          2            0            5 Y          2 N      Chi Minority
+##  3 n79141606    a         $a A, Kejian                                              2            0            3 N          3 N      &lt;NA&gt;        
+##  4 n2005085813  a         $a Abao                                                   2            0            1 Y          2 N      &lt;NA&gt;        
+##  5 no2007114850 a         $a Abdulla, Zaki                                          2            0            7 N          2 N      Chi Minority
+##  6 no2007111407 a         $a Abduqadir, Ablimit                                     2            0            3 Y          1 N      Chi Minority
+##  7 n83043146    a         $a Abing, $d 1893-1950                                    2            0            6 N          2 N      &lt;NA&gt;        
+##  8 n88276359    a         $a Abudureheman                                           2            0            1 N          1 N      &lt;NA&gt;        
+##  9 n88012033    a         $a Abulaiti, Abudurexiti                                  2            0            3 N          1 N      Chi Minority
+## 10 no97032405   a         $a Acheng, $d 1948-                                       2            0            6 Y          4 N      &lt;NA&gt;        
+## # ℹ 47,927 more rows</code></pre>
 <pre class="r"><code>ssja &lt;- &quot;https://docs.google.com/spreadsheets/d/1dIKgpdGZFXx20Mcbh83Y-0pgQ6wAUPw3Lc8zFKXteD8/edit?usp=sharing&quot;
-cjkextractja &lt;- read_sheet(ssja ,
+extract &lt;- read_sheet(ssja ,
                    sheet = &quot;Sheet1&quot;,
                    range = &quot;A:J&quot;,
                    col_types = &quot;ccciiicicc&quot;,
-                   trim_ws = FALSE)
+                   trim_ws = TRUE)
+colnames(extract) = c(&quot;lccnraw&quot;,&quot;tag008_32&quot;,&quot;tag100_field&quot;,&quot;tag400_CJK&quot;,&quot;tag400_other&quot;,&quot;tag400_roman&quot;,&quot;rda&quot;,&quot;tag670&quot;,&quot;tag667&quot;,&quot;lang&quot;)
+cjkextractja &lt;- extract %&gt;% mutate(lccn = stringi::stri_replace_all_fixed(stringi::stri_trans_tolower(lccnraw),&quot; &quot;,&quot;&quot;), .before = 1) %&gt;%
+    select(-lccnraw)
 cjkextractja</code></pre>
 <pre><code>## # A tibble: 19,981 × 10
-##    `010 $a`    `008/32` `100 field`                 `400 CJK` `400 other` `400 roman` rda   `670` `667` Language
-##    &lt;chr&gt;       &lt;chr&gt;    &lt;chr&gt;                           &lt;int&gt;       &lt;int&gt;       &lt;int&gt; &lt;chr&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt;   
-##  1 NR 99017057 a        $a &#39;Airin                           2           0           0 N         1 N     Japanese
-##  2 N 88253516  a        $a Abe, Akihiro                     2           0           0 N         1 N     Japanese
-##  3 NO 93015214 a        $a Abe, Akira                       8           0           0 N         1 N     Japanese
-##  4 NR 94007064 a        $a Abe, Anjin, $d 1938-             2           0           1 N         1 N     Japanese
-##  5 N 84106637  a        $a Abe, Chunosuke, $d 1904-         2           0           0 N         2 N     Japanese
-##  6 NR 92021369 a        $a Abe, Fumio                       2           0           1 N         2 N     Japanese
-##  7 N 81006765  a        $a Abe, Hajime, $d 1951-            2           0           0 N         1 N     Japanese
-##  8 N 86149761  a        $a Abe, Hideo                       3           0           0 N         2 N     Japanese
-##  9 NR 92035682 a        $a Abe, Hirokuni                    2           0           0 N         1 N     Japanese
-## 10 N 85059502  a        $a Abe, Hiroshi                    15           0           0 N         3 N     Japanese
+##    lccn       tag008_32 tag100_field                tag400_CJK tag400_other tag400_roman rda   tag670 tag667 lang    
+##    &lt;chr&gt;      &lt;chr&gt;     &lt;chr&gt;                            &lt;int&gt;        &lt;int&gt;        &lt;int&gt; &lt;chr&gt;  &lt;int&gt; &lt;chr&gt;  &lt;chr&gt;   
+##  1 nr99017057 a         $a &#39;Airin                            2            0            0 N          1 N      Japanese
+##  2 n88253516  a         $a Abe, Akihiro                      2            0            0 N          1 N      Japanese
+##  3 no93015214 a         $a Abe, Akira                        8            0            0 N          1 N      Japanese
+##  4 nr94007064 a         $a Abe, Anjin, $d 1938-              2            0            1 N          1 N      Japanese
+##  5 n84106637  a         $a Abe, Chunosuke, $d 1904-          2            0            0 N          2 N      Japanese
+##  6 nr92021369 a         $a Abe, Fumio                        2            0            1 N          2 N      Japanese
+##  7 n81006765  a         $a Abe, Hajime, $d 1951-             2            0            0 N          1 N      Japanese
+##  8 n86149761  a         $a Abe, Hideo                        3            0            0 N          2 N      Japanese
+##  9 nr92035682 a         $a Abe, Hirokuni                     2            0            0 N          1 N      Japanese
+## 10 n85059502  a         $a Abe, Hiroshi                     15            0            0 N          3 N      Japanese
 ## # ℹ 19,971 more rows</code></pre>
+<pre class="r"><code>ssko &lt;- &quot;https://docs.google.com/spreadsheets/d/1GcJslDB8v9WklEI6tv0iTcZS3v9LZapVFnkCs9HoUpw/edit?usp=sharing&quot;
+extract &lt;- read_sheet(ssko ,
+                   sheet = &quot;Sheet1&quot;,
+                   range = &quot;A:J&quot;,
+                   col_types = &quot;ccciiicicc&quot;,
+                   trim_ws = TRUE)
+colnames(extract) = c(&quot;lccnraw&quot;,&quot;tag008_32&quot;,&quot;tag100_field&quot;,&quot;tag400_CJK&quot;,&quot;tag400_other&quot;,&quot;tag400_roman&quot;,&quot;rda&quot;,&quot;tag670&quot;,&quot;tag667&quot;,&quot;tag400Hangul&quot;,
+                        &quot;Hangul_only&quot;,&quot;note&quot;)
+cjkextractko &lt;- extract %&gt;% mutate(lccn = stringi::stri_replace_all_fixed(stringi::stri_trans_tolower(lccnraw),&quot; &quot;,&quot;&quot;), .before = 1) %&gt;%
+    select(-lccnraw)
+cjkextractko</code></pre>
+<pre><code>## # A tibble: 13,038 × 10
+##    lccn       tag008_32 tag100_field                   tag400_CJK tag400_other tag400_roman rda   tag670 tag667 tag400Hangul
+##    &lt;chr&gt;      &lt;chr&gt;     &lt;chr&gt;                               &lt;int&gt;        &lt;int&gt;        &lt;int&gt; &lt;chr&gt;  &lt;int&gt; &lt;chr&gt;  &lt;chr&gt;       
+##  1 n88232154  a         $a An, Ch&#39;ang-bom                       3            0            0 Y          2 N      2           
+##  2 n81019633  a         $a An, Ch&#39;ang-ho, $d 1878-1938          4            0            7 Y          4 N      2           
+##  3 nr92041412 a         $a An, Ch&#39;ang-hwan                      3            0            0 N          1 N      2           
+##  4 nr95046843 a         $a An, Ch&#39;i-un                          3            0            0 N          2 N      3           
+##  5 n85176972  a         $a An, Ch&#39;on-hun                        2            0            0 Y          1 N      2           
+##  6 n88276868  a         $a An, Ch&#39;on, $d 1947-                  2            0            0 N          1 N      1           
+##  7 n87910468  a         $a An, Ch&#39;ong-si                        5            0            1 N          3 N      2           
+##  8 no00081965 a         $a An, Ch&#39;uk, $d 1287-1348              2            0            2 Y          3 N      1           
+##  9 n82124096  a         $a An, Ch&#39;un-gun                        3            0            2 N          4 N      2           
+## 10 n82269501  a         $a An, Ch&#39;un-sik, $d 1942-              2            0            1 N          1 N      1           
+## # ℹ 13,028 more rows</code></pre>
 </div>
 <div id="references" class="section level1 unnumbered">
 <h1 class="unnumbered">References</h1>
@@ -753,6 +783,12 @@ Gagolewski, Marek. 2022. <span>“<span class="nocase">stringi</span>:
 <span>F</span>ast and Portable Character String Processing in
 <span>R</span>.”</span> <em>Journal of Statistical Software</em> 103
 (2): 1–59. <a href="https://doi.org/10.18637/jss.v103.i02">https://doi.org/10.18637/jss.v103.i02</a>.
+</div>
+<div id="ref-hickey2006naco" class="csl-entry">
+Hickey, Thomas B., Jenny Toves, and T. O’Neill Edward. 2006. <span>“NACO
+Normalization: A Detailed Examination of the Authority File Comparison
+Rules.”</span> <em>Library Resources &amp; Technical Services</em> 50
+(3): 166–72. <a href="https://www.proquest.com/scholarly-journals/naco-normalization-detailed-examination-authority/docview/216890715/se-2">https://www.proquest.com/scholarly-journals/naco-normalization-detailed-examination-authority/docview/216890715/se-2</a>.
 </div>
 <div id="ref-hickey2011naco" class="csl-entry">
 Hickey, Thomas B, Jenny Toves, and Edward T O’Neill. 2011. <span>“NACO

@@ -1,6 +1,7 @@
-DataVersion: 0.1.3
-cjkextractja: 4330dd9631d3e0711478f4c323c3dee8
-cjkextractzh: 95cc22bc0d1497eea46923509839ba86
+DataVersion: 0.1.8
+cjkextractja: e7dae71d40d6d64c40cfbfc5d03a2480
+cjkextractko: c40ca90e69c42c63600dcb3ed9019cab
+cjkextractzh: c9d1df8883678cd34082120f4f9b6fd3
 marcBasicArabic: 92c8701021b8268ebfe735e8f316e00e
 marcBasicCyrillic: 84abd822064dfff4bdfa6708dcaeb04c
 marcBasicGreek: 5be2ef7deb489e9147dec4cce8b98d22

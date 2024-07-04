@@ -4,34 +4,51 @@
 \name{cjkextractja}
 \alias{cjkextractja}
 \alias{cjkextractzh}
+\alias{cjkextractko}
 \title{Personal name authority records}
 \format{
 cjkextractja is a \code{tbl_df} containing the following fields:
 \describe{
-\item{010 $a}{}
-\item{008/32}{Descriptive cataloging rule. Differentiated personal name when coded “a”}
-\item{100 field}{Name in the 100 field}
-\item{400 CJK}{Number of Chinese, Japanese or Korean references in 400 fields}
-\item{400 other}{Number of other non-Latin references in 400 fields}
-\item{400 roman}{Number of Latin references in 400 fields}
+\item{lccn}{LC control number, lower case 'n', no space}
+\item{tag008_32}{Descriptive cataloging rule. Differentiated personal name when coded “a”}
+\item{tag100_field}{Name in the 100 field}
+\item{tag400_CJK}{Number of Chinese, Japanese or Korean references in 400 fields}
+\item{tag400_other}{Number of other non-Latin references in 400 fields}
+\item{tag400_roman}{Number of Latin references in 400 fields}
 \item{rda}{Whether or not RDA record}
-\item{670}{Number of 670 fields}
-\item{667}{Has non-Latin script reference been evaluated?}
+\item{tag670}{Number of 670 fields}
+\item{tag667}{Has non-Latin script reference been evaluated?}
 \item{Language}{Language of name record}
 }
 
 cjkextractzh is a \code{tbl_df} containing the following fields:
 \describe{
-\item{010 $a}{}
-\item{008/32}{Descriptive cataloging rule. Differentiated personal name when coded “a”}
-\item{100 field}{Name in the 100 field}
-\item{400 CJK}{Number of Chinese, Japanese or Korean references in 400 fields}
-\item{400 other}{Number of other non-Latin references in 400 fields}
-\item{400 roman}{Number of Latin references in 400 fields}
+\item{lccn}{LC control number, lower case 'n', no space}
+\item{tag008_32}{Descriptive cataloging rule. Differentiated personal name when coded “a”}
+\item{tag100_field}{Name in the 100 field}
+\item{tag400_CJK}{Number of Chinese, Japanese or Korean references in 400 fields}
+\item{tag400_other}{Number of other non-Latin references in 400 fields}
+\item{tag400_roman}{Number of Latin references in 400 fields}
 \item{rda}{Whether or not RDA record}
-\item{670}{Number of 670 fields}
-\item{667}{Has non-Latin script reference been evaluated?}
+\item{tag670}{Number of 670 fields}
+\item{tag667}{Has non-Latin script reference been evaluated?}
 \item{notes}{If not CJK or minority name}
+}
+
+cjkextractko is a \code{tbl_df} containing the following fields:
+\describe{
+\item{lccn}{LC control number, lower case 'n', no space}
+\item{tag008_32}{Descriptive cataloging rule. Differentiated personal name when coded “a”}
+\item{tag100_field}{Name in the 100 field}
+\item{tag400_CJK}{Number of Chinese, Japanese or Korean references in 400 fields}
+\item{tag400_other}{Number of other non-Latin references in 400 fields}
+\item{tag400_roman}{Number of Latin references in 400 fields}
+\item{rda}{Whether or not RDA record}
+\item{tag670}{Number of 670 fields}
+\item{tag667}{Has non-Latin script reference been evaluated?}
+\item{tag400Hangul}{Number of Hangul references in 400 fields}
+\item{Hangul_only}{}
+\item{note}{}
 }
 }
 \source{
@@ -50,5 +67,4 @@ Personal name authority records
 }
 \seealso{
 \link{rnaco}
-\link{cjkextractzh}
 }

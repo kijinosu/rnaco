@@ -1,3 +1,136 @@
+DataVersion: 0.1.8
+=======================
+* Added: cjkextractko
+* Changed: cjkextractja
+* Changed: cjkextractzh
+* Changed: marcBasicArabic
+* Changed: marcBasicCyrillic
+* Changed: marcBasicGreek
+* Changed: marcBasicHebrew
+* Changed: marcBasicLatinASCII
+* Changed: marcComponentInputMethodCharacters
+* Changed: marcEastAsianIdeographsHan
+* Changed: marcEastAsianPunctuationMarks
+* Changed: marcExtendedArabic
+* Changed: marcExtendedCyrillic
+* Changed: marcExtendedLatinANSEL
+* Changed: marcGreekSymbols
+* Changed: marcJapaneseHiraganaandKatakana
+* Changed: marcKoreanHangul
+* Changed: marcNotes
+* Changed: marcSubscripts
+* Changed: marcSuperscripts
+* Changed: numericrules
+* Changed: step6rulestring
+* Changed: step7lltranslitrule
+* Changed: unconditionalMappings
+* Changed: unihan_variants
+Added cjkextractko
+
+DataVersion: 0.1.7
+=======================
+* Changed: marcBasicArabic
+* Changed: marcBasicCyrillic
+* Changed: marcBasicGreek
+* Changed: marcBasicHebrew
+* Changed: marcBasicLatinASCII
+* Changed: marcComponentInputMethodCharacters
+* Changed: marcEastAsianIdeographsHan
+* Changed: marcEastAsianPunctuationMarks
+* Changed: marcExtendedArabic
+* Changed: marcExtendedCyrillic
+* Changed: marcExtendedLatinANSEL
+* Changed: marcGreekSymbols
+* Changed: marcJapaneseHiraganaandKatakana
+* Changed: marcKoreanHangul
+* Changed: marcNotes
+* Changed: marcSubscripts
+* Changed: marcSuperscripts
+* Changed: numericrules
+* Changed: step6rulestring
+* Changed: step7lltranslitrule
+* Changed: unconditionalMappings
+* Changed: unihan_variants
+Modified subfield $a rule in naco_transform()
+
+DataVersion: 0.1.6
+=======================
+* Changed: marcBasicArabic
+* Changed: marcBasicCyrillic
+* Changed: marcBasicGreek
+* Changed: marcBasicHebrew
+* Changed: marcBasicLatinASCII
+* Changed: marcComponentInputMethodCharacters
+* Changed: marcEastAsianIdeographsHan
+* Changed: marcEastAsianPunctuationMarks
+* Changed: marcExtendedArabic
+* Changed: marcExtendedCyrillic
+* Changed: marcExtendedLatinANSEL
+* Changed: marcGreekSymbols
+* Changed: marcJapaneseHiraganaandKatakana
+* Changed: marcKoreanHangul
+* Changed: marcNotes
+* Changed: marcSubscripts
+* Changed: marcSuperscripts
+* Changed: numericrules
+* Changed: step6rulestring
+* Changed: step7lltranslitrule
+* Changed: unconditionalMappings
+* Changed: unihan_variants
+Sys.setlocale("LC_ALL", savedlocale)
+
+DataVersion: 0.1.5
+=======================
+* Changed: marcBasicArabic
+* Changed: marcBasicCyrillic
+* Changed: marcBasicGreek
+* Changed: marcBasicHebrew
+* Changed: marcBasicLatinASCII
+* Changed: marcComponentInputMethodCharacters
+* Changed: marcEastAsianIdeographsHan
+* Changed: marcEastAsianPunctuationMarks
+* Changed: marcExtendedArabic
+* Changed: marcExtendedCyrillic
+* Changed: marcExtendedLatinANSEL
+* Changed: marcGreekSymbols
+* Changed: marcJapaneseHiraganaandKatakana
+* Changed: marcKoreanHangul
+* Changed: marcNotes
+* Changed: marcSubscripts
+* Changed: marcSuperscripts
+* Changed: numericrules
+* Changed: step6rulestring
+* Changed: step7lltranslitrule
+* Changed: unconditionalMappings
+* Changed: unihan_variants
+Sys.setlocale("LC_ALL", savedlocale)
+
+DataVersion: 0.1.4
+=======================
+* Changed: marcBasicArabic
+* Changed: marcBasicCyrillic
+* Changed: marcBasicGreek
+* Changed: marcBasicHebrew
+* Changed: marcBasicLatinASCII
+* Changed: marcComponentInputMethodCharacters
+* Changed: marcEastAsianIdeographsHan
+* Changed: marcEastAsianPunctuationMarks
+* Changed: marcExtendedArabic
+* Changed: marcExtendedCyrillic
+* Changed: marcExtendedLatinANSEL
+* Changed: marcGreekSymbols
+* Changed: marcJapaneseHiraganaandKatakana
+* Changed: marcKoreanHangul
+* Changed: marcNotes
+* Changed: marcSubscripts
+* Changed: marcSuperscripts
+* Changed: numericrules
+* Changed: step6rulestring
+* Changed: step7lltranslitrule
+* Changed: unconditionalMappings
+* Changed: unihan_variants
+Sys.setlocale("LC_ALL", savedlocale)
+
 DataVersion: 0.1.3
 =======================
 * Added: cjkextractja

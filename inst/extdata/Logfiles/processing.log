@@ -234,3 +234,315 @@ TRACE [2024-06-28 09:27:39] DataPackageR succeeded
 TRACE [2024-06-28 09:27:39] Building documentation
 TRACE [2024-06-28 09:27:42] Building package
 TRACE [2024-06-28 09:58:23] Rebuilding data package documentation.
+TRACE [2024-06-28 13:37:59] Logging to C:/Users/Alan/Documents/R Projects/rnaco/rnaco/inst/extdata/Logfiles/processing.log
+TRACE [2024-06-28 13:37:59] Processing data
+TRACE [2024-06-28 13:37:59] Reading yaml configuration
+TRACE [2024-06-28 13:37:59] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/marctables.Rmd
+TRACE [2024-06-28 13:37:59] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/unihanVariants.Rmd
+TRACE [2024-06-28 13:37:59] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/nacoDatasets.Rmd
+TRACE [2024-06-28 13:37:59] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/naco.Rmd
+TRACE [2024-06-28 13:37:59] Processing 1 of 4: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/marctables.Rmd
+
+TRACE [2024-06-28 13:38:42] 17 data set(s) created by marctables.Rmd
+TRACE [2024-06-28 13:38:42] Processing 2 of 4: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/unihanVariants.Rmd
+
+TRACE [2024-06-28 13:39:06] 1 data set(s) created by unihanVariants.Rmd
+TRACE [2024-06-28 13:39:06] Processing 3 of 4: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/nacoDatasets.Rmd
+
+TRACE [2024-06-28 13:40:25] 6 data set(s) created by nacoDatasets.Rmd
+TRACE [2024-06-28 13:40:25] Processing 4 of 4: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/naco.Rmd
+
+TRACE [2024-06-28 13:40:27] 0 data set(s) created by naco.Rmd
+TRACE [2024-06-28 13:40:27] NEWS.md file found, updating!
+WARN [2024-06-28 13:40:27] DataVersion has changed.
+WARN [2024-06-28 13:40:27] cjkextractja has changed.
+WARN [2024-06-28 13:40:27] unihan_variants has changed.
+WARN [2024-06-28 13:40:27] DataVersion has changed.
+WARN [2024-06-28 13:40:27] cjkextractja has changed.
+WARN [2024-06-28 13:40:27] unihan_variants has changed.
+WARN [2024-06-28 13:40:27] DataVersion has changed.
+WARN [2024-06-28 13:40:27] cjkextractja has changed.
+WARN [2024-06-28 13:40:27] unihan_variants has changed.
+TRACE [2024-06-28 13:40:27] NEWS.md file found, updating!
+TRACE [2024-06-28 13:40:27] NEWS.md file found, updating!
+TRACE [2024-06-28 13:40:27] Data has been updated and DataVersion string incremented automatically to 0.1.4
+TRACE [2024-06-28 13:40:27] Saving to data
+TRACE [2024-06-28 13:40:27] Copied documentation to C:/Users/Alan/Documents/R Projects/rnaco/rnaco/R/rnaco.R
+TRACE [2024-06-28 13:40:28] Done
+TRACE [2024-06-28 13:40:28] DataPackageR succeeded
+TRACE [2024-06-28 13:40:28] Building documentation
+TRACE [2024-06-28 13:40:30] Building package
+TRACE [2024-06-28 13:41:27] Rebuilding data package documentation.
+TRACE [2024-06-28 14:07:04] Logging to C:/Users/Alan/Documents/R Projects/rnaco/rnaco/inst/extdata/Logfiles/processing.log
+TRACE [2024-06-28 14:07:04] Processing data
+TRACE [2024-06-28 14:07:04] Reading yaml configuration
+TRACE [2024-06-28 14:07:04] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/marctables.Rmd
+TRACE [2024-06-28 14:07:04] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/unihanVariants.Rmd
+TRACE [2024-06-28 14:07:04] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/nacoDatasets.Rmd
+TRACE [2024-06-28 14:07:04] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/naco.Rmd
+TRACE [2024-06-28 14:07:04] Processing 1 of 4: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/marctables.Rmd
+
+TRACE [2024-06-28 14:07:50] 17 data set(s) created by marctables.Rmd
+TRACE [2024-06-28 14:07:51] Processing 2 of 4: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/unihanVariants.Rmd
+
+TRACE [2024-06-28 14:08:14] 1 data set(s) created by unihanVariants.Rmd
+TRACE [2024-06-28 14:08:14] Processing 3 of 4: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/nacoDatasets.Rmd
+
+TRACE [2024-06-28 14:09:31] 6 data set(s) created by nacoDatasets.Rmd
+TRACE [2024-06-28 14:09:31] Processing 4 of 4: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/naco.Rmd
+
+TRACE [2024-06-28 14:09:33] 0 data set(s) created by naco.Rmd
+TRACE [2024-06-28 14:09:33] NEWS.md file found, updating!
+WARN [2024-06-28 14:09:33] DataVersion has changed.
+WARN [2024-06-28 14:09:33] cjkextractja has changed.
+WARN [2024-06-28 14:09:33] unihan_variants has changed.
+WARN [2024-06-28 14:09:33] DataVersion has changed.
+WARN [2024-06-28 14:09:33] cjkextractja has changed.
+WARN [2024-06-28 14:09:33] unihan_variants has changed.
+WARN [2024-06-28 14:09:33] DataVersion has changed.
+WARN [2024-06-28 14:09:33] cjkextractja has changed.
+WARN [2024-06-28 14:09:33] unihan_variants has changed.
+TRACE [2024-06-28 14:09:33] NEWS.md file found, updating!
+TRACE [2024-06-28 14:09:33] NEWS.md file found, updating!
+TRACE [2024-06-28 14:09:33] Data has been updated and DataVersion string incremented automatically to 0.1.5
+TRACE [2024-06-28 14:09:33] Saving to data
+TRACE [2024-06-28 14:09:33] Copied documentation to C:/Users/Alan/Documents/R Projects/rnaco/rnaco/R/rnaco.R
+TRACE [2024-06-28 14:09:33] Done
+TRACE [2024-06-28 14:09:33] DataPackageR succeeded
+TRACE [2024-06-28 14:09:33] Building documentation
+TRACE [2024-06-28 14:09:36] Building package
+TRACE [2024-06-28 14:11:03] Rebuilding data package documentation.
+TRACE [2024-06-28 14:23:17] Logging to C:/Users/Alan/Documents/R Projects/rnaco/rnaco/inst/extdata/Logfiles/processing.log
+TRACE [2024-06-28 14:23:17] Processing data
+TRACE [2024-06-28 14:23:17] Reading yaml configuration
+TRACE [2024-06-28 14:23:17] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/marctables.Rmd
+TRACE [2024-06-28 14:23:17] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/unihanVariants.Rmd
+TRACE [2024-06-28 14:23:17] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/nacoDatasets.Rmd
+TRACE [2024-06-28 14:23:17] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/naco.Rmd
+TRACE [2024-06-28 14:23:17] Processing 1 of 4: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/marctables.Rmd
+
+TRACE [2024-06-28 14:23:59] 17 data set(s) created by marctables.Rmd
+TRACE [2024-06-28 14:23:59] Processing 2 of 4: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/unihanVariants.Rmd
+
+TRACE [2024-06-28 14:24:23] 1 data set(s) created by unihanVariants.Rmd
+TRACE [2024-06-28 14:24:23] Processing 3 of 4: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/nacoDatasets.Rmd
+
+TRACE [2024-06-28 14:25:34] 6 data set(s) created by nacoDatasets.Rmd
+TRACE [2024-06-28 14:25:35] Processing 4 of 4: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/naco.Rmd
+
+TRACE [2024-06-28 14:25:36] 0 data set(s) created by naco.Rmd
+TRACE [2024-06-28 14:25:36] NEWS.md file found, updating!
+WARN [2024-06-28 14:25:36] DataVersion has changed.
+WARN [2024-06-28 14:25:36] cjkextractja has changed.
+WARN [2024-06-28 14:25:36] unihan_variants has changed.
+WARN [2024-06-28 14:25:36] DataVersion has changed.
+WARN [2024-06-28 14:25:36] cjkextractja has changed.
+WARN [2024-06-28 14:25:36] unihan_variants has changed.
+WARN [2024-06-28 14:25:36] DataVersion has changed.
+WARN [2024-06-28 14:25:36] cjkextractja has changed.
+WARN [2024-06-28 14:25:36] unihan_variants has changed.
+TRACE [2024-06-28 14:25:36] NEWS.md file found, updating!
+TRACE [2024-06-28 14:25:36] NEWS.md file found, updating!
+TRACE [2024-06-28 14:25:36] Data has been updated and DataVersion string incremented automatically to 0.1.6
+TRACE [2024-06-28 14:25:36] Saving to data
+TRACE [2024-06-28 14:25:37] Copied documentation to C:/Users/Alan/Documents/R Projects/rnaco/rnaco/R/rnaco.R
+TRACE [2024-06-28 14:25:37] Done
+TRACE [2024-06-28 14:25:37] DataPackageR succeeded
+TRACE [2024-06-28 14:25:37] Building documentation
+TRACE [2024-06-28 14:25:39] Building package
+TRACE [2024-06-28 14:27:55] Logging to C:/Users/Alan/Documents/R Projects/rnaco/rnaco/inst/extdata/Logfiles/processing.log
+TRACE [2024-06-28 14:27:55] Processing data
+TRACE [2024-06-28 14:27:55] Reading yaml configuration
+TRACE [2024-06-28 14:27:55] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/marctables.Rmd
+TRACE [2024-06-28 14:27:55] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/unihanVariants.Rmd
+TRACE [2024-06-28 14:27:55] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/nacoDatasets.Rmd
+TRACE [2024-06-28 14:27:55] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/naco.Rmd
+TRACE [2024-06-28 14:27:55] Processing 1 of 4: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/marctables.Rmd
+
+TRACE [2024-06-28 14:28:40] 17 data set(s) created by marctables.Rmd
+TRACE [2024-06-28 14:28:40] Processing 2 of 4: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/unihanVariants.Rmd
+
+TRACE [2024-06-28 14:29:03] 1 data set(s) created by unihanVariants.Rmd
+TRACE [2024-06-28 14:29:03] Processing 3 of 4: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/nacoDatasets.Rmd
+
+TRACE [2024-06-28 14:30:15] 6 data set(s) created by nacoDatasets.Rmd
+TRACE [2024-06-28 14:30:15] Processing 4 of 4: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/naco.Rmd
+
+TRACE [2024-06-28 14:30:17] 0 data set(s) created by naco.Rmd
+TRACE [2024-06-28 14:30:17] NEWS.md file found, updating!
+TRACE [2024-06-28 14:30:17] Processed data sets match existing data sets at version 0.1.6
+TRACE [2024-06-28 14:30:17] Saving to data
+TRACE [2024-06-28 14:30:17] Copied documentation to C:/Users/Alan/Documents/R Projects/rnaco/rnaco/R/rnaco.R
+TRACE [2024-06-28 14:30:18] Done
+TRACE [2024-06-28 14:30:18] DataPackageR succeeded
+TRACE [2024-06-28 14:30:18] Building documentation
+TRACE [2024-06-28 14:30:20] Building package
+TRACE [2024-06-28 14:30:41] Rebuilding data package documentation.
+TRACE [2024-07-03 16:32:11] Logging to C:/Users/Alan/Documents/R Projects/rnaco/rnaco/inst/extdata/Logfiles/processing.log
+TRACE [2024-07-03 16:32:11] Processing data
+TRACE [2024-07-03 16:32:11] Reading yaml configuration
+TRACE [2024-07-03 16:32:11] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/marctables.Rmd
+TRACE [2024-07-03 16:32:11] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/unihanVariants.Rmd
+TRACE [2024-07-03 16:32:11] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/nacoDatasets.Rmd
+TRACE [2024-07-03 16:32:11] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/naco.Rmd
+TRACE [2024-07-03 16:32:11] Processing 1 of 4: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/marctables.Rmd
+
+TRACE [2024-07-03 16:32:59] 17 data set(s) created by marctables.Rmd
+TRACE [2024-07-03 16:32:59] Processing 2 of 4: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/unihanVariants.Rmd
+
+TRACE [2024-07-03 16:33:23] 1 data set(s) created by unihanVariants.Rmd
+TRACE [2024-07-03 16:33:23] Processing 3 of 4: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/nacoDatasets.Rmd
+
+TRACE [2024-07-03 16:34:40] 6 data set(s) created by nacoDatasets.Rmd
+TRACE [2024-07-03 16:34:40] Processing 4 of 4: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/naco.Rmd
+
+TRACE [2024-07-03 16:34:42] 0 data set(s) created by naco.Rmd
+TRACE [2024-07-03 16:34:42] NEWS.md file found, updating!
+TRACE [2024-07-03 16:34:42] Processed data sets match existing data sets at version 0.1.6
+TRACE [2024-07-03 16:34:42] Saving to data
+TRACE [2024-07-03 16:34:43] Copied documentation to C:/Users/Alan/Documents/R Projects/rnaco/rnaco/R/rnaco.R
+TRACE [2024-07-03 16:34:43] Done
+TRACE [2024-07-03 16:34:43] DataPackageR succeeded
+TRACE [2024-07-03 16:34:43] Building documentation
+TRACE [2024-07-03 16:34:46] Building package
+TRACE [2024-07-03 16:46:07] Rebuilding data package documentation.
+TRACE [2024-07-03 17:23:15] Logging to C:/Users/Alan/Documents/R Projects/rnaco/rnaco/inst/extdata/Logfiles/processing.log
+TRACE [2024-07-03 17:23:15] Processing data
+TRACE [2024-07-03 17:23:15] Reading yaml configuration
+TRACE [2024-07-03 17:23:15] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/marctables.Rmd
+TRACE [2024-07-03 17:23:15] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/unihanVariants.Rmd
+TRACE [2024-07-03 17:23:15] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/nacoDatasets.Rmd
+TRACE [2024-07-03 17:23:15] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/naco.Rmd
+TRACE [2024-07-03 17:23:15] Processing 1 of 4: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/marctables.Rmd
+
+TRACE [2024-07-03 17:23:59] 17 data set(s) created by marctables.Rmd
+TRACE [2024-07-03 17:23:59] Processing 2 of 4: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/unihanVariants.Rmd
+
+TRACE [2024-07-03 17:24:22] 1 data set(s) created by unihanVariants.Rmd
+TRACE [2024-07-03 17:24:22] Processing 3 of 4: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/nacoDatasets.Rmd
+
+TRACE [2024-07-03 17:25:37] 6 data set(s) created by nacoDatasets.Rmd
+TRACE [2024-07-03 17:25:38] Processing 4 of 4: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/naco.Rmd
+
+TRACE [2024-07-03 17:28:48] Logging to C:/Users/Alan/Documents/R Projects/rnaco/rnaco/inst/extdata/Logfiles/processing.log
+TRACE [2024-07-03 17:28:48] Processing data
+TRACE [2024-07-03 17:28:48] Reading yaml configuration
+TRACE [2024-07-03 17:28:48] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/marctables.Rmd
+TRACE [2024-07-03 17:28:48] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/unihanVariants.Rmd
+TRACE [2024-07-03 17:28:48] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/nacoDatasets.Rmd
+TRACE [2024-07-03 17:28:48] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/naco.Rmd
+TRACE [2024-07-03 17:28:48] Processing 1 of 4: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/marctables.Rmd
+
+TRACE [2024-07-03 17:29:33] 17 data set(s) created by marctables.Rmd
+TRACE [2024-07-03 17:29:33] Processing 2 of 4: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/unihanVariants.Rmd
+
+TRACE [2024-07-03 17:29:56] 1 data set(s) created by unihanVariants.Rmd
+TRACE [2024-07-03 17:29:56] Processing 3 of 4: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/nacoDatasets.Rmd
+
+TRACE [2024-07-03 17:31:07] 6 data set(s) created by nacoDatasets.Rmd
+TRACE [2024-07-03 17:31:08] Processing 4 of 4: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/naco.Rmd
+
+TRACE [2024-07-03 17:31:10] 0 data set(s) created by naco.Rmd
+TRACE [2024-07-03 17:31:10] NEWS.md file found, updating!
+TRACE [2024-07-03 17:31:10] Processed data sets match existing data sets at version 0.1.6
+TRACE [2024-07-03 17:31:10] Saving to data
+TRACE [2024-07-03 17:31:10] Copied documentation to C:/Users/Alan/Documents/R Projects/rnaco/rnaco/R/rnaco.R
+TRACE [2024-07-03 17:31:10] Done
+TRACE [2024-07-03 17:31:10] DataPackageR succeeded
+TRACE [2024-07-03 17:31:10] Building documentation
+TRACE [2024-07-03 17:49:50] Logging to C:/Users/Alan/Documents/R Projects/rnaco/rnaco/inst/extdata/Logfiles/processing.log
+TRACE [2024-07-03 17:49:50] Processing data
+TRACE [2024-07-03 17:49:50] Reading yaml configuration
+TRACE [2024-07-03 17:49:50] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/marctables.Rmd
+TRACE [2024-07-03 17:49:50] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/unihanVariants.Rmd
+TRACE [2024-07-03 17:49:50] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/nacoDatasets.Rmd
+TRACE [2024-07-03 17:49:50] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/naco.Rmd
+TRACE [2024-07-03 17:49:50] Processing 1 of 4: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/marctables.Rmd
+
+TRACE [2024-07-03 17:50:35] 17 data set(s) created by marctables.Rmd
+TRACE [2024-07-03 17:50:35] Processing 2 of 4: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/unihanVariants.Rmd
+
+TRACE [2024-07-03 17:50:57] 1 data set(s) created by unihanVariants.Rmd
+TRACE [2024-07-03 17:50:57] Processing 3 of 4: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/nacoDatasets.Rmd
+
+TRACE [2024-07-03 17:52:27] 6 data set(s) created by nacoDatasets.Rmd
+TRACE [2024-07-03 17:52:27] Processing 4 of 4: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/naco.Rmd
+
+TRACE [2024-07-03 17:52:30] 0 data set(s) created by naco.Rmd
+TRACE [2024-07-03 17:52:30] NEWS.md file found, updating!
+WARN [2024-07-03 17:52:30] DataVersion has changed.
+WARN [2024-07-03 17:52:30] cjkextractja has changed.
+WARN [2024-07-03 17:52:30] unihan_variants has changed.
+WARN [2024-07-03 17:52:30] DataVersion has changed.
+WARN [2024-07-03 17:52:30] cjkextractja has changed.
+WARN [2024-07-03 17:52:30] unihan_variants has changed.
+WARN [2024-07-03 17:52:30] DataVersion has changed.
+WARN [2024-07-03 17:52:30] cjkextractja has changed.
+WARN [2024-07-03 17:52:30] unihan_variants has changed.
+TRACE [2024-07-03 17:52:30] NEWS.md file found, updating!
+TRACE [2024-07-03 18:05:57] NEWS.md file found, updating!
+TRACE [2024-07-03 18:05:57] Data has been updated and DataVersion string incremented automatically to 0.1.7
+TRACE [2024-07-03 18:05:57] Saving to data
+TRACE [2024-07-03 18:05:58] Copied documentation to C:/Users/Alan/Documents/R Projects/rnaco/rnaco/R/rnaco.R
+TRACE [2024-07-03 18:05:58] Done
+TRACE [2024-07-03 18:05:58] DataPackageR succeeded
+TRACE [2024-07-03 18:05:58] Building documentation
+TRACE [2024-07-03 18:08:23] Logging to C:/Users/Alan/Documents/R Projects/rnaco/rnaco/inst/extdata/Logfiles/processing.log
+TRACE [2024-07-03 18:08:23] Processing data
+TRACE [2024-07-03 18:08:23] Reading yaml configuration
+TRACE [2024-07-03 18:08:23] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/marctables.Rmd
+TRACE [2024-07-03 18:08:23] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/unihanVariants.Rmd
+TRACE [2024-07-03 18:08:23] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/nacoDatasets.Rmd
+TRACE [2024-07-03 18:08:23] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/naco.Rmd
+TRACE [2024-07-03 18:08:23] Processing 1 of 4: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/marctables.Rmd
+
+TRACE [2024-07-03 18:09:12] 17 data set(s) created by marctables.Rmd
+TRACE [2024-07-03 18:09:12] Processing 2 of 4: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/unihanVariants.Rmd
+
+TRACE [2024-07-03 18:09:34] 1 data set(s) created by unihanVariants.Rmd
+TRACE [2024-07-03 18:09:34] Processing 3 of 4: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/nacoDatasets.Rmd
+
+TRACE [2024-07-03 18:11:02] 7 data set(s) created by nacoDatasets.Rmd
+TRACE [2024-07-03 18:11:03] Processing 4 of 4: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/naco.Rmd
+
+TRACE [2024-07-03 18:11:05] 0 data set(s) created by naco.Rmd
+TRACE [2024-07-03 18:11:05] NEWS.md file found, updating!
+DEBUG [2024-07-03 18:11:05] cjkextractko was added.
+DEBUG [2024-07-03 18:11:05] cjkextractko was added.
+DEBUG [2024-07-03 18:11:05] cjkextractko was added.
+TRACE [2024-07-03 18:11:05] NEWS.md file found, updating!
+TRACE [2024-07-03 18:11:22] NEWS.md file found, updating!
+TRACE [2024-07-03 18:11:22] Data has been updated and DataVersion string incremented automatically to 0.1.8
+TRACE [2024-07-03 18:11:22] Saving to data
+TRACE [2024-07-03 18:11:22] Copied documentation to C:/Users/Alan/Documents/R Projects/rnaco/rnaco/R/rnaco.R
+TRACE [2024-07-03 18:11:22] Done
+TRACE [2024-07-03 18:11:22] DataPackageR succeeded
+TRACE [2024-07-03 18:11:22] Building documentation
+TRACE [2024-07-04 13:52:46] Logging to C:/Users/Alan/Documents/R Projects/rnaco/rnaco/inst/extdata/Logfiles/processing.log
+TRACE [2024-07-04 13:52:46] Processing data
+TRACE [2024-07-04 13:52:46] Reading yaml configuration
+TRACE [2024-07-04 13:52:46] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/marctables.Rmd
+TRACE [2024-07-04 13:52:46] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/unihanVariants.Rmd
+TRACE [2024-07-04 13:52:46] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/nacoDatasets.Rmd
+TRACE [2024-07-04 13:52:46] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/naco.Rmd
+TRACE [2024-07-04 13:52:46] Processing 1 of 4: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/marctables.Rmd
+
+TRACE [2024-07-04 13:53:31] 17 data set(s) created by marctables.Rmd
+TRACE [2024-07-04 13:53:31] Processing 2 of 4: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/unihanVariants.Rmd
+
+TRACE [2024-07-04 13:53:55] 1 data set(s) created by unihanVariants.Rmd
+TRACE [2024-07-04 13:53:55] Processing 3 of 4: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/nacoDatasets.Rmd
+
+TRACE [2024-07-04 13:55:25] 7 data set(s) created by nacoDatasets.Rmd
+TRACE [2024-07-04 13:55:26] Processing 4 of 4: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/naco.Rmd
+
+TRACE [2024-07-04 13:55:28] 0 data set(s) created by naco.Rmd
+TRACE [2024-07-04 13:55:28] NEWS.md file found, updating!
+TRACE [2024-07-04 13:55:28] Processed data sets match existing data sets at version 0.1.8
+TRACE [2024-07-04 13:55:28] Saving to data
+TRACE [2024-07-04 13:55:28] Copied documentation to C:/Users/Alan/Documents/R Projects/rnaco/rnaco/R/rnaco.R
+TRACE [2024-07-04 13:55:28] Done
+TRACE [2024-07-04 13:55:28] DataPackageR succeeded
+TRACE [2024-07-04 13:55:28] Building documentation
+TRACE [2024-07-04 13:55:31] Building package
+TRACE [2024-07-04 13:58:37] Rebuilding data package documentation.

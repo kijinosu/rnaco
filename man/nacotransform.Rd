@@ -36,8 +36,6 @@ step7lltranslitrule is in the form of a \code{string}
 \source{
 The data comes from the \href{https://www.unicode.org/versions/Unicode15.1.0/}{Unicode® Standard}
 provides a file UCD.zip that contains the file SpecialCasings.txt.
-
-The data comes from version 15.1.0 of the Unicode Standard.
 }
 \usage{
 naco_transform(s, encoding="UTF-8")
@@ -66,19 +64,16 @@ for this package are found in the file SpecialCasings.txt, which is contained in
 file UCD.zip
 
 Detailed description of the data
-
-Detailed description of the data
-
-Detailed description of the data
 }
 \details{
 'naco_transform()' applies the authority file comparison
 rules (NACO normalization) to a string
-
-Detailed description of the data
 }
 \seealso{
-\link{rnaco}
+\itemize{
+\item Please see \code{vignette("naco", package = "rnaco")} for a detailed walk-through of
+the NACO authority file comparison rules.
+}
 
 \link{rnaco}
 }

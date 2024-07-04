@@ -33,5 +33,6 @@ configuration:
   - numericrules
   - cjkextractzh
   - cjkextractja
+  - cjkextractko
   render_root:
     tmp: '23451'
