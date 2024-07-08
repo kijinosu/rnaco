@@ -8,7 +8,11 @@
 #'     and/or DataPackageR::load_all
 #' _datasets() to load them.
 #' @seealso
-#' \link{cjkextractko}
+#' \link{marcNotes}
+#' \link{marctables}
+#' \link{unihan_variants}
+#' \link{nacotransform}
+#' \link{cjkextracts}
 '_PACKAGE'
 
 
@@ -35,22 +39,10 @@
 #' @seealso
 #' \link{rnaco}
 #' \link{marcNotes}
-#' \link{marcBasicArabic}
-#' \link{marcBasicCyrillic}
-#' \link{marcBasicGreek}
-#' \link{marcBasicHebrew}
-#' \link{marcComponentInputMethodCharacters}
-#' \link{marcEastAsianIdeographsHan}
-#' \link{marcEastAsianPunctuationMarks}
-#' \link{marcExtendedArabic}
-#' \link{marcExtendedCyrillic}
-#' \link{marcExtendedLatinANSEL}
-#' \link{marcGreekSymbols}
-#' \link{marcJapaneseHiraganaandKatakana}
-#' \link{marcKoreanHangul}
-#' \link{marcSubscripts}
-#' \link{marcSuperscripts}
+#' \link{marctables}
 #' \link{unihan_variants}
+#' \link{nacotransform}
+#' \link{cjkextracts}
 NULL
 
 
@@ -64,6 +56,7 @@ NULL
 #' Detailed description of the data
 #' @name marcBasicLatinASCII
 #' @docType data
+#' @rdname marctables
 #' @title Basic Latin (ASCII) code table (January 2000) ISOcode=42
 #' @description From the Basic and Extended Latin character sets
 #' @format a \code{tbl_df} containing the following fields:
@@ -82,22 +75,10 @@ NULL
 #' @seealso
 #' \link{rnaco}
 #' \link{marcNotes}
-#' \link{marcBasicArabic}
-#' \link{marcBasicCyrillic}
-#' \link{marcBasicGreek}
-#' \link{marcBasicHebrew}
-#' \link{marcComponentInputMethodCharacters}
-#' \link{marcEastAsianIdeographsHan}
-#' \link{marcEastAsianPunctuationMarks}
-#' \link{marcExtendedArabic}
-#' \link{marcExtendedCyrillic}
-#' \link{marcExtendedLatinANSEL}
-#' \link{marcGreekSymbols}
-#' \link{marcJapaneseHiraganaandKatakana}
-#' \link{marcKoreanHangul}
-#' \link{marcSubscripts}
-#' \link{marcSuperscripts}
+#' \link{marctables}
 #' \link{unihan_variants}
+#' \link{nacotransform}
+#' \link{cjkextracts}
 NULL
 
 
@@ -108,6 +89,7 @@ NULL
 
 #' Detailed description of the data
 #' @name marcBasicArabic
+#' @rdname marctables
 #' @docType data
 #' @title Basic Arabic code table, ISOcode=33 (July 2001)
 #' @description From the Basic and Extended Arabic character sets
@@ -122,24 +104,6 @@ NULL
 #' \item{isCombining}{}
 #' \item{name}{MARC character name, followed by the UCS name}
 #' }
-#' @source The data comes from the [Library of Congress](https://www.loc.gov/marc/specifications/codetables.xml "MARC specification").
-#' @seealso
-#' \link{rnaco}
-#' \link{marcBasicCyrillic}
-#' \link{marcBasicGreek}
-#' \link{marcBasicHebrew}
-#' \link{marcComponentInputMethodCharacters}
-#' \link{marcEastAsianIdeographsHan}
-#' \link{marcEastAsianPunctuationMarks}
-#' \link{marcExtendedArabic}
-#' \link{marcExtendedCyrillic}
-#' \link{marcExtendedLatinANSEL}
-#' \link{marcGreekSymbols}
-#' \link{marcJapaneseHiraganaandKatakana}
-#' \link{marcKoreanHangul}
-#' \link{marcSubscripts}
-#' \link{marcSuperscripts}
-#' \link{unihan_variants}
 NULL
 
 
@@ -150,6 +114,7 @@ NULL
 
 #' Detailed description of the data
 #' @name marcBasicCyrillic
+#' @rdname marctables
 #' @docType data
 #' @title Basic Cyrillic code table, ISOcode=4E (January 2000)
 #' @description From the Basic and Extended Cyrillic character sets
@@ -164,24 +129,6 @@ NULL
 #' \item{isCombining}{}
 #' \item{name}{MARC character name, followed by the UCS name}
 #' }
-#' @source The data comes from the [Library of Congress](https://www.loc.gov/marc/specifications/codetables.xml "MARC specification").
-#' @seealso
-#' \link{rnaco}
-#' \link{marcBasicArabic}
-#' \link{marcBasicGreek}
-#' \link{marcBasicHebrew}
-#' \link{marcComponentInputMethodCharacters}
-#' \link{marcEastAsianIdeographsHan}
-#' \link{marcEastAsianPunctuationMarks}
-#' \link{marcExtendedArabic}
-#' \link{marcExtendedCyrillic}
-#' \link{marcExtendedLatinANSEL}
-#' \link{marcGreekSymbols}
-#' \link{marcJapaneseHiraganaandKatakana}
-#' \link{marcKoreanHangul}
-#' \link{marcSubscripts}
-#' \link{marcSuperscripts}
-#' \link{unihan_variants}
 NULL
 
 
@@ -192,6 +139,7 @@ NULL
 
 #' Detailed description of the data
 #' @name marcBasicGreek
+#' @rdname marctables
 #' @docType data
 #' @title Basic Greek code table, ISOcode=53 (January 2000)
 #' @description From the Greek character set
@@ -206,24 +154,6 @@ NULL
 #' \item{isCombining}{}
 #' \item{name}{MARC character name, followed by the UCS name}
 #' }
-#' @source The data comes from the [Library of Congress](https://www.loc.gov/marc/specifications/codetables.xml "MARC specification").
-#' @seealso
-#' \link{rnaco}
-#' \link{marcBasicArabic}
-#' \link{marcBasicCyrillic}
-#' \link{marcBasicHebrew}
-#' \link{marcComponentInputMethodCharacters}
-#' \link{marcEastAsianIdeographsHan}
-#' \link{marcEastAsianPunctuationMarks}
-#' \link{marcExtendedArabic}
-#' \link{marcExtendedCyrillic}
-#' \link{marcExtendedLatinANSEL}
-#' \link{marcGreekSymbols}
-#' \link{marcJapaneseHiraganaandKatakana}
-#' \link{marcKoreanHangul}
-#' \link{marcSubscripts}
-#' \link{marcSuperscripts}
-#' \link{unihan_variants}
 NULL
 
 
@@ -234,6 +164,7 @@ NULL
 
 #' Detailed description of the data
 #' @name marcBasicHebrew
+#' @rdname marctables
 #' @docType data
 #' @title Basic Hebrew code table, ISOcode=32 (January 2000)
 #' @description From the Basic Hebrew character set
@@ -248,24 +179,6 @@ NULL
 #' \item{isCombining}{}
 #' \item{name}{MARC character name, followed by the UCS name}
 #' }
-#' @source The data comes from the [Library of Congress](https://www.loc.gov/marc/specifications/codetables.xml "MARC specification").
-#' @seealso
-#' \link{rnaco}
-#' \link{marcBasicArabic}
-#' \link{marcBasicCyrillic}
-#' \link{marcBasicGreek}
-#' \link{marcComponentInputMethodCharacters}
-#' \link{marcEastAsianIdeographsHan}
-#' \link{marcEastAsianPunctuationMarks}
-#' \link{marcExtendedArabic}
-#' \link{marcExtendedCyrillic}
-#' \link{marcExtendedLatinANSEL}
-#' \link{marcGreekSymbols}
-#' \link{marcJapaneseHiraganaandKatakana}
-#' \link{marcKoreanHangul}
-#' \link{marcSubscripts}
-#' \link{marcSuperscripts}
-#' \link{unihan_variants}
 NULL
 
 
@@ -276,6 +189,7 @@ NULL
 
 #' Detailed description of the data
 #' @name marcComponentInputMethodCharacters
+#' @rdname marctables
 #' @docType data
 #' @title Component Input Method Characters code table (February 6, 2003)
 #' @description This table contains 35 mappings of encodings for component input method characters from the East Asian Coded Character set (ANSI/NISO Z39.64, or "EACC") to character encodings in the Private Use Area (PUA) of the Universal Character Set (UCS, ISO-IEC 10646)/Unicode. Character codes are given in hexadecimal notation. Each character is presented on a separate row.
@@ -290,24 +204,6 @@ NULL
 #' \item{isCombining}{}
 #' \item{name}{MARC character name, followed by the UCS name}
 #' }
-#' @source The data comes from the [Library of Congress](https://www.loc.gov/marc/specifications/codetables.xml "MARC specification").
-#' @seealso
-#' \link{rnaco}
-#' \link{marcBasicArabic}
-#' \link{marcBasicCyrillic}
-#' \link{marcBasicGreek}
-#' \link{marcBasicHebrew}
-#' \link{marcEastAsianIdeographsHan}
-#' \link{marcEastAsianPunctuationMarks}
-#' \link{marcExtendedArabic}
-#' \link{marcExtendedCyrillic}
-#' \link{marcExtendedLatinANSEL}
-#' \link{marcGreekSymbols}
-#' \link{marcJapaneseHiraganaandKatakana}
-#' \link{marcKoreanHangul}
-#' \link{marcSubscripts}
-#' \link{marcSuperscripts}
-#' \link{unihan_variants}
 NULL
 
 
@@ -318,6 +214,7 @@ NULL
 
 #' Detailed description of the data
 #' @name marcEastAsianIdeographsHan
+#' @rdname marctables
 #' @docType data
 #' @title East Asian Ideographs ('Han') code table (February 6, 2003)
 #' @description This table contains 13,478 mappings of character encodings for East Asian ideographs from the East Asian Coded Character set (ANSI/NISO Z39.64, or "EACC", including 10 "Version J" additions that did not appear in the published standard) to character encodings in the Universal Character Set (UCS, ISO-IEC 10646)/Unicode. Character codes are given in hexadecimal notation. Each character is presented on a separate row.
@@ -332,24 +229,6 @@ NULL
 #' \item{isCombining}{}
 #' \item{name}{MARC character name, followed by the UCS name}
 #' }
-#' @source The data comes from the [Library of Congress](https://www.loc.gov/marc/specifications/codetables.xml "MARC specification").
-#' @seealso
-#' \link{rnaco}
-#' \link{marcBasicArabic}
-#' \link{marcBasicCyrillic}
-#' \link{marcBasicGreek}
-#' \link{marcBasicHebrew}
-#' \link{marcComponentInputMethodCharacters}
-#' \link{marcEastAsianPunctuationMarks}
-#' \link{marcExtendedArabic}
-#' \link{marcExtendedCyrillic}
-#' \link{marcExtendedLatinANSEL}
-#' \link{marcGreekSymbols}
-#' \link{marcJapaneseHiraganaandKatakana}
-#' \link{marcKoreanHangul}
-#' \link{marcSubscripts}
-#' \link{marcSuperscripts}
-#' \link{unihan_variants}
 NULL
 
 
@@ -360,38 +239,10 @@ NULL
 
 #' Detailed description of the data
 #' @name marcEastAsianPunctuationMarks
+#' @rdname marctables
 #' @docType data
 #' @title East Asian Punctuation Marks code table (February 6, 2003)
 #' @description This table contains 25 mappings of character encodings for East Asian punctuation marks from the East Asian Coded Character set (ANSI/NISO Z39.64, or "EACC") to character encodings in the Universal Character Set (UCS, ISO-IEC 10646)/Unicode. Character codes are given in hexadecimal notation.
-#' @format a \code{tbl_df} containing the following fields:
-#' \describe{
-#' \item{marc}{MARC-8 code (in hex) for the character as coming from the G0 graphic set}
-#' \item{ucs}{UCS/Unicode code point (hexmode)}
-#' \item{utf8}{UTF-8 code (in hex) for the UCS character}
-#' \item{rep}{representation of the character (where possible)}
-#' \item{isAlt}{For some tables alternate encodings in Unicode and UTF-8 are given.
-#' When that occurs the alternate Unicode and alternate UTF-8 columns follow the character name.}
-#' \item{isCombining}{}
-#' \item{name}{MARC character name, followed by the UCS name}
-#' }
-#' @source The data comes from the [Library of Congress](https://www.loc.gov/marc/specifications/codetables.xml "MARC specification").
-#' @seealso
-#' \link{rnaco}
-#' \link{marcBasicArabic}
-#' \link{marcBasicCyrillic}
-#' \link{marcBasicGreek}
-#' \link{marcBasicHebrew}
-#' \link{marcComponentInputMethodCharacters}
-#' \link{marcEastAsianIdeographsHan}
-#' \link{marcExtendedArabic}
-#' \link{marcExtendedCyrillic}
-#' \link{marcExtendedLatinANSEL}
-#' \link{marcGreekSymbols}
-#' \link{marcJapaneseHiraganaandKatakana}
-#' \link{marcKoreanHangul}
-#' \link{marcSubscripts}
-#' \link{marcSuperscripts}
-#' \link{unihan_variants}
 NULL
 
 
@@ -402,38 +253,10 @@ NULL
 
 #' Detailed description of the data
 #' @name marcExtendedArabic
+#' @rdname marctables
 #' @docType data
 #' @title Extended Arabic code table, ISO code 34 (July 2001)
 #' @description From the Basic and Extended Arabic character sets
-#' @format a \code{tbl_df} containing the following fields:
-#' \describe{
-#' \item{marc}{MARC-8 code (in hex) for the character as coming from the G0 graphic set}
-#' \item{ucs}{UCS/Unicode code point (hexmode)}
-#' \item{utf8}{UTF-8 code (in hex) for the UCS character}
-#' \item{rep}{representation of the character (where possible)}
-#' \item{isAlt}{For some tables alternate encodings in Unicode and UTF-8 are given.
-#' When that occurs the alternate Unicode and alternate UTF-8 columns follow the character name.}
-#' \item{isCombining}{}
-#' \item{name}{MARC character name, followed by the UCS name}
-#' }
-#' @source The data comes from the [Library of Congress](https://www.loc.gov/marc/specifications/codetables.xml "MARC specification").
-#' @seealso
-#' \link{rnaco}
-#' \link{marcBasicArabic}
-#' \link{marcBasicCyrillic}
-#' \link{marcBasicGreek}
-#' \link{marcBasicHebrew}
-#' \link{marcComponentInputMethodCharacters}
-#' \link{marcEastAsianIdeographsHan}
-#' \link{marcEastAsianPunctuationMarks}
-#' \link{marcExtendedCyrillic}
-#' \link{marcExtendedLatinANSEL}
-#' \link{marcGreekSymbols}
-#' \link{marcJapaneseHiraganaandKatakana}
-#' \link{marcKoreanHangul}
-#' \link{marcSubscripts}
-#' \link{marcSuperscripts}
-#' \link{unihan_variants}
 NULL
 
 
@@ -444,38 +267,10 @@ NULL
 
 #' Detailed description of the data
 #' @name marcExtendedCyrillic
+#' @rdname marctables
 #' @docType data
 #' @title Extended Cyrillic code table, ISO code 51 (January 2000)
 #' @description From the Basic and Extended Cyrillic character sets
-#' @format a \code{tbl_df} containing the following fields:
-#' \describe{
-#' \item{marc}{MARC-8 code (in hex) for the character as coming from the G0 graphic set}
-#' \item{ucs}{UCS/Unicode code point (hexmode)}
-#' \item{utf8}{UTF-8 code (in hex) for the UCS character}
-#' \item{rep}{representation of the character (where possible)}
-#' \item{isAlt}{For some tables alternate encodings in Unicode and UTF-8 are given.
-#' When that occurs the alternate Unicode and alternate UTF-8 columns follow the character name.}
-#' \item{isCombining}{}
-#' \item{name}{MARC character name, followed by the UCS name}
-#' }
-#' @source The data comes from the [Library of Congress](https://www.loc.gov/marc/specifications/codetables.xml "MARC specification").
-#' @seealso
-#' \link{rnaco}
-#' \link{marcBasicArabic}
-#' \link{marcBasicCyrillic}
-#' \link{marcBasicGreek}
-#' \link{marcBasicHebrew}
-#' \link{marcComponentInputMethodCharacters}
-#' \link{marcEastAsianIdeographsHan}
-#' \link{marcEastAsianPunctuationMarks}
-#' \link{marcExtendedArabic}
-#' \link{marcExtendedLatinANSEL}
-#' \link{marcGreekSymbols}
-#' \link{marcJapaneseHiraganaandKatakana}
-#' \link{marcKoreanHangul}
-#' \link{marcSubscripts}
-#' \link{marcSuperscripts}
-#' \link{unihan_variants}
 NULL
 
 
@@ -486,38 +281,10 @@ NULL
 
 #' Detailed description of the data
 #' @name marcExtendedLatinANSEL
+#' @rdname marctables
 #' @docType data
 #' @title Extended Latin (ANSEL) code table, ISO code 45 (January 2000, Updated September 2004)
 #' @description From the Extended Latin (ANSEL) character sets
-#' @format a \code{tbl_df} containing the following fields:
-#' \describe{
-#' \item{marc}{MARC-8 code (in hex) for the character as coming from the G0 graphic set}
-#' \item{ucs}{UCS/Unicode code point (hexmode)}
-#' \item{utf8}{UTF-8 code (in hex) for the UCS character}
-#' \item{rep}{representation of the character (where possible)}
-#' \item{isAlt}{For some tables alternate encodings in Unicode and UTF-8 are given.
-#' When that occurs the alternate Unicode and alternate UTF-8 columns follow the character name.}
-#' \item{isCombining}{}
-#' \item{name}{MARC character name, followed by the UCS name}
-#' }
-#' @source The data comes from the [Library of Congress](https://www.loc.gov/marc/specifications/codetables.xml "MARC specification").
-#' @seealso
-#' \link{rnaco}
-#' \link{marcBasicArabic}
-#' \link{marcBasicCyrillic}
-#' \link{marcBasicGreek}
-#' \link{marcBasicHebrew}
-#' \link{marcComponentInputMethodCharacters}
-#' \link{marcEastAsianIdeographsHan}
-#' \link{marcEastAsianPunctuationMarks}
-#' \link{marcExtendedArabic}
-#' \link{marcExtendedCyrillic}
-#' \link{marcGreekSymbols}
-#' \link{marcJapaneseHiraganaandKatakana}
-#' \link{marcKoreanHangul}
-#' \link{marcSubscripts}
-#' \link{marcSuperscripts}
-#' \link{unihan_variants}
 NULL
 
 
@@ -528,38 +295,10 @@ NULL
 
 #' Detailed description of the data
 #' @name marcGreekSymbols
+#' @rdname marctables
 #' @docType data
 #' @title Greek Symbols
 #' @description Greek Symbols code table, ISO code 67 (January 2000, Updated September 2004)
-#' @format a \code{tbl_df} containing the following fields:
-#' \describe{
-#' \item{marc}{MARC-8 code (in hex) for the character as coming from the G0 graphic set}
-#' \item{ucs}{UCS/Unicode code point (hexmode)}
-#' \item{utf8}{UTF-8 code (in hex) for the UCS character}
-#' \item{rep}{representation of the character (where possible)}
-#' \item{isAlt}{For some tables alternate encodings in Unicode and UTF-8 are given.
-#' When that occurs the alternate Unicode and alternate UTF-8 columns follow the character name.}
-#' \item{isCombining}{}
-#' \item{name}{MARC character name, followed by the UCS name}
-#' }
-#' @source The data comes from the [Library of Congress](https://www.loc.gov/marc/specifications/codetables.xml "MARC specification").
-#' @seealso
-#' \link{rnaco}
-#' \link{marcBasicArabic}
-#' \link{marcBasicCyrillic}
-#' \link{marcBasicGreek}
-#' \link{marcBasicHebrew}
-#' \link{marcComponentInputMethodCharacters}
-#' \link{marcEastAsianIdeographsHan}
-#' \link{marcEastAsianPunctuationMarks}
-#' \link{marcExtendedArabic}
-#' \link{marcExtendedCyrillic}
-#' \link{marcExtendedLatinANSEL}
-#' \link{marcJapaneseHiraganaandKatakana}
-#' \link{marcKoreanHangul}
-#' \link{marcSubscripts}
-#' \link{marcSuperscripts}
-#' \link{unihan_variants}
 NULL
 
 
@@ -570,38 +309,10 @@ NULL
 
 #' Detailed description of the data
 #' @name marcJapaneseHiraganaandKatakana
+#' @rdname marctables
 #' @docType data
 #' @title Japanese Hiragana and Katakana code table (February 6, 2003)
 #' @description This table contains 172 mappings of character encodings for Japanese Hiragana and Katakana from the East Asian Coded Character set (ANSI/NISO Z39.64, or "EACC") to character encodings in the Universal Character Set (UCS, ISO-IEC 10646)/Unicode.
-#' @format a \code{tbl_df} containing the following fields:
-#' \describe{
-#' \item{marc}{MARC-8 code (in hex) for the character as coming from the G0 graphic set}
-#' \item{ucs}{UCS/Unicode code point (hexmode)}
-#' \item{utf8}{UTF-8 code (in hex) for the UCS character}
-#' \item{rep}{representation of the character (where possible)}
-#' \item{isAlt}{For some tables alternate encodings in Unicode and UTF-8 are given.
-#' When that occurs the alternate Unicode and alternate UTF-8 columns follow the character name.}
-#' \item{isCombining}{}
-#' \item{name}{MARC character name, followed by the UCS name}
-#' }
-#' @source The data comes from the [Library of Congress](https://www.loc.gov/marc/specifications/codetables.xml "MARC specification").
-#' @seealso
-#' \link{rnaco}
-#' \link{marcBasicArabic}
-#' \link{marcBasicCyrillic}
-#' \link{marcBasicGreek}
-#' \link{marcBasicHebrew}
-#' \link{marcComponentInputMethodCharacters}
-#' \link{marcEastAsianIdeographsHan}
-#' \link{marcEastAsianPunctuationMarks}
-#' \link{marcExtendedArabic}
-#' \link{marcExtendedCyrillic}
-#' \link{marcExtendedLatinANSEL}
-#' \link{marcGreekSymbols}
-#' \link{marcKoreanHangul}
-#' \link{marcSubscripts}
-#' \link{marcSuperscripts}
-#' \link{unihan_variants}
 NULL
 
 
@@ -612,38 +323,10 @@ NULL
 
 #' Detailed description of the data
 #' @name marcKoreanHangul
+#' @rdname marctables
 #' @docType data
 #' @title Korean Hangul code table (February 6, 2003)
 #' @description This table contains 2,028 mappings of character encodings for Korean hangul from the East Asian Coded Character set (ANSI/NISO Z39.64, or "EACC") to character encodings in the Universal Character Set (UCS, ISO-IEC 10646)/Unicode. 
-#' @format a \code{tbl_df} containing the following fields:
-#' \describe{
-#' \item{marc}{MARC-8 code (in hex) for the character as coming from the G0 graphic set}
-#' \item{ucs}{UCS/Unicode code point (hexmode)}
-#' \item{utf8}{UTF-8 code (in hex) for the UCS character}
-#' \item{rep}{representation of the character (where possible)}
-#' \item{isAlt}{For some tables alternate encodings in Unicode and UTF-8 are given.
-#' When that occurs the alternate Unicode and alternate UTF-8 columns follow the character name.}
-#' \item{isCombining}{}
-#' \item{name}{MARC character name, followed by the UCS name}
-#' }
-#' @source The data comes from the [Library of Congress](https://www.loc.gov/marc/specifications/codetables.xml "MARC specification").
-#' @seealso
-#' \link{rnaco}
-#' \link{marcBasicArabic}
-#' \link{marcBasicCyrillic}
-#' \link{marcBasicGreek}
-#' \link{marcBasicHebrew}
-#' \link{marcComponentInputMethodCharacters}
-#' \link{marcEastAsianIdeographsHan}
-#' \link{marcEastAsianPunctuationMarks}
-#' \link{marcExtendedArabic}
-#' \link{marcExtendedCyrillic}
-#' \link{marcExtendedLatinANSEL}
-#' \link{marcGreekSymbols}
-#' \link{marcJapaneseHiraganaandKatakana}
-#' \link{marcSubscripts}
-#' \link{marcSuperscripts}
-#' \link{unihan_variants}
 NULL
 
 
@@ -654,39 +337,10 @@ NULL
 
 #' Detailed description of the data
 #' @name marcSubscripts
+#' @rdname marctables
 #' @docType data
 #' @title Subscripts
 #' @description Subscripts code table, ISO code 62 (January 2000)
-#' @format a \code{tbl_df} containing the following fields:
-#' \describe{
-#' \item{marc}{MARC-8 code (in hex) for the character as coming from the G0 graphic set}
-#' \item{ucs}{UCS/Unicode code point (hexmode)}
-#' \item{utf8}{UTF-8 code (in hex) for the UCS character}
-#' \item{rep}{representation of the character (where possible)}
-#' \item{isAlt}{For some tables alternate encodings in Unicode and UTF-8 are given.
-#' When that occurs the alternate Unicode and alternate UTF-8 columns follow the character name.}
-#' \item{isCombining}{}
-#' \item{name}{MARC character name, followed by the UCS name}
-#' }
-#' @details See the vignette `vignette("marctables")`.
-#' @source The data comes from the [Library of Congress](https://www.loc.gov/marc/specifications/codetables.xml "MARC specification").
-#' @seealso
-#' \link{rnaco}
-#' \link{marcBasicArabic}
-#' \link{marcBasicCyrillic}
-#' \link{marcBasicGreek}
-#' \link{marcBasicHebrew}
-#' \link{marcComponentInputMethodCharacters}
-#' \link{marcEastAsianIdeographsHan}
-#' \link{marcEastAsianPunctuationMarks}
-#' \link{marcExtendedArabic}
-#' \link{marcExtendedCyrillic}
-#' \link{marcExtendedLatinANSEL}
-#' \link{marcGreekSymbols}
-#' \link{marcJapaneseHiraganaandKatakana}
-#' \link{marcKoreanHangul}
-#' \link{marcSuperscripts}
-#' \link{unihan_variants}
 NULL
 
 
@@ -697,38 +351,10 @@ NULL
 
 #' Detailed description of the data
 #' @name marcSuperscripts
+#' @rdname marctables
 #' @docType data
 #' @title Superscripts
 #' @description Superscripts code table, ISO code 70 (January 2000)
-#' @format a \code{tbl_df} containing the following fields:
-#' \describe{
-#' \item{marc}{MARC-8 code (in hex) for the character as coming from the G0 graphic set}
-#' \item{ucs}{UCS/Unicode code point (hexmode)}
-#' \item{utf8}{UTF-8 code (in hex) for the UCS character}
-#' \item{rep}{representation of the character (where possible)}
-#' \item{isAlt}{For some tables alternate encodings in Unicode and UTF-8 are given.
-#' When that occurs the alternate Unicode and alternate UTF-8 columns follow the character name.}
-#' \item{isCombining}{}
-#' \item{name}{MARC character name, followed by the UCS name}
-#' }
-#' @source The data comes from the [Library of Congress](https://www.loc.gov/marc/specifications/codetables.xml "MARC specification").
-#' @seealso
-#' \link{rnaco}
-#' \link{marcBasicArabic}
-#' \link{marcBasicCyrillic}
-#' \link{marcBasicGreek}
-#' \link{marcBasicHebrew}
-#' \link{marcComponentInputMethodCharacters}
-#' \link{marcEastAsianIdeographsHan}
-#' \link{marcEastAsianPunctuationMarks}
-#' \link{marcExtendedArabic}
-#' \link{marcExtendedCyrillic}
-#' \link{marcExtendedLatinANSEL}
-#' \link{marcGreekSymbols}
-#' \link{marcJapaneseHiraganaandKatakana}
-#' \link{marcKoreanHangul}
-#' \link{marcSubscripts}
-#' \link{unihan_variants}
 NULL
 
 
@@ -754,21 +380,11 @@ NULL
 #' provides a file Unihan.zip that contains a file Unihan\_Variants.txt.
 #' @seealso
 #' \link{rnaco}
-#' \link{marcBasicArabic}
-#' \link{marcBasicCyrillic}
-#' \link{marcBasicGreek}
-#' \link{marcBasicHebrew}
-#' \link{marcComponentInputMethodCharacters}
-#' \link{marcEastAsianIdeographsHan}
-#' \link{marcEastAsianPunctuationMarks}
-#' \link{marcExtendedArabic}
-#' \link{marcExtendedCyrillic}
-#' \link{marcExtendedLatinANSEL}
-#' \link{marcGreekSymbols}
-#' \link{marcJapaneseHiraganaandKatakana}
-#' \link{marcKoreanHangul}
-#' \link{marcSubscripts}
-#' \link{unconditionalMappings}
+#' \link{marcNotes}
+#' \link{marctables}
+#' \link{unihan_variants}
+#' \link{nacotransform}
+#' \link{cjkextracts}
 NULL
 
 
@@ -801,6 +417,11 @@ NULL
 #' provides a file UCD.zip that contains the file SpecialCasings.txt.
 #' @seealso
 #' \link{rnaco}
+#' \link{marcNotes}
+#' \link{marctables}
+#' \link{unihan_variants}
+#' \link{nacotransform}
+#' \link{cjkextracts}
 NULL
 
 
@@ -859,11 +480,14 @@ NULL
 #' @docType data
 #' @title Personal name authority records
 #' @description The [NACO CJK Funnel References Project Guidelines](https://www.loc.gov/aba/pcc/naco/CJK/NACO-CJK-Funnel-References-Project-Guidelines.docx)[@naco2019naco]
-#' refer to three Excel files containing personal name authorities for use
-#' in the funnel project. These files contain 268,128 records extracted by
+#' refer to three Google spreadsheets containing personal name authorities for use
+#' in the funnel project. These spreadsheets derive from 268,128 records extracted by
 #' Gary Strawn. While they emphasize Chinese, Japanese and Korean, when coupled
-#' with VIAF, they access a rich resource of name authority records from
-#' the various VIAF contributors.
+#' with VIAF they access a rich resource of name authority records from
+#' the various VIAF contributors in various languages. Please refer to the
+#' [Descriptive Cataloging Manual](https://www.loc.gov/aba/publications/FreeDCM/DCM/Z01.pdf)
+#' for detailed information on the tag fields. For example, the tag009_32 and tag670
+#' columns relate to compliance with RDA name authority records.
 #' @format cjkextractja is a \code{tbl_df} containing the following fields:
 #' \describe{
 #' \item{lccn}{LC control number, lower case 'n', no space}
@@ -880,6 +504,11 @@ NULL
 #' @source The data comes from the NACO CJK Funnel References Project.
 #' @seealso
 #' \link{rnaco}
+#' \link{marcNotes}
+#' \link{marctables}
+#' \link{unihan_variants}
+#' \link{nacotransform}
+#' \link{cjkextracts}
 NULL
 
 

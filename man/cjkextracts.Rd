@@ -56,15 +56,23 @@ The data comes from the NACO CJK Funnel References Project.
 }
 \description{
 The \href{https://www.loc.gov/aba/pcc/naco/CJK/NACO-CJK-Funnel-References-Project-Guidelines.docx}{NACO CJK Funnel References Project Guidelines}\link{@naco2019naco}
-refer to three Excel files containing personal name authorities for use
-in the funnel project. These files contain 268,128 records extracted by
+refer to three Google spreadsheets containing personal name authorities for use
+in the funnel project. These spreadsheets derive from 268,128 records extracted by
 Gary Strawn. While they emphasize Chinese, Japanese and Korean, when coupled
-with VIAF, they access a rich resource of name authority records from
-the various VIAF contributors.
+with VIAF they access a rich resource of name authority records from
+the various VIAF contributors in various languages. Please refer to the
+\href{https://www.loc.gov/aba/publications/FreeDCM/DCM/Z01.pdf}{Descriptive Cataloging Manual}
+for detailed information on the tag fields. For example, the tag009_32 and tag670
+columns relate to compliance with RDA name authority records.
 }
 \details{
 Personal name authority records
 }
 \seealso{
 \link{rnaco}
+\link{marcNotes}
+\link{marctables}
+\link{unihan_variants}
+\link{nacotransform}
+\link{cjkextracts}
 }

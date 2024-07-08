@@ -1,15 +1,17 @@
 R implemention of NACO normalization
 ================
 Alan Engel
-04 July, 2024
+08 July, 2024
 
 The Library of Congress’s [Authority File Comparison Rules (NACO
 Normalization)](https://www.loc.gov/aba/pcc/naco/normrule-2.html) were
 finalized in 2009 for the specific purpose of determining whether or not
 names in the 4XX fields can be added to the 1XX fields. If the
 comparision rules find that a name in a 4XX field already exists, in
-normalized form, in the 1XX fields, it cannot be added.([Hickey, Toves,
-and O’Neill 2006](#ref-hickey2006naco))
+normalized form, in the 1XX fields, it cannot be added.\[Hickey, Toves,
+and O’Neill ([2006](#ref-hickey2006naco))\]([Library of Congress,
+Policy, Training, and Cooperative Programs Division
+2020](#ref-loc2020descriptive))
 
 Thanks to a splendid new R package, stringi, developed by Marek
 Gagolewski,([Gagolewski 2022](#ref-R-stringi)) the comparison rules can
@@ -155,6 +157,15 @@ Hickey, Thomas B., Jenny Toves, and T. O’Neill Edward. 2006. “NACO
 Normalization: A Detailed Examination of the Authority File Comparison
 Rules.” *Library Resources & Technical Services* 50 (3): 166–72.
 <https://www.proquest.com/scholarly-journals/naco-normalization-detailed-examination-authority/docview/216890715/se-2>.
+
+</div>
+
+<div id="ref-loc2020descriptive" class="csl-entry">
+
+Library of Congress, Policy, Training, and Cooperative Programs
+Division. 2020. “Descriptive Cataloging Manual: Z1: Name and Series
+Authority Records.” August 2020.
+<https://www.loc.gov/aba/publications/FreeDCM/DCM/Z01.pdf>.
 
 </div>
 

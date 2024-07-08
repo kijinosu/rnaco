@@ -12,7 +12,7 @@ link-citations: true
 The Library of Congress's [Authority File Comparison Rules (NACO Normalization)](https://www.loc.gov/aba/pcc/naco/normrule-2.html)
 were finalized in 2009 for the specific purpose of determining whether or not names in the 4XX fields
 can be added to the 1XX fields. If the comparision rules find that a name in a 4XX field already exists,
-in normalized form, in the 1XX fields, it cannot be added.[@hickey2006naco]
+in normalized form, in the 1XX fields, it cannot be added.[@hickey2006naco][@loc2020descriptive]
 
 Thanks to a splendid new R package, stringi, developed by Marek Gagolewski,[@R-stringi] the comparison rules
 can be implemented using calls to the ICU4C library from the [International Components for Unicode](https://icu.unicode.org/).

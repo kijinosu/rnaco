@@ -18,7 +18,7 @@
 #' * Please see \code{vignette("naco", package = "rnaco")} for a detailed walk-through of
 #' the NACO authority file comparison rules.
 #' @export
-naco_transform <- function(str, firstcomma=TRUE, encoding="UTF-8") {
+naco_transform <- function(str, firstcomma=FALSE, encoding="UTF-8") {
     library(dplyr)
     library(magrittr)
     library(stringi)
@@ -44,7 +44,8 @@ naco_transform <- function(str, firstcomma=TRUE, encoding="UTF-8") {
     step7Z <- stringi::stri_replace_all_regex(step7So, "[\\p{Zl}|\\p{Zp}|\\p{Zs}]", " ")
     step8 <- .step8(step7Z, step6str)
     step9 <- stringi::stri_replace_all_charclass(step8, '\\p{WHITE_SPACE}', ' ', merge=TRUE)
-    return(step9)
+    step10 <- stringi::stri_trim_both(step9, pattern = "\\P{Wspace}")
+    return(step10)
 }
 
 .step8 <- function(strlist1, strlist2){

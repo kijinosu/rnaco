@@ -546,3 +546,31 @@ TRACE [2024-07-04 13:55:28] DataPackageR succeeded
 TRACE [2024-07-04 13:55:28] Building documentation
 TRACE [2024-07-04 13:55:31] Building package
 TRACE [2024-07-04 13:58:37] Rebuilding data package documentation.
+TRACE [2024-07-08 11:02:14] Logging to C:/Users/Alan/Documents/R Projects/rnaco/rnaco/inst/extdata/Logfiles/processing.log
+TRACE [2024-07-08 11:02:14] Processing data
+TRACE [2024-07-08 11:02:14] Reading yaml configuration
+TRACE [2024-07-08 11:02:14] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/marctables.Rmd
+TRACE [2024-07-08 11:02:14] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/unihanVariants.Rmd
+TRACE [2024-07-08 11:02:14] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/nacoDatasets.Rmd
+TRACE [2024-07-08 11:02:14] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/naco.Rmd
+TRACE [2024-07-08 11:02:15] Processing 1 of 4: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/marctables.Rmd
+
+TRACE [2024-07-08 11:03:02] 17 data set(s) created by marctables.Rmd
+TRACE [2024-07-08 11:03:02] Processing 2 of 4: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/unihanVariants.Rmd
+
+TRACE [2024-07-08 11:03:26] 1 data set(s) created by unihanVariants.Rmd
+TRACE [2024-07-08 11:03:26] Processing 3 of 4: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/nacoDatasets.Rmd
+
+TRACE [2024-07-08 11:04:59] 7 data set(s) created by nacoDatasets.Rmd
+TRACE [2024-07-08 11:04:59] Processing 4 of 4: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/naco.Rmd
+
+TRACE [2024-07-08 11:05:01] 0 data set(s) created by naco.Rmd
+TRACE [2024-07-08 11:05:01] NEWS.md file found, updating!
+TRACE [2024-07-08 11:05:01] Processed data sets match existing data sets at version 0.1.8
+TRACE [2024-07-08 11:05:01] Saving to data
+TRACE [2024-07-08 11:05:01] Copied documentation to C:/Users/Alan/Documents/R Projects/rnaco/rnaco/R/rnaco.R
+TRACE [2024-07-08 11:05:02] Done
+TRACE [2024-07-08 11:05:02] DataPackageR succeeded
+TRACE [2024-07-08 11:05:02] Building documentation
+TRACE [2024-07-08 11:05:05] Building package
+TRACE [2024-07-08 11:10:22] Rebuilding data package documentation.

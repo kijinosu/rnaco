@@ -76,4 +76,9 @@ the NACO authority file comparison rules.
 }
 
 \link{rnaco}
+\link{marcNotes}
+\link{marctables}
+\link{unihan_variants}
+\link{nacotransform}
+\link{cjkextracts}
 }

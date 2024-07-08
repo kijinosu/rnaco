@@ -603,14 +603,14 @@ padding-top: 0px;
 
 <h1 id="r-implemention-of-naco-normalization">R implemention of NACO
 normalization</h1>
-<p>Alan Engel 04 July, 2024</p>
+<p>Alan Engel 08 July, 2024</p>
 <p>The Library of Congress’s <a href="https://www.loc.gov/aba/pcc/naco/normrule-2.html">Authority File
 Comparison Rules (NACO Normalization)</a> were finalized in 2009 for the
 specific purpose of determining whether or not names in the 4XX fields
 can be added to the 1XX fields. If the comparision rules find that a
 name in a 4XX field already exists, in normalized form, in the 1XX
-fields, it cannot be added.(<a href="#ref-hickey2006naco">Hickey, Toves,
-and O’Neill 2006</a>)</p>
+fields, it cannot be added.[Hickey, Toves, and O’Neill (<a href="#ref-hickey2006naco">2006</a>)](<a href="#ref-loc2020descriptive">Library of Congress, Policy, Training,
+and Cooperative Programs Division 2020</a>)</p>
 <p>Thanks to a splendid new R package, stringi, developed by Marek
 Gagolewski,(<a href="#ref-R-stringi">Gagolewski 2022</a>) the comparison
 rules can be implemented using calls to the ICU4C library from the <a href="https://icu.unicode.org/">International Components for
@@ -827,6 +827,13 @@ Statistical Software</em> 103 (2): 1–59. <a href="https://doi.org/10.18637/jss
 Normalization: A Detailed Examination of the Authority File Comparison
 Rules.” <em>Library Resources &amp; Technical Services</em> 50 (3):
 166–72. <a href="https://www.proquest.com/scholarly-journals/naco-normalization-detailed-examination-authority/docview/216890715/se-2">https://www.proquest.com/scholarly-journals/naco-normalization-detailed-examination-authority/docview/216890715/se-2</a>.</p>
+</div>
+
+<div id="ref-loc2020descriptive" class="csl-entry">
+
+<p>Library of Congress, Policy, Training, and Cooperative Programs
+Division. 2020. “Descriptive Cataloging Manual: Z1: Name and Series
+Authority Records.” August 2020. <a href="https://www.loc.gov/aba/publications/FreeDCM/DCM/Z01.pdf">https://www.loc.gov/aba/publications/FreeDCM/DCM/Z01.pdf</a>.</p>
 </div>
 
 <div id="ref-R-tibble" class="csl-entry">

@@ -17,7 +17,11 @@ and/or DataPackageR::load_all
 _datasets() to load them.
 }
 \seealso{
-\link{cjkextractko}
+\link{marcNotes}
+\link{marctables}
+\link{unihan_variants}
+\link{nacotransform}
+\link{cjkextracts}
 }
 \author{
 \strong{Maintainer}: Alan Engel \email{alan@ttcrossroads.net} (\href{https://orcid.org/0000-0003-0070-2347}{ORCID})

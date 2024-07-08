@@ -1,6 +1,6 @@
 Package: rnaco
 Title: rnaco: Dealing with Name Normalization for the VIAF API
-Version: 1.1.1
+Version: 1.1.2
 Authors@R: 
     person("Alan", "Engel", , "alan@ttcrossroads.net", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0003-0070-2347"))
@@ -23,7 +23,7 @@ Imports:
     stringi,
     readxl,
     viafr
-Date: 2024-07-04
+Date: 2024-07-08
 Suggests: 
     knitr,
     rmarkdown
