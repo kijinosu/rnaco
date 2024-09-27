@@ -620,7 +620,7 @@ NULL
 #' @rdname jctPrecedence
 #' @docType data
 #' @title Unicode code point precedence tables based on kUnihanCore2020 source tags and educational grade levels
-#' @format a \code{tbl_df} containing the following fields:
+#' @format \code{jctPrecedence} is a \code{tbl_df} containing the following fields:
 #' \describe{
 #' \item{ucs}{Unicode code point of ideograph}
 #' \item{kTotalStrokes}{Total strokes in ideograph}
@@ -631,9 +631,10 @@ NULL
 #' \item{tCoreRank}{Ranking based on kUnihanCore2020 source tags favoring 'T' (Taiwan)}
 #' \item{twRank}{Ranking based on educational grade level of ideograph in Taiwan}
 #' }
-#' @source The data comes from Japan's Ministry of Education, Culture, Sports, Science and Technology (MEXT);
-#' \href{http://www.microweiidv.com/weipage/n9gradeword.htm}; and
+#' @source The data for ```kyoikuKanji``` comes from Japan's Ministry of Education, Culture, Sports, Science and Technology (MEXT);
+#' for ```twXiaoxueWenzi``` from \href{http://www.microweiidv.com/weipage/n9gradeword.htm}; and for ```zhXiaoxueWenzi``` from
 #' \href{https://cd.jiajiaoban.com/e/20210314/604de778686f4.shtml}.
+#' The data for ```unihanPrecedenceData```` comes from the XML Representation of Unicode 15.1.0 UCD flat file.
 #' @seealso
 #' \link{rnaco}
 #' \href{../doc/unihanprecedencedata.html}{\code{vignette("unihanprecedencedata", package = "rnaco")}}
@@ -693,22 +694,18 @@ NULL
 #' @name unihanPrecedenceData
 #' @rdname jctPrecedence
 #' @docType data
-#' @title Data used for calculating ideograph precedences.
-#' @format a \code{tbl_df} containing the following fields:
+#' @format \code{unihanPrecedenceData} is a \code{tbl_df} containing the following fields:
 #' \describe{
-#' \item{ucs}{}
-#' \item{kFrequency}{}
-#' \item{kTotalStrokes}{}
-#' \item{kIICore}{}
-#' \item{kUnihanCore2020}{}
-#' \item{kJinmeiyoKanji}{}
-#' \item{kJis0}{}
-#' \item{kJis1}{}
-#' \item{kJIS0213}{}
-#' \item{kJoyoKanji}{}
-#' \item{kMojiJoho}{}
+#' \item{ucs}{Unicode code point of ideograph}
+#' \item{kFrequency}{Unihan property: A rough frequency measurement for the ideograph based on analysis of traditional Chinese USENET postings; ideographs with a kFrequency of 1 are the most common, those with a kFrequency of 2 are less common, and so on, through a kFrequency of 5.}
+#' \item{kTotalStrokes}{Unihan property: The total number of strokes in the ideograph (including the radical). }
+#' \item{kIICore}{Unihan property: Used for ideographs which are in IICore, the IRG-produced minimal set of required ideographs for East Asian use.}
+#' \item{kUnihanCore2020}{Unihan property: Used for ideographs which are in the Unihan Core 2020 set.}
+#' \item{kJinmeiyoKanji}{Unihan property: The year that corresponds to the Jinmei-yō Kanji (人名用漢字) table in which the ideograph appears.}
+#' \item{kJis0}{Unihan property: The JIS X 0208-1990 mapping for this ideograph in row-cell form.}
+#' \item{kJis1}{Unihan property: The JIS X 0212-1990 mapping for this ideograph in row-cell form.}
+#' \item{kJIS0213}{Unihan property: The JIS X 0213:2004 mapping for this ideograph in plane-row-cell form.}
+#' \item{kJoyoKanji}{Unihan property: The year that corresponds to the Jōyō Kanji (常用漢字) table in which the ideograph appears.}
+#' \item{kMojiJoho}{Unihan property: mappings from the Moji Jōhō Kiban database by CITPC (Character Information Technology Promotion Council) }
 #' }
-#' @source The data comes from the XML Representation of Unicode 15.1.0 UCD flat file.
-#' @seealso
-#' \link{rnaco}
 NULL
