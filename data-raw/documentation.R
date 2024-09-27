@@ -1,7 +1,7 @@
 #' rnaco
 #' A data package for rnaco.
 #' @aliases rnaco-package
-#' @title DName Normalization for the VIAF API
+#' @title Package Title
 #' @name rnaco
 #' @description A description of the data package
 #' @details Use \code{data(package='rnaco')$results[, 3]} to see a list of available data sets in this data package
