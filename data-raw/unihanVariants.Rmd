@@ -12,7 +12,7 @@ link-citations: true
 
 # Libraries
 
-```{r libraries}
+```{r libraries, warning=FALSE, message=FALSE}
 library(tidyr)
 library(dplyr)
 library(magrittr)
@@ -575,12 +575,12 @@ utvlist <- lapply(utv, function(df) {
 		tgtlist = list(string = target))
 })
 ubf <- do.call(rbind,utvlist)
-unihan_variants <- ubf %>% tidyr::unnest(cols = c(tgtlist)) %>% 
+unihanVariants <- ubf %>% tidyr::unnest(cols = c(tgtlist)) %>% 
 	dplyr::mutate(
 		ucsvariant = as.hexmode(paste("0x",tgtlist, sep=""))
 	) %>% 
 	dplyr::select(-tgtlist)
-unihan_variants
+unihanVariants
 ```
 
 # References

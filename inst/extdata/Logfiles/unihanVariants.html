@@ -373,20 +373,15 @@ display: none;
 
 <h1 class="title toc-ignore">Unihan Variants Table for rnaco</h1>
 <h4 class="author">Alan Engel</h4>
-<h4 class="date">08 July, 2024</h4>
+<h4 class="date">14 August, 2024</h4>
 
 </div>
 
 
 <div id="libraries" class="section level1">
 <h1>Libraries</h1>
-<pre class="r"><code>library(tidyr)</code></pre>
-<pre><code>## 
-## 次のパッケージを付け加えます: &#39;tidyr&#39;</code></pre>
-<pre><code>## 以下のオブジェクトは &#39;package:magrittr&#39; からマスクされています:
-## 
-##     extract</code></pre>
-<pre class="r"><code>library(dplyr)
+<pre class="r"><code>library(tidyr)
+library(dplyr)
 library(magrittr)
 library(tibble)
 library(stringi)</code></pre>
@@ -1274,12 +1269,12 @@ utvlist &lt;- lapply(utv, function(df) {
         tgtlist = list(string = target))
 })
 ubf &lt;- do.call(rbind,utvlist)
-unihan_variants &lt;- ubf %&gt;% tidyr::unnest(cols = c(tgtlist)) %&gt;% 
+unihanVariants &lt;- ubf %&gt;% tidyr::unnest(cols = c(tgtlist)) %&gt;% 
     dplyr::mutate(
         ucsvariant = as.hexmode(paste(&quot;0x&quot;,tgtlist, sep=&quot;&quot;))
     ) %&gt;% 
     dplyr::select(-tgtlist)
-unihan_variants</code></pre>
+unihanVariants</code></pre>
 <pre><code>## # A tibble: 18,839 × 3
 ##    ucsindex  varianttype      ucsvariant
 ##    &lt;hexmode&gt; &lt;fct&gt;            &lt;hexmode&gt; 

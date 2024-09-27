@@ -374,7 +374,7 @@ display: none;
 <h1 class="title toc-ignore">Datasets for Authority File Comparison
 Rules (NACO Normalization)</h1>
 <h4 class="author">Alan Engel</h4>
-<h4 class="date">08 July, 2024</h4>
+<h4 class="date">09 July, 2024</h4>
 
 </div>
 
@@ -708,18 +708,18 @@ cjkextractzh &lt;- extract %&gt;% mutate(lccn = stringi::stri_replace_all_fixed(
     select(-lccnraw)
 cjkextractzh</code></pre>
 <pre><code>## # A tibble: 47,937 × 10
-##    lccn         tag008_32 tag100_field                                     tag400_CJK tag400_other tag400_roman rda   tag670 tag667 note     
-##    &lt;chr&gt;        &lt;chr&gt;     &lt;chr&gt;                                                 &lt;int&gt;        &lt;int&gt;        &lt;int&gt; &lt;chr&gt;  &lt;int&gt; &lt;chr&gt;  &lt;chr&gt;    
-##  1 no93022222   a         $a &#39;Jam-dpal-rgya-mtsho                                   2            0            5 Y          7 N      Non-CJK  
-##  2 n82098580    a         $a &#39;Phags-pa Blo-gros-rgyal-mtshan, $d 1235-1280          2            0            5 Y          2 N      Chi Mino…
-##  3 n79141606    a         $a A, Kejian                                              2            0            3 N          3 N      &lt;NA&gt;     
-##  4 n2005085813  a         $a Abao                                                   2            0            1 Y          2 N      &lt;NA&gt;     
-##  5 no2007114850 a         $a Abdulla, Zaki                                          2            0            7 N          2 N      Chi Mino…
-##  6 no2007111407 a         $a Abduqadir, Ablimit                                     2            0            3 Y          1 N      Chi Mino…
-##  7 n83043146    a         $a Abing, $d 1893-1950                                    2            0            6 N          2 N      &lt;NA&gt;     
-##  8 n88276359    a         $a Abudureheman                                           2            0            1 N          1 N      &lt;NA&gt;     
-##  9 n88012033    a         $a Abulaiti, Abudurexiti                                  2            0            3 N          1 N      Chi Mino…
-## 10 no97032405   a         $a Acheng, $d 1948-                                       2            0            6 Y          4 N      &lt;NA&gt;     
+##    lccn         tag008_32 tag100_field                                     tag400_CJK tag400_other tag400_roman rda   tag670 tag667 note      
+##    &lt;chr&gt;        &lt;chr&gt;     &lt;chr&gt;                                                 &lt;int&gt;        &lt;int&gt;        &lt;int&gt; &lt;chr&gt;  &lt;int&gt; &lt;chr&gt;  &lt;chr&gt;     
+##  1 no93022222   a         $a &#39;Jam-dpal-rgya-mtsho                                   2            0            5 Y          7 N      Non-CJK   
+##  2 n82098580    a         $a &#39;Phags-pa Blo-gros-rgyal-mtshan, $d 1235-1280          2            0            5 Y          2 N      Chi Minor…
+##  3 n79141606    a         $a A, Kejian                                              2            0            3 N          3 N      &lt;NA&gt;      
+##  4 n2005085813  a         $a Abao                                                   2            0            1 Y          2 N      &lt;NA&gt;      
+##  5 no2007114850 a         $a Abdulla, Zaki                                          2            0            7 N          2 N      Chi Minor…
+##  6 no2007111407 a         $a Abduqadir, Ablimit                                     2            0            3 Y          1 N      Chi Minor…
+##  7 n83043146    a         $a Abing, $d 1893-1950                                    2            0            6 N          2 N      &lt;NA&gt;      
+##  8 n88276359    a         $a Abudureheman                                           2            0            1 N          1 N      &lt;NA&gt;      
+##  9 n88012033    a         $a Abulaiti, Abudurexiti                                  2            0            3 N          1 N      Chi Minor…
+## 10 no97032405   a         $a Acheng, $d 1948-                                       2            0            6 Y          4 N      &lt;NA&gt;      
 ## # ℹ 47,927 more rows</code></pre>
 <pre class="r"><code>ssja &lt;- &quot;https://docs.google.com/spreadsheets/d/1dIKgpdGZFXx20Mcbh83Y-0pgQ6wAUPw3Lc8zFKXteD8/edit?usp=sharing&quot;
 extract &lt;- read_sheet(ssja ,

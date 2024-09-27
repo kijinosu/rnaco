@@ -72,7 +72,7 @@ Personal name authority records
 \link{rnaco}
 \link{marcNotes}
 \link{marctables}
-\link{unihan_variants}
+\link{unihanVariants}
 \link{nacotransform}
 \link{cjkextracts}
 }

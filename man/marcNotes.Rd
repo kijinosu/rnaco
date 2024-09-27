@@ -29,7 +29,8 @@ Detailed description of the data
 \link{rnaco}
 \link{marcNotes}
 \link{marctables}
-\link{unihan_variants}
+\link{unihanVariants}
 \link{nacotransform}
 \link{cjkextracts}
+\href{../doc/marctables.html}{\code{vignette("marctables", package = "rnaco")}}
 }

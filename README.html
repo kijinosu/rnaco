@@ -601,9 +601,9 @@ padding-top: 0px;
 
 <body>
 
-<h1 id="r-implemention-of-naco-normalization">R implemention of NACO
-normalization</h1>
-<p>Alan Engel 08 July, 2024</p>
+<h1 id="r-toolbox-for-naco-and-cjk-name-authority-comparison">R toolbox
+for NACO and CJK name authority comparison</h1>
+<p>Alan Engel 27 September, 2024</p>
 <p>The Library of Congress’s <a href="https://www.loc.gov/aba/pcc/naco/normrule-2.html">Authority File
 Comparison Rules (NACO Normalization)</a> were finalized in 2009 for the
 specific purpose of determining whether or not names in the 4XX fields
@@ -620,8 +620,8 @@ comparison rules are executed using stringi functions.</p>
 forked from Stefanie Schneider’s viafr package on Github.(<a href="#ref-R-viafr">Schneider 2022</a>) In a related project, viafr
 development is aimed at extracting information, for example, social
 networks based on coauthors, from the <a href="https://viaf.org/">Virtual International Authority Files
-(VIAF)</a>. In particular, normalization functionality for that package
-will be built and maintained in rnaco.</p>
+(VIAF)</a>. Normalization functionality for that package will be built
+and maintained in rnaco.</p>
 <p>Of course, development based on NACO did not end in 2009 and is
 included in the <a href="https://www.loc.gov/aba/pcc/naco/index.html">NACO - Name Authority
 Cooperative Program</a>. This package is intended to facilitate
@@ -631,11 +631,19 @@ files, which are then included as <code>tibbles</code>(<a href="#ref-R-tibble">M
 <h1 id="features">Features</h1>
 <h2 id="functions">Functions</h2>
 <ul>
+<li><p>get_transliteration_rules() Fetch transliteration rules for use
+in stringi::stri_trans_general()</p></li>
+<li><p>moji_transform() Normalizing transform based on MojiJoho
+variants</p></li>
+<li><p>multiform_transform() CJK normalizing transform with
+user-selectable form (JA, TW or ZH)</p></li>
 <li><p>naco_transform() This function follows the Authority File
 Comparison Rules using stringi(<a href="#ref-R-stringi">Gagolewski
 2022</a>) to implement the <a href="https://icu.unicode.org/">International Components for
 Unicode</a>. The derivation of naco_transform() is detailed in a
 walk-through vignette, <code>rnaco::naco</code>.</p></li>
+<li><p>show_cluster() Display ideographic clusters used in normalizing
+transform</p></li>
 <li><p>xml2df() This function reads a specially structured xml, and
 produces a tibble.</p></li>
 </ul>
@@ -762,14 +770,53 @@ normalization</h3>
 <td>Unihan CJK variants</td>
 </tr>
 <tr class="even">
+<td>mojiMapdf</td>
+<td>Mapping of Moji Joho</td>
+</tr>
+<tr class="odd">
+<td>mojiVariants</td>
+<td>Moji Joho variants</td>
+</tr>
+<tr class="even">
+<td>kyoikuKanji</td>
+<td>Kanji by grade level in Japan</td>
+</tr>
+<tr class="odd">
+<td>zhXiaoxueWenzi</td>
+<td>Ideographs by grade level in PRC</td>
+</tr>
+<tr class="even">
+<td>twXiaoxueWenzi</td>
+<td>Ideographs by grade level in TW</td>
+</tr>
+<tr class="odd">
+<td>jctPrecedence</td>
+<td>Precedence schemes for variant clusters</td>
+</tr>
+</tbody>
+</table>
+<h3 id="datasets-for-testing">Datasets for testing</h3>
+<p>This data comes from personal name authority records that were
+developed by the <a href="https://www.loc.gov/aba/pcc/naco/CJK.html">NACO CJK Funnel
+References Project</a> as a source of Chinese, Japanese and Korean names
+for testing and development.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Dataset</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
 <td>cjkextractja</td>
 <td>Personal name authority records - Japanese names</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>cjkextractko</td>
 <td>Personal name authority records - Korean names</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>cjkextractzh</td>
 <td>Personal name authority records - Chinese names</td>
 </tr>
@@ -786,6 +833,9 @@ walk-through</p></li>
 (NACO Normalization)</p></li>
 <li><p>rnaco::unihanVariants: Unihan Variants Table for rnaco including
 analysis of their use in VAIF normalization of CJK names</p></li>
+<li><p>rnaco::integrated-variant-map: An in-progress effort to combine
+NACO, Unihan variants and MojiJoho variants into an internally coherent
+scheme for normalization</p></li>
 </ul>
 <h1 id="installation">Installation</h1>
 <p>You can install the latest version of <strong>rnaco</strong> from <a href="https://github.com/kijinosu/rnaco">github</a> with:</p>
@@ -794,13 +844,16 @@ analysis of their use in VAIF normalization of CJK names</p></li>
 <h1 id="other-simlar-work">Other simlar work</h1>
 <ul>
 <li><a href="https://github.com/unt-libraries/pynaco">pynaco</a> is a
-fork by University of North Texas Libraries of sample code found on the
-OCLC Research Website.</li>
+fork by University of North Texas Libraries of Python sample code that
+was on the OCLC Research Website.</li>
 </ul>
-<h1 id="r-packages-used-for-this-data-package">R packages used for this
-data package</h1>
+<h1 id="r-packages-used-for-this-package">R packages used for this
+package</h1>
 <ul>
-<li>DataPackageR - Set up and put the pieces together (<a href="#ref-R-DataPackageR">Finak et al. 2018</a>)</li>
+<li><p>DataPackageR - Set up and put the pieces together (<a href="#ref-R-DataPackageR">Finak et al. 2018</a>)</p></li>
+<li><p>stringi - (<a href="#ref-R-stringi">Gagolewski 2022</a>)</p></li>
+<li><p>tibble - (<a href="#ref-R-tibble">Müller and Wickham
+2023</a>)</p></li>
 </ul>
 <h1 id="references">References</h1>
 <div id="refs" class="references csl-bib-body hanging-indent">

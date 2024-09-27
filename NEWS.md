@@ -1,3 +1,49 @@
+DataVersion: 0.1.14
+=======================
+* Changed: jctPrecedence
+* Changed: kyoikuKanji
+* Changed: twXiaoxueWenzi
+* Changed: unihanPrecedenceData
+* Changed: zhXiaoxueWenzi
+Package built in non-interactive mode
+
+DataVersion: 0.1.13
+=======================
+* Added: unihanPrecedenceData
+* Changed: kyoikuKanji
+* Changed: mojiMapdf
+* Changed: mojiVariants
+* Changed: twXiaoxueWenzi
+* Changed: zhXiaoxueWenzi
+Package built in non-interactive mode
+
+DataVersion: 0.1.12
+=======================
+* Changed: kyoikuKanji
+* Changed: twXiaoxueWenzi
+Package built in non-interactive mode
+
+DataVersion: 0.1.11
+=======================
+* Added: jctPrecedence
+* Added: kyoikuKanji
+* Added: twXiaoxueWenzi
+* Added: zhXiaoxueWenzi
+* Deleted: unihanVariants
+Package built in non-interactive mode
+
+DataVersion: 0.1.10
+=======================
+* Changed: unihanVariants
+Added moji_transform()
+
+DataVersion: 0.1.9
+=======================
+* Deleted: unihan_variants
+* Added: unihanVariants
+* Added: mojiMapdf
+* Added: mojiVariants
+
 DataVersion: 0.1.8
 =======================
 * Added: cjkextractko
@@ -25,7 +71,6 @@ DataVersion: 0.1.8
 * Changed: step7lltranslitrule
 * Changed: unconditionalMappings
 * Changed: unihan_variants
-Added cjkextractko
 
 DataVersion: 0.1.7
 =======================

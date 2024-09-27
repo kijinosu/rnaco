@@ -574,3 +574,500 @@ TRACE [2024-07-08 11:05:02] DataPackageR succeeded
 TRACE [2024-07-08 11:05:02] Building documentation
 TRACE [2024-07-08 11:05:05] Building package
 TRACE [2024-07-08 11:10:22] Rebuilding data package documentation.
+TRACE [2024-07-09 11:02:06] Logging to C:/Users/Alan/Documents/R Projects/rnaco/rnaco/inst/extdata/Logfiles/processing.log
+TRACE [2024-07-09 11:02:06] Processing data
+TRACE [2024-07-09 11:02:06] Reading yaml configuration
+TRACE [2024-07-09 11:02:06] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/marctables.Rmd
+TRACE [2024-07-09 11:02:06] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/unihanVariants.Rmd
+TRACE [2024-07-09 11:02:06] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/nacoDatasets.Rmd
+TRACE [2024-07-09 11:02:06] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/naco.Rmd
+TRACE [2024-07-09 11:02:06] Processing 1 of 4: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/marctables.Rmd
+
+TRACE [2024-07-09 11:02:54] 17 data set(s) created by marctables.Rmd
+TRACE [2024-07-09 11:02:54] Processing 2 of 4: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/unihanVariants.Rmd
+
+TRACE [2024-07-09 11:03:18] 1 data set(s) created by unihanVariants.Rmd
+TRACE [2024-07-09 11:03:18] Processing 3 of 4: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/nacoDatasets.Rmd
+
+TRACE [2024-07-09 11:04:49] 7 data set(s) created by nacoDatasets.Rmd
+TRACE [2024-07-09 11:04:50] Processing 4 of 4: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/naco.Rmd
+
+TRACE [2024-07-09 11:04:52] 0 data set(s) created by naco.Rmd
+TRACE [2024-07-09 11:04:52] NEWS.md file found, updating!
+TRACE [2024-07-09 11:04:52] Processed data sets match existing data sets at version 0.1.8
+TRACE [2024-07-09 11:04:52] Saving to data
+TRACE [2024-07-09 11:04:52] Copied documentation to C:/Users/Alan/Documents/R Projects/rnaco/rnaco/R/rnaco.R
+TRACE [2024-07-09 11:04:52] Done
+TRACE [2024-07-09 11:04:52] DataPackageR succeeded
+TRACE [2024-07-09 11:04:52] Building documentation
+TRACE [2024-07-09 11:04:56] Building package
+TRACE [2024-07-09 11:08:50] Rebuilding data package documentation.
+TRACE [2024-08-13 10:27:54] Logging to C:/Users/Alan/Documents/R Projects/rnaco/rnaco/inst/extdata/Logfiles/processing.log
+TRACE [2024-08-13 10:27:54] Processing data
+TRACE [2024-08-13 10:27:54] Reading yaml configuration
+TRACE [2024-08-13 10:27:54] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/unihanVariants.Rmd
+TRACE [2024-08-13 10:27:54] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/citpcmojivariants.Rmd
+TRACE [2024-08-13 10:27:54] Processing 1 of 2: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/unihanVariants.Rmd
+
+TRACE [2024-08-13 10:28:22] 1 data set(s) created by unihanVariants.Rmd
+TRACE [2024-08-13 10:28:22] Processing 2 of 2: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/citpcmojivariants.Rmd
+
+TRACE [2024-08-13 10:29:12] 2 data set(s) created by citpcmojivariants.Rmd
+TRACE [2024-08-13 10:29:12] NEWS.md file found, updating!
+DEBUG [2024-08-13 10:29:12] cjkextractja was removed.
+TRACE [2024-08-13 10:33:59] Logging to C:/Users/Alan/Documents/R Projects/rnaco/rnaco/inst/extdata/Logfiles/processing.log
+TRACE [2024-08-13 10:33:59] Processing data
+TRACE [2024-08-13 10:33:59] Reading yaml configuration
+TRACE [2024-08-13 10:33:59] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/unihanVariants.Rmd
+TRACE [2024-08-13 10:33:59] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/citpcmojivariants.Rmd
+TRACE [2024-08-13 10:33:59] Processing 1 of 2: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/unihanVariants.Rmd
+
+TRACE [2024-08-13 10:34:23] 1 data set(s) created by unihanVariants.Rmd
+TRACE [2024-08-13 10:34:23] Processing 2 of 2: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/citpcmojivariants.Rmd
+
+TRACE [2024-08-13 10:35:05] 2 data set(s) created by citpcmojivariants.Rmd
+TRACE [2024-08-13 10:35:05] NEWS.md file found, updating!
+DEBUG [2024-08-13 10:35:05] cjkextractja was removed.
+TRACE [2024-08-13 10:36:21] Logging to C:/Users/Alan/Documents/R Projects/rnaco/rnaco/inst/extdata/Logfiles/processing.log
+TRACE [2024-08-13 10:36:21] Processing data
+TRACE [2024-08-13 10:36:21] Reading yaml configuration
+TRACE [2024-08-13 10:36:21] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/unihanVariants.Rmd
+TRACE [2024-08-13 10:36:21] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/citpcmojivariants.Rmd
+TRACE [2024-08-13 10:36:21] Processing 1 of 2: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/unihanVariants.Rmd
+
+TRACE [2024-08-13 10:36:44] 1 data set(s) created by unihanVariants.Rmd
+TRACE [2024-08-13 10:36:44] Processing 2 of 2: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/citpcmojivariants.Rmd
+
+TRACE [2024-08-13 10:37:28] 2 data set(s) created by citpcmojivariants.Rmd
+TRACE [2024-08-13 10:37:28] NEWS.md file found, updating!
+DEBUG [2024-08-13 10:37:28] cjkextractja was removed.
+TRACE [2024-08-13 10:40:53] Logging to C:/Users/Alan/Documents/R Projects/rnaco/rnaco/inst/extdata/Logfiles/processing.log
+TRACE [2024-08-13 10:40:53] Processing data
+TRACE [2024-08-13 10:40:53] Reading yaml configuration
+TRACE [2024-08-13 10:40:53] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/unihanVariants.Rmd
+TRACE [2024-08-13 10:40:53] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/citpcmojivariants.Rmd
+TRACE [2024-08-13 10:40:53] Processing 1 of 2: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/unihanVariants.Rmd
+
+TRACE [2024-08-13 10:41:16] 1 data set(s) created by unihanVariants.Rmd
+TRACE [2024-08-13 10:41:16] Processing 2 of 2: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/citpcmojivariants.Rmd
+
+TRACE [2024-08-13 10:41:58] 2 data set(s) created by citpcmojivariants.Rmd
+TRACE [2024-08-13 10:41:58] NEWS.md file found, updating!
+TRACE [2024-08-13 10:41:58] NEWS.md file found, updating!
+TRACE [2024-08-13 10:41:58] Saving to data
+TRACE [2024-08-13 10:41:58] Copied documentation to C:/Users/Alan/Documents/R Projects/rnaco/rnaco/R/rnaco.R
+TRACE [2024-08-13 10:41:59] Done
+TRACE [2024-08-13 10:41:59] DataPackageR succeeded
+TRACE [2024-08-13 10:41:59] Building documentation
+TRACE [2024-08-13 10:42:02] Building package
+TRACE [2024-08-13 11:03:25] Rebuilding data package documentation.
+TRACE [2024-08-14 12:50:14] Logging to C:/Users/Alan/Documents/R Projects/rnaco/rnaco/inst/extdata/Logfiles/processing.log
+TRACE [2024-08-14 12:50:14] Processing data
+TRACE [2024-08-14 12:50:14] Reading yaml configuration
+TRACE [2024-08-14 12:50:14] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/unihanVariants.Rmd
+TRACE [2024-08-14 12:50:14] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/citpcmojivariants.Rmd
+TRACE [2024-08-14 12:50:14] Processing 1 of 2: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/unihanVariants.Rmd
+
+TRACE [2024-08-14 12:50:44] 1 data set(s) created by unihanVariants.Rmd
+TRACE [2024-08-14 12:50:44] Processing 2 of 2: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/citpcmojivariants.Rmd
+
+TRACE [2024-08-14 12:51:32] 2 data set(s) created by citpcmojivariants.Rmd
+TRACE [2024-08-14 12:51:32] NEWS.md file found, updating!
+WARN [2024-08-14 12:51:32] DataVersion has changed.
+WARN [2024-08-14 12:51:32] mojiMapdf has changed.
+WARN [2024-08-14 12:51:32] unihanVariants has changed.
+WARN [2024-08-14 12:51:32] DataVersion has changed.
+WARN [2024-08-14 12:51:32] mojiMapdf has changed.
+WARN [2024-08-14 12:51:32] unihanVariants has changed.
+WARN [2024-08-14 12:51:32] DataVersion has changed.
+WARN [2024-08-14 12:51:32] mojiMapdf has changed.
+WARN [2024-08-14 12:51:32] unihanVariants has changed.
+TRACE [2024-08-14 12:51:32] NEWS.md file found, updating!
+TRACE [2024-08-14 12:52:33] NEWS.md file found, updating!
+TRACE [2024-08-14 12:52:33] Data has been updated and DataVersion string incremented automatically to 0.1.10
+TRACE [2024-08-14 12:52:33] Saving to data
+TRACE [2024-08-14 12:52:33] Copied documentation to C:/Users/Alan/Documents/R Projects/rnaco/rnaco/R/rnaco.R
+TRACE [2024-08-14 12:52:34] Done
+TRACE [2024-08-14 12:52:34] DataPackageR succeeded
+TRACE [2024-08-14 12:52:34] Building documentation
+TRACE [2024-08-14 12:52:38] Building package
+TRACE [2024-08-14 13:07:47] Rebuilding data package documentation.
+TRACE [2024-08-14 14:33:05] Logging to C:/Users/Alan/Documents/R Projects/rnaco/rnaco/inst/extdata/Logfiles/processing.log
+TRACE [2024-08-14 14:33:05] Processing data
+TRACE [2024-08-14 14:33:05] Reading yaml configuration
+TRACE [2024-08-14 14:33:05] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/unihanVariants.Rmd
+TRACE [2024-08-14 14:33:05] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/citpcmojivariants.Rmd
+TRACE [2024-08-14 14:33:05] Processing 1 of 2: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/unihanVariants.Rmd
+
+TRACE [2024-08-14 14:33:27] 1 data set(s) created by unihanVariants.Rmd
+TRACE [2024-08-14 14:33:27] Processing 2 of 2: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/citpcmojivariants.Rmd
+
+TRACE [2024-08-14 14:34:09] 2 data set(s) created by citpcmojivariants.Rmd
+TRACE [2024-08-14 14:34:09] NEWS.md file found, updating!
+TRACE [2024-08-14 14:34:09] Processed data sets match existing data sets at version 0.1.10
+TRACE [2024-08-14 14:34:09] Saving to data
+TRACE [2024-08-14 14:34:09] Copied documentation to C:/Users/Alan/Documents/R Projects/rnaco/rnaco/R/rnaco.R
+TRACE [2024-08-14 14:34:09] Done
+TRACE [2024-08-14 14:34:09] DataPackageR succeeded
+TRACE [2024-08-14 14:34:09] Building documentation
+TRACE [2024-08-14 14:34:11] Building package
+TRACE [2024-08-14 14:36:16] Rebuilding data package documentation.
+TRACE [2024-08-14 14:56:04] Logging to C:/Users/Alan/Documents/R Projects/rnaco/rnaco/inst/extdata/Logfiles/processing.log
+TRACE [2024-08-14 14:56:04] Processing data
+TRACE [2024-08-14 14:56:04] Reading yaml configuration
+TRACE [2024-08-14 14:56:04] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/unihanVariants.Rmd
+TRACE [2024-08-14 14:56:04] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/citpcmojivariants.Rmd
+TRACE [2024-08-14 14:56:04] Processing 1 of 2: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/unihanVariants.Rmd
+
+TRACE [2024-08-14 14:56:26] 1 data set(s) created by unihanVariants.Rmd
+TRACE [2024-08-14 14:56:27] Processing 2 of 2: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/citpcmojivariants.Rmd
+
+TRACE [2024-08-14 14:57:08] 2 data set(s) created by citpcmojivariants.Rmd
+TRACE [2024-08-14 14:57:08] NEWS.md file found, updating!
+TRACE [2024-08-14 14:57:08] Processed data sets match existing data sets at version 0.1.10
+TRACE [2024-08-14 14:57:08] Saving to data
+TRACE [2024-08-14 14:57:08] Copied documentation to C:/Users/Alan/Documents/R Projects/rnaco/rnaco/R/rnaco.R
+TRACE [2024-08-14 14:57:08] Done
+TRACE [2024-08-14 14:57:08] DataPackageR succeeded
+TRACE [2024-08-14 14:57:08] Building documentation
+TRACE [2024-08-14 14:57:10] Building package
+TRACE [2024-08-14 14:58:13] Rebuilding data package documentation.
+TRACE [2024-08-14 15:00:25] Rebuilding data package documentation.
+TRACE [2024-08-27 16:35:37] Logging to C:/Users/Alan/Documents/R Projects/rnaco/rnaco/inst/extdata/Logfiles/processing.log
+TRACE [2024-08-27 16:35:37] Processing data
+TRACE [2024-08-27 16:35:37] Reading yaml configuration
+TRACE [2024-08-27 16:35:37] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/citpcmojivariants.Rmd
+TRACE [2024-08-27 16:35:37] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/kyoikuKanji.Rmd
+TRACE [2024-08-27 16:35:37] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/xiaoxuewenziZH.Rmd
+TRACE [2024-08-27 16:35:37] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/xiaoxuewenziTW.Rmd
+TRACE [2024-08-27 16:35:37] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/unihanprecedencedata.Rmd
+TRACE [2024-08-27 16:37:03] Logging to C:/Users/Alan/Documents/R Projects/rnaco/rnaco/inst/extdata/Logfiles/processing.log
+TRACE [2024-08-27 16:37:03] Processing data
+TRACE [2024-08-27 16:37:03] Reading yaml configuration
+TRACE [2024-08-27 16:37:03] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/citpcmojivariants.Rmd
+TRACE [2024-08-27 16:37:03] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/kyoikuKanji.Rmd
+TRACE [2024-08-27 16:37:03] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/xiaoxuewenziZH.Rmd
+TRACE [2024-08-27 16:37:03] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/xiaoxuewenziTW.Rmd
+TRACE [2024-08-27 16:37:03] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/unihanprecedencedata.Rmd
+TRACE [2024-08-27 16:47:25] Logging to C:/Users/Alan/Documents/R Projects/rnaco/rnaco/inst/extdata/Logfiles/processing.log
+TRACE [2024-08-27 16:47:25] Processing data
+TRACE [2024-08-27 16:47:25] Reading yaml configuration
+TRACE [2024-08-27 16:47:25] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/citpcmojivariants.Rmd
+TRACE [2024-08-27 16:47:25] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/kyoikuKanji.Rmd
+TRACE [2024-08-27 16:47:25] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/xiaoxuewenziZH.Rmd
+TRACE [2024-08-27 16:47:25] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/xiaoxuewenziTW.Rmd
+TRACE [2024-08-27 16:47:25] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/unihanprecedencedata.Rmd
+TRACE [2024-08-27 16:59:48] Logging to C:/Users/Alan/Documents/R Projects/rnaco/rnaco/inst/extdata/Logfiles/processing.log
+TRACE [2024-08-27 16:59:48] Processing data
+TRACE [2024-08-27 16:59:48] Reading yaml configuration
+TRACE [2024-08-27 16:59:48] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/citpcmojivariants.Rmd
+TRACE [2024-08-27 16:59:48] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/kyoikuKanji.Rmd
+TRACE [2024-08-27 16:59:48] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/xiaoxuewenziZH.Rmd
+TRACE [2024-08-27 16:59:48] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/xiaoxuewenziTW.Rmd
+TRACE [2024-08-27 16:59:48] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/unihanprecedencedata.Rmd
+TRACE [2024-08-27 17:02:01] Logging to C:/Users/Alan/Documents/R Projects/rnaco/rnaco/inst/extdata/Logfiles/processing.log
+TRACE [2024-08-27 17:02:01] Processing data
+TRACE [2024-08-27 17:02:01] Reading yaml configuration
+TRACE [2024-08-27 17:02:01] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/citpcmojivariants.Rmd
+TRACE [2024-08-27 17:02:01] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/kyoikuKanji.Rmd
+TRACE [2024-08-27 17:02:01] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/xiaoxuewenziZH.Rmd
+TRACE [2024-08-27 17:02:01] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/xiaoxuewenziTW.Rmd
+TRACE [2024-08-27 17:02:01] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/unihanprecedencedata.Rmd
+TRACE [2024-08-27 17:02:01] Processing 1 of 5: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/citpcmojivariants.Rmd
+
+TRACE [2024-08-27 17:02:34] 2 data set(s) created by citpcmojivariants.Rmd
+TRACE [2024-08-27 17:02:34] Processing 2 of 5: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/kyoikuKanji.Rmd
+
+TRACE [2024-08-27 17:02:35] 1 data set(s) created by kyoikuKanji.Rmd
+TRACE [2024-08-27 17:02:35] Processing 3 of 5: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/xiaoxuewenziZH.Rmd
+
+TRACE [2024-08-27 17:02:35] 1 data set(s) created by xiaoxuewenziZH.Rmd
+TRACE [2024-08-27 17:02:35] Processing 4 of 5: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/xiaoxuewenziTW.Rmd
+
+TRACE [2024-08-27 17:02:36] 1 data set(s) created by xiaoxuewenziTW.Rmd
+TRACE [2024-08-27 17:02:36] Processing 5 of 5: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/unihanprecedencedata.Rmd
+
+TRACE [2024-08-27 17:09:16] Logging to C:/Users/Alan/Documents/R Projects/rnaco/rnaco/inst/extdata/Logfiles/processing.log
+TRACE [2024-08-27 17:09:16] Processing data
+TRACE [2024-08-27 17:09:16] Reading yaml configuration
+TRACE [2024-08-27 17:09:16] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/citpcmojivariants.Rmd
+TRACE [2024-08-27 17:09:16] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/kyoikuKanji.Rmd
+TRACE [2024-08-27 17:09:16] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/xiaoxuewenziZH.Rmd
+TRACE [2024-08-27 17:09:16] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/xiaoxuewenziTW.Rmd
+TRACE [2024-08-27 17:09:16] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/unihanprecedencedata.Rmd
+TRACE [2024-08-27 17:09:16] Processing 1 of 5: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/citpcmojivariants.Rmd
+
+TRACE [2024-08-27 17:09:50] 2 data set(s) created by citpcmojivariants.Rmd
+TRACE [2024-08-27 17:09:50] Processing 2 of 5: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/kyoikuKanji.Rmd
+
+TRACE [2024-08-27 17:09:51] 1 data set(s) created by kyoikuKanji.Rmd
+TRACE [2024-08-27 17:09:51] Processing 3 of 5: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/xiaoxuewenziZH.Rmd
+
+TRACE [2024-08-27 17:09:51] 1 data set(s) created by xiaoxuewenziZH.Rmd
+TRACE [2024-08-27 17:09:51] Processing 4 of 5: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/xiaoxuewenziTW.Rmd
+
+TRACE [2024-08-27 17:09:52] 1 data set(s) created by xiaoxuewenziTW.Rmd
+TRACE [2024-08-27 17:09:52] Processing 5 of 5: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/unihanprecedencedata.Rmd
+
+TRACE [2024-08-27 17:18:22] Logging to C:/Users/Alan/Documents/R Projects/rnaco/rnaco/inst/extdata/Logfiles/processing.log
+TRACE [2024-08-27 17:18:22] Processing data
+TRACE [2024-08-27 17:18:22] Reading yaml configuration
+TRACE [2024-08-27 17:18:22] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/citpcmojivariants.Rmd
+TRACE [2024-08-27 17:18:22] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/kyoikuKanji.Rmd
+TRACE [2024-08-27 17:18:22] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/xiaoxuewenziZH.Rmd
+TRACE [2024-08-27 17:18:22] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/xiaoxuewenziTW.Rmd
+TRACE [2024-08-27 17:18:22] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/unihanprecedencedata.Rmd
+TRACE [2024-08-27 17:18:22] Processing 1 of 5: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/citpcmojivariants.Rmd
+
+TRACE [2024-08-27 17:18:55] 2 data set(s) created by citpcmojivariants.Rmd
+TRACE [2024-08-27 17:18:55] Processing 2 of 5: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/kyoikuKanji.Rmd
+
+TRACE [2024-08-27 17:18:56] 1 data set(s) created by kyoikuKanji.Rmd
+TRACE [2024-08-27 17:18:56] Processing 3 of 5: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/xiaoxuewenziZH.Rmd
+
+TRACE [2024-08-27 17:18:56] 1 data set(s) created by xiaoxuewenziZH.Rmd
+TRACE [2024-08-27 17:18:56] Processing 4 of 5: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/xiaoxuewenziTW.Rmd
+
+TRACE [2024-08-27 17:18:57] 1 data set(s) created by xiaoxuewenziTW.Rmd
+TRACE [2024-08-27 17:18:57] Processing 5 of 5: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/unihanprecedencedata.Rmd
+
+TRACE [2024-08-27 17:27:26] Logging to C:/Users/Alan/Documents/R Projects/rnaco/rnaco/inst/extdata/Logfiles/processing.log
+TRACE [2024-08-27 17:27:26] Processing data
+TRACE [2024-08-27 17:27:26] Reading yaml configuration
+TRACE [2024-08-27 17:27:26] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/citpcmojivariants.Rmd
+TRACE [2024-08-27 17:27:26] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/kyoikuKanji.Rmd
+TRACE [2024-08-27 17:27:26] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/xiaoxuewenziZH.Rmd
+TRACE [2024-08-27 17:27:26] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/xiaoxuewenziTW.Rmd
+TRACE [2024-08-27 17:27:26] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/unihanprecedencedata.Rmd
+TRACE [2024-08-27 17:27:26] Processing 1 of 5: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/citpcmojivariants.Rmd
+
+TRACE [2024-08-27 17:27:59] 2 data set(s) created by citpcmojivariants.Rmd
+TRACE [2024-08-27 17:27:59] Processing 2 of 5: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/kyoikuKanji.Rmd
+
+TRACE [2024-08-27 17:28:00] 1 data set(s) created by kyoikuKanji.Rmd
+TRACE [2024-08-27 17:28:00] Processing 3 of 5: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/xiaoxuewenziZH.Rmd
+
+TRACE [2024-08-27 17:28:00] 1 data set(s) created by xiaoxuewenziZH.Rmd
+TRACE [2024-08-27 17:28:00] Processing 4 of 5: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/xiaoxuewenziTW.Rmd
+
+TRACE [2024-08-27 17:28:01] 1 data set(s) created by xiaoxuewenziTW.Rmd
+TRACE [2024-08-27 17:28:01] Processing 5 of 5: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/unihanprecedencedata.Rmd
+
+TRACE [2024-08-27 17:34:48] Logging to C:/Users/Alan/Documents/R Projects/rnaco/rnaco/inst/extdata/Logfiles/processing.log
+TRACE [2024-08-27 17:34:48] Processing data
+TRACE [2024-08-27 17:34:48] Reading yaml configuration
+TRACE [2024-08-27 17:34:48] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/citpcmojivariants.Rmd
+TRACE [2024-08-27 17:34:48] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/kyoikuKanji.Rmd
+TRACE [2024-08-27 17:34:48] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/xiaoxuewenziZH.Rmd
+TRACE [2024-08-27 17:34:48] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/xiaoxuewenziTW.Rmd
+TRACE [2024-08-27 17:34:48] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/unihanprecedencedata.Rmd
+TRACE [2024-08-27 17:34:48] Processing 1 of 5: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/citpcmojivariants.Rmd
+
+TRACE [2024-08-27 17:35:22] 2 data set(s) created by citpcmojivariants.Rmd
+TRACE [2024-08-27 17:35:22] Processing 2 of 5: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/kyoikuKanji.Rmd
+
+TRACE [2024-08-27 17:35:22] 1 data set(s) created by kyoikuKanji.Rmd
+TRACE [2024-08-27 17:35:22] Processing 3 of 5: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/xiaoxuewenziZH.Rmd
+
+TRACE [2024-08-27 17:35:23] 1 data set(s) created by xiaoxuewenziZH.Rmd
+TRACE [2024-08-27 17:35:23] Processing 4 of 5: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/xiaoxuewenziTW.Rmd
+
+TRACE [2024-08-27 17:35:24] 1 data set(s) created by xiaoxuewenziTW.Rmd
+TRACE [2024-08-27 17:35:24] Processing 5 of 5: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/unihanprecedencedata.Rmd
+
+TRACE [2024-08-27 17:41:32] 1 data set(s) created by unihanprecedencedata.Rmd
+TRACE [2024-08-27 17:41:32] NEWS.md file found, updating!
+WARN [2024-08-27 17:41:32] DataVersion has changed.
+WARN [2024-08-27 17:41:32] jctPrecedence has changed.
+WARN [2024-08-27 17:41:32] kyoikuKanji has changed.
+WARN [2024-08-27 17:41:32] mojiMapdf has changed.
+WARN [2024-08-27 17:41:32] mojiVariants has changed.
+WARN [2024-08-27 17:41:32] twXiaoxueWenzi has changed.
+WARN [2024-08-27 17:41:32] zhXiaoxueWenzi has changed.
+WARN [2024-08-27 17:41:32] DataVersion has changed.
+WARN [2024-08-27 17:41:32] jctPrecedence has changed.
+WARN [2024-08-27 17:41:32] kyoikuKanji has changed.
+WARN [2024-08-27 17:41:32] mojiMapdf has changed.
+WARN [2024-08-27 17:41:32] mojiVariants has changed.
+WARN [2024-08-27 17:41:32] twXiaoxueWenzi has changed.
+WARN [2024-08-27 17:41:32] zhXiaoxueWenzi has changed.
+WARN [2024-08-27 17:41:32] DataVersion has changed.
+WARN [2024-08-27 17:41:32] jctPrecedence has changed.
+WARN [2024-08-27 17:41:32] kyoikuKanji has changed.
+WARN [2024-08-27 17:41:32] mojiMapdf has changed.
+WARN [2024-08-27 17:41:32] mojiVariants has changed.
+WARN [2024-08-27 17:41:32] twXiaoxueWenzi has changed.
+WARN [2024-08-27 17:41:32] zhXiaoxueWenzi has changed.
+TRACE [2024-08-27 17:41:32] NEWS.md file found, updating!
+TRACE [2024-08-27 17:41:32] NEWS.md file found, updating!
+TRACE [2024-08-27 17:41:32] Data has been updated and DataVersion string incremented automatically to 0.1.11
+TRACE [2024-08-27 17:41:32] Saving to data
+TRACE [2024-08-27 17:41:32] Copied documentation to C:/Users/Alan/Documents/R Projects/rnaco/rnaco/R/rnaco.R
+TRACE [2024-08-27 17:41:34] Done
+TRACE [2024-08-27 17:41:34] DataPackageR succeeded
+TRACE [2024-08-27 17:41:34] Building documentation
+TRACE [2024-08-27 17:41:38] Building package
+TRACE [2024-08-28 11:43:36] Logging to C:/Users/Alan/Documents/R Projects/rnaco/rnaco/inst/extdata/Logfiles/processing.log
+TRACE [2024-08-28 11:43:36] Processing data
+TRACE [2024-08-28 11:43:36] Reading yaml configuration
+TRACE [2024-08-28 11:43:36] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/kyoikuKanji.Rmd
+TRACE [2024-08-28 11:43:36] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/xiaoxuewenziZH.Rmd
+TRACE [2024-08-28 11:43:36] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/xiaoxuewenziTW.Rmd
+TRACE [2024-08-28 11:43:36] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/unihanprecedencedata.Rmd
+TRACE [2024-08-28 11:43:36] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/citpcmojivariants.Rmd
+TRACE [2024-08-28 11:43:36] Processing 1 of 5: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/kyoikuKanji.Rmd
+
+TRACE [2024-08-28 11:43:39] 1 data set(s) created by kyoikuKanji.Rmd
+TRACE [2024-08-28 11:43:39] Processing 2 of 5: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/xiaoxuewenziZH.Rmd
+
+TRACE [2024-08-28 11:43:39] 1 data set(s) created by xiaoxuewenziZH.Rmd
+TRACE [2024-08-28 11:43:39] Processing 3 of 5: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/xiaoxuewenziTW.Rmd
+
+TRACE [2024-08-28 11:43:40] 1 data set(s) created by xiaoxuewenziTW.Rmd
+TRACE [2024-08-28 11:43:40] Processing 4 of 5: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/unihanprecedencedata.Rmd
+
+TRACE [2024-08-28 11:49:20] 1 data set(s) created by unihanprecedencedata.Rmd
+TRACE [2024-08-28 11:49:20] Processing 5 of 5: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/citpcmojivariants.Rmd
+
+TRACE [2024-08-28 11:49:56] 2 data set(s) created by citpcmojivariants.Rmd
+TRACE [2024-08-28 11:49:56] NEWS.md file found, updating!
+TRACE [2024-08-28 11:49:56] Processed data sets match existing data sets at version 0.1.11
+TRACE [2024-08-28 11:49:56] Saving to data
+TRACE [2024-08-28 11:49:56] Copied documentation to C:/Users/Alan/Documents/R Projects/rnaco/rnaco/R/rnaco.R
+TRACE [2024-08-28 11:49:57] Done
+TRACE [2024-08-28 11:49:57] DataPackageR succeeded
+TRACE [2024-08-28 11:49:57] Building documentation
+TRACE [2024-08-28 11:50:01] Building package
+TRACE [2024-08-28 13:38:44] Rebuilding data package documentation.
+TRACE [2024-08-30 14:41:28] Logging to C:/Users/Alan/Documents/R Projects/rnaco/rnaco/inst/extdata/Logfiles/processing.log
+TRACE [2024-08-30 14:41:28] Processing data
+TRACE [2024-08-30 14:41:28] Reading yaml configuration
+TRACE [2024-08-30 14:41:28] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/kyoikuKanji.Rmd
+TRACE [2024-08-30 14:41:28] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/xiaoxuewenziZH.Rmd
+TRACE [2024-08-30 14:41:28] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/xiaoxuewenziTW.Rmd
+TRACE [2024-08-30 14:41:28] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/unihanprecedencedata.Rmd
+TRACE [2024-08-30 14:41:28] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/citpcmojivariants.Rmd
+TRACE [2024-08-30 14:41:28] Processing 1 of 5: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/kyoikuKanji.Rmd
+
+TRACE [2024-08-30 14:41:29] 1 data set(s) created by kyoikuKanji.Rmd
+TRACE [2024-08-30 14:41:29] Processing 2 of 5: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/xiaoxuewenziZH.Rmd
+
+TRACE [2024-08-30 14:41:30] 1 data set(s) created by xiaoxuewenziZH.Rmd
+TRACE [2024-08-30 14:41:30] Processing 3 of 5: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/xiaoxuewenziTW.Rmd
+
+TRACE [2024-08-30 14:41:30] 1 data set(s) created by xiaoxuewenziTW.Rmd
+TRACE [2024-08-30 14:41:30] Processing 4 of 5: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/unihanprecedencedata.Rmd
+
+TRACE [2024-08-30 14:47:25] 1 data set(s) created by unihanprecedencedata.Rmd
+TRACE [2024-08-30 14:47:25] Processing 5 of 5: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/citpcmojivariants.Rmd
+
+TRACE [2024-08-30 14:48:09] 2 data set(s) created by citpcmojivariants.Rmd
+TRACE [2024-08-30 14:48:09] NEWS.md file found, updating!
+WARN [2024-08-30 14:48:09] DataVersion has changed.
+WARN [2024-08-30 14:48:09] kyoikuKanji has changed.
+WARN [2024-08-30 14:48:09] mojiMapdf has changed.
+WARN [2024-08-30 14:48:09] twXiaoxueWenzi has changed.
+WARN [2024-08-30 14:48:09] zhXiaoxueWenzi has changed.
+WARN [2024-08-30 14:48:09] DataVersion has changed.
+WARN [2024-08-30 14:48:09] kyoikuKanji has changed.
+WARN [2024-08-30 14:48:09] mojiMapdf has changed.
+WARN [2024-08-30 14:48:09] twXiaoxueWenzi has changed.
+WARN [2024-08-30 14:48:09] zhXiaoxueWenzi has changed.
+WARN [2024-08-30 14:48:09] DataVersion has changed.
+WARN [2024-08-30 14:48:09] kyoikuKanji has changed.
+WARN [2024-08-30 14:48:09] mojiMapdf has changed.
+WARN [2024-08-30 14:48:09] twXiaoxueWenzi has changed.
+WARN [2024-08-30 14:48:09] zhXiaoxueWenzi has changed.
+TRACE [2024-08-30 14:48:09] NEWS.md file found, updating!
+TRACE [2024-08-30 14:48:09] NEWS.md file found, updating!
+TRACE [2024-08-30 14:48:09] Data has been updated and DataVersion string incremented automatically to 0.1.12
+TRACE [2024-08-30 14:48:09] Saving to data
+TRACE [2024-08-30 14:48:09] Copied documentation to C:/Users/Alan/Documents/R Projects/rnaco/rnaco/R/rnaco.R
+TRACE [2024-08-30 14:48:11] Done
+TRACE [2024-08-30 14:48:11] DataPackageR succeeded
+TRACE [2024-08-30 14:48:11] Building documentation
+TRACE [2024-08-30 14:48:15] Building package
+TRACE [2024-08-30 15:07:01] Rebuilding data package documentation.
+TRACE [2024-09-02 15:48:02] Logging to C:/Users/Alan/Documents/R Projects/rnaco/rnaco/inst/extdata/Logfiles/processing.log
+TRACE [2024-09-02 15:48:02] Processing data
+TRACE [2024-09-02 15:48:02] Reading yaml configuration
+TRACE [2024-09-02 15:48:02] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/kyoikuKanji.Rmd
+TRACE [2024-09-02 15:48:02] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/xiaoxuewenziZH.Rmd
+TRACE [2024-09-02 15:48:02] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/xiaoxuewenziTW.Rmd
+TRACE [2024-09-02 15:48:02] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/unihanprecedencedata.Rmd
+TRACE [2024-09-02 15:48:02] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/citpcmojivariants.Rmd
+TRACE [2024-09-02 15:48:02] Processing 1 of 5: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/kyoikuKanji.Rmd
+
+TRACE [2024-09-02 15:48:03] 1 data set(s) created by kyoikuKanji.Rmd
+TRACE [2024-09-02 15:48:03] Processing 2 of 5: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/xiaoxuewenziZH.Rmd
+
+TRACE [2024-09-02 15:48:04] 1 data set(s) created by xiaoxuewenziZH.Rmd
+TRACE [2024-09-02 15:48:04] Processing 3 of 5: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/xiaoxuewenziTW.Rmd
+
+TRACE [2024-09-02 15:48:04] 1 data set(s) created by xiaoxuewenziTW.Rmd
+TRACE [2024-09-02 15:48:04] Processing 4 of 5: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/unihanprecedencedata.Rmd
+
+TRACE [2024-09-02 15:54:48] 2 data set(s) created by unihanprecedencedata.Rmd
+TRACE [2024-09-02 15:54:49] Processing 5 of 5: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/citpcmojivariants.Rmd
+
+TRACE [2024-09-02 15:55:29] 2 data set(s) created by citpcmojivariants.Rmd
+TRACE [2024-09-02 15:55:30] NEWS.md file found, updating!
+WARN [2024-09-02 15:55:30] DataVersion has changed.
+WARN [2024-09-02 15:55:30] unihanPrecedenceData has changed.
+WARN [2024-09-02 15:55:30] DataVersion has changed.
+WARN [2024-09-02 15:55:30] unihanPrecedenceData has changed.
+WARN [2024-09-02 15:55:30] DataVersion has changed.
+WARN [2024-09-02 15:55:30] unihanPrecedenceData has changed.
+TRACE [2024-09-02 15:55:30] NEWS.md file found, updating!
+TRACE [2024-09-02 15:55:30] NEWS.md file found, updating!
+TRACE [2024-09-02 15:55:30] Data has been updated and DataVersion string incremented automatically to 0.1.13
+TRACE [2024-09-02 15:55:30] Saving to data
+TRACE [2024-09-02 15:55:30] Copied documentation to C:/Users/Alan/Documents/R Projects/rnaco/rnaco/R/rnaco.R
+TRACE [2024-09-02 15:55:31] Done
+TRACE [2024-09-02 15:55:31] DataPackageR succeeded
+TRACE [2024-09-02 15:55:31] Building documentation
+TRACE [2024-09-02 15:55:36] Building package
+TRACE [2024-09-02 16:16:58] Rebuilding data package documentation.
+TRACE [2024-09-27 13:16:48] Logging to C:/Users/Alan/Documents/R Projects/rnaco/rnaco/inst/extdata/Logfiles/processing.log
+TRACE [2024-09-27 13:16:48] Processing data
+TRACE [2024-09-27 13:16:48] Reading yaml configuration
+TRACE [2024-09-27 13:16:48] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/kyoikuKanji.Rmd
+TRACE [2024-09-27 13:16:48] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/xiaoxuewenziZH.Rmd
+TRACE [2024-09-27 13:16:48] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/xiaoxuewenziTW.Rmd
+TRACE [2024-09-27 13:16:48] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/unihanprecedencedata.Rmd
+TRACE [2024-09-27 13:16:48] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/citpcmojivariants.Rmd
+TRACE [2024-09-27 13:16:48] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/integrated-variant-map.Rmd
+TRACE [2024-09-27 13:16:48] Processing 1 of 6: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/kyoikuKanji.Rmd
+
+TRACE [2024-09-27 13:16:57] 1 data set(s) created by kyoikuKanji.Rmd
+TRACE [2024-09-27 13:16:57] Processing 2 of 6: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/xiaoxuewenziZH.Rmd
+
+TRACE [2024-09-27 13:16:57] 1 data set(s) created by xiaoxuewenziZH.Rmd
+TRACE [2024-09-27 13:16:57] Processing 3 of 6: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/xiaoxuewenziTW.Rmd
+
+TRACE [2024-09-27 13:16:58] 1 data set(s) created by xiaoxuewenziTW.Rmd
+TRACE [2024-09-27 13:16:58] Processing 4 of 6: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/unihanprecedencedata.Rmd
+
+TRACE [2024-09-27 13:22:33] 2 data set(s) created by unihanprecedencedata.Rmd
+TRACE [2024-09-27 13:22:33] Processing 5 of 6: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/citpcmojivariants.Rmd
+
+TRACE [2024-09-27 13:23:19] 2 data set(s) created by citpcmojivariants.Rmd
+TRACE [2024-09-27 13:23:20] Processing 6 of 6: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/integrated-variant-map.Rmd
+
+TRACE [2024-09-27 13:23:34] 0 data set(s) created by integrated-variant-map.Rmd
+TRACE [2024-09-27 13:23:34] NEWS.md file found, updating!
+WARN [2024-09-27 13:23:34] kyoikuKanji has changed.
+WARN [2024-09-27 13:23:34] mojiMapdf has changed.
+WARN [2024-09-27 13:23:34] kyoikuKanji has changed.
+WARN [2024-09-27 13:23:34] mojiMapdf has changed.
+WARN [2024-09-27 13:23:34] kyoikuKanji has changed.
+WARN [2024-09-27 13:23:34] mojiMapdf has changed.
+TRACE [2024-09-27 13:23:34] NEWS.md file found, updating!
+TRACE [2024-09-27 13:23:34] NEWS.md file found, updating!
+TRACE [2024-09-27 13:23:34] Data has been updated and DataVersion string incremented automatically to 0.1.14
+TRACE [2024-09-27 13:23:34] Saving to data
+TRACE [2024-09-27 13:23:35] Copied documentation to C:/Users/Alan/Documents/R Projects/rnaco/rnaco/R/rnaco.R
+TRACE [2024-09-27 13:23:36] Done
+TRACE [2024-09-27 13:23:36] DataPackageR succeeded
+TRACE [2024-09-27 13:23:36] Building documentation
+TRACE [2024-09-27 13:23:45] Building package

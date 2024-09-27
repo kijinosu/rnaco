@@ -1,12 +1,24 @@
 configuration:
   files:
     marctables.Rmd:
-      enabled: yes
-    unihanVariants.Rmd:
-      enabled: yes
+      enabled: no
     nacoDatasets.Rmd:
-      enabled: yes
+      enabled: no
     naco.Rmd:
+      enabled: no
+    unihanVariants.Rmd:
+      enabled: no
+    kyoikuKanji.Rmd:
+      enabled: yes
+    xiaoxuewenziZH.Rmd:
+      enabled: yes
+    xiaoxuewenziTW.Rmd:
+      enabled: yes
+    unihanprecedencedata.Rmd:
+      enabled: yes
+    citpcmojivariants.Rmd:
+      enabled: yes
+    integrated-variant-map.Rmd:
       enabled: yes
   objects:
   - marcNotes
@@ -26,7 +38,6 @@ configuration:
   - marcKoreanHangul
   - marcSubscripts
   - marcSuperscripts
-  - unihan_variants
   - unconditionalMappings
   - step7lltranslitrule
   - step6rulestring
@@ -34,5 +45,13 @@ configuration:
   - cjkextractzh
   - cjkextractja
   - cjkextractko
+  - unihanVariants
+  - mojiMapdf
+  - mojiVariants
+  - kyoikuKanji
+  - zhXiaoxueWenzi
+  - twXiaoxueWenzi
+  - unihanPrecedenceData
+  - jctPrecedence
   render_root:
     tmp: '23451'

@@ -2,11 +2,9 @@
 #' 
 #' 'naco_transform()' applies the authority file comparison
 #' rules (NACO normalization) to a string
-#' @rdname nacotransform
 #' @description Transform (normalize) a string for according to
 #' LOC's Authority file comparison rules.
-#' 
-#' @usage naco_transform(s, encoding="UTF-8")
+#' @usage naco_transform(s, firstcomma=FALSE, encoding="UTF-8")
 #' @param s String 
 #' @param firstcomma Retain the first comma in the string
 #' @param encoding UTF-8 only
@@ -24,7 +22,7 @@ naco_transform <- function(str, firstcomma=FALSE, encoding="UTF-8") {
     library(stringi)
     step2str <- stringi::stri_trim_both(str, pattern = "\\P{Wspace}", negate = FALSE)
     step4str <- .step4(step2str)
-    step5str <- stringi::stri_trans_nfkd(step4str)
+    step5str <- .step5(step4str)
     step6str <- stringi::stri_trans_general(step5str,id=rnaco::step6rulestring,rules=TRUE)
     step7removeStr <- stringi::stri_replace_all_regex(step6str,
                         pattern = "(\\p{Cc}|\\p{Cf}|\\p{Co}|\\p{Cs}|\\p{Lm}|\\p{Mc}|\\p{Me}|\\p{Mn})",
@@ -46,6 +44,18 @@ naco_transform <- function(str, firstcomma=FALSE, encoding="UTF-8") {
     step9 <- stringi::stri_replace_all_charclass(step8, '\\p{WHITE_SPACE}', ' ', merge=TRUE)
     step10 <- stringi::stri_trim_both(step9, pattern = "\\P{Wspace}")
     return(step10)
+}
+
+.step5 <- function(str){
+    result <- lapply(str, function(s) {
+        s1 <- ""
+        s2 <- s
+        while( stringi::stri_cmp_neq(s1, s2)){
+            s1 <- s2
+            s2 <- stringi::stri_trans_nfkd(s1)
+        }
+        return(s2)
+    })
 }
 
 .step8 <- function(strlist1, strlist2){

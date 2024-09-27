@@ -1,0 +1,386 @@
+---
+title: Deriving an integrated CJK variant map
+author: Alan Engel
+date: '`r format(Sys.time(), ''%d %B, %Y'')`'
+lang: en-us
+output_format: rmarkdown::html_vignette
+bibliography:
+- R.bib
+- naco.bib
+- unihan.bib
+link-citations: yes
+vignette: >
+  %\VignetteIndexEntry{Deriving an integrated CJK variant map}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+---
+
+```{r libraries, warning=FALSE, message=FALSE}
+library(rlang)
+library(tidyverse)
+library(dplyr)
+library(xslt)
+library(tibble)
+library(stringi)
+library(viafr)
+library(magrittr)
+library(igraph)
+library(rnaco)
+```
+
+```{r knitr_setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+This vignette describes a derivation of an integrated CJK variant
+map for name authority comparison.
+
+## The Problem
+
+At a previous devlopment stage, this package included tranformations using the NACO Authority 
+Comparison Rules[@pcc2020authority],
+the Unihan Variants, and Traditional-Simplified transformation. But in testing these
+using the ```cjkextractja``` dataset obtained from the
+[NACO CJK Funnel References Project Guidelines](https://www.loc.gov/aba/pcc/naco/CJK/NACO-CJK-Funnel-References-Project-Guidelines.docx){target="_blank"}[@naco2019naco].
+(Please see the [accompanying vignette](rnaco-viafr.html){target="_blank"}) found Japanese characters
+whose normalization did not replicate that found in x400 elements of corresponding
+VIAF clusters. For example, the [VIAF cluster for Kawai, Ryūsuke](https://viaf.org/viaf/11309362/viaf.xml){target="_blank"} contains
+the following two x400 elements. 
+
+```
+<ns1:x400>
+<ns1:datafield dtype="MARC21" ind1="1" ind2=" " tag="400">
+<ns1:subfield code="a">川井竜介,</ns1:subfield>
+<ns1:subfield code="d">1956-</ns1:subfield>
+<ns1:normalized>巛丼尨介 1956</ns1:normalized>
+</ns1:datafield>
+<ns1:sources>
+<ns1:s>LC</ns1:s>
+<ns1:sid>LC|n 85367264</ns1:sid>
+</ns1:sources>
+</ns1:x400>
+...
+<ns1:x400>
+<ns1:datafield dtype="MARC21" ind1="1" ind2=" " tag="400">
+<ns1:subfield code="a">川井龍介,</ns1:subfield>
+<ns1:subfield code="d">1956-</ns1:subfield>
+<ns1:normalized>巛丼尨介 1956</ns1:normalized>
+</ns1:datafield>
+<ns1:sources>
+<ns1:s>LC</ns1:s>
+<ns1:sid>LC|n 85367264</ns1:sid>
+</ns1:sources>
+</ns1:x400>
+```
+
+In this example, the two name strings 川井竜介 and 川井龍介 are transformed to 巛丼尨介. 
+Of the three characters that are transformed for each of these two strings, the first
+two could be transformed by the viaf_cjk_transform() function of this package. The third
+character was not yet transformed.
+
+original | x400 normalization 
+-------- | ------- | ----------
+川 (`r stringi::stri_trans_general("川" , id="Any-Hex/Unicode")`) | 巛 (`r stringi::stri_trans_general("巛" , id="Any-Hex/Unicode")`)
+井 (`r stringi::stri_trans_general("井" , id="Any-Hex/Unicode")`) | 丼 (`r stringi::stri_trans_general("丼" , id="Any-Hex/Unicode")`) 
+竜 (`r stringi::stri_trans_general("竜" , id="Any-Hex/Unicode")`) | 尨 (`r stringi::stri_trans_general("尨" , id="Any-Hex/Unicode")`) 
+龍 (`r stringi::stri_trans_general("龍" , id="Any-Hex/Unicode")`) | 尨 (`r stringi::stri_trans_general("尨" , id="Any-Hex/Unicode")`) 
+
+
+The characters 川 (`r stringi::stri_trans_general("川" , id="Any-Hex/Unicode")`) and
+巛 (`r stringi::stri_trans_general("巛" , id="Any-Hex/Unicode")`) both mean "river". The former is a
+[member of Japanese Joyo Kanji](https://util.unicode.org/UnicodeJsps/character.jsp?a=5DDD){target="_blank"},
+but the [latter is not](https://util.unicode.org/UnicodeJsps/character.jsp?a=5DDB){target="_blank"}. They are
+semantic variants of each other. 
+
+The character [井 (`r stringi::stri_trans_general("井" , id="Any-Hex/Unicode")`)](https://util.unicode.org/UnicodeJsps/character.jsp?a=4E95){target="_blank"}
+means "well" while
+[丼 (`r stringi::stri_trans_general("丼" , id="Any-Hex/Unicode")`)](https://util.unicode.org/UnicodeJsps/character.jsp?a=4E3C){target="_blank"} has
+the additional meaning of "bowl of food". This makes them specialized semantic variants. They are both Joyo Kanji.
+
+The characters [竜 (`r stringi::stri_trans_general("竜" , id="Any-Hex/Unicode")`)](https://util.unicode.org/UnicodeJsps/character.jsp?a=7ADC){target="_blank"},
+[龍 (`r stringi::stri_trans_general("龍" , id="Any-Hex/Unicode")`)](https://util.unicode.org/UnicodeJsps/character.jsp?a=9F8D){target="_blank"} and
+[尨 (`r stringi::stri_trans_general("尨" , id="Any-Hex/Unicode")`)](https://util.unicode.org/UnicodeJsps/character.jsp?a=5C28){target="_blank"} are more complicated.
+Meaning "dragon", 龍 is neither a Joyo Kanji nor a simplified Kanji. Its simplified variant is 
+[`r stringi::stri_trans_general("龍" , id="Traditional-Simplified")`
+(`r stringi::stri_trans_general("龙" , id="Any-Hex/Unicode")`)](https://util.unicode.org/UnicodeJsps/character.jsp?a=9F99){target="_blank"}.
+Its Jinmeiyo Kanji variant is the character
+[竜 (`r stringi::stri_trans_general("竜" , id="Any-Hex/Unicode")`)](https://util.unicode.org/UnicodeJsps/character.jsp?a=7ADC){target="_blank"},
+which is a Joyo Kanji. These dragons' link to [尨 (`r stringi::stri_trans_general("尨" , id="Any-Hex/Unicode")`)](https://util.unicode.org/UnicodeJsps/character.jsp?a=5C28){target="_blank"}
+is via the MJ Shukutai Map, which contains MJ element below. This element indicates
+that 尨 is recognized as valid for family registries and the characters 龍 and 竜
+are related to it by dictionaries or other sources. It doesn't have a simplified variant, but does have the semantic variant [狵 
+`r stringi::stri_trans_general("狵" , id="Any-Hex/Unicode")`](https://util.unicode.org/UnicodeJsps/character.jsp?a=72F5){target="_blank"}.
+
+```
+<縮退候補情報>
+  <MJ文字図形名>MJ034246</MJ文字図形名> <!-- MJ code -->
+  <法務省戸籍法関連通達-通知>
+    <戸籍統一文字情報_親字-正字 ホップ数="1"> <!-- Unified koseki, 1 'hop' -->
+      <JIS_X_0213情報>
+        <面区点位置>1-53-88</面区点位置>
+        <対応UCS>U+5C28</対応UCS>
+      </JIS_X_0213情報>
+    </戸籍統一文字情報_親字-正字>
+    <戸籍統一文字情報_親字-正字 ホップ数="2"> <!-- Unified koseki, 2 'hops' -->
+      <JIS_X_0213情報>
+        <面区点位置>1-53-88</面区点位置>
+        <対応UCS>U+5C28</対応UCS>
+      </JIS_X_0213情報>
+    </戸籍統一文字情報_親字-正字>
+  </法務省戸籍法関連通達-通知>
+  <辞書類等による関連字> <!-- related characters based on dictionaries, etc. -->
+    <JIS_X_0213情報>
+      <面区点位置>1-46-21</面区点位置>
+      <対応UCS>U+7ADC</対応UCS>
+    </JIS_X_0213情報>
+    <JIS_X_0213情報>
+      <面区点位置>1-46-22</面区点位置>
+      <対応UCS>U+9F8D</対応UCS>
+    </JIS_X_0213情報>
+  </辞書類等による関連字>
+</縮退候補情報>
+```
+
+A more troublesome example is the x400 normalization found in the record below.
+This record comes from personal name authority records that were developed by the
+NACO CJK Funnel References Project[@naco2019naco] as a source of testing and
+development data. This data were used to obtain names and corresponding
+normalizations from the Virtual International Authority Files (VIAF). This
+particular record is from the
+[VIAF cluster for Nagayo, Sensai, 1838-1902](https://viaf.org/viaf/11173352/viaf.xml){target="_blank"}.
+
+```
+<ns1:x400>
+<ns1:datafield dtype="MARC21" ind1="1" ind2=" " tag="400">
+<ns1:subfield code="a">長与専斎,</ns1:subfield>
+<ns1:subfield code="d">1838-1902</ns1:subfield>
+<ns1:normalized>長与专亝 1838 1902</ns1:normalized>
+</ns1:datafield>
+<ns1:sources>
+<ns1:s>LC</ns1:s>
+<ns1:sid>LC|n 81105244</ns1:sid>
+</ns1:sources>
+</ns1:x400>
+```
+
+
+original | x400 normalization 
+-------- | ------- | ----------
+長 (`r stringi::stri_trans_general("長" , id="Any-Hex/Unicode")`) | 長 (`r stringi::stri_trans_general("長" , id="Any-Hex/Unicode")`)
+与 (`r stringi::stri_trans_general("与" , id="Any-Hex/Unicode")`) | 与 (`r stringi::stri_trans_general("与" , id="Any-Hex/Unicode")`) 
+専 (`r stringi::stri_trans_general("専" , id="Any-Hex/Unicode")`) | 专 (`r stringi::stri_trans_general("专" , id="Any-Hex/Unicode")`) 
+斎 (`r stringi::stri_trans_general("斎" , id="Any-Hex/Unicode")`) | 亝 (`r stringi::stri_trans_general("亝" , id="Any-Hex/Unicode")`) 
+
+This normalized form contains Japanese and simplified Chinese characters. The characters
+[長 (`r stringi::stri_trans_general("長" , id="Any-Hex/Unicode")`)](https://util.unicode.org/UnicodeJsps/character.jsp?a=9577){target="_blank"},
+[与 (`r stringi::stri_trans_general("与" , id="Any-Hex/Unicode")`)](https://util.unicode.org/UnicodeJsps/character.jsp?a=4E0E){target="_blank"},
+[专 (`r stringi::stri_trans_general("专" , id="Any-Hex/Unicode")`)](https://util.unicode.org/UnicodeJsps/character.jsp?a=4E13){target="_blank"}, and 
+[亝 (`r stringi::stri_trans_general("亝" , id="Any-Hex/Unicode")`)](https://util.unicode.org/UnicodeJsps/character.jsp?a=4E9D){target="_blank"}
+長 is a traditional Chinese character and also a Japanese character taught in the first grade. 与 is shared by Japanese, traditional Chinese and
+simplified Chinese. 专 is simplified Chinese and not used in Japanese. 亝 is Japanese but not a Joyo Kanji.
+
+One possible explanation for this mix is that variant clusters derived from combining the Unihan variants with variants derived from
+the MojiJoho "shrink map" are used for normalization, with each cluster being represented by the character with the numerically smallest
+Unicode code point. After all, the normalized forms are used for algorithmicly comparing names and not necessarily for human viewing.
+This possiblity is explored below.
+
+## Normalization scheme
+
+The normalization scheme below combines Unihan variants and Moji Joho variants into a single graph and
+clusters determined using the walktrap algorithm in R package igraph [@R-igraph]. Representative
+ideographs are selected from each cluster based on the Unihan database property kUnihanCore2020 [@lunde2019new],
+one for each of the IRG sources Japan (J), PRC (G), and the Taipei Computing Association (T). The
+representative ideograph becomes the "normalized" ideograph. Users can select which of the three IRG
+sources they wish to be favored.
+
+The normalization scheme further prioritizes by educational level as determined by the grade level at
+which the ideograph is taught in Japan, China and Taiwan, by the number of strokes in the ideograph, and
+finally by the numerical sequence of the ideograph's Unicode code point.
+
+All ideographs in the combined Unihan and Moji Joho sets are assigned precedence values so that no
+ideograph is excluded. Because the representative ideograph is merely a label for it's respective
+cluster, its analytical behavior should be that of its cluster and analytical behavior should not
+differ depending on J, G or T preference of the user.
+
+### Data frames from Unihan and Moji Joho variants
+
+The function ```igraph::graph_from_data_frame()``` accept as input data frames with the columns 'from',
+'to' and 'relation'. The code chunk below makes a graph from each variant set and then combines them.
+
+```{r variant-graphs}
+unihandf <- unihanVariants %>% filter(varianttype != "kSpoofingVariant") %>%
+	mutate(from = ucsindex, to=ucsvariant, relation=varianttype) %>%
+	select(from,to,relation)
+
+mojidf <- mojiMapdf %>% 
+		mutate(
+		  from = as.hexmode(stringi::stri_match_first(from,regex = "(?:U[+])([A-F0-9]++)")[,2]),
+		  to = as.hexmode(stringi::stri_match_first(to,regex = "(?:U[+])([A-F0-9]++)")[,2]),
+		  relation = as.factor(relation)
+		) %>%
+		select(from,to,relation)
+
+gunihan <- igraph::graph_from_data_frame(unihandf,directed = TRUE, vertices = NULL)
+gmoji <- igraph::graph_from_data_frame(mojidf,directed = TRUE, vertices = NULL)
+
+gc <- gunihan + gmoji
+```
+
+### Use walktrap algorithm to compute clusters.
+
+```{r get-clusters}
+wc <- cluster_walktrap(gc, steps=4)
+
+clustpick <- tibble(ucs=V(gc)$name, edges=as.integer(degree(gc, mode="all")),
+			membership=membership(wc)) %>%
+			mutate(ucs = as.hexmode(ucs))
+summary(clustpick$edges)
+```
+
+The result ```clustpick``` is a tibble that lists the number of edges and assigned membership cluster for
+`r length(clustpick$ucs)` ideographs grouped into
+`r clustpick %>% select(membership) %>% unique() %>% count()` clusters. The ideographs have edge
+connections to as many as `r summary(clustpick$edges)[6]` other ideographs with the median number
+of edges being `r summary(clustpick$edges)[3]`. 
+
+```{r plot-edge-count, warning=FALSE}
+library(ggpubr)
+ggplot(clustpick , aes(x = edges)) +
+  geom_histogram(binwidth=1) + 
+  labs(title="Count ideographs by number of edges") +
+  labs(x = "edges per ideograph")
+```
+
+The code chunk below looks at the sizes of these ideograph clusters.
+
+```{r cluster-sizes}
+clustersizes <- clustpick %>% group_by(membership) %>%
+	mutate(n = n()) %>%
+	ungroup() %>%
+	select(membership, n)
+
+cssum <- summary(clustersizes$n)
+```
+
+The clusters range in size from `r cssum[1]` up to `r cssum[6]` ideographs
+with the median being `r cssum[3]`.
+The histogram below shows the distribution of cluster sizes.
+
+```{r cluster-size-histogram, warning=FALSE}
+ggplot(clustersizes , aes(x = n)) +
+  geom_histogram(binwidth=1) + 
+  labs(title="Distibution of cluster sizes") +
+  labs(x = "ideographs per cluster")
+```
+
+### Adding preference rankings
+
+Preference rankings use the following formula:
+
+$$Rank = IRG sources\times1000 + Grade\times100 + Strokes + UCS / 100000$$
+
+Here, "IRG sources" is 1 if the kUnicodeCore2020 property contains its respective tag, 2 if not.
+This gives precedence to more broadly used ideographs. 'Grade' is 1 if in a grade level at which
+the ideograph is taught in Japan, PRC or Taiwan corresponding to the desired IRG source, 2 if not. 
+'Strokes' is the number of strokes in the ideograph, giving preference to simpler ideographs.
+And 'UCS' is the integer form of the Unicode code point.
+
+The code chunk below produces a table of preference rankings for the Japanese preference.
+It first calculates a precedence score, jaPrec, for each ideograph, and then determines
+the minimum score for each membership cluster. The precedence score is kept in the final
+table for diagnostic purposes.
+
+```{r japan-preference}
+#jct <- rnaco::jctPrecedence
+jct <- jctPrecedence
+
+jaSet <- clustpick %>%
+	dplyr::inner_join(jct, by=join_by(ucs==ucs)) %>% # filter(ucs == as.hexmode(0x08303))
+	mutate(
+		jaPrec =  num((jCoreRank*1000 + jpRank*100 + kTotalStrokes) + as.double(as.integer(ucs))/as.double(1000000),
+				digits = 6, notation="dec")
+	) %>%
+	select(ucs,edges,membership,jaPrec) %>%
+	group_by(membership) %>%
+	mutate(jaPick = min(jaPrec)) %>%
+	ungroup() %>% unique()
+jaSet
+
+jaTbl <- jaSet %>% select(ucs,edges,membership,jaPrec,jaPick) %>%
+	dplyr::inner_join(select(jaSet,ucs,jaPrec), by=join_by(jaPick==jaPrec)) %>%
+	dplyr::rename(c(ucs = "ucs.x",ucsjppick="ucs.y")) %>%
+	select(ucs,edges,membership,jaPrec,ucsjppick)
+jaTbl
+```
+
+Then do the same for the PRC and Taiwan sources.
+
+```{r prc-preference}
+zhSet <- clustpick %>%
+	dplyr::inner_join(jct, by=join_by(ucs==ucs)) %>% # filter(ucs == as.hexmode(0x08303))
+	mutate(
+		zhPrec =  num((gCoreRank*1000 + zhRank*100 + kTotalStrokes) + as.double(as.integer(ucs))/as.double(1000000),
+				digits = 6, notation="dec")
+	) %>%
+	select(ucs,edges,membership,zhPrec) %>%
+	group_by(membership) %>%
+	mutate(zhPick = min(zhPrec)) %>%
+	ungroup() %>% unique()
+zhSet
+
+zhTbl <- zhSet %>% select(ucs,edges,membership,zhPrec,zhPick) %>%
+	dplyr::inner_join(select(zhSet,ucs,zhPrec), by=join_by(zhPick==zhPrec)) %>%
+	dplyr::rename(c(ucs = "ucs.x",ucszhpick="ucs.y")) %>%
+	select(ucs,zhPrec,ucszhpick)
+zhTbl
+```
+
+```{r tw-preference}
+twSet <- clustpick %>%
+	dplyr::inner_join(jct, by=join_by(ucs==ucs)) %>% # filter(ucs == as.hexmode(0x08303))
+	mutate(
+		twPrec =  num((tCoreRank*1000 + twRank*100 + kTotalStrokes) + as.double(as.integer(ucs))/as.double(1000000),
+				digits = 6, notation="dec")
+	) %>%
+	select(ucs,edges,membership,twPrec) %>%
+	group_by(membership) %>%
+	mutate(twPick = min(twPrec)) %>%
+	ungroup() %>% unique()
+
+twTbl <- twSet %>% select(ucs,edges,membership,twPrec,twPick) %>%
+	dplyr::inner_join(select(twSet,ucs,twPrec), by=join_by(twPick==twPrec)) %>%
+	dplyr::rename(c(ucs = "ucs.x",ucstwpick="ucs.y")) %>%
+	select(ucs,twPrec,ucstwpick)
+
+twTbl
+```
+
+And combine them.
+
+```{r combine-preferences}
+jazhtwMap <- jaTbl %>%
+	dplyr::inner_join(zhTbl, by=join_by(ucs == ucs))  %>%
+	dplyr::inner_join(twTbl, by=join_by(ucs == ucs))
+
+jazhtwMap
+```
+
+Create transliteration rules for stringi::stri_trans_general().
+
+```{r translit-rules}
+jztTranslitRules <- jazhtwMap %>%
+	mutate(from = intToUtf8(as.integer(ucs), multiple = TRUE),
+		to.JA = intToUtf8(as.integer(ucsjppick), multiple = TRUE),
+		rule.JA = paste0(from," > ",to.JA ," ;",sep="" )) %>%
+	mutate(from = intToUtf8(as.integer(ucs), multiple = TRUE),
+		to.ZH = intToUtf8(as.integer(ucszhpick), multiple = TRUE),
+		rule.ZH = paste0(from," > ",to.ZH," ;",sep="" )) %>%
+	mutate(from = intToUtf8(as.integer(ucs), multiple = TRUE),
+		to.TW = intToUtf8(as.integer(ucstwpick), multiple = TRUE),
+		rule.TW = paste0(from," > ",to.TW," ;",sep="" )) %>%
+	select(ucs,membership, from,to.JA,rule.JA,to.ZH,rule.ZH,to.TW,rule.TW)
+jztTranslitRules
+```
+
+# References
+

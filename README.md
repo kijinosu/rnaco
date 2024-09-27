@@ -1,7 +1,7 @@
-R implemention of NACO normalization
+R toolbox for NACO and CJK name authority comparison
 ================
 Alan Engel
-08 July, 2024
+27 September, 2024
 
 The Library of Congress’s [Authority File Comparison Rules (NACO
 Normalization)](https://www.loc.gov/aba/pcc/naco/normrule-2.html) were
@@ -26,8 +26,8 @@ Stefanie Schneider’s viafr package on Github.([Schneider
 2022](#ref-R-viafr)) In a related project, viafr development is aimed at
 extracting information, for example, social networks based on coauthors,
 from the [Virtual International Authority Files
-(VIAF)](https://viaf.org/). In particular, normalization functionality
-for that package will be built and maintained in rnaco.
+(VIAF)](https://viaf.org/). Normalization functionality for that package
+will be built and maintained in rnaco.
 
 Of course, development based on NACO did not end in 2009 and is included
 in the [NACO - Name Authority Cooperative
@@ -42,11 +42,22 @@ files, which are then included as `tibbles`([Müller and Wickham
 
 ## Functions
 
+- get_transliteration_rules() Fetch transliteration rules for use in
+  stringi::stri_trans_general()
+
+- moji_transform() Normalizing transform based on MojiJoho variants
+
+- multiform_transform() CJK normalizing transform with user-selectable
+  form (JA, TW or ZH)
+
 - naco_transform() This function follows the Authority File Comparison
   Rules using stringi([Gagolewski 2022](#ref-R-stringi)) to implement
   the [International Components for Unicode](https://icu.unicode.org/).
   The derivation of naco_transform() is detailed in a walk-through
   vignette, `rnaco::naco`.
+
+- show_cluster() Display ideographic clusters used in normalizing
+  transform
 
 - xml2df() This function reads a specially structured xml, and produces
   a tibble.
@@ -86,12 +97,28 @@ files, which are then included as `tibbles`([Müller and Wickham
 
 ### Datasets for CJK normalization
 
-| Dataset         | Description                                      |
-|-----------------|--------------------------------------------------|
-| unihan_variants | Unihan CJK variants                              |
-| cjkextractja    | Personal name authority records - Japanese names |
-| cjkextractko    | Personal name authority records - Korean names   |
-| cjkextractzh    | Personal name authority records - Chinese names  |
+| Dataset         | Description                             |
+|-----------------|-----------------------------------------|
+| unihan_variants | Unihan CJK variants                     |
+| mojiMapdf       | Mapping of Moji Joho                    |
+| mojiVariants    | Moji Joho variants                      |
+| kyoikuKanji     | Kanji by grade level in Japan           |
+| zhXiaoxueWenzi  | Ideographs by grade level in PRC        |
+| twXiaoxueWenzi  | Ideographs by grade level in TW         |
+| jctPrecedence   | Precedence schemes for variant clusters |
+
+### Datasets for testing
+
+This data comes from personal name authority records that were developed
+by the [NACO CJK Funnel References
+Project](https://www.loc.gov/aba/pcc/naco/CJK.html) as a source of
+Chinese, Japanese and Korean names for testing and development.
+
+| Dataset      | Description                                      |
+|--------------|--------------------------------------------------|
+| cjkextractja | Personal name authority records - Japanese names |
+| cjkextractko | Personal name authority records - Korean names   |
+| cjkextractzh | Personal name authority records - Chinese names  |
 
 ## Vignettes
 
@@ -107,6 +134,10 @@ files, which are then included as `tibbles`([Müller and Wickham
 - rnaco::unihanVariants: Unihan Variants Table for rnaco including
   analysis of their use in VAIF normalization of CJK names
 
+- rnaco::integrated-variant-map: An in-progress effort to combine NACO,
+  Unihan variants and MojiJoho variants into an internally coherent
+  scheme for normalization
+
 # Installation
 
 You can install the latest version of **rnaco** from
@@ -120,13 +151,17 @@ devtools::install_github("kijinosu/rnaco")
 # Other simlar work
 
 - [pynaco](https://github.com/unt-libraries/pynaco) is a fork by
-  University of North Texas Libraries of sample code found on the OCLC
-  Research Website.
+  University of North Texas Libraries of Python sample code that was on
+  the OCLC Research Website.
 
-# R packages used for this data package
+# R packages used for this package
 
 - DataPackageR - Set up and put the pieces together ([Finak et al.
   2018](#ref-R-DataPackageR))
+
+- stringi - ([Gagolewski 2022](#ref-R-stringi))
+
+- tibble - ([Müller and Wickham 2023](#ref-R-tibble))
 
 # References
 

@@ -1,0 +1,539 @@
+---
+title: CITPC Moji Variants
+author: Alan Engel
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+version: 0.2.5
+lang: "en-us"
+output_format: rmarkdown::html_vignette
+bibliography: 
+  - R.bib
+  - naco.bib
+link-citations: true
+---
+
+```{r libraries, warning=FALSE, message=FALSE}
+library(rlang)
+library(tidyverse)
+library(dplyr)
+library(xslt)
+library(tibble)
+library(stringi)
+library(viafr)
+library(magrittr)
+library(igraph)
+library(rnaco)
+```
+
+```{r knitr_setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+This vignette describes the derivation of a variants table for Japanese
+characters based on a mapping of characters suggested for elimination from
+Japan's recognized characters onto candidate replacements.[@citpc2015shukutai] 
+
+## The Problem
+
+At the previous devlopment stage, this package included tranformations using the NACO Authority Comparison Rules[@pcc2020authority],
+the Unihan Variants, and Traditional-Simplified transformation. But in testing these
+using the ```cjkextractja``` dataset obtained from the
+[NACO CJK Funnel References Project Guidelines](https://www.loc.gov/aba/pcc/naco/CJK/NACO-CJK-Funnel-References-Project-Guidelines.docx){target="rnacosupplement"} [@naco2019naco].
+(Please see the [accompanying vignette](rnaco-viafr.html){target="rnacosupplement"} ) found Japanese characters
+whose normalization did not replicate that found in x400 elements of corresponding
+VIAF clusters. For example, the [VIAF cluster for Kawai, Ryūsuke](https://viaf.org/viaf/11309362/viaf.xml){target="rnacosupplement"}  contains
+the following two x400 elements. 
+
+```
+<ns1:x400>
+<ns1:datafield dtype="MARC21" ind1="1" ind2=" " tag="400">
+<ns1:subfield code="a">川井竜介,</ns1:subfield>
+<ns1:subfield code="d">1956-</ns1:subfield>
+<ns1:normalized>巛丼尨介 1956</ns1:normalized>
+</ns1:datafield>
+<ns1:sources>
+<ns1:s>LC</ns1:s>
+<ns1:sid>LC|n 85367264</ns1:sid>
+</ns1:sources>
+</ns1:x400>
+...
+<ns1:x400>
+<ns1:datafield dtype="MARC21" ind1="1" ind2=" " tag="400">
+<ns1:subfield code="a">川井龍介,</ns1:subfield>
+<ns1:subfield code="d">1956-</ns1:subfield>
+<ns1:normalized>巛丼尨介 1956</ns1:normalized>
+</ns1:datafield>
+<ns1:sources>
+<ns1:s>LC</ns1:s>
+<ns1:sid>LC|n 85367264</ns1:sid>
+</ns1:sources>
+</ns1:x400>
+```
+
+In this example, the two name strings 川井竜介 and 川井龍介 are transformed to 巛丼尨介. 
+Of the three characters that are transformed for each of these two strings, the first
+two could be transformed by the viaf_cjk_transform() function of this package. The third
+character was not yet transformed.
+
+original | desired normalization | method
+-------- | ------- | ----------
+川 (`r stringi::stri_trans_general("川" , id="Any-Hex/Unicode")`) | 巛 (`r stringi::stri_trans_general("巛" , id="Any-Hex/Unicode")`) | Unihan variants
+井 (`r stringi::stri_trans_general("井" , id="Any-Hex/Unicode")`) | 丼 (`r stringi::stri_trans_general("丼" , id="Any-Hex/Unicode")`) | Unihan variants
+竜 (`r stringi::stri_trans_general("竜" , id="Any-Hex/Unicode")`) | 尨 (`r stringi::stri_trans_general("尨" , id="Any-Hex/Unicode")`) | (not yet handled)
+龍 (`r stringi::stri_trans_general("龍" , id="Any-Hex/Unicode")`) | 尨 (`r stringi::stri_trans_general("尨" , id="Any-Hex/Unicode")`) | (not yet handled)
+
+
+## The Moji_Joho Collection and MJ Shukutai Map
+
+The [Ideographic Variation Database (IVD)](https://www.unicode.org/ivd/){target="rnacosupplement"}  includes
+the [Moji_Joho collection](https://moji.or.jp/mojikiban/){target="rnacosupplement"} , which includes
+the [MJ Shukutai Map](https://moji.or.jp/mojikiban/map/){target="rnacosupplement"} , a proposal for replacing
+about half of the approximately 60,000 characters in the [MJ character list](https://moji.or.jp/mojikiban/mjlist/).
+The [XML version](https://moji.or.jp/wp-content/mojikiban/oscdl/mjs.1.2.0.xml){target="rnacosupplement"}  of this map
+contains the following element. This element proposes replacing MJ character MJ034246 
+(U+21BCE) with 尨 (`r stringi::stri_trans_general("尨" , id="Any-Hex/Unicode")`). It also
+references characters 竜 (`r stringi::stri_trans_general("竜" , id="Any-Hex/Unicode")`) and
+龍 (`r stringi::stri_trans_general("龍" , id="Any-Hex/Unicode")`). This suggests that the MJ Shukutai Map,
+which is available with the Moji_Joho Collection under a 
+[Creative Commons By-SA 2.1 JP license](https://creativecommons.org/licenses/by-sa/2.1/jp/){target="rnacosupplement"} ,
+can serve as a basis for tranliteration rules that can be used to replicate
+VIAF's normalizing transformations for Japanese characters. This vignette describes
+the derivation and testing of a dataset, ```mojiVariants```, of such transliteration rules.
+A summary of the information available for this MJ character can be found at 
+<https://moji.or.jp/mojikibansearch/info?MJ%E6%96%87%E5%AD%97%E5%9B%B3%E5%BD%A2%E5%90%8D=MJ034246>{target="rnacosupplement"} .
+
+> For the curious, 竜 and 龍 both are pronounces "ryuu" and have the
+> meaning "dragon". The first is a simplified form of the latter. An example of
+> their relationship is the city 龍ヶ崎市 in Ibaraki Prefecture that
+> has a high school named 竜ヶ崎第一高等学校, Ryugasaki 1st High School.
+> The high school is run by the prefecture. The character 尨 has the readings "bou", "mou",
+> and "muku". It is the "shaggy" in shaggy dog.
+
+```
+<縮退候補情報>
+  <MJ文字図形名>MJ034246</MJ文字図形名> <!-- MJ code -->
+  <法務省戸籍法関連通達-通知>
+    <戸籍統一文字情報_親字-正字 ホップ数="1"> <!-- Unified koseki, 1 'hop' -->
+      <JIS_X_0213情報>
+        <面区点位置>1-53-88</面区点位置>
+        <対応UCS>U+5C28</対応UCS>
+      </JIS_X_0213情報>
+    </戸籍統一文字情報_親字-正字>
+    <戸籍統一文字情報_親字-正字 ホップ数="2"> <!-- Unified koseki, 2 'hops' -->
+      <JIS_X_0213情報>
+        <面区点位置>1-53-88</面区点位置>
+        <対応UCS>U+5C28</対応UCS>
+      </JIS_X_0213情報>
+    </戸籍統一文字情報_親字-正字>
+  </法務省戸籍法関連通達-通知>
+  <辞書類等による関連字> <!-- related characters based on dictionaries, etc. -->
+    <JIS_X_0213情報>
+      <面区点位置>1-46-21</面区点位置>
+      <対応UCS>U+7ADC</対応UCS>
+    </JIS_X_0213情報>
+    <JIS_X_0213情報>
+      <面区点位置>1-46-22</面区点位置>
+      <対応UCS>U+9F8D</対応UCS>
+    </JIS_X_0213情報>
+  </辞書類等による関連字>
+</縮退候補情報>
+	
+```
+
+## Overview of Method
+
+The method of this vignette consists of two major steps:
+1. Using XSLT transforms, generate an XML file from the MJ shukutai map and Moji_Joho collection
+that contains from-to relations between UCS variants and can be used by the ```xml2df``` function
+of this package to produce a ```tibble``` data frame.
+2. Use the R package igraph[@R-igraph] to identify variant clusters and produce the final mojiVariants
+dataset.
+
+### 1. From MJ shukutai map to tibble data frame
+
+#### Algorithm for finding replacement characters
+
+A [guide to the MJ map](https://moji.or.jp/wp-content/mojikiban/2015/09/20150925_5.pdf){target="rnacosupplement"} [@ipa2015shukutai]
+contains on page 8 an algorithm for determining replacement characters.
+@muto2016visualization provides a description of the mapping process. The process shown in
+the flowchart below is adapted below for this task. The map file provides the results for
+each of the lookups in the flowchart, so this algorithm can be carried out using data
+in the map file element. (The UCS code corresponding to the MJ code is not in the map
+file but can be supplied as is described later in this section.)
+
+Starting with the MJ code, the algorithm first checks a list of previously decided
+JIS/UCS correspondences. If a corresponding JIS/UCS character exists, this becomes
+the replacement. If not, the the algorithm checks a set of three sources related to Japan's
+[family registry (koseki) system](https://www.moj.go.jp/EN/MINJI/koseki.html){target="rnacosupplement"} .
+The source is a table ("Minni 5202") of correspondences between colloquial and accepted
+characters. The second source is the unified koseki characters.<a id="koseki"></a> The third source
+is a table ("Minichi 2842") of correspondences between erroneous or colloquial and
+accepted characters.
+
+For some MJ characters, there are multiple possible unified koseki characters that
+could serve as replacements. This shows an example. This element proposes replacing MJ character MJ030534 
+(U+201A4) with 介 (`r stringi::stri_trans_general("介" , id="Any-Hex/Unicode")`) or
+丁 (`r stringi::stri_trans_general("介" , id="Any-Hex/Unicode")`). It also has
+介 (`r stringi::stri_trans_general("介" , id="Any-Hex/Unicode")`) as a Minichi 2842 candidate
+and a dictionary reference to character 丁 (`r stringi::stri_trans_general("丁" , id="Any-Hex/Unicode")`).
+Both unified koseki characters have the same hop number 1. Selecting the character
+with the minimum UCS value substitutes 介 with 丁. This does not happen in the
+example 川井龍介 above. Selecting based on minimum menkuten (面区点位置) value does
+not produce this subsitution. So the minimum menkuten value is used for selection.
+In the XSLT transform, this is achieved by numerically sorting on the concatenation of the hop number
+and dehyphenated menkuten values (113590 and 111880 for the example below).
+
+```
+<縮退候補情報>
+  <MJ文字図形名>MJ030534</MJ文字図形名>
+  <法務省戸籍法関連通達-通知>
+    <戸籍統一文字情報_親字-正字 ホップ数="1">
+      <JIS_X_0213情報>
+      <面区点位置>1-35-90</面区点位置>
+      <対応UCS>U+4E01</対応UCS>
+      </JIS_X_0213情報>
+    </戸籍統一文字情報_親字-正字>
+    <戸籍統一文字情報_親字-正字 ホップ数="1">
+      <JIS_X_0213情報>
+      <面区点位置>1-18-80</面区点位置>
+      <対応UCS>U+4ECB</対応UCS>
+      </JIS_X_0213情報>
+    </戸籍統一文字情報_親字-正字>
+    <民一2842号通達別表_誤字俗字-正字一覧表 付記="別字">
+      <JIS_X_0213情報>
+      <面区点位置>1-18-80</面区点位置>
+      <対応UCS>U+4ECB</対応UCS>
+      </JIS_X_0213情報>
+    </民一2842号通達別表_誤字俗字-正字一覧表>
+  </法務省戸籍法関連通達-通知>
+  <辞書類等による関連字>
+  <JIS_X_0213情報>
+  <面区点位置>1-35-90</面区点位置>
+  <対応UCS>U+4E01</対応UCS>
+  </JIS_X_0213情報>
+  </辞書類等による関連字>
+</縮退候補情報>
+```
+
+If a replacement is not found by this stage, the algorithm proceeds to a table
+of character correspondences used for foreign resident cards and maintained by
+the Ministry of Justice.
+The [source document](https://www.moj.go.jp/isa/content/930002422.pdf) contains
+two appended tables (別表第四 一 and 別表第四 二). The first table is accepted for
+candidate replacements, but the second is not. Nonetheless, the information for
+both tables is included in the map file.
+
+The map file also contains UCS codes for characters that are
+indicated as related according to dictionaries and other sources even
+though these relationships do not contribute to the selection of candidate
+replacements.
+
+```{r replacement_flowchart, echo=FALSE}
+DiagrammeR::grViz("
+digraph graph2 {
+graph [layout = dot]
+
+node [shape = rectangle, width=2, style = filled, fillcolor = Linen]
+
+mj [label = 'MJ element']
+ju [label = 'JIS/UCS']
+rep [label = 'Replacement']
+proc1a [label = 'Family registry:\nMinni 5202']
+proc1b [label = 'Family registry:\nUnified koseki']
+proc1c [label = 'Family registry:\nMinichi 2842']
+forres1 [label = 'Residence Card List 1']
+prec [label = 'Selection']
+norep [label = 'No replacement']
+
+mj -> ju;
+ju -> rep[label = 'Exists'];
+ju -> proc1a[label = 'None'];
+forres1 -> norep[label = 'None'];
+forres1 -> prec[label = 'Exists'];
+prec -> rep;
+proc1a -> proc1b[label = 'None'];
+proc1a -> rep[label = 'Exists'];
+proc1b -> rep[label = 'Exists\nSelect'];
+proc1b -> proc1c[label = 'None'];
+proc1c -> rep[label = 'Exists'];
+proc1c -> forres1[label = 'None'];
+}
+")
+         
+```
+
+#### XSLT transform to execute algorithm
+
+In the current version of this package, an xslt transform (mjsfromto.xsl)
+is used to select the replacement candidate based on information in the map file.
+If a replacement is found, "from/to" records are output to an xml file
+(mjmap.xml) in which the "from" characters are all characters listed
+in the MJ element and the "to" character is the replacement.
+UCS codes corresponding the the MJ codes are supplied
+to the xslt transform by means of an auxiliary file (mjucs.xml) that
+is created by the R code below. This package includes the files mjsfromto.xsl, mjucs.xml,
+and mji.00602.xlsx.
+
+This code writes the resulting xml file directly rather than using the xml2 package
+because writing directly is much faster. It also uses the ```new_environment()```
+function of the rlang package in order to organize major sections of this process
+within the workspace.
+
+```{r, mojoaux, eval=FALSE}
+library(readxl)
+
+a <- new_environment()
+ls(a)
+a$mjauxpath = file.path(project_path(),"xslt","mjucs.xml")
+a$xlpath <- file.path(project_extdata_path(),"moji","mji.00602.xlsx")
+a$xmojo <- read_excel(a$xlpath)
+colnames(a$xmojo)
+a$xmojo <- a$xmojo %>% filter(!is.na(対応するUCS))
+a$mojoaux <- a$xmojo %>% select(MJ文字図形名, 対応するUCS,X0213, 28) %>%
+	mutate(strokes = as.integer(4)) %>%
+	rename(mjcode = MJ文字図形名, ucs = 対応するUCS) %>%
+	mutate(jisx0213 = stringi::stri_replace_all_fixed(X0213,"-","")) %>%
+	select(mjcode, ucs, strokes, jisx0213)
+
+a$con <- file(a$mjauxpath, "w", encoding = "UTF-8")
+a$text  <- "<?xml version='1.0' encoding='UTF-8'?>"
+writeLines(a$text,a$con)
+a$text  <- "<mjucs>"
+writeLines(a$text,a$con)
+apply(a$mojoaux,1, function(v) {
+	a$item <- vector(mode = "character", length = 7)
+	a$item[1] <- paste0("<row mj='",v[1],"' u='",v[2],"' s='",v[3],"' jis='",v[4],"' >")
+	a$item[2] <- paste0("<mjcode ct='character'>",v[1],"</mjcode>")
+	a$item[3] <- paste0("<ucs ct='character'>",v[2],"</ucs>")
+	a$item[4] <- paste0("<strokes ct='integer'>",v[3],"</ucs>")
+	a$item[5] <- paste0("</row>")
+	writeLines(a$item,a$con)
+})
+
+a$text  <- "</mjucs>"
+writeLines(a$text,a$con)
+close(a$con)
+```
+
+The following chunk prepares precedence information from jctPrecedence
+for use in the xslt transform by putting in mjprecedence.xml which
+is then included in mjsfromto.xsl by means of xslt's document()
+feature.
+
+```{r mjprecedenct}
+t$mjprecpath <- file.path(project_path(),"xslt","mjprecedence.xml")
+t$prec <- jctPrecedence %>%
+		mutate(ucs= paste0("U+",as.hexmode(ucs)),
+			strokes = kTotalStrokes) %>%
+		select(ucs,jpRank,strokes)
+t$con <- file(t$mjprecpath, "w", encoding = "UTF-8")
+t$text  <- "<?xml version='1.0' encoding='UTF-8'?>"
+writeLines(t$text,t$con)
+t$text  <- "<mjr>"
+writeLines(t$text,t$con)
+apply(t$prec,1, function(v) {
+	t$item <- vector(mode = "character", length = 6)
+	t$item[1] <- paste0("<row ucs='",v[1],"' rank='",v[2],"' strokes='",v[3],"' >")
+	t$item[2] <- paste0("<ucs>",v[1],"</ucs>")
+	t$item[3] <- paste0("<rank>",v[2],"</rank>")
+	t$item[4] <- paste0("<strokes>",v[3],"</strokes>")
+	t$item[5] <- paste0("</row>")
+	writeLines(t$item,t$con)
+})
+t$text  <- "</mjr>"
+writeLines(t$text,t$con)
+close(t$con)
+```
+
+The code below executes the xslt transform (mjsfromto.xsl **and** mjaux.xml
+in the same folder) that performs the algoritm diagrammed above and produces
+the mjmap.xml "from/to" mapping.
+
+```{r, mjmap, eval=FALSE}
+t <- new_environment()
+ls(t)
+
+t$xslpath <- file.path(project_path(),"xslt","mjsfromto.xsl")
+t$xsl <- xml2::read_xml(t$xslpath)
+t$zippath <- file.path(project_extdata_path(),"moji","MJShrinkMapVer.1.2.0-xml.zip")
+t$tmppath <- tempdir()
+utils::unzip(t$zippath,files = "mjs.1.2.0.xml", exdir=t$tmppath)
+list.files(t$tmppath)
+t$xml <- xml2::read_xml(file.path(t$tmppath, "mjs.1.2.0.xml")) 
+t$outpath = file.path(project_extdata_path(),"moji","mjmap.xml")
+as.POSIXlt(Sys.time())
+t$result <- xslt::xml_xslt(t$xml,t$xsl)
+as.POSIXlt(Sys.time())
+xml2::write_xml(t$result, t$outpath)
+```
+
+This process takes several hours on a Windows PC. For the MJ element shown above,
+this process produces the following elements in mjmap.xml. Here U+21BCE is the
+UCS index point for character MJ034246. It is supplied to the xslt transform
+mjsfromto.xsl via the auxiliary xml file mjaux.xml.  UCS code U+21BCE points
+then to 尨 (`r stringi::stri_trans_general("尨" , id="Any-Hex/Unicode")`) as
+do also 竜 (`r stringi::stri_trans_general("竜" , id="Any-Hex/Unicode")`) and
+龍 (`r stringi::stri_trans_general("龍" , id="Any-Hex/Unicode")`). (The 'relation'
+element is created for tracing and debugging purposes.)
+
+```
+<mjsedges>
+...
+<row>
+<mjcode ct="character">MJ034246</mjcode>
+<from ct="character">U+21BCE</from>
+<to ct="character">U+5C28</to>
+<relation ct="character">replaceducs</relation>
+</row>
+<row>
+<mjcode ct="character">MJ034246</mjcode>
+<from ct="character">U+7ADC</from>
+<to ct="character">U+5C28</to>
+<relation ct="character">dictionary</relation>
+</row>
+<row>
+<mjcode ct="character">MJ034246</mjcode>
+<from ct="character">U+9F8D</from>
+<to ct="character">U+5C28</to>
+<relation ct="character">dictionary</relation>
+</row>
+...
+</mjsedges>
+```
+
+#### ```mojiMap``` data frame from ```mjmap.xml```
+
+The xml file mjmap.xml can then be read into a tibble data.frame 
+```mojiMapdf``` as
+performed below. This tibble is included in the package's data to
+allow for experimentation with ```igraph``` clustering.
+
+For this vignette, the results of the steps above were
+canned and stored in the ```inst/extdata/moji``` folder. The steps below
+are performed for each build of the package.
+
+```{r mapdf}
+mappath <- file.path(project_extdata_path(),"moji","mjmap.xml")
+mapxml <- xml2::read_xml(mappath)
+mojiMapdf <- rnaco::xml2df(mapxml)
+mojiMapdf
+```
+
+### 2. From tibble data frame to variant clusters
+
+#### Use ```igraph``` to produce ```mojiVariants```
+
+The strategy here is to read ```mojiMapdf``` into a directed graph.
+The walktrap algorithm produces clusters of variants. A
+representative UCS code is selected for each cluster and a tibble
+of ucs, representative ucs, and membership triads is produced.
+Finally, this table of triads is converted to the form of
+transliterations rules that can be used in ```stringi::stri_trans_general()```
+in the same way that Unihan variant rules are used in this package.
+
+#### Make a graph.
+
+```{r make_graph}
+mapsub <- mojiMapdf %>% select(from,to, mjcode, relation)
+g <- igraph::graph_from_data_frame(mapsub,directed = TRUE, vertices = NULL)
+```
+
+#### Get the clusters.
+
+```{r clusters}
+wc <- cluster_walktrap(g, steps=4)
+clustpick <- tibble(ucs=V(g)$name, ins=degree(g, mode="in"),
+			outs=degree(g, mode="out"),
+			membership=membership(wc))
+```
+
+#### Pick out one terminal (no edges out) vertex per cluster. This version filters first
+for the terminal vertex with the most incoming edges, then for the
+lowest UCS index.
+
+```{r get_representative_vertexes}
+mojitranslit <- clustpick %>% filter(ins > 0, outs == 0) %>%
+		group_by(membership) %>%
+		mutate(maxins = max(ins)) %>%
+		ungroup() %>%
+		filter(ins == maxins) %>%
+		group_by(membership) %>%
+		mutate(repucs = min(ucs)) %>%
+		ungroup() %>%
+		filter(repucs == ucs) %>%
+		select(repucs, membership) %>%
+		inner_join(clustpick, by = join_by(membership)) %>%
+		filter(repucs != ucs) %>%
+		select(ucs, repucs, membership)
+```
+
+#### Convert this to the form used for unihanVariants.
+
+```{r mojiVariants}
+mojiVariants <- mojitranslit %>%
+	mutate(ucsindex = as.hexmode(stringi::stri_match_first(ucs,regex = "(?:U[+])([A-F0-9]++)")[,2]),
+		ucsvariant = as.hexmode(stringi::stri_match_first(repucs,regex = "(?:U[+])([A-F0-9]++)")[,2])) %>%
+	mutate(from = intToUtf8(as.integer(ucsindex), multiple = TRUE)) %>%
+	mutate(to = intToUtf8(as.integer(ucsvariant), multiple = TRUE)) %>%
+       dplyr::mutate(rule = paste0(from," > ",to," ;",sep="" )) %>%
+	select(ucsindex,ucsvariant,membership,from,to,rule)
+mojiVariants
+```
+
+##Summary and testing
+
+First, look at the motivating case. 竜 and 龍 are normalized to 尨 as desired. 尨
+is the normalized form for 18 characters.
+
+```{r check_motivating}
+mojiVariants %>% filter(from %in% c("竜","龍"))
+mojiVariants %>% filter(ucsvariant == as.hexmode(0x5C28))
+```
+
+There should be the same number of unique ucsvariant values, unique to values,
+and unique membership values.
+
+```{r check_membership_vs_ucsvariant}
+mojiVariants %>% select(ucsvariant) %>% unique() %>% nrow()
+mojiVariants %>% select(membership) %>% unique() %>% nrow()
+mojiVariants %>% select(to) %>% unique() %>% nrow()
+```
+
+## Next task
+
+Integrate mojiVariants with unihanVariants.
+
+## R packages used for this script
+
+### Workhorses
+
+dplyr [@R-dplyr]
+
+magrittr [@R-magrittr]
+
+readxl [@R-readxl]
+
+rlang [@R-rlang]
+
+tidyverse [@R-tidyverse]
+
+xml2 [@R-xml2]
+
+xslt [@R-xslt]
+
+
+### Network analysis and visualization
+
+DiagrammeR [@R-diagrammer]
+
+igraph [@R-igraph]
+
+### Normalization
+
+stringi [@R-stringi]
+
+rnaco [@R-rnaco]
+
+viafr [@R-viafr]
+
+# References
+

@@ -1,0 +1,262 @@
+---
+title: Unihan Data for Precedence Schemes
+author: Alan Engel
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+lang: "en-us"
+output_format: rmarkdown::html_vignette
+bibliography: 
+  - R.bib
+  - naco.bib
+  - unihan.bib
+link-citations: true
+---
+
+```{r libraries, warning=FALSE, message=FALSE}
+library(rlang)
+library(tidyverse)
+library(dplyr)
+library(xml2)
+library(tibble)
+library(stringi)
+library(magrittr)
+library(igraph)
+```
+
+```{r knitr_setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,
+ fig.width = 6,
+ fig.asp = 0.8,
+ out.width = "80%")
+```
+
+## Unihan data
+
+Precedence schemes for selecting ideographs from groups or clusters may enter
+into normalization at several points. For example, the CITPC algorithm for
+determined replacement candidates for MJ characters ([@ipa2015shukutai])
+specifies that when there are two or more koseki candidates
+(see [CITPC Moji Variants](citpcmojivariants.html#koseki){target="rnacosupplement"}),
+precedence goes to Joyo Kanji, then to Jinmeiyo Kanji, and finally to
+JIS order. This vignette describes the extraction of propery data from the
+[Unicode Character Database](https://www.unicode.org/versions/Unicode15.1.0/){target="rnacosupplement"}
+for the purpose of constructing various precedence schemes.
+
+The desired properties are selected from the
+[Unicode Han Database](https://www.unicode.org/reports/tr38/tr38-35.html){target="rnacosupplement"}.
+Developers may find an [example from the Unicode utilities site](https://util.unicode.org/UnicodeJsps/character.jsp?a=4E9D){target="rnacosupplement"} easier to follow.
+This script uses the
+[XML Representation of Unicode 15.1.0 UCD flat file (downloadable zip file)](https://www.unicode.org/Public/15.1.0/ucdxml/ucd.unihan.flat.zip){target="rnacosupplement"}.
+
+* kFrequency is a rough frequency measurement of the ideograph's occurance in a collection of traditional USENET posting. It may be useful
+for selecting among traditional Chinese ideographs.
+
+* kTotalStrokes is the total number of strokes in the ideograph and can be used for selection based on simplicity.
+
+* kIICore and kUnihanCore2020 specify the ideograph's membership in IRG-produced minimal sets of required ideographs for East Asian use. It may
+be used to select based on use in, for example, the PRC, Japan or Taiwan.
+
+* kJoyoKanji and kJinmeiyoKanji designate membership in standardized Japanese collections.
+
+* kJis0, kJis1 and kJIS0213 designate membership in standardized Japanese collections.
+
+```{r construct-unihanPrecedenceData}
+zippath <- file.path(project_extdata_path(),"ucd","ucd.unihan.flat.zip")
+t <- tempdir()
+unzip(zippath,exdir=t)
+xml <- xml2::read_xml(file.path(t,"ucd.unihan.flat.xml"))
+ns <- xml_ns_rename(xml_ns(xml), d1 = "u")
+charelements <- xml_find_all(xml, "/u:ucd/u:repertoire/u:char", ns)
+as.POSIXlt(Sys.time())
+dv <- lapply(charelements, function(charelement) {
+  df <- suppressWarnings(tibble(
+    ucs = as.hexmode(xml_attr(charelement, attr="cp", default = NA)),
+    kFrequency = as.integer(xml_attr(charelement, attr="kFrequency", default = NA)),
+    kTotalStrokes = as.integer(xml_attr(charelement, attr="kTotalStrokes", default = NA)),
+    kIICore = xml_attr(charelement, attr="kIICore", default = ""),
+    kUnihanCore2020 = xml_attr(charelement, attr="kUnihanCore2020", default = ""),
+    kJinmeiyoKanji = xml_attr(charelement, attr="kJinmeiyoKanji", default = NA),
+    kJis0 = xml_attr(charelement, attr="kJis0", default = NA),
+    kJis1 = xml_attr(charelement, attr="kJis1", default = NA),
+    kJIS0213 = xml_attr(charelement, attr="kJIS0213", default = NA),
+    kJoyoKanji = xml_attr(charelement, attr="kJoyoKanji", default = NA),
+    kMojiJoho = xml_attr(charelement, attr="kMojiJoho", default = NA),
+  ), classes = "warning")
+})
+unihanPrecedenceData <- dplyr::bind_rows(dv)
+as.POSIXlt(Sys.time())
+```
+
+The file ucd.unihan.flat.zip is missing kTotalStrokes data for 4 ideographs. These
+are manually added below using data from Moji Joho file mji.00602.xlsx.
+
+```{r add-missing-stroke-counts}
+unihanPrecedenceData[which(unihanPrecedenceData$ucs == as.hexmode(0x08303)),]$kTotalStrokes <- 8
+unihanPrecedenceData[which(unihanPrecedenceData$ucs == as.hexmode(0x09AA8)),]$kTotalStrokes <- 10
+unihanPrecedenceData[which(unihanPrecedenceData$ucs == as.hexmode(0x2010E)),]$kTotalStrokes <- 2
+unihanPrecedenceData[which(unihanPrecedenceData$ucs == as.hexmode(0x2A060)),]$kTotalStrokes <- 18
+unihanPrecedenceData
+```
+
+## Precedence schemes
+
+While normalization algorithms may be intended for background comparison
+of name authorities, it may be desirable to enable users or working groups
+to select a character regime in which they work comfortably. The precedence
+schemes described below select cluster representatives with preference for
+one of Japanese, simplified Chinese and traditional Chinese. They also
+provide preference for ideographs taught in lower grade levels.
+
+### Using kUnihanCore2020 properties
+
+The property [kUnihanCore2020](https://www.unicode.org/reports/tr38/#kUnihanCore2020){target="rnacosupplement"}
+is used for ideographs that are in the minimal set of ideographs required for East Asia.
+Ken Lunde [@lunde2019new] provides a detailed description and history of this
+property along with a 
+[stand-alone data file](https://www.unicode.org/L2/L2019/19388-unihancore2020-data.txt){target="rnacosupplement"}.
+This property covers 20,652 CJK Unified Ideographs and 68 CJK Compatibility Ideographs,
+10,910 more than the older kIICore property. From the kUnihanCore2020 ideographs, the
+scripts below cover Japan (6,490 ideographs having the 'J' tag), PRC (8,247
+ideographs having the 'G' tag), and ROC (13,068 ideographs having the 'T' tag).
+A precedence value (jCoreRank, gCoreRank and tCoreRank) is 8 minus the number
+of source tags. The value 8 is assigned to all ideographs not in the respective
+core set. This provides for precedence favoring ideographs that more broadly used
+as reflected by the number of IRG source tags.
+
+### Using grade levels
+
+The educational administrations in China, Japan, Taiwan and Hong Kong specify the ideographs are
+to be taught at which grade levels in their school systems. The levels for Hong Kong are included
+in the [Unihan database](https://www.unicode.org/reports/tr38/tr38-35.html#N10106){target="rnacosupplement"}
+as the property kGradeLevel. Those for China, Japan and Taiwan can be obtained from online
+sources and are included in this package as the following datasets:
+
+Authority | Dataset
+--------- | --------
+China | [zhXiaoxueWenzi](xiaoxuewenziZH.html){target="rnacosupplement"}
+Japan | [kyoikuKanji](kyoikuKanji.html){target="rnacosupplement"}
+Taiwan | [twXiaoxueWenzi](xiaoxuewenziTW.html){target="rnacosupplement"}
+
+The code chunk below creates two precedence rankings. The first, coreRank, uses the kUnihanCore2020 property, selects
+for Japan 'J' as an IRG source and is set to 7 minus the number of IRG sources represented in the property's value string.
+In other words, preference is for ideographs represented in the greater number of IRG sources. If kUnihanCore2020
+is absent, coreRank is set to 8.
+The second precedence ranking is jpRank and is the 1-6 grade level (from [Kyoiku Kanji Dataset](kyoikuKanji.html){target="rnacosupplement"})
+for the ideograph, 7 if outside those sets but still
+a Joyo Kanji, 8 if none of the left but is a Jimmeiyo Kanji, and 9 for all others. 
+
+```{r jpPrecedence}
+kyoikuKanji <- DataPackageR::datapackager_object_read("kyoikuKanji")
+jpPrecedence <-unihanPrecedenceData %>%
+	mutate(jCoreRank = as.integer(ifelse(stri_detect_fixed(kUnihanCore2020,'J'), 8-stri_length(kUnihanCore2020), 8)),.after=ucs) %>%
+	dplyr::left_join(kyoikuKanji, by=join_by(ucs == ucs)) %>%
+	mutate(jpRank = as.integer(ifelse(!is.na(jpGrade), jpGrade,
+				ifelse(!is.na(kJoyoKanji),7,
+				ifelse(!is.na(kJinmeiyoKanji),8,9))))
+ 				,.after = jCoreRank ) %>%	
+	select(ucs,char,jCoreRank ,jpRank)
+jpPrecedence
+```
+
+```{r correlation-jpPrecedence}
+subset <- jpPrecedence %>% filter(jCoreRank < 8, jpRank < 9)
+cc <-cor.test(subset$jCoreRank, subset$jpRank, method = "pearson")
+stringi::stri_printf("Pearson correlation %.3f, CI %.3f-%.3f, p-value: %.2f", 
+							round(cc$estimate,digits=2),round(cc$conf.int[1],digits=2),	
+							round(cc$conf.int[2],digits=2),round(cc$p.value,digits=2))
+```
+
+With `r jpPrecedence %>% select(ucs) %>% count()` Unicode code points in the full set,
+`jpPrecedence %>% filter(jCoreRank < 8) %>% select(ucs) %>% count()` in the UnihanCore2020 subset, and
+`jpPrecedence %>% filter(jpRank < 9) %>% select(ucs) %>% count()` in the jpRank subset, jpPrecedence is
+skewed to higher coreRank and higher jpRank. Ignoring the default high values, jCoreRank and jpRank
+are weakly correlated, suggesting that they can be treated as complementary. 
+
+
+
+```{r plotjp, echo=FALSE}
+library(ggpubr)
+ggplot(subset , aes(x = jCoreRank)) +
+  geom_histogram(binwidth=1) + labs(title="Count by jCoreRank")
+
+ggplot(subset , aes(x = jpRank)) +
+  geom_histogram(binwidth=1) + labs(title="Count by jpRank")
+```
+
+The PRC grade level ideograph lists cover the first 6 grades.  The grade precedences (zhRank)
+below are set to the respective grade levels for these lists and 9 for all other ideographs.
+
+```{r zhPrecedence}
+zhXiaoxueWenzi <- DataPackageR::datapackager_object_read("zhXiaoxueWenzi")
+zhPrecedence <- unihanPrecedenceData %>%
+	mutate(gCoreRank = as.integer(ifelse(stri_detect_fixed(kUnihanCore2020,'G'), 8-stri_length(kUnihanCore2020), 8)),.after=ucs) %>%
+	dplyr::left_join(zhXiaoxueWenzi, by=join_by(ucs == ucs)) %>%
+	mutate(zhRank = as.integer(ifelse(!is.na(zhGrade), zhGrade,9))
+ 				,.after = gCoreRank) %>%	
+	select(ucs,char,gCoreRank,zhRank )
+zhPrecedence 
+```
+
+```{r correlation-zhPrecedence}
+zhsubset <- zhPrecedence %>% filter(gCoreRank < 8, zhRank < 9)
+zhcc <-cor.test(zhsubset$gCoreRank, zhsubset$zhRank, method = "pearson")
+stringi::stri_printf("Pearson correlation %.3f, CI %.3f-%.3f, p-value: %.2f", 
+							round(zhcc$estimate,digits=2),round(zhcc$conf.int[1],digits=2),	
+							round(zhcc$conf.int[2],digits=2),round(zhcc$p.value,digits=2))
+```
+
+```{r plotzh, echo=FALSE}
+library(ggpubr)
+ggplot(zhsubset , aes(x = gCoreRank)) +
+  geom_histogram(binwidth=1) + labs(title="Count by gCoreRank")
+
+ggplot(zhsubset , aes(x = zhRank)) +
+  geom_histogram(binwidth=1) + labs(title="Count by zhRank")
+```
+
+The Taiwan ideograph lists are for grades 1-9. The grade precedences (twRank) below
+are set to the grade level for grades 1-8 and 9 for all other ideographs. Restricting the
+maximum value to 9 allows twRank to be represented by a single digit in the next step.
+
+```{r twPrecedence}
+twXiaoxueWenzi <- DataPackageR::datapackager_object_read("twXiaoxueWenzi")
+twPrecedence <- unihanPrecedenceData %>%
+	mutate(tCoreRank = as.integer(ifelse(stri_detect_fixed(kUnihanCore2020,'T'), 8-stri_length(kUnihanCore2020), 8)),.after=ucs) %>%
+	dplyr::left_join(twXiaoxueWenzi, by=join_by(ucs == ucs)) %>%
+	mutate(twRank = as.integer(ifelse(!is.na(twGrade), twGrade,9))
+ 				,.after = tCoreRank) %>%	
+	select(ucs,char,tCoreRank,twRank)
+twPrecedence 
+```
+
+```{r correlation-twPrecedence}
+twsubset <- twPrecedence %>% filter(tCoreRank < 8, twRank < 9)
+zhcc <-cor.test(twsubset$tCoreRank, twsubset$twRank, method = "pearson")
+stringi::stri_printf("Pearson correlation %.3f, CI %.3f-%.3f, p-value: %.2f", 
+							round(zhcc$estimate,digits=2),round(zhcc$conf.int[1],digits=2),	
+							round(zhcc$conf.int[2],digits=2),round(zhcc$p.value,digits=2))
+```
+
+```{r plottw, echo=FALSE}
+library(ggpubr)
+ggplot(twsubset , aes(x = tCoreRank)) +
+  geom_histogram(binwidth=1) + labs(title="Count by tCoreRank")
+
+ggplot(twsubset , aes(x = twRank)) +
+  geom_histogram(binwidth=1) + labs(title="Count by twRank")
+```
+
+## Put it together
+
+```{r combine}
+jctPrecedence <- unihanPrecedenceData %>% select(ucs,kTotalStrokes) %>%
+	dplyr::inner_join(select(jpPrecedence,ucs,jCoreRank,jpRank), by=join_by(ucs == ucs))  %>%
+	dplyr::inner_join(select(zhPrecedence,ucs,gCoreRank,zhRank), by=join_by(ucs == ucs)) %>%
+	dplyr::inner_join(select(twPrecedence,ucs,tCoreRank,twRank), by=join_by(ucs == ucs))
+jctPrecedence
+```
+
+## Next task
+
+Integrate mojiVariants with unihanVariants.
+
+# References

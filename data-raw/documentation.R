@@ -1,16 +1,20 @@
 #' rnaco
 #' A data package for rnaco.
 #' @aliases rnaco-package
-#' @title Package Title
+#' @title DName Normalization for the VIAF API
 #' @name rnaco
-#' @description A description of the data package
+#' @description This package combines, in one place, data and functions for
+#'      normalizing transforms of names and titles in VIAF records. Please
+#'      see the vignettes for details.
 #' @details Use \code{data(package='rnaco')$results[, 3]} to see a list of available data sets in this data package
 #'     and/or DataPackageR::load_all
 #' _datasets() to load them.
 #' @seealso
 #' \link{marcNotes}
 #' \link{marctables}
-#' \link{unihan_variants}
+#' \link{mojiMapdf}
+#' \link{mojiVariants}
+#' \link{unihanVariants}
 #' \link{nacotransform}
 #' \link{cjkextracts}
 '_PACKAGE'
@@ -40,9 +44,10 @@
 #' \link{rnaco}
 #' \link{marcNotes}
 #' \link{marctables}
-#' \link{unihan_variants}
+#' \link{unihanVariants}
 #' \link{nacotransform}
 #' \link{cjkextracts}
+#' \href{../doc/marctables.html}{\code{vignette("marctables", package = "rnaco")}}
 NULL
 
 
@@ -76,9 +81,10 @@ NULL
 #' \link{rnaco}
 #' \link{marcNotes}
 #' \link{marctables}
-#' \link{unihan_variants}
+#' \link{unihanVariants}
 #' \link{nacotransform}
 #' \link{cjkextracts}
+#' \href{../doc/marctables.html}{\code{vignette("marctables", package = "rnaco")}}
 NULL
 
 
@@ -364,7 +370,7 @@ NULL
 
 
 #' Detailed description of the data
-#' @name unihan_variants
+#' @name unihanVariants
 #' @docType data
 #' @title Unihan CJK variants
 #' @format a \code{tbl_df} containing the following fields:
@@ -380,11 +386,11 @@ NULL
 #' provides a file Unihan.zip that contains a file Unihan\_Variants.txt.
 #' @seealso
 #' \link{rnaco}
+#' \link{cjkextracts}
 #' \link{marcNotes}
 #' \link{marctables}
-#' \link{unihan_variants}
 #' \link{nacotransform}
-#' \link{cjkextracts}
+#' \href{../doc/unihanVariants.html}{\code{vignette("unihanVariants", package = "rnaco")}}
 NULL
 
 
@@ -419,9 +425,11 @@ NULL
 #' \link{rnaco}
 #' \link{marcNotes}
 #' \link{marctables}
-#' \link{unihan_variants}
+#' \link{unihanVariants}
 #' \link{nacotransform}
 #' \link{cjkextracts}
+#' \href{../doc/naco.html}{\code{vignette("naco", package = "rnaco")}}
+#' \href{../doc/nacoDatasets.html}{\code{vignette("nacoDatasets", package = "rnaco")}}
 NULL
 
 
@@ -506,7 +514,7 @@ NULL
 #' \link{rnaco}
 #' \link{marcNotes}
 #' \link{marctables}
-#' \link{unihan_variants}
+#' \link{unihanVariants}
 #' \link{nacotransform}
 #' \link{cjkextracts}
 NULL
@@ -537,7 +545,7 @@ NULL
 
 
 
-#' Detailed description of the data
+#' Personal name authority records
 #' @name cjkextractko
 #' @rdname cjkextracts
 #' @docType data
@@ -556,4 +564,151 @@ NULL
 #' \item{Hangul_only}{}
 #' \item{note}{}
 #' }
+NULL
+
+
+
+
+#' Detailed description of the data
+#' @name mojiMapdf
+#' @docType data
+#' @title Descriptive data title
+#' @format a \code{tbl_df} containing the following fields:
+#' \describe{
+#' \item{mjcode}{}
+#' \item{from}{}
+#' \item{to}{}
+#' \item{relation}{}
+#' }
+#' @source The data comes from the Japanese Character Information Technology Promotion Council. \link{https://moji.or.jp/mojikiban/}
+#' @seealso
+#' \link{rnaco}
+#' \link{mojiVariants}
+#' \link{unihanVariants}
+NULL
+
+
+
+
+#' Detailed description of the data
+#' @name mojiVariants
+#' @docType data
+#' @title Descriptive data title
+#' @format a \code{tbl_df} containing the following fields:
+#' \describe{
+#' \item{ucsindex}{}
+#' \item{ucsvariant}{}
+#' \item{membership}{}
+#' \item{from}{}
+#' \item{to}{}
+#' \item{rule}{}
+#' }
+#' @source The data comes from the Japanese Character Information Technology Promotion Council. \link{https://moji.or.jp/mojikiban/}
+#' @seealso
+#' \link{rnaco}
+#' \link{mojiMapdf}
+#' \link{unihanVariants}
+#' \href{../doc/citpcmojivariants.html}{\code{vignette("citpcmojivariants", package = "rnaco")}}
+NULL
+
+
+
+
+
+#' Detailed description of the data
+#' @name jctPrecedence
+#' @rdname jctPrecedence
+#' @docType data
+#' @title Unicode code point precedence tables based on kUnihanCore2020 source tags and educational grade levels
+#' @format a \code{tbl_df} containing the following fields:
+#' \describe{
+#' \item{ucs}{Unicode code point of ideograph}
+#' \item{kTotalStrokes}{Total strokes in ideograph}
+#' \item{jCoreRank}{Ranking based on kUnihanCore2020 source tags favoring 'J' (Japan)}
+#' \item{jpRank}{Ranking based on educational grade level of ideograph in Japan}
+#' \item{gCoreRank}{Ranking based on kUnihanCore2020 source tags favoring 'G' (PRC)}
+#' \item{zhRank}{Ranking based on educational grade level of ideograph in PRC}
+#' \item{tCoreRank}{Ranking based on kUnihanCore2020 source tags favoring 'T' (Taiwan)}
+#' \item{twRank}{Ranking based on educational grade level of ideograph in Taiwan}
+#' }
+#' @source The data comes from Japan's Ministry of Education, Culture, Sports, Science and Technology (MEXT);
+#' \href{http://www.microweiidv.com/weipage/n9gradeword.htm}; and
+#' \href{https://cd.jiajiaoban.com/e/20210314/604de778686f4.shtml}.
+#' @seealso
+#' \link{rnaco}
+#' \href{../doc/unihanprecedencedata.html}{\code{vignette("unihanprecedencedata", package = "rnaco")}}
+#' \href{../doc/kyoikuKanji.html}{\code{vignette("kyoikuKanji", package = "rnaco")}}
+#' \href{../doc/xiaoxuewenziTW.html}{\code{vignette("xiaoxuewenziTW", package = "rnaco")}}
+#' \href{../doc/xiaoxuewenziZH.html}{\code{vignette("xiaoxuewenziZH", package = "rnaco")}}
+NULL
+
+
+
+
+#' Detailed description of the data
+#' @name kyoikuKanji
+#' @rdname jctPrecedence
+#' @docType data
+#' @format kyoikuKanji is a \code{tbl_df} containing the following fields:
+#' \describe{
+#' \item{ucs}{Unicode code point of ideograph}
+#' \item{char}{Ideograph}
+#' \item{jpGrade}{Grade level (1-6)}
+#' }
+NULL
+
+
+
+
+#' Detailed description of the data
+#' @name twXiaoxueWenzi
+#' @rdname jctPrecedence
+#' @docType data
+#' @format twXiaoxueWenzi is a \code{tbl_df} containing the following fields:
+#' \describe{
+#' \item{ucs}{Unicode code point of ideograph}
+#' \item{char}{Ideograph}
+#' \item{twGrade}{Grade level (1-9)}
+#' }
+NULL
+
+
+
+
+#' Detailed description of the data
+#' @name zhXiaoxueWenzi
+#' @rdname jctPrecedence
+#' @docType data
+#' @format zhXiaoxueWenzi is a \code{tbl_df} containing the following fields:
+#' \describe{
+#' \item{ucs}{Unicode code point of ideograph}
+#' \item{char}{Ideograph}
+#' \item{zhGrade}{Grade level (1-6)}
+#' }
+NULL
+
+
+
+#' Detailed description of the data
+#' @name unihanPrecedenceData
+#' @rdname jctPrecedence
+#' @docType data
+#' @title Data used for calculating ideograph precedences.
+#' @format a \code{tbl_df} containing the following fields:
+#' \describe{
+#' \item{ucs}{}
+#' \item{kFrequency}{}
+#' \item{kTotalStrokes}{}
+#' \item{kIICore}{}
+#' \item{kUnihanCore2020}{}
+#' \item{kJinmeiyoKanji}{}
+#' \item{kJis0}{}
+#' \item{kJis1}{}
+#' \item{kJIS0213}{}
+#' \item{kJoyoKanji}{}
+#' \item{kMojiJoho}{}
+#' }
+#' @source The data comes from the XML Representation of Unicode 15.1.0 UCD flat file.
+#' @seealso
+#' \link{rnaco}
 NULL

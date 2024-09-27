@@ -1,5 +1,13 @@
 # Licenses
 
+## License for List of MJ Characters
+
+文字情報技術促進協議会は、文字情報基盤 文字情報一覧表（MJ文字情報一覧表） をクリエイティブ・コモンズ 表示 – 継承 2.1 日本 ライセンスによって提供しています。利用に際してはIPA の著作物であることを明記してください。なお、本成果物の内容を適用した結果生じたこと、また、適用できなかった結果について、文字情報技術促進協議会は一切の責任を負いませんのでご了承ください。
+
+Attribution-ShareAlike 2.1 Japan
+<https://creativecommons.org/licenses/by-sa/2.1/jp/deed.en>
+
+
 ## GNU General Public License
 
 ==========================
