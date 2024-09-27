@@ -24,13 +24,6 @@ aimed at extracting information, for example, social networks based on coauthors
 [Virtual International Authority Files (VIAF)](https://viaf.org/). Normalization functionality
 for that package will be built and maintained in rnaco.
 
-Of course, development based on NACO did not end in 2009 and is included in the
-[NACO - Name Authority Cooperative Program](https://www.loc.gov/aba/pcc/naco/index.html). This package
-is intended to facilitate following developments and includes test datasets from the
-[CJK NACO Project](https://www.loc.gov/aba/pcc/naco/CJK.html). In particular, each build
-of the rnaco project downloads the following files, which are then included as ```tibbles```[@R-tibble]
-in package data.
-
 # Features
 
 ## Functions
@@ -50,6 +43,13 @@ naco_transform() is detailed in a walk-through vignette, ```rnaco::naco```.
 * xml2df() This function reads a specially structured xml, and produces a tibble.
 
 ## Data
+
+Of course, development based on NACO did not end in 2009 and is included in the
+[NACO - Name Authority Cooperative Program](https://www.loc.gov/aba/pcc/naco/index.html). This package
+is intended to facilitate following developments and includes test datasets from the
+[CJK NACO Project](https://www.loc.gov/aba/pcc/naco/CJK.html). In particular, each build
+of the rnaco project downloads several related files, which are then included as ```tibbles```[@R-tibble]
+in package data.
 
 ### MARC code tables
 
@@ -140,8 +140,23 @@ of Python sample code that was on the OCLC Research Website.
 
 * DataPackageR - Set up and put the pieces together [@R-DataPackageR]
 
+* dplyr - [@R-dplyr]
+
+* igraph - [@R-igraph]
+
+* readxl - [@R-readxl]
+
 * stringi - [@R-stringi] 
 
 * tibble - [@R-tibble]
+
+* tidyr - [@R-tidyr]
+
+* viafr(fork) - [@R-viafr]
+
+* xml2 - [@R-xml2]
+
+* xslt = [@R-xslt]
+
 
 # References

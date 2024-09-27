@@ -617,17 +617,11 @@ rules can be implemented using calls to the ICU4C library from the <a href="http
 Unicode</a>. A step-by-step walk through vignette shows how the
 comparison rules are executed using stringi functions.</p>
 <p>This package is a sibling of a <a href="https://github.com/kijinosu/viafr">R package viafr</a>, which was
-forked from Stefanie Schneider’s viafr package on Github.(<a href="#ref-R-viafr">Schneider 2022</a>) In a related project, viafr
-development is aimed at extracting information, for example, social
-networks based on coauthors, from the <a href="https://viaf.org/">Virtual International Authority Files
+forked from Stefanie Schneider’s viafr package on Github.(<a href="#ref-R-viafr">Stefanie Schneider and Alan Engel 2024</a>) In a
+related project, viafr development is aimed at extracting information,
+for example, social networks based on coauthors, from the <a href="https://viaf.org/">Virtual International Authority Files
 (VIAF)</a>. Normalization functionality for that package will be built
 and maintained in rnaco.</p>
-<p>Of course, development based on NACO did not end in 2009 and is
-included in the <a href="https://www.loc.gov/aba/pcc/naco/index.html">NACO - Name Authority
-Cooperative Program</a>. This package is intended to facilitate
-following developments and includes test datasets from the <a href="https://www.loc.gov/aba/pcc/naco/CJK.html">CJK NACO Project</a>.
-In particular, each build of the rnaco project downloads the following
-files, which are then included as <code>tibbles</code>(<a href="#ref-R-tibble">Müller and Wickham 2023</a>) in package data.</p>
 <h1 id="features">Features</h1>
 <h2 id="functions">Functions</h2>
 <ul>
@@ -648,6 +642,12 @@ transform</p></li>
 produces a tibble.</p></li>
 </ul>
 <h2 id="data">Data</h2>
+<p>Of course, development based on NACO did not end in 2009 and is
+included in the <a href="https://www.loc.gov/aba/pcc/naco/index.html">NACO - Name Authority
+Cooperative Program</a>. This package is intended to facilitate
+following developments and includes test datasets from the <a href="https://www.loc.gov/aba/pcc/naco/CJK.html">CJK NACO Project</a>.
+In particular, each build of the rnaco project downloads several related
+files, which are then included as <code>tibbles</code>(<a href="#ref-R-tibble">Müller and Wickham 2023</a>) in package data.</p>
 <h3 id="marc-code-tables">MARC code tables</h3>
 <table>
 <thead>
@@ -851,12 +851,31 @@ was on the OCLC Research Website.</li>
 package</h1>
 <ul>
 <li><p>DataPackageR - Set up and put the pieces together (<a href="#ref-R-DataPackageR">Finak et al. 2018</a>)</p></li>
+<li><p>dplyr - (<a href="#ref-R-dplyr">Wickham et al. 2023</a>)</p></li>
+<li><p>igraph - (<a href="#ref-R-igraph">Csardi and Nepusz
+2006</a>)</p></li>
+<li><p>readxl - (<a href="#ref-R-readxl">Wickham and Bryan
+2023</a>)</p></li>
 <li><p>stringi - (<a href="#ref-R-stringi">Gagolewski 2022</a>)</p></li>
 <li><p>tibble - (<a href="#ref-R-tibble">Müller and Wickham
 2023</a>)</p></li>
+<li><p>tidyr - (<a href="#ref-R-tidyr">Wickham, Vaughan, and Girlich
+2024</a>)</p></li>
+<li><p>viafr(fork) - (<a href="#ref-R-viafr">Stefanie Schneider and Alan
+Engel 2024</a>)</p></li>
+<li><p>xml2 - (<a href="#ref-R-xml2">Wickham, Hester, and Ooms
+2023</a>)</p></li>
+<li><p>xslt = (<a href="#ref-R-xslt">Ooms 2024</a>)</p></li>
 </ul>
 <h1 id="references">References</h1>
 <div id="refs" class="references csl-bib-body hanging-indent">
+
+<div id="ref-R-igraph" class="csl-entry">
+
+<p>Csardi, Gabor, and Tamas Nepusz. 2006. “The Igraph Software Package
+for Complex Network Research.” <em>InterJournal</em> Complex Systems:
+1695. <a href="https://igraph.org">https://igraph.org</a>.</p>
+</div>
 
 <div id="ref-R-DataPackageR" class="csl-entry">
 
@@ -895,10 +914,40 @@ Authority Records.” August 2020. <a href="https://www.loc.gov/aba/publications
 Frames</em>. <a href="https://CRAN.R-project.org/package=tibble">https://CRAN.R-project.org/package=tibble</a>.</p>
 </div>
 
+<div id="ref-R-xslt" class="csl-entry">
+
+<p>Ooms, Jeroen. 2024. <em>Xslt: Extensible Style-Sheet Language
+Transformations</em>. <a href="https://CRAN.R-project.org/package=xslt">https://CRAN.R-project.org/package=xslt</a>.</p>
+</div>
+
 <div id="ref-R-viafr" class="csl-entry">
 
-<p>Schneider, Stefanie. 2022. <em>Viafr: Interface to the ’VIAF’
-(’Virtual International Authority File’) API</em>. <a href="https://CRAN.R-project.org/package=viafr">https://CRAN.R-project.org/package=viafr</a>.</p>
+<p>Stefanie Schneider, and Alan Engel. 2024. <em>Viafr: (Fork) Interface
+to the ’VIAF’ (’Virtual International Authority File’) API</em>. <a href="https://github.com/kijinosu/viafr">https://github.com/kijinosu/viafr</a>.</p>
+</div>
+
+<div id="ref-R-readxl" class="csl-entry">
+
+<p>Wickham, Hadley, and Jennifer Bryan. 2023. <em>Readxl: Read Excel
+Files</em>. <a href="https://CRAN.R-project.org/package=readxl">https://CRAN.R-project.org/package=readxl</a>.</p>
+</div>
+
+<div id="ref-R-dplyr" class="csl-entry">
+
+<p>Wickham, Hadley, Romain François, Lionel Henry, Kirill Müller, and
+Davis Vaughan. 2023. <em>Dplyr: A Grammar of Data Manipulation</em>. <a href="https://CRAN.R-project.org/package=dplyr">https://CRAN.R-project.org/package=dplyr</a>.</p>
+</div>
+
+<div id="ref-R-xml2" class="csl-entry">
+
+<p>Wickham, Hadley, Jim Hester, and Jeroen Ooms. 2023. <em>Xml2: Parse
+XML</em>. <a href="https://CRAN.R-project.org/package=xml2">https://CRAN.R-project.org/package=xml2</a>.</p>
+</div>
+
+<div id="ref-R-tidyr" class="csl-entry">
+
+<p>Wickham, Hadley, Davis Vaughan, and Maximilian Girlich. 2024.
+<em>Tidyr: Tidy Messy Data</em>. <a href="https://CRAN.R-project.org/package=tidyr">https://CRAN.R-project.org/package=tidyr</a>.</p>
 </div>
 
 </div>

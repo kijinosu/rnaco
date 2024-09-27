@@ -22,21 +22,12 @@ stringi functions.
 
 This package is a sibling of a [R package
 viafr](https://github.com/kijinosu/viafr), which was forked from
-Stefanie Schneider’s viafr package on Github.([Schneider
-2022](#ref-R-viafr)) In a related project, viafr development is aimed at
-extracting information, for example, social networks based on coauthors,
-from the [Virtual International Authority Files
+Stefanie Schneider’s viafr package on Github.([Stefanie Schneider and
+Alan Engel 2024](#ref-R-viafr)) In a related project, viafr development
+is aimed at extracting information, for example, social networks based
+on coauthors, from the [Virtual International Authority Files
 (VIAF)](https://viaf.org/). Normalization functionality for that package
 will be built and maintained in rnaco.
-
-Of course, development based on NACO did not end in 2009 and is included
-in the [NACO - Name Authority Cooperative
-Program](https://www.loc.gov/aba/pcc/naco/index.html). This package is
-intended to facilitate following developments and includes test datasets
-from the [CJK NACO Project](https://www.loc.gov/aba/pcc/naco/CJK.html).
-In particular, each build of the rnaco project downloads the following
-files, which are then included as `tibbles`([Müller and Wickham
-2023](#ref-R-tibble)) in package data.
 
 # Features
 
@@ -63,6 +54,15 @@ files, which are then included as `tibbles`([Müller and Wickham
   a tibble.
 
 ## Data
+
+Of course, development based on NACO did not end in 2009 and is included
+in the [NACO - Name Authority Cooperative
+Program](https://www.loc.gov/aba/pcc/naco/index.html). This package is
+intended to facilitate following developments and includes test datasets
+from the [CJK NACO Project](https://www.loc.gov/aba/pcc/naco/CJK.html).
+In particular, each build of the rnaco project downloads several related
+files, which are then included as `tibbles`([Müller and Wickham
+2023](#ref-R-tibble)) in package data.
 
 ### MARC code tables
 
@@ -159,13 +159,35 @@ devtools::install_github("kijinosu/rnaco")
 - DataPackageR - Set up and put the pieces together ([Finak et al.
   2018](#ref-R-DataPackageR))
 
+- dplyr - ([Wickham et al. 2023](#ref-R-dplyr))
+
+- igraph - ([Csardi and Nepusz 2006](#ref-R-igraph))
+
+- readxl - ([Wickham and Bryan 2023](#ref-R-readxl))
+
 - stringi - ([Gagolewski 2022](#ref-R-stringi))
 
 - tibble - ([Müller and Wickham 2023](#ref-R-tibble))
 
+- tidyr - ([Wickham, Vaughan, and Girlich 2024](#ref-R-tidyr))
+
+- viafr(fork) - ([Stefanie Schneider and Alan Engel 2024](#ref-R-viafr))
+
+- xml2 - ([Wickham, Hester, and Ooms 2023](#ref-R-xml2))
+
+- xslt = ([Ooms 2024](#ref-R-xslt))
+
 # References
 
 <div id="refs" class="references csl-bib-body hanging-indent">
+
+<div id="ref-R-igraph" class="csl-entry">
+
+Csardi, Gabor, and Tamas Nepusz. 2006. “The Igraph Software Package for
+Complex Network Research.” *InterJournal* Complex Systems: 1695.
+<https://igraph.org>.
+
+</div>
 
 <div id="ref-R-DataPackageR" class="csl-entry">
 
@@ -211,11 +233,47 @@ Müller, Kirill, and Hadley Wickham. 2023. *Tibble: Simple Data Frames*.
 
 </div>
 
+<div id="ref-R-xslt" class="csl-entry">
+
+Ooms, Jeroen. 2024. *Xslt: Extensible Style-Sheet Language
+Transformations*. <https://CRAN.R-project.org/package=xslt>.
+
+</div>
+
 <div id="ref-R-viafr" class="csl-entry">
 
-Schneider, Stefanie. 2022. *Viafr: Interface to the ’VIAF’ (’Virtual
-International Authority File’) API*.
-<https://CRAN.R-project.org/package=viafr>.
+Stefanie Schneider, and Alan Engel. 2024. *Viafr: (Fork) Interface to
+the ’VIAF’ (’Virtual International Authority File’) API*.
+<https://github.com/kijinosu/viafr>.
+
+</div>
+
+<div id="ref-R-readxl" class="csl-entry">
+
+Wickham, Hadley, and Jennifer Bryan. 2023. *Readxl: Read Excel Files*.
+<https://CRAN.R-project.org/package=readxl>.
+
+</div>
+
+<div id="ref-R-dplyr" class="csl-entry">
+
+Wickham, Hadley, Romain François, Lionel Henry, Kirill Müller, and Davis
+Vaughan. 2023. *Dplyr: A Grammar of Data Manipulation*.
+<https://CRAN.R-project.org/package=dplyr>.
+
+</div>
+
+<div id="ref-R-xml2" class="csl-entry">
+
+Wickham, Hadley, Jim Hester, and Jeroen Ooms. 2023. *Xml2: Parse XML*.
+<https://CRAN.R-project.org/package=xml2>.
+
+</div>
+
+<div id="ref-R-tidyr" class="csl-entry">
+
+Wickham, Hadley, Davis Vaughan, and Maximilian Girlich. 2024. *Tidyr:
+Tidy Messy Data*. <https://CRAN.R-project.org/package=tidyr>.
 
 </div>
 
