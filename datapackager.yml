@@ -9,15 +9,15 @@ configuration:
     unihanVariants.Rmd:
       enabled: no
     kyoikuKanji.Rmd:
-      enabled: yes
+      enabled: no
     xiaoxuewenziZH.Rmd:
-      enabled: yes
+      enabled: no
     xiaoxuewenziTW.Rmd:
-      enabled: yes
+      enabled: no
     unihanprecedencedata.Rmd:
-      enabled: yes
+      enabled: no
     citpcmojivariants.Rmd:
-      enabled: yes
+      enabled: no
     integrated-variant-map.Rmd:
       enabled: yes
   objects:
@@ -53,5 +53,6 @@ configuration:
   - twXiaoxueWenzi
   - unihanPrecedenceData
   - jctPrecedence
+  - jztTranslitRules
   render_root:
     tmp: '23451'

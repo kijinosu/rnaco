@@ -1,8 +1,2 @@
-DataVersion: 0.1.14
-jctPrecedence: 481a3a22eba69c129326e9d475e5d913
-kyoikuKanji: 4559ab0315daa7c7e549c34502ca7ba3
-mojiMapdf: 192108c299db526edaada0cda5d8350e
-mojiVariants: 3d3e7936d1b1c0ecde674ca795c6a6a5
-twXiaoxueWenzi: 568e31e9f3d8a14422ee03385125f05a
-unihanPrecedenceData: 1bd1c41f0c0b4dce48736af5ce8ba004
-zhXiaoxueWenzi: 2d72eccfc136a3cb5a2a98c7bee278db
+DataVersion: 0.1.15
+jztTranslitRules: ef7a268b8226de88377ff741d701f89b

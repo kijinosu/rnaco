@@ -3,21 +3,14 @@
 #' @aliases rnaco-package
 #' @title DName Normalization for the VIAF API
 #' @name rnaco
-#' @description This package combines, in one place, data and functions for
-#'      normalizing transforms of names and titles in VIAF records. Please
-#'      see the vignettes for details.
+#' @description A description of the data package
 #' @details Use \code{data(package='rnaco')$results[, 3]} to see a list of available data sets in this data package
 #'     and/or DataPackageR::load_all
 #' _datasets() to load them.
 #' @seealso
-#' \link{marcNotes}
-#' \link{marctables}
-#' \link{mojiMapdf}
-#' \link{mojiVariants}
-#' \link{unihanVariants}
-#' \link{nacotransform}
-#' \link{cjkextracts}
+#' \link{jztTranslitRules}
 '_PACKAGE'
+
 
 
 
@@ -49,6 +42,7 @@
 #' \link{cjkextracts}
 #' \href{../doc/marctables.html}{\code{vignette("marctables", package = "rnaco")}}
 NULL
+
 
 
 
@@ -93,6 +87,7 @@ NULL
 
 
 
+
 #' Detailed description of the data
 #' @name marcBasicArabic
 #' @rdname marctables
@@ -111,6 +106,7 @@ NULL
 #' \item{name}{MARC character name, followed by the UCS name}
 #' }
 NULL
+
 
 
 
@@ -143,6 +139,7 @@ NULL
 
 
 
+
 #' Detailed description of the data
 #' @name marcBasicGreek
 #' @rdname marctables
@@ -161,6 +158,7 @@ NULL
 #' \item{name}{MARC character name, followed by the UCS name}
 #' }
 NULL
+
 
 
 
@@ -193,6 +191,7 @@ NULL
 
 
 
+
 #' Detailed description of the data
 #' @name marcComponentInputMethodCharacters
 #' @rdname marctables
@@ -211,6 +210,7 @@ NULL
 #' \item{name}{MARC character name, followed by the UCS name}
 #' }
 NULL
+
 
 
 
@@ -243,6 +243,7 @@ NULL
 
 
 
+
 #' Detailed description of the data
 #' @name marcEastAsianPunctuationMarks
 #' @rdname marctables
@@ -250,6 +251,7 @@ NULL
 #' @title East Asian Punctuation Marks code table (February 6, 2003)
 #' @description This table contains 25 mappings of character encodings for East Asian punctuation marks from the East Asian Coded Character set (ANSI/NISO Z39.64, or "EACC") to character encodings in the Universal Character Set (UCS, ISO-IEC 10646)/Unicode. Character codes are given in hexadecimal notation.
 NULL
+
 
 
 
@@ -271,6 +273,7 @@ NULL
 
 
 
+
 #' Detailed description of the data
 #' @name marcExtendedCyrillic
 #' @rdname marctables
@@ -278,6 +281,7 @@ NULL
 #' @title Extended Cyrillic code table, ISO code 51 (January 2000)
 #' @description From the Basic and Extended Cyrillic character sets
 NULL
+
 
 
 
@@ -299,6 +303,7 @@ NULL
 
 
 
+
 #' Detailed description of the data
 #' @name marcGreekSymbols
 #' @rdname marctables
@@ -306,6 +311,7 @@ NULL
 #' @title Greek Symbols
 #' @description Greek Symbols code table, ISO code 67 (January 2000, Updated September 2004)
 NULL
+
 
 
 
@@ -327,6 +333,7 @@ NULL
 
 
 
+
 #' Detailed description of the data
 #' @name marcKoreanHangul
 #' @rdname marctables
@@ -334,6 +341,7 @@ NULL
 #' @title Korean Hangul code table (February 6, 2003)
 #' @description This table contains 2,028 mappings of character encodings for Korean hangul from the East Asian Coded Character set (ANSI/NISO Z39.64, or "EACC") to character encodings in the Universal Character Set (UCS, ISO-IEC 10646)/Unicode. 
 NULL
+
 
 
 
@@ -355,6 +363,7 @@ NULL
 
 
 
+
 #' Detailed description of the data
 #' @name marcSuperscripts
 #' @rdname marctables
@@ -362,6 +371,7 @@ NULL
 #' @title Superscripts
 #' @description Superscripts code table, ISO code 70 (January 2000)
 NULL
+
 
 
 
@@ -392,6 +402,7 @@ NULL
 #' \link{nacotransform}
 #' \href{../doc/unihanVariants.html}{\code{vignette("unihanVariants", package = "rnaco")}}
 NULL
+
 
 
 
@@ -437,6 +448,7 @@ NULL
 
 
 
+
 #' @name numericrules
 #' @rdname nacotransform
 #' @docType data
@@ -458,12 +470,14 @@ NULL
 
 
 
+
 #' @name step6rulestring
 #' @rdname nacotransform
 #' @docType data
 #' @title Transliteration rule Step 6 of naco_transform()
 #' @format step6rulestring is in the form of a \code{string} 
 NULL
+
 
 
 
@@ -477,6 +491,7 @@ NULL
 #' @title Transliteration rule Step 7 of naco_transform()
 #' @format step7lltranslitrule is in the form of a \code{string} 
 NULL
+
 
 
 
@@ -523,6 +538,7 @@ NULL
 
 
 
+
 #' Personal name authority records
 #' @name cjkextractzh
 #' @rdname cjkextracts
@@ -541,6 +557,7 @@ NULL
 #' \item{notes}{If not CJK or minority name}
 #' }
 NULL
+
 
 
 
@@ -569,6 +586,7 @@ NULL
 
 
 
+
 #' Detailed description of the data
 #' @name mojiMapdf
 #' @docType data
@@ -586,6 +604,7 @@ NULL
 #' \link{mojiVariants}
 #' \link{unihanVariants}
 NULL
+
 
 
 
@@ -610,6 +629,7 @@ NULL
 #' \link{unihanVariants}
 #' \href{../doc/citpcmojivariants.html}{\code{vignette("citpcmojivariants", package = "rnaco")}}
 NULL
+
 
 
 
@@ -646,6 +666,7 @@ NULL
 
 
 
+
 #' Detailed description of the data
 #' @name kyoikuKanji
 #' @rdname jctPrecedence
@@ -657,6 +678,7 @@ NULL
 #' \item{jpGrade}{Grade level (1-6)}
 #' }
 NULL
+
 
 
 
@@ -676,6 +698,7 @@ NULL
 
 
 
+
 #' Detailed description of the data
 #' @name zhXiaoxueWenzi
 #' @rdname jctPrecedence
@@ -687,6 +710,7 @@ NULL
 #' \item{zhGrade}{Grade level (1-6)}
 #' }
 NULL
+
 
 
 
@@ -708,4 +732,28 @@ NULL
 #' \item{kJoyoKanji}{Unihan property: The year that corresponds to the Jōyō Kanji (常用漢字) table in which the ideograph appears.}
 #' \item{kMojiJoho}{Unihan property: mappings from the Moji Jōhō Kiban database by CITPC (Character Information Technology Promotion Council) }
 #' }
+NULL
+
+
+
+
+#' Detailed description of the data
+#' @name jztTranslitRules
+#' @docType data
+#' @title Descriptive data title
+#' @format a \code{tbl_df} containing the following fields:
+#' \describe{
+#' \item{ucs}{}
+#' \item{membership}{}
+#' \item{from}{}
+#' \item{to.JA}{}
+#' \item{rule.JA}{}
+#' \item{to.ZH}{}
+#' \item{rule.ZH}{}
+#' \item{to.TW}{}
+#' \item{rule.TW}{}
+#' }
+#' @source The data comes from________________________.
+#' @seealso
+#' \link{rnaco}
 NULL

@@ -4,11 +4,9 @@
 \name{rnaco}
 \alias{rnaco}
 \alias{rnaco-package}
-\title{DName Normalization for the VIAF API}
+\title{Package Title}
 \description{
-This package combines, in one place, data and functions for
-normalizing transforms of names and titles in VIAF records. Please
-see the vignettes for details.
+A description of the data package
 }
 \details{
 rnaco
@@ -19,13 +17,7 @@ and/or DataPackageR::load_all
 _datasets() to load them.
 }
 \seealso{
-\link{marcNotes}
-\link{marctables}
-\link{mojiMapdf}
-\link{mojiVariants}
-\link{unihanVariants}
-\link{nacotransform}
-\link{cjkextracts}
+\link{jztTranslitRules}
 }
 \author{
 \strong{Maintainer}: Alan Engel \email{alan@ttcrossroads.net} (\href{https://orcid.org/0000-0003-0070-2347}{ORCID})

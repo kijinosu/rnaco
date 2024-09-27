@@ -1,3 +1,15 @@
+DataVersion: 0.1.15
+=======================
+* Added: jztTranslitRules
+* Deleted: jctPrecedence
+* Deleted: kyoikuKanji
+* Deleted: mojiMapdf
+* Deleted: mojiVariants
+* Deleted: twXiaoxueWenzi
+* Deleted: unihanPrecedenceData
+* Deleted: zhXiaoxueWenzi
+Package built in non-interactive mode
+
 DataVersion: 0.1.14
 =======================
 * Changed: jctPrecedence

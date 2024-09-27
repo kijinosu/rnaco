@@ -1071,3 +1071,25 @@ TRACE [2024-09-27 13:23:36] Done
 TRACE [2024-09-27 13:23:36] DataPackageR succeeded
 TRACE [2024-09-27 13:23:36] Building documentation
 TRACE [2024-09-27 13:23:45] Building package
+TRACE [2024-09-27 17:21:24] Logging to C:/Users/Alan/Documents/R Projects/rnaco/rnaco/inst/extdata/Logfiles/processing.log
+TRACE [2024-09-27 17:21:24] Processing data
+TRACE [2024-09-27 17:21:24] Reading yaml configuration
+TRACE [2024-09-27 17:21:24] Found C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/integrated-variant-map.Rmd
+TRACE [2024-09-27 17:21:24] Processing 1 of 1: C:/Users/Alan/Documents/R Projects/rnaco/rnaco/data-raw/integrated-variant-map.Rmd
+
+TRACE [2024-09-27 17:21:40] 1 data set(s) created by integrated-variant-map.Rmd
+TRACE [2024-09-27 17:21:40] NEWS.md file found, updating!
+DEBUG [2024-09-27 17:21:40] jctPrecedence was removed.
+DEBUG [2024-09-27 17:21:40] jctPrecedence was removed.
+DEBUG [2024-09-27 17:21:40] jctPrecedence was removed.
+TRACE [2024-09-27 17:21:40] NEWS.md file found, updating!
+TRACE [2024-09-27 17:21:40] NEWS.md file found, updating!
+TRACE [2024-09-27 17:21:40] Data has been updated and DataVersion string incremented automatically to 0.1.15
+TRACE [2024-09-27 17:21:40] Saving to data
+TRACE [2024-09-27 17:21:41] Copied documentation to C:/Users/Alan/Documents/R Projects/rnaco/rnaco/R/rnaco.R
+TRACE [2024-09-27 17:21:41] Done
+TRACE [2024-09-27 17:21:41] DataPackageR succeeded
+TRACE [2024-09-27 17:21:41] Building documentation
+TRACE [2024-09-27 17:21:44] Building package
+TRACE [2024-09-27 17:24:01] Rebuilding data package documentation.
+TRACE [2024-09-27 17:30:01] Rebuilding data package documentation.
